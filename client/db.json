@@ -2,9 +2,230 @@
     "restaurants": [
         {
             "id": "001",
-            "name": "dishy",
+            "name": "Dishy",
             "address": "Kyiv, Shevchenka str. 25",
-            "isOpen": false,
+            "isOpen": true,
+            "menu": [
+                {
+                    "category": "appetizers",
+                    "items": [
+                        {
+                            "name": "Bruschetta",
+                            "price": "50 UAH",
+                            "ingredients": ["bread", "tomatoes", "garlic", "basil", "olive oil"],
+                            "calories": "120 kcal",
+                            "weight": "200 g"
+                        },
+                        {
+                            "name": "Garlic Bread",
+                            "price": "40 UAH",
+                            "ingredients": ["bread", "garlic", "butter"],
+                            "calories": "180 kcal",
+                            "weight": "150 g"
+                        }
+                    ]
+                },
+                {
+                    "category": "mainDishes",
+                    "items": [
+                        {
+                            "name": "Spaghetti Carbonara",
+                            "price": "120 UAH",
+                            "ingredients": ["spaghetti", "eggs", "cheese", "bacon"],
+                            "calories": "560 kcal",
+                            "weight": "500 g"
+                        },
+                        {
+                            "name": "Chicken Parmesan",
+                            "price": "130 UAH",
+                            "ingredients": ["chicken", "cheese", "tomato sauce", "spaghetti"],
+                            "calories": "640 kcal",
+                            "weight": "550 g"
+                        }
+                    ]
+                },
+                {
+                    "category": "desserts",
+                    "items": [
+                        {
+                            "name": "Tiramisu",
+                            "price": "70 UAH",
+                            "ingredients": ["ladyfingers", "coffee", "eggs", "sugar", "mascarpone cheese", "cocoa powder"],
+                            "calories": "450 kcal",
+                            "weight": "200 g"
+                        },
+                        {
+                            "name": "Panna Cotta",
+                            "price": "60 UAH",
+                            "ingredients": ["cream", "milk", "sugar", "gelatin", "vanilla extract"],
+                            "calories": "320 kcal",
+                            "weight": "150 g"
+                        }
+                    ]
+                }
+            ],    
+            "needs": [
+                {
+                    "waiterName": "Mark",
+                    "message": "We need more napkins in the dining area.",
+                    "time": "12:30",
+                    "date": "2023-12-01",
+                    "priority": "low"
+                },
+                {
+                    "waiterName": "Serhii",
+                    "message": "Table 5 is asking for the bill.",
+                    "time": "13:15",
+                    "date": "2023-12-01",
+                    "priority": "high"
+                }
+            ],    
+            "orders": [
+                {
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                }
+            ]            
+        },
+        {
+            "id": "002",
+            "name": "Overeats",
+            "address": "Lviv, Franka str. 25",
+            "isOpen": true,
+            "menu": [
+                {
+                    "category": "appetizers",
+                    "items": [
+                        {
+                            "name": "Bruschetta",
+                            "price": "50 UAH",
+                            "ingredients": ["bread", "tomatoes", "garlic", "basil", "olive oil"],
+                            "calories": "120 kcal",
+                            "weight": "200 g"
+                        },
+                        {
+                            "name": "Garlic Bread",
+                            "price": "40 UAH",
+                            "ingredients": ["bread", "garlic", "butter"],
+                            "calories": "180 kcal",
+                            "weight": "150 g"
+                        }
+                    ]
+                },
+                {
+                    "category": "mainDishes",
+                    "items": [
+                        {
+                            "name": "Spaghetti Carbonara",
+                            "price": "120 UAH",
+                            "ingredients": ["spaghetti", "eggs", "cheese", "bacon"],
+                            "calories": "560 kcal",
+                            "weight": "500 g"
+                        },
+                        {
+                            "name": "Chicken Parmesan",
+                            "price": "130 UAH",
+                            "ingredients": ["chicken", "cheese", "tomato sauce", "spaghetti"],
+                            "calories": "640 kcal",
+                            "weight": "550 g"
+                        }
+                    ]
+                },
+                {
+                    "category": "desserts",
+                    "items": [
+                        {
+                            "name": "Tiramisu",
+                            "price": "70 UAH",
+                            "ingredients": ["ladyfingers", "coffee", "eggs", "sugar", "mascarpone cheese", "cocoa powder"],
+                            "calories": "450 kcal",
+                            "weight": "200 g"
+                        },
+                        {
+                            "name": "Panna Cotta",
+                            "price": "60 UAH",
+                            "ingredients": ["cream", "milk", "sugar", "gelatin", "vanilla extract"],
+                            "calories": "320 kcal",
+                            "weight": "150 g"
+                        }
+                    ]
+                }
+            ],    
+            "needs": [
+                {
+                    "waiterName": "Mark",
+                    "message": "We need more napkins in the dining area.",
+                    "time": "12:30",
+                    "date": "2023-12-01",
+                    "priority": "low"
+                },
+                {
+                    "waiterName": "Serhii",
+                    "message": "Table 5 is asking for the bill.",
+                    "time": "13:15",
+                    "date": "2023-12-01",
+                    "priority": "high"
+                }
+            ],    
+            "orders": [
+                {
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                }
+            ]            
+        },{
+            "id": "003",
+            "name": "Dineease",
+            "address": "Ternopil, Hmelnitskiy str. 25",
+            "isOpen": true,
             "menu": [
                 {
                     "category": "appetizers",
@@ -117,7 +338,9 @@
             "name": "Mark",
             "age": 25,
             "experience": "3 years",
-            "position": "waiter",
+            "isOnline": false,
+            "position": "Офіціант",
+            "pin": "0000",
             "restaurant": "Dishy",
             "salary": "20000 UAH",
             "workingTime": {
@@ -126,9 +349,11 @@
         },
         {
             "name": "Anna",
+            "login": "anna@gmail.com",
             "age": 30,
             "experience": "5 years",
-            "position": "accountant",
+            "isOnline": false,
+            "position": "Бухгалтер",
             "restaurant": "Dishy",
             "salary": "30000 UAH",
             "workingTime": {
@@ -137,10 +362,12 @@
         },
         {
             "name": "John",
+            "email": "jonh@gmail.com",
             "age": 35,
             "experience": "7 years",
-            "position": "admin",
-            "restaurant": "Dishy",
+            "isOnline": false,
+            "position": "Адмін",
+            "restaurant": "Overeats",
             "salary": "40000 UAH",
             "workingTime": {
                 "27.10.2023": ["timestart", "timeend"]
