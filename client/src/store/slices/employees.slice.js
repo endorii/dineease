@@ -9,8 +9,8 @@ const initialState = {
 
 export const fetchEmployees = createAsyncThunk(
     "employees/fetchEmployees",
-    async (restaurantName) => {
-        const response = await getEmployees(restaurantName);
+    async () => {
+        const response = await getEmployees();
         return response;
     }
 )
@@ -18,7 +18,11 @@ export const fetchEmployees = createAsyncThunk(
 const employeesSlice = createSlice({
     name: 'employees',
     initialState,
-    reducers: {},
+    reducers: {
+        setEmployeesByRestaurant(state, action){
+            state.employees = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchEmployees.pending, (state) => {
@@ -35,5 +39,7 @@ const employeesSlice = createSlice({
             })
     },
 })
+
+export const {setEmployeesByRestaurant} = employeesSlice.actions;
 
 export default employeesSlice.reducer

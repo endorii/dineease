@@ -4,17 +4,16 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import { Login } from './components/Login';
 import { ChooseRestaurant } from './components/ChooseRestaurant';
-import App from './App';
-import { ChooseLoginMethod } from './components/ChooseLoginMethod';
+import { LoginAs } from './components/LoginAs';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path='/' element={<App />}>
-                <Route path='choose/restaurant' element={<ChooseRestaurant /> }/>
-                <Route path='choose/login-method' element={<ChooseLoginMethod />} />
-            </Route>
+            <Route path='/' element={<ChooseRestaurant />}></Route>
+            <Route path='login/:restaurant' element={<LoginAs/>}></Route>
+            <Route path='login/:restaurant/:position' element={<Login/>}></Route>
         </>
     )
 )

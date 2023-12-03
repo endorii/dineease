@@ -1,0 +1,39 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import Left from '../assets/svg/angle-left.svg';
+import { useEffect } from "react";
+import { getEmployeesByRestaurant } from "../actions/employees.actions";
+
+export const LoginAs = () => {
+
+    const { employees } = useSelector(state => state.employees);
+
+    const { restaurant } = useParams();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getEmployeesByRestaurant(restaurant));
+    }, [])
+
+    return (
+        <div className="flex flex-col mt-[10%] justify-center items-center">
+            <button onClick={() => navigate(-1)} className="absolute flex flex-row items-center top-10 left-10 text-center shadow-lg rounded-lg text-lg px-5 py-1 hover:bg-gray-100 font-medium">
+                <img className="w-12" src={Left} alt="" />
+                Повернутися назад
+            </button>
+            <div className="text-4xl">Увійти в ресторан <span className="text-5xl font-medium text-orange-500">{restaurant}</span> як:</div>
+            <div>
+                <ul className="flex justify-center items-center gap-12 px-7 py-10 mt-10">
+                    {employees ? employees.map((employee, i) =>
+                        <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-gray-100" key={i} onClick={() => { navigate(`/login/${restaurant}/${employee.position}`) }}>
+                            <div className="flex flex-col">
+                                <div className="text-2xl inline-block font-medium">{employee.position}</div>
+                            </div>
+                        </li>
+                    ) : <div>Нічого не знайдено</div>}
+                </ul>
+            </div>
+        </div>
+    )
+}
