@@ -221,7 +221,8 @@
                     ]
                 }
             ]            
-        },{
+        },
+        {
             "id": "003",
             "name": "Dineease",
             "address": "Ternopil, Hmelnitskiy str. 25",
@@ -339,7 +340,7 @@
             "age": 25,
             "experience": "3 years",
             "isOnline": false,
-            "position": "Офіціант",
+            "position": "Waiter",
             "pin": "0000",
             "restaurant": "Dishy",
             "salary": "20000 UAH",
@@ -353,9 +354,22 @@
             "age": 30,
             "experience": "5 years",
             "isOnline": false,
-            "position": "Бухгалтер",
+            "position": "Accountant",
             "restaurant": "Dishy",
             "salary": "30000 UAH",
+            "workingTime": {
+                "27.10.2023": ["timestart", "timeend"]
+            }
+        },
+        {
+            "name": "Serhii",
+            "email": "serhii@gmail.com",
+            "age": 18,
+            "experience": "7 years",
+            "isOnline": false,
+            "position": "Admin",
+            "restaurant": "Dishy",
+            "salary": "40000 UAH",
             "workingTime": {
                 "27.10.2023": ["timestart", "timeend"]
             }
@@ -366,8 +380,21 @@
             "age": 35,
             "experience": "7 years",
             "isOnline": false,
-            "position": "Адмін",
+            "position": "Admin",
             "restaurant": "Overeats",
+            "salary": "40000 UAH",
+            "workingTime": {
+                "27.10.2023": ["timestart", "timeend"]
+            }
+        },
+        {
+            "name": "Alex",
+            "email": "alex@gmail.com",
+            "age": 35,
+            "experience": "7 years",
+            "isOnline": false,
+            "position": "Admin",
+            "restaurant": "Dineease",
             "salary": "40000 UAH",
             "workingTime": {
                 "27.10.2023": ["timestart", "timeend"]
