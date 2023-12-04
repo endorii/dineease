@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import { GoBackButton } from "../ui/buttons/GoBackButton";
+import { login } from "../actions/user.actions";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const AdminAndAccountantLogin = () => {
 
@@ -8,6 +11,8 @@ export const AdminAndAccountantLogin = () => {
 
     const [emailTouched, setEmailTouched] = useState(false);
     const [passwordTouched, setPasswordTouched] = useState(false);
+
+    const dispatch = useDispatch();
 
     const [emailError, setEmailError] = useState("Email не може бути пустим");
     const [passwordError, setPasswordError] = useState("Пароль не може бути пустим");
@@ -44,6 +49,9 @@ export const AdminAndAccountantLogin = () => {
             default: ;
         }
     }
+
+    const navigate = useNavigate();
+    const {restaurant, position} = useParams();
 
     useEffect(() => {
 
@@ -106,9 +114,10 @@ export const AdminAndAccountantLogin = () => {
 
                         <div>
                             <button
-                                onClick={(e) => {
+                                onClick={async (e) => {
                                     e.preventDefault();
-                                    // dispatch(login(email, password))
+                                    await dispatch(login(restaurant, position, email, password));
+                                    navigate(`/${restaurant}/${position}/panel`)
                                 }
                                 }
                                 disabled={emailError || passwordError}
