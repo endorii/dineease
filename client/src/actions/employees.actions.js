@@ -23,3 +23,17 @@ export const getEmployeesByRestaurant = (restaurantName) => {
         }   
     }
 }
+
+export const getEmployeeByRestaurantAndPin = (restaurantName, pin) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.get("http://localhost:3001/employees");
+            const employees = response.data;
+            const filteredEmployee = employees.filter(employee => employee.restaurant === restaurantName && employee.pin === pin);
+            dispatch(setEmployeesByRestaurant(filteredEmployee))
+            return filteredEmployee;
+        } catch (e) {
+            console.log(e.response.data.message);
+        }   
+    }
+}
