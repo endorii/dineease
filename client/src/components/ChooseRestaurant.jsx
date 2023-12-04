@@ -18,12 +18,12 @@ export const ChooseRestaurant = () => {
     }, [])
 
     return (
-        <div className="flex flex-col mt-[10%] justify-center items-center">
+        <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
             <div className="text-4xl">Виберіть ваш ресторан</div>
             <div>
                 <ul className="flex justify-center items-center gap-12 px-7 py-10">
                     {restaurants.length > 0 ? restaurants.map((restaurant) =>
-                        <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-gray-100" key={restaurant.id} onClick={() => { 
+                        <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" key={restaurant.id} onClick={() => { 
                             dispatch(getEmployeesByRestaurant(restaurant.name)); 
                             navigate(`/login/${restaurant.name}`)}}>
                             <img className="w-10 mr-2 inline-block" src={Restaurant} alt="" />

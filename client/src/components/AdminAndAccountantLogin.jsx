@@ -50,20 +50,20 @@ export const AdminAndAccountantLogin = () => {
     }, [])
 
     return (
-        <div className="flex flex-row justify-center px-6 py-12 lg:px-8">
+        <div className="flex flex-row justify-center px-6 py-12 lg:px-8 text-sky-900">
 
             <GoBackButton />
             <div className="w-full">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="text-center text-3xl leading-9 tracking-tight text-gray-900 mt-[50%]">
+                    <h2 className="text-center text-4xl leading-9 tracking-tight mt-[50%]">
                         Увійти в свій акаунт
                     </h2>
                 </div>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form className="space-y-6" action="#" method="POST">
+                <div className="mt-10 flex justify-center">
+                    <form className="space-y-6 w-[25%]" action="#" method="POST">
                         <div>
-                            <label htmlFor="email" className="block font-medium leading-6 text-gray-900">
+                            <label htmlFor="email" className="block font-medium leading-6 text-lg">
                                 Електронна адреса (Email)
                             </label>
                             <div className="mt-2">
@@ -75,16 +75,16 @@ export const AdminAndAccountantLogin = () => {
                                     type="email"
                                     autoComplete="email"
                                     required
-                                    className="pl-3 block w-full h-12 text-lg rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
+                                    className="pl-3 block w-full h-12 text-xl rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
                                     onBlur={(e) => blurHandler(e)}
                                 />
                             </div>
-                            {(emailTouched && emailError) && <div className="text-red-600">{emailError}</div>}
+                            {(emailTouched && emailError) && <div className="text-yellow-700">{emailError}</div>}
                         </div>
 
                         <div>
                             <div className="flex items-center justify-between">
-                                <label htmlFor="password" className="block font-medium leading-6 text-gray-900">
+                                <label htmlFor="password" className="block font-medium leading-6 text-lg">
                                     Пароль
                                 </label>
                             </div>
@@ -97,11 +97,11 @@ export const AdminAndAccountantLogin = () => {
                                     type="password"
                                     autoComplete="current-password"
                                     required
-                                    className="pl-3 text-normal block w-full h-12 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
+                                    className="pl-3 text-xl block w-full h-12 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6"
                                     onBlur={(e) => blurHandler(e)}
                                 />
                             </div>
-                            {(passwordTouched && passwordError) && <div className="text-red-600">{passwordError}</div>}
+                            {(passwordTouched && passwordError) && <div className="text-yellow-700">{passwordError}</div>}
                         </div>
 
                         <div>
@@ -113,7 +113,7 @@ export const AdminAndAccountantLogin = () => {
                                 }
                                 disabled={emailError || passwordError}
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-orange-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-700 disabled:hover:bg-orange-300 disabled:bg-orange-300 disabled:cursor-not-allowed"
+                                className="flex w-full justify-center rounded-md bg-teal-800 px-3 py-3 text-md font-semibold leading-6 text-white shadow-sm hover:bg-teal-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-900 disabled:bg-teal-700/50 disabled:cursor-not-allowed"
                             >
                                 Увійти
                             </button>

@@ -336,6 +336,19 @@
     ],
     "employees": [
         {
+            "name": "Sam",
+            "age": 25,
+            "experience": "3 years",
+            "isOnline": false,
+            "position": "Waiter",
+            "pin": "0000",
+            "restaurant": "Dishy",
+            "salary": "20000 UAH",
+            "workingTime": {
+                "27.10.2023": ["timestart", "timeend"]
+            }
+        },
+        {
             "name": "Mark",
             "age": 25,
             "experience": "3 years",
