@@ -7,6 +7,11 @@ import store from './store/store';
 import { Login } from './components/Login';
 import { ChooseRestaurant } from './components/ChooseRestaurant';
 import { LoginAs } from './components/LoginAs';
+import Account from './components/Account';
+import { Orders } from './components/Orders';
+import { Tables } from './components/Tables';
+import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
+import { Service } from './components/Service';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -14,6 +19,17 @@ const router = createBrowserRouter(
             <Route path='/' element={<ChooseRestaurant />}></Route>
             <Route path='login/:restaurant' element={<LoginAs />}></Route>
             <Route path='login/:restaurant/:position' element={<Login />}></Route>
+            <Route path=':restaurant/Waiter/panel' element={<Service />}>
+                <Route path='orders' element={<Orders />} />
+                <Route path='tables' element={<Tables />} />
+                <Route path='account' element={<CurrentEmployeeAccount />} />
+            </Route>
+            <Route path=':restaurant/Admin/panel' element={<Account />}>
+                
+            </Route>
+            <Route path=':restaurant/Accountant/panel' element={<Account />}>
+                
+            </Route>
         </>
     )
 )

@@ -341,7 +341,7 @@
             "experience": "3 years",
             "isOnline": false,
             "position": "Waiter",
-            "pin": "0000",
+            "pin": "1111",
             "restaurant": "Dishy",
             "salary": "20000 UAH",
             "workingTime": {
@@ -363,7 +363,8 @@
         },
         {
             "name": "Anna",
-            "login": "anna@gmail.com",
+            "email": "anna@gmail.com",
+            "password": "Qwerty123456",
             "age": 30,
             "experience": "5 years",
             "isOnline": false,
@@ -377,6 +378,7 @@
         {
             "name": "Serhii",
             "email": "serhii@gmail.com",
+            "password": "Qwerty12345",
             "age": 18,
             "experience": "7 years",
             "isOnline": false,
@@ -390,6 +392,7 @@
         {
             "name": "John",
             "email": "jonh@gmail.com",
+            "password": "Qwerty123",
             "age": 35,
             "experience": "7 years",
             "isOnline": false,
@@ -403,6 +406,7 @@
         {
             "name": "Alex",
             "email": "alex@gmail.com",
+            "password": "Qwerty1234",
             "age": 35,
             "experience": "7 years",
             "isOnline": false,
