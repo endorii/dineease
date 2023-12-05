@@ -12,6 +12,9 @@ import { Orders } from './components/Orders';
 import { Tables } from './components/Tables';
 import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
 import { Service } from './components/Service';
+import { Checks } from './pages/Statistis/Checks/Checks';
+import Employees from './pages/Access/Employees/Employees';
+import Dishes from './pages/Menu/Dishes/Dishes';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -25,10 +28,20 @@ const router = createBrowserRouter(
                 <Route path='account' element={<CurrentEmployeeAccount />} />
             </Route>
             <Route path=':restaurant/Admin/panel' element={<Account />}>
-                
+                <Route path='sales' element={<Checks />} />
+                <Route path='checks' element={<Checks />} />
+                <Route path='dishes' element={<Dishes />} />
+                <Route path='employees' element={<Employees />} />
+                <Route path='positions' element={<Checks />} />
+                <Route path='cash-registers' element={<Checks />} />
+                <Route path='feedback' element={<Checks />} />
+                <Route path='needs' element={<Checks />} />
+                <Route path='general' element={<Checks />} />
+                <Route path='account' element={<Checks />} />
+
             </Route>
             <Route path=':restaurant/Accountant/panel' element={<Account />}>
-                
+
             </Route>
         </>
     )
