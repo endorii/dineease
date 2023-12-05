@@ -84,6 +84,7 @@
                 {
                     "orderId": "001",
                     "tableNumber": "5",
+                    "isOpen": true,
                     "items": [
                         {
                             "item": "Spaghetti Carbonara",
@@ -98,6 +99,7 @@
                 {
                     "orderId": "002",
                     "tableNumber": "3",
+                    "isOpen": true,
                     "items": [
                         {
                             "item": "Chicken Parmesan",
