@@ -13,9 +13,9 @@ import Waiter from '../assets/svg/waiter.svg';
 import { NavLink, Link, Outlet } from 'react-router-dom';
 
 const NestedItem = ({ item }) => (
-    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-gray-800">
+    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-white">
         <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-blue-600 border-r-4 pr-10 border-blue-600" : "font-light"
+            isPending ? "pending" : isActive ? "text-yellow-500 border-r-4 pr-10 border-yellow-500" : "font-light"
         } to={item.path}>{item.title}</NavLink>
     </div>
 );
@@ -34,7 +34,7 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
             <div className='cursor-pointer' onClick={() => setMenuOpen(true)}>
                 <img src={icon} alt="" className='inline w-6' />
 
-                <div className="px-3 py-2 inline text-lg font-medium" onClick={() => children ? setOpen(!open) : null}>
+                <div className="px-3 py-2 inline text-lg font-medium " onClick={() => children ? setOpen(!open) : null}>
                     {menuOpen ? title : null} {' '}
                     {children && menuOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`h-3 w-3 inline transform transition duration-150 ease-out ${open ? 'rotate-180' : ''}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
@@ -60,17 +60,9 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
         {
             title: "Меню", icon: Menu, children:
                 [
-                    { title: "Товари", path: "things" },
+                    { title: "Товари", path: "dishes" },
                     // { title: "Інгредієнти", path: "ingredients" },
                     // { title: "QR - меню", path: "qrmenu" }
-                ]
-        },
-        {
-            title: "Склад", icon: Storage, children:
-                [
-                    { title: "Залишки", path: "residues" },
-                    { title: "Постачання", path: "supply" },
-                    { title: "Виробництво", path: "production" },
                 ]
         },
         {
@@ -89,7 +81,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                 [
                     { title: "Загальні", path: "general" },
                     { title: "Аккаунт", path: "account" },
-                    { title: "Столи", path: "tables" },
                     // { title: "Сповіщення", path: "notifications" },
                 ]
         }
@@ -111,25 +102,15 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
 const Account = () => {
 
     const [menuOpen, setMenuOpen] = useState(true)
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div className="flex">
-            <aside className={menuOpen ? "w-[260px] h-screen bg-slate-200 p-7 border-r border-slate-300 overflow-auto" : "w-[85px] h-screen bg-slate-200 p-7 border-r border-slate-300 overflow-auto"}>
+            <aside className={menuOpen ? " text-white w-[260px] h-screen bg-sky-900 p-7 border-slate-300 overflow-auto" : "text-white w-[85px] h-screen bg-sky-900 p-7 border-r border-slate-300 overflow-auto"}>
                 <div>
-                    <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
+                    <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                     </svg>
                 </div>
-                <div className='flex justify-center w-full '>
-                    <Link to='employee/auth/login' className='font-medium text-center bg-blue-500 px-5 py-3 rounded-lg text-white shadow-md'><img className='w-10 ' src={Waiter} alt="" />GO</Link>
-
-                </div>
-                <hr className='border-t-1 border-slate-300 mt-3' />
                 <Accordion menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             </aside>
             <main className="flex-1 ">
