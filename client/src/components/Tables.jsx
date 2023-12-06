@@ -66,25 +66,26 @@ export const Tables = () => {
     }, [])
 
     return (
-        <>
+        <div className='h-screen'>
             {/* {openNewOrderMenu ? <Modal>
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder} currentTable={currentTable} />
             </Modal> : null} */}
-            <div className="flex flex-col w-full text-white justify-center bg-gray-600">
+            <div className="flex flex-col w-full text-white justify-center bg-sky-900">
                 <div className='flex justify-end p-3'>
-                    <button className='px-6 py-3 bg-green-600 rounded-lg hover:bg-green-700 text-lg' onClick={() => {
+                    <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg' onClick={() => {
                         setOpenNewOrderMenu(true)
                     }}>Нове замовлення</button>
                 </div>
-                <div className="h-auto bg-gray-200 text-black">
-                    <div className="flex flex-wrap p-4 text-xl justify-between overflow-x-auto">
+            </div>
+            <div className="bg-white m-5 overflow-y-scroll h-[80%] shadow-inner border">
+                    <div className="flex flex-wrap p-4 text-xl justify-between ">
                         {tables.map((table) => {
                             let isTableBusy = orders.some(order => order.tableNumber == table.table_id && order.isOpen === true);
                             return (
                                 <div onClick={() => { setCurrentTable(table.table_id) }} key={table.table_id} className="relative flex flex-col items-center w-1/6 p-4">
                                     <button
                                         onClick={() => { setOpenNewOrderMenu(true); }} disabled={isTableBusy}
-                                        className={ isTableBusy ? 'bg-red-800 text-white rounded-md w-[160px] h-[160px] cursor-not-allowed' : 'bg-green-600 text-white rounded-md w-[160px] h-[160px] hover:bg-gray-800' }
+                                        className={ isTableBusy ? 'bg-yellow-800 text-white rounded-md w-[160px] h-[160px] cursor-not-allowed' : 'bg-teal-700 text-white rounded-md w-[160px] h-[160px] hover:bg-teal-900' }
                                     >
                                         Столик {table.table_id}
                                     </button>
@@ -93,7 +94,6 @@ export const Tables = () => {
                         })}
                     </div>
                 </div>
-            </div>
-        </>
+        </div>
     );
 };

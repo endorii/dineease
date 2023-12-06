@@ -9,13 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMenu } from "../../../store/slices/menu.slice";
 import { useParams } from "react-router-dom";
 // import { fetchMenuItems } from "../../../../store/slices/menuItemsSlice";
+import Plus from '../../../assets/svg/plus.svg'
+import { AddButton } from '../../../ui/buttons/AddButton';
 
 const Dishes = () => {
 
     const [searchInput, setSearchInput] = useState('');
     const [openAddDishModal, setOpenAddDishModal] = useState(false);
 
-    const {restaurant} = useParams();
+    const { restaurant } = useParams();
 
     const dispatch = useDispatch();
 
@@ -33,117 +35,68 @@ const Dishes = () => {
                     <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />
                 </Modal>
                 : null} */}
-            <div className='flex flex-col h-full' >
+            <div className='flex flex-col' >
                 <div className="flex justify-between ">
-                    <h2 className="text-3xl font-medium">Доступні страви для замовлень</h2>
-                    <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg px-7 py-2 text-white font-medium drop-shadow-md"
-                        onClick={() => setOpenAddDishModal(true)}
-                    >Додати
-                        {/* <img className='w-7 inline pl-2' src={Plus} alt="" /> */}
-                    </button>
+                    <h2 className="text-3xl font-medium text-sky-950">Доступні страви для замовлень</h2>
+                    <AddButton customFunction={setOpenAddDishModal}/>
                 </div>
                 <hr className='border-t-1 border-slate-300 my-10' />
                 <div className="flex w-full justify-end px-3 pb-4">
-                    <img 
-                    src={Search}
-                     alt="" className="w-6 mr-2" />
+                    <img
+                        src={Search}
+                        alt="" className="w-6 mr-2" />
                     <input className="p-3 rounded-lg border-2 border-gray-200" type="text" placeholder="Введать назву страви..." value={searchInput} onChange={(e) => {
                         setSearchInput(e.target.value);
                     }} />
                 </div>
-                <div className="relative shadow-md sm:rounded-lg overflow-y-auto">
+                <div className="flex flex-col relative shadow-md sm:rounded-lg overflow-y-auto gap-10">
 
-                    
-                    {menu.length > 0 ? menu.map(menuCategory => 
-                    
-                    <div className='bg-sky-950 text-white'>
-                        <div className='p-5 text-xl capitalize'>
-                            {menuCategory.category}
+
+                    {menu.length > 0 ? menu.map(menuCategory =>
+
+                        <div className='text-blue-100'>
+                            <div className='px-5 py-3 text-xl capitalize bg-sky-950'>
+                                {menuCategory.category}
+                            </div>
+                            <table className="w-full text-left">
+                                <thead className="text-xs text-gray-700 uppercase bg-teal-800/30">
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3">
+                                            Назва
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Ціна
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Час приготування
+                                        </th>
+                                        <th scope="col" className="px-6 py-3">
+                                            Вага
+                                        </th>
+                                        <th scope="col" className="px-1 py-1">
+
+                                        </th>
+                                        <th scope="col" className="px-1 py-1">
+
+                                        </th>
+                                        <th scope="col" className="px-1 py-1">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    {
+                                        menuCategory.items.length > 0 ?
+                                            menuCategory.items.map((item, i) => (
+                                                item.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={item} key={i} /> : null
+                                            ))
+                                            :
+                                            <h2 className='text-4xl text-sky-900 px-6 pt-10 font-light text'>Страв не знайдено</h2>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
-                        <table className="w-full text-sm text-left text-gray-500 ">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-300">
-                            <tr>
-                                <th scope="col" className="px-6 py-3">
-                                    Назва
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Ціна
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Час приготування
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Вага
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                            {
-                                menuCategory.items.length > 0 ?
-                                menuCategory.items.map((item, i) => (
-                                        item.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={item} key={i} /> : null
-                                    ))
-                                    :
-                                    <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>
-                            }
-                        </tbody>
-                    </table>
-                    </div>
-                    
-                    ) : null}
-
-
-
-
-                    {/* <table className="w-full text-sm text-left text-gray-500 ">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-300">
-                            <tr>
-                                <th scope="col" className="px-6 py-3">
-                                    Назва
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Категорія
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Ціна
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Час приготування
-                                </th>
-                                <th scope="col" className="px-6 py-3">
-                                    Кількість
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                            {
-                                menuItems.length > 0 ?
-                                    menuItems.map((item, i) => (
-                                        item.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={item} key={i} /> : null
-                                    ))
-                                    :
-                                    <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>
-                            }
-                        </tbody>
-                    </table> */}
+                    ) : <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>}
                 </div>
             </div>
         </>

@@ -6,6 +6,7 @@ import { getEmployeesByRestaurant, getStaffByRestaurant } from '../../../actions
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
+import { AddButton } from '../../../ui/buttons/AddButton';
 // import { deleteEmployee } from './employee';
 // import EditEmployee from './EditEmployee';
 // import { Modal } from '../../../../components/Modal';
@@ -18,7 +19,7 @@ const Employees = () => {
 
     const dispatch = useDispatch();
 
-    const {restaurant} = useParams()
+    const { restaurant } = useParams()
 
     const { employees } = useSelector(state => state.employees);
 
@@ -42,17 +43,17 @@ const Employees = () => {
 
             <div className='flex flex-col' >
                 <div className="flex justify-between ">
-                    <h2 className="text-3xl font-medium">Працівники</h2>
-                    <button className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg px-7 py-2 text-white font-medium drop-shadow-md"
-                        onClick={() => setAddEmployeeModalOpen(true)}>Додати
-                        <img className='w-7 inline pl-2' src={Plus} alt="" />
-                    </button>
+                    <h2 className="text-3xl font-medium text-sky-950">Працівники</h2>
+                    <AddButton customFunction={setAddEmployeeModalOpen}/>
                 </div>
                 <hr className='border-t-1 border-slate-300 my-10' />
 
-                <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-                    <table className="w-full text-sm text-left text-gray-500">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-300">
+                <div className="relative overflow-x-auto shadow-md sm:rounded-lg text-blue-100">
+                    <div className='px-5 py-3 text-xl capitalize bg-sky-950'>
+                        Список працівників
+                    </div>
+                    <table className="w-full text-left text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase bg-teal-800/30">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
                                     Ім'я
@@ -80,7 +81,7 @@ const Employees = () => {
                         {employees.length > 0 ? employees.map((employee, i) =>
                             <tbody key={i}>
                                 <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900">
                                         {employee.name}
                                     </th>
                                     <td className="px-6 py-4">
@@ -102,13 +103,13 @@ const Employees = () => {
                                             dispatch(getStaffByRestaurant(restaurant))
                                         }}
 
-                                            className="font-medium text-blue-600 hover:underline">Редагувати</button>
+                                        className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10">Редагувати</button>
                                     </td>
                                     <td className="px-2 py-1 text-left">
-                                        <button onClick={async () => { 
+                                        <button onClick={async () => {
                                             // await deleteEmployee(employee._id); 
-                                            dispatch(getStaffByRestaurant(restaurant)) 
-                                            }}  className="font-medium text-blue-600 hover:underline">Видалити</button>
+                                            dispatch(getStaffByRestaurant(restaurant))
+                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10">Видалити</button>
                                     </td>
                                 </tr>
                             </tbody>

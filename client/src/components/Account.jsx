@@ -13,9 +13,9 @@ import Waiter from '../assets/svg/waiter.svg';
 import { NavLink, Link, Outlet } from 'react-router-dom';
 
 const NestedItem = ({ item }) => (
-    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-white">
+    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-blue-50">
         <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "text-yellow-500 border-r-4 pr-10 border-yellow-500" : "font-light"
+            isPending ? "pending" : isActive ? "pr-10 py-3 pl-3 bg-sky-50/20 rounded-md border-r-4" : "font-light"
         } to={item.path}>{item.title}</NavLink>
     </div>
 );
@@ -71,7 +71,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                     { title: "Працівники", path: "employees" },
                     { title: "Посади", path: "positions" },
                     { title: "Касси", path: "cash-registers" },
-                    { title: "Зворотній зв'язок", path: "feedback" },
+                    { title: "Зв'язок", path: "feedback" },
                     { title: "Потреби", path: "needs" }
                 ]
         },
@@ -87,7 +87,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
     ];
 
     return (
-        <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6">
+        <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-100">
             {items.map((item, index) => (
                 <AccordionItem key={index} title={item.title} icon={item.icon} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
                     {item.children?.map((item, index) => (
@@ -105,7 +105,7 @@ const Account = () => {
 
     return (
         <div className="flex">
-            <aside className={menuOpen ? " text-white w-[260px] h-screen bg-sky-900 p-7 border-slate-300 overflow-auto" : "text-white w-[85px] h-screen bg-sky-900 p-7 border-r border-slate-300 overflow-auto"}>
+            <aside className={menuOpen ? " text-white w-[260px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300 overflow-auto"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
