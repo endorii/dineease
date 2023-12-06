@@ -7,7 +7,7 @@
             "isOpen": true,
             "menu": [
                 {
-                    "category": "appetizers",
+                    "category": "Закуски",
                     "items": [
                         {
                             "name": "Bruschetta",
@@ -26,7 +26,7 @@
                     ]
                 },
                 {
-                    "category": "mainDishes",
+                    "category": "Основні страви",
                     "items": [
                         {
                             "name": "Spaghetti Carbonara",
@@ -45,7 +45,7 @@
                     ]
                 },
                 {
-                    "category": "desserts",
+                    "category": "Десерти",
                     "items": [
                         {
                             "name": "Tiramisu",
@@ -82,6 +82,125 @@
             ],    
             "orders": [
                 {
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                },{
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                }
+                ,{
                     "orderId": "001",
                     "tableNumber": "5",
                     "isOpen": true,
