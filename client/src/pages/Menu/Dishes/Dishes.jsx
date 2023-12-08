@@ -29,32 +29,31 @@ const Dishes = () => {
     }, [])
 
     return (
-        <>
+        <div className="h-screen">
             {/* {openAddDishModal ?
                 <Modal>
                     <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />
                 </Modal>
                 : null} */}
-            <div className='flex flex-col' >
-                <div className="flex justify-between ">
-                    <h2 className="text-3xl font-medium text-sky-950">Доступні страви для замовлень</h2>
-                    <AddButton customFunction={setOpenAddDishModal}/>
+            <div className='flex flex-col'>
+                <div>
+                    <div className="flex justify-between ">
+                        <h2 className="text-3xl font-medium text-sky-950">Доступні страви для замовлень</h2>
+                        <AddButton customFunction={setOpenAddDishModal} />
+                    </div>
+                    <hr className='border-t-1 border-slate-300 my-10' />
+                    <div className="flex w-full justify-end px-3 pb-4">
+                        <img
+                            src={Search}
+                            alt="" className="w-6 mr-2" />
+                        <input className="p-3 rounded-lg border-2 border-gray-200" type="text" placeholder="Введать назву страви..." value={searchInput} onChange={(e) => {
+                            setSearchInput(e.target.value);
+                        }} />
+                    </div>
                 </div>
-                <hr className='border-t-1 border-slate-300 my-10' />
-                <div className="flex w-full justify-end px-3 pb-4">
-                    <img
-                        src={Search}
-                        alt="" className="w-6 mr-2" />
-                    <input className="p-3 rounded-lg border-2 border-gray-200" type="text" placeholder="Введать назву страви..." value={searchInput} onChange={(e) => {
-                        setSearchInput(e.target.value);
-                    }} />
-                </div>
-                <div className="flex flex-col relative shadow-md sm:rounded-lg overflow-y-auto gap-10">
-
-
+                <div className=" h-[650px] flex flex-col shadow-md overflow-y-scroll gap-5">
                     {menu.length > 0 ? menu.map(menuCategory =>
-
-                        <div className='text-blue-100'>
+                        <div className='w-full text-blue-100'>
                             <div className='px-5 py-3 text-xl capitalize bg-sky-950'>
                                 {menuCategory.category}
                             </div>
@@ -99,7 +98,7 @@ const Dishes = () => {
                     ) : <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

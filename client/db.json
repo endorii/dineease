@@ -12,16 +12,55 @@
                         {
                             "name": "Bruschetta",
                             "price": "50 UAH",
-                            "ingredients": ["bread", "tomatoes", "garlic", "basil", "olive oil"],
+                            "ingredients": [
+                                "bread",
+                                "tomatoes",
+                                "garlic",
+                                "basil",
+                                "olive oil"
+                            ],
                             "calories": "120 kcal",
                             "weight": "200 g"
                         },
                         {
                             "name": "Garlic Bread",
                             "price": "40 UAH",
-                            "ingredients": ["bread", "garlic", "butter"],
+                            "ingredients": [
+                                "bread",
+                                "garlic",
+                                "butter"
+                            ],
                             "calories": "180 kcal",
                             "weight": "150 g"
+                        }
+                    ]
+                },
+                {
+                    "category": "Cтрави",
+                    "items": [
+                        {
+                            "name": "Spaghetti Carbonara",
+                            "price": "120 UAH",
+                            "ingredients": [
+                                "spaghetti",
+                                "eggs",
+                                "cheese",
+                                "bacon"
+                            ],
+                            "calories": "560 kcal",
+                            "weight": "500 g"
+                        },
+                        {
+                            "name": "Chicken Parmesan",
+                            "price": "130 UAH",
+                            "ingredients": [
+                                "chicken",
+                                "cheese",
+                                "tomato sauce",
+                                "spaghetti"
+                            ],
+                            "calories": "640 kcal",
+                            "weight": "550 g"
                         }
                     ]
                 },
@@ -31,14 +70,24 @@
                         {
                             "name": "Spaghetti Carbonara",
                             "price": "120 UAH",
-                            "ingredients": ["spaghetti", "eggs", "cheese", "bacon"],
+                            "ingredients": [
+                                "spaghetti",
+                                "eggs",
+                                "cheese",
+                                "bacon"
+                            ],
                             "calories": "560 kcal",
                             "weight": "500 g"
                         },
                         {
                             "name": "Chicken Parmesan",
                             "price": "130 UAH",
-                            "ingredients": ["chicken", "cheese", "tomato sauce", "spaghetti"],
+                            "ingredients": [
+                                "chicken",
+                                "cheese",
+                                "tomato sauce",
+                                "spaghetti"
+                            ],
                             "calories": "640 kcal",
                             "weight": "550 g"
                         }
@@ -50,20 +99,33 @@
                         {
                             "name": "Tiramisu",
                             "price": "70 UAH",
-                            "ingredients": ["ladyfingers", "coffee", "eggs", "sugar", "mascarpone cheese", "cocoa powder"],
+                            "ingredients": [
+                                "ladyfingers",
+                                "coffee",
+                                "eggs",
+                                "sugar",
+                                "mascarpone cheese",
+                                "cocoa powder"
+                            ],
                             "calories": "450 kcal",
                             "weight": "200 g"
                         },
                         {
                             "name": "Panna Cotta",
                             "price": "60 UAH",
-                            "ingredients": ["cream", "milk", "sugar", "gelatin", "vanilla extract"],
+                            "ingredients": [
+                                "cream",
+                                "milk",
+                                "sugar",
+                                "gelatin",
+                                "vanilla extract"
+                            ],
                             "calories": "320 kcal",
                             "weight": "150 g"
                         }
                     ]
                 }
-            ],    
+            ],
             "needs": [
                 {
                     "waiterName": "Mark",
@@ -79,7 +141,7 @@
                     "date": "2023-12-01",
                     "priority": "high"
                 }
-            ],    
+            ],
             "orders": [
                 {
                     "orderId": "001",
@@ -170,7 +232,38 @@
                             "quantity": "1"
                         }
                     ]
-                },{
+                },
+                {
+                    "orderId": "001",
+                    "tableNumber": "5",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Spaghetti Carbonara",
+                            "quantity": "2"
+                        },
+                        {
+                            "item": "Tiramisu",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
+                    "orderId": "002",
+                    "tableNumber": "3",
+                    "isOpen": true,
+                    "items": [
+                        {
+                            "item": "Chicken Parmesan",
+                            "quantity": "1"
+                        },
+                        {
+                            "item": "Panna Cotta",
+                            "quantity": "1"
+                        }
+                    ]
+                },
+                {
                     "orderId": "001",
                     "tableNumber": "5",
                     "isOpen": true,
@@ -200,37 +293,7 @@
                         }
                     ]
                 }
-                ,{
-                    "orderId": "001",
-                    "tableNumber": "5",
-                    "isOpen": true,
-                    "items": [
-                        {
-                            "item": "Spaghetti Carbonara",
-                            "quantity": "2"
-                        },
-                        {
-                            "item": "Tiramisu",
-                            "quantity": "1"
-                        }
-                    ]
-                },
-                {
-                    "orderId": "002",
-                    "tableNumber": "3",
-                    "isOpen": true,
-                    "items": [
-                        {
-                            "item": "Chicken Parmesan",
-                            "quantity": "1"
-                        },
-                        {
-                            "item": "Panna Cotta",
-                            "quantity": "1"
-                        }
-                    ]
-                }
-            ]            
+            ]
         },
         {
             "id": "002",
@@ -244,14 +307,24 @@
                         {
                             "name": "Bruschetta",
                             "price": "50 UAH",
-                            "ingredients": ["bread", "tomatoes", "garlic", "basil", "olive oil"],
+                            "ingredients": [
+                                "bread",
+                                "tomatoes",
+                                "garlic",
+                                "basil",
+                                "olive oil"
+                            ],
                             "calories": "120 kcal",
                             "weight": "200 g"
                         },
                         {
                             "name": "Garlic Bread",
                             "price": "40 UAH",
-                            "ingredients": ["bread", "garlic", "butter"],
+                            "ingredients": [
+                                "bread",
+                                "garlic",
+                                "butter"
+                            ],
                             "calories": "180 kcal",
                             "weight": "150 g"
                         }
@@ -263,14 +336,24 @@
                         {
                             "name": "Spaghetti Carbonara",
                             "price": "120 UAH",
-                            "ingredients": ["spaghetti", "eggs", "cheese", "bacon"],
+                            "ingredients": [
+                                "spaghetti",
+                                "eggs",
+                                "cheese",
+                                "bacon"
+                            ],
                             "calories": "560 kcal",
                             "weight": "500 g"
                         },
                         {
                             "name": "Chicken Parmesan",
                             "price": "130 UAH",
-                            "ingredients": ["chicken", "cheese", "tomato sauce", "spaghetti"],
+                            "ingredients": [
+                                "chicken",
+                                "cheese",
+                                "tomato sauce",
+                                "spaghetti"
+                            ],
                             "calories": "640 kcal",
                             "weight": "550 g"
                         }
@@ -282,20 +365,33 @@
                         {
                             "name": "Tiramisu",
                             "price": "70 UAH",
-                            "ingredients": ["ladyfingers", "coffee", "eggs", "sugar", "mascarpone cheese", "cocoa powder"],
+                            "ingredients": [
+                                "ladyfingers",
+                                "coffee",
+                                "eggs",
+                                "sugar",
+                                "mascarpone cheese",
+                                "cocoa powder"
+                            ],
                             "calories": "450 kcal",
                             "weight": "200 g"
                         },
                         {
                             "name": "Panna Cotta",
                             "price": "60 UAH",
-                            "ingredients": ["cream", "milk", "sugar", "gelatin", "vanilla extract"],
+                            "ingredients": [
+                                "cream",
+                                "milk",
+                                "sugar",
+                                "gelatin",
+                                "vanilla extract"
+                            ],
                             "calories": "320 kcal",
                             "weight": "150 g"
                         }
                     ]
                 }
-            ],    
+            ],
             "needs": [
                 {
                     "waiterName": "Mark",
@@ -311,7 +407,7 @@
                     "date": "2023-12-01",
                     "priority": "high"
                 }
-            ],    
+            ],
             "orders": [
                 {
                     "orderId": "001",
@@ -341,7 +437,7 @@
                         }
                     ]
                 }
-            ]            
+            ]
         },
         {
             "id": "003",
@@ -355,14 +451,24 @@
                         {
                             "name": "Bruschetta",
                             "price": "50 UAH",
-                            "ingredients": ["bread", "tomatoes", "garlic", "basil", "olive oil"],
+                            "ingredients": [
+                                "bread",
+                                "tomatoes",
+                                "garlic",
+                                "basil",
+                                "olive oil"
+                            ],
                             "calories": "120 kcal",
                             "weight": "200 g"
                         },
                         {
                             "name": "Garlic Bread",
                             "price": "40 UAH",
-                            "ingredients": ["bread", "garlic", "butter"],
+                            "ingredients": [
+                                "bread",
+                                "garlic",
+                                "butter"
+                            ],
                             "calories": "180 kcal",
                             "weight": "150 g"
                         }
@@ -374,14 +480,24 @@
                         {
                             "name": "Spaghetti Carbonara",
                             "price": "120 UAH",
-                            "ingredients": ["spaghetti", "eggs", "cheese", "bacon"],
+                            "ingredients": [
+                                "spaghetti",
+                                "eggs",
+                                "cheese",
+                                "bacon"
+                            ],
                             "calories": "560 kcal",
                             "weight": "500 g"
                         },
                         {
                             "name": "Chicken Parmesan",
                             "price": "130 UAH",
-                            "ingredients": ["chicken", "cheese", "tomato sauce", "spaghetti"],
+                            "ingredients": [
+                                "chicken",
+                                "cheese",
+                                "tomato sauce",
+                                "spaghetti"
+                            ],
                             "calories": "640 kcal",
                             "weight": "550 g"
                         }
@@ -393,20 +509,33 @@
                         {
                             "name": "Tiramisu",
                             "price": "70 UAH",
-                            "ingredients": ["ladyfingers", "coffee", "eggs", "sugar", "mascarpone cheese", "cocoa powder"],
+                            "ingredients": [
+                                "ladyfingers",
+                                "coffee",
+                                "eggs",
+                                "sugar",
+                                "mascarpone cheese",
+                                "cocoa powder"
+                            ],
                             "calories": "450 kcal",
                             "weight": "200 g"
                         },
                         {
                             "name": "Panna Cotta",
                             "price": "60 UAH",
-                            "ingredients": ["cream", "milk", "sugar", "gelatin", "vanilla extract"],
+                            "ingredients": [
+                                "cream",
+                                "milk",
+                                "sugar",
+                                "gelatin",
+                                "vanilla extract"
+                            ],
                             "calories": "320 kcal",
                             "weight": "150 g"
                         }
                     ]
                 }
-            ],    
+            ],
             "needs": [
                 {
                     "waiterName": "Mark",
@@ -422,7 +551,7 @@
                     "date": "2023-12-01",
                     "priority": "high"
                 }
-            ],    
+            ],
             "orders": [
                 {
                     "orderId": "001",
@@ -452,7 +581,7 @@
                         }
                     ]
                 }
-            ]            
+            ]
         }
     ],
     "employees": [
@@ -466,7 +595,10 @@
             "restaurant": "Dishy",
             "salary": "20000 UAH",
             "workingTime": {
-                "27.10.2023": ["timestart", "timeend"]
+                "27.10.2023": [
+                    "timestart",
+                    "timeend"
+                ]
             }
         },
         {
@@ -479,7 +611,10 @@
             "restaurant": "Dishy",
             "salary": "20000 UAH",
             "workingTime": {
-                "27.10.2023": ["timestart", "timeend"]
+                "27.10.2023": [
+                    "timestart",
+                    "timeend"
+                ]
             }
         },
         {
@@ -493,7 +628,10 @@
             "restaurant": "Dishy",
             "salary": "30000 UAH",
             "workingTime": {
-                "27.10.2023": ["timestart", "timeend"]
+                "27.10.2023": [
+                    "timestart",
+                    "timeend"
+                ]
             }
         },
         {
@@ -507,7 +645,10 @@
             "restaurant": "Dishy",
             "salary": "40000 UAH",
             "workingTime": {
-                "27.10.2023": ["timestart", "timeend"]
+                "27.10.2023": [
+                    "timestart",
+                    "timeend"
+                ]
             }
         },
         {
@@ -521,7 +662,10 @@
             "restaurant": "Overeats",
             "salary": "40000 UAH",
             "workingTime": {
-                "27.10.2023": ["timestart", "timeend"]
+                "27.10.2023": [
+                    "timestart",
+                    "timeend"
+                ]
             }
         },
         {
@@ -535,8 +679,11 @@
             "restaurant": "Dineease",
             "salary": "40000 UAH",
             "workingTime": {
-                "27.10.2023": ["timestart", "timeend"]
+                "27.10.2023": [
+                    "timestart",
+                    "timeend"
+                ]
             }
         }
-    ]    
+    ]
 }

@@ -29,21 +29,21 @@ export const Orders = () => {
     }, [])
 
     return (
-        <div className="h-screen">
+        <div className="h-[65%]">
             {/* {openNewOrderMenu ? <Modal>
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
             </Modal> : null}
             {openPayOrder ? <Modal>
                 <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder} />
             </Modal> : null} */}
-            <div className="flex flex-col text-white justify-center bg-sky-900" >
+            <div className="flex flex-col text-white justify-center bg-sky-900">
                 <div className='flex justify-end p-3'>
                     <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg' onClick={() => {
                         setOpenNewOrderMenu(true)
                     }}>Нове замовлення</button>
                 </div>
             </div>
-            <div className="bg-white p-10 m-10 overflow-y-scroll h-[75%] shadow-inner border">
+            <div className="bg-white p-10 m-10 overflow-y-scroll shadow-inner border">
                 {openOrders.length > 0 ?
                     <table className="w-full text-left text-sky-900">
                         <thead className="uppercase bg-sky-200">

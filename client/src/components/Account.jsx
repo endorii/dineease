@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // import { auth } from '../modules/auth/user';
-
 import Statistic from '../assets/svg/statistic.svg';
 import Finances from '../assets/svg/finances.svg';
 import Menu from '../assets/svg/menu.svg';
-import Storage from '../assets/svg/storage.svg';
+// import Storage from '../assets/svg/storage.svg';
 import Access from '../assets/svg/access.svg';
 import Settings from '../assets/svg/settings.svg';
-import Waiter from '../assets/svg/waiter.svg';
+// import Waiter from '../assets/svg/waiter.svg';
 
 import { NavLink, Link, Outlet } from 'react-router-dom';
 
@@ -104,7 +103,7 @@ const Account = () => {
     const [menuOpen, setMenuOpen] = useState(true)
 
     return (
-        <div className="flex">
+        <div className="fixed flex w-screen h-screen">
             <aside className={menuOpen ? " text-white w-[260px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300 overflow-auto"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
@@ -113,8 +112,8 @@ const Account = () => {
                 </div>
                 <Accordion menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             </aside>
-            <main className="flex-1 ">
-                <div className="h-screen bg-slate-100 p-10">
+            <main className="flex-1">
+                <div className="bg-slate-100 p-10 h-screen">
                     <Outlet />
                 </div>
             </main>
