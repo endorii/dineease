@@ -15,6 +15,7 @@ import { Service } from './components/Service';
 import { Checks } from './pages/Statistis/Checks/Checks';
 import Employees from './pages/Access/Employees/Employees';
 import Dishes from './pages/Menu/Dishes/Dishes';
+import { Needs } from './components/Needs';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,7 +36,7 @@ const router = createBrowserRouter(
                 <Route path='positions' element={<Checks />} />
                 <Route path='cash-registers' element={<Checks />} />
                 <Route path='feedback' element={<Checks />} />
-                <Route path='needs' element={<Checks />} />
+                <Route path='needs' element={<Needs />} />
                 <Route path='general' element={<Checks />} />
                 <Route path='account' element={<Checks />} />
 
