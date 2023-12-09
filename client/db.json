@@ -11,7 +11,7 @@
                     "items": [
                         {
                             "name": "Bruschetta",
-                            "price": "50 UAH",
+                            "price": 50,
                             "ingredients": [
                                 "bread",
                                 "tomatoes",
@@ -25,7 +25,7 @@
                         },
                         {
                             "name": "Garlic Bread",
-                            "price": "40 UAH",
+                            "price": 40,
                             "ingredients": [
                                 "bread",
                                 "garlic",
@@ -42,7 +42,7 @@
                     "items": [
                         {
                             "name": "Spaghetti Carbonara",
-                            "price": "120 UAH",
+                            "price": 120,
                             "ingredients": [
                                 "spaghetti",
                                 "eggs",
@@ -55,7 +55,7 @@
                         },
                         {
                             "name": "Chicken Parmesan",
-                            "price": "130 UAH",
+                            "price": 130,
                             "ingredients": [
                                 "chicken",
                                 "cheese",
@@ -73,7 +73,7 @@
                     "items": [
                         {
                             "name": "Spaghetti Carbonara",
-                            "price": "120 UAH",
+                            "price": 120,
                             "ingredients": [
                                 "spaghetti",
                                 "eggs",
@@ -86,7 +86,7 @@
                         },
                         {
                             "name": "Chicken Parmesan",
-                            "price": "130 UAH",
+                            "price": 130,
                             "ingredients": [
                                 "chicken",
                                 "cheese",
@@ -104,7 +104,7 @@
                     "items": [
                         {
                             "name": "Tiramisu",
-                            "price": "70 UAH",
+                            "price": 70,
                             "ingredients": [
                                 "ladyfingers",
                                 "coffee",
@@ -119,7 +119,7 @@
                         },
                         {
                             "name": "Panna Cotta",
-                            "price": "60 UAH",
+                            "price": 60,
                             "ingredients": [
                                 "cream",
                                 "milk",

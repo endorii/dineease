@@ -10,6 +10,7 @@ import { fetchOrders } from "../store/slices/orders.slice";
 import { useParams } from "react-router-dom";
 import { NewOrderModal } from "./NewOrderModal";
 import { fetchMenu } from "../store/slices/menu.slice";
+import { PayOrder } from "./PayOrder";
 
 export const Orders = () => {
 
@@ -35,9 +36,9 @@ export const Orders = () => {
             {openNewOrderMenu ? <Modal>
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
             </Modal> : null}
-            {/* {openPayOrder ? <Modal>
+            {openPayOrder ? <Modal>
                 <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder} />
-            </Modal> : null} */}
+            </Modal> : null}
             <div className="flex flex-col text-white justify-center bg-sky-50">
                 <div className='flex justify-end p-3'>
                     <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg' onClick={() => {
@@ -49,7 +50,7 @@ export const Orders = () => {
                 <div className="shadow-inner border rounded-md">
                     {openOrders.length > 0 ?
                         <table className="w-full text-left text-sky-900">
-                            <thead className="uppercase bg-sky-200">
+                            <thead className="uppercase bg-teal-700/10">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">
                                         Замовлення

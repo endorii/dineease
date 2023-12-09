@@ -7,6 +7,7 @@ import { fetchOrders } from '../store/slices/orders.slice';
 // import { fetchMenu } from '../store/slices/menuSlice';
 // import { fetchMenuItems } from "../store/slices/menuItemsSlice";
 import { useParams } from "react-router-dom";
+import { NewOrderModal } from './NewOrderModal';
 
 export const Tables = () => {
 
@@ -67,9 +68,9 @@ export const Tables = () => {
 
     return (
         <div className='h-screen'>
-            {/* {openNewOrderMenu ? <Modal>
+            {openNewOrderMenu ? <Modal>
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder} currentTable={currentTable} />
-            </Modal> : null} */}
+            </Modal> : null}
             <div className="flex flex-col w-full text-white justify-center bg-sky-50">
                 <div className='flex justify-end p-3'>
                     <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg' onClick={() => {
