@@ -12,7 +12,7 @@ import Settings from '../assets/svg/settings.svg';
 import { NavLink, Link, Outlet } from 'react-router-dom';
 
 const NestedItem = ({ item }) => (
-    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-blue-50">
+    <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-sky-100">
         <NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "pr-10 py-3 pl-3 bg-sky-50/20 rounded-md border-r-4" : "font-light"
         } to={item.path}>{item.title}</NavLink>
@@ -86,7 +86,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
     ];
 
     return (
-        <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-100">
+        <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-00">
             {items.map((item, index) => (
                 <AccordionItem key={index} title={item.title} icon={item.icon} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
                     {item.children?.map((item, index) => (

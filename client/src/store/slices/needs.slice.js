@@ -3,7 +3,7 @@ import { getNeedsByRestaurant } from '../../actions/needs.actions';
 // import { getNeedsByRestaurant } from '../../actions/menu.actions';
 
 const initialState = {
-    needs: {},
+    needs: [],
     isLoading: false,
     error: null
 }

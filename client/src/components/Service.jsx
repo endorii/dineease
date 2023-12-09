@@ -21,12 +21,12 @@ export const Service = () => {
                         <ul className="flex items-center text-lg">
                             <li>
                                 <NavLink className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "p-5 text-center bg-sky-900 hover:bg-sky-900" : "p-5 text-center hover:bg-sky-900"
+                                    isPending ? "pending" : isActive ? "p-5 text-center bg-sky-50 text-sky-950" : "p-5 text-center hover:bg-sky-50 hover:text-sky-950 text-sky-50"
                                 } to="orders" >Замовлення</NavLink>
                             </li>
                             <li>
                                 <NavLink className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "p-5 text-center bg-sky-900 hover:bg-sky-900" : "p-5 text-center hover:bg-sky-900"
+                                    isPending ? "pending" : isActive ? "p-5 text-center bg-sky-50 text-sky-950" : "p-5 text-center hover:bg-sky-50 hover:text-sky-950 text-sky-50"
                                 } to="tables" >Столи</NavLink>
                             </li>
                         </ul>
@@ -36,7 +36,7 @@ export const Service = () => {
                             </div>
                             <div className="p-5 text-center font-medium">
                                 <NavLink className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "p-5 text-center bg-sky-900 hover:bg-sky-900" : "p-5 text-center hover:bg-sky-900"
+                                    isPending ? "pending" : isActive ? "p-5 text-center bg-sky-50 text-sky-950" : "p-5 text-center hover:bg-sky-50 hover:text-sky-950 text-sky-50"
                                 } to="account">
                                     {/* {name} */} ALEX
                                 </NavLink>

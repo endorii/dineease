@@ -19,7 +19,10 @@ export const Needs = () => {
         <div>
             <h2 className="text-3xl font-medium">Потреби, побажання та прохання</h2>
             <hr className='border-t-1 border-slate-300 my-10' />
-            <div className="relative overflow-y-scroll">
+            <div className="relative overflow-y-scroll rounded-md">
+                <div className='px-5 py-3 text-xl capitalize bg-sky-950 text-sky-100'>
+                    Список потреб
+                </div>
                 <table className="w-full text-left text-sky-900">
                     <thead className="text-xs text-gray-700 uppercase bg-teal-800/30">
                         <tr>
