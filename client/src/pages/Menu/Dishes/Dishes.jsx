@@ -11,6 +11,8 @@ import { useParams } from "react-router-dom";
 // import { fetchMenuItems } from "../../../../store/slices/menuItemsSlice";
 import Plus from '../../../assets/svg/plus.svg'
 import { AddButton } from '../../../ui/buttons/AddButton';
+import { Modal } from '../../../components/Modal';
+import { AddDishModal } from '../../../components/AddDishModal';
 
 const Dishes = () => {
 
@@ -30,11 +32,11 @@ const Dishes = () => {
 
     return (
         <div className="h-screen">
-            {/* {openAddDishModal ?
+            {openAddDishModal ?
                 <Modal>
                     <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />
                 </Modal>
-                : null} */}
+                : null}
             <div className='flex flex-col'>
                 <div>
                     <div className="flex justify-between ">
@@ -51,7 +53,7 @@ const Dishes = () => {
                         }} />
                     </div>
                 </div>
-                <div className=" h-[650px] flex flex-col shadow-md overflow-y-scroll gap-5">
+                <div className=" h-[650px] flex flex-col shadow-md overflow-y-scroll gap-5 rounded-md">
                     {menu.length > 0 ? menu.map(menuCategory =>
                         <div className='w-full text-blue-100'>
                             <div className='px-5 py-3 text-xl capitalize bg-sky-950'>

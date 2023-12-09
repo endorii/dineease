@@ -1,12 +1,13 @@
 import Plus from '../../../assets/svg/plus.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import AddEmployee from './AddEmployee';
+import AddEmployee from '../../../components/AddEmployee';
 import { getEmployeesByRestaurant, getStaffByRestaurant } from '../../../actions/employees.actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
 import { AddButton } from '../../../ui/buttons/AddButton';
+import { Modal } from '../../../components/Modal';
 // import { deleteEmployee } from './employee';
 // import EditEmployee from './EditEmployee';
 // import { Modal } from '../../../../components/Modal';
@@ -25,17 +26,16 @@ const Employees = () => {
 
     useEffect(() => {
         dispatch(getStaffByRestaurant(restaurant));
-        // dispatch(fetchPositions());
     }, [])
 
     return (
         <>
-            {/* {addEmployeeModalOpen &&
+            {addEmployeeModalOpen &&
                 <Modal>
                     <AddEmployee setOpen={setAddEmployeeModalOpen} />
                 </Modal>
             }
-            {editEmployeeModalOpen &&
+            {/* {editEmployeeModalOpen &&
                 <Modal>
                     <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
                 </Modal>
