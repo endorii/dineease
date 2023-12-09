@@ -5,6 +5,7 @@ import userSlice from './slices/user.slice';
 import ordersSlice from './slices/orders.slice';
 import menuSlice from './slices/menu.slice';
 import needsSlice from './slices/needs.slice';
+import feedbackSlice from './slices/feedback.slice';
 
 const rootReducer = {
     restaurants: restaurantSlice,
@@ -12,7 +13,8 @@ const rootReducer = {
     user: userSlice,
     orders: ordersSlice,
     menu: menuSlice,
-    needs: needsSlice
+    needs: needsSlice,
+    feedback: feedbackSlice
 }
 
 const store = configureStore({
