@@ -18,19 +18,18 @@ export const DishListItem = ({ item }) => {
                 <EditMenuItemModal setEditModal={setEditModal} currentDish={item}/>
             </Modal> : null} */}
 
-
             <tr className="bg-white border-b border-gray-300 text-gray-700" >
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900">
                     {item.name}
                 </th>
                 <td className="px-6 py-4">
-                    {item.price}
+                    {item.price} ₴
                 </td>
                 <td className="px-6 py-4">
                     {item.time ? item.time : "немає інформації"}
                 </td>
                 <td className="px-6 py-4">
-                    {item.weight}
+                    {item.weight} 
                 </td>
                 <td className="px-2 py-1 text-right">
                     <button onClick={() => { setOpenInfo(!openInfo) }}
@@ -47,7 +46,6 @@ export const DishListItem = ({ item }) => {
                     }}
                         className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10">Видалити</button>
                 </td>
-
             </tr>
             <div>
                 {openInfo ?

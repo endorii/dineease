@@ -8,7 +8,6 @@ import { DishListItem } from "./DishListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMenu } from "../../../store/slices/menu.slice";
 import { useParams } from "react-router-dom";
-// import { fetchMenuItems } from "../../../../store/slices/menuItemsSlice";
 import Plus from '../../../assets/svg/plus.svg'
 import { AddButton } from '../../../ui/buttons/AddButton';
 import { Modal } from '../../../components/Modal';
@@ -27,7 +26,6 @@ const Dishes = () => {
 
     useEffect(() => {
         dispatch(fetchMenu(restaurant));
-        // dispatch(fetchMenu());
     }, [])
 
     return (
@@ -66,7 +64,7 @@ const Dishes = () => {
                                             Назва
                                         </th>
                                         <th scope="col" className="px-6 py-3">
-                                            Ціна
+                                            Ціна 
                                         </th>
                                         <th scope="col" className="px-6 py-3">
                                             Час приготування
@@ -90,9 +88,7 @@ const Dishes = () => {
                                         menuCategory.items.length > 0 ?
                                             menuCategory.items.map((item, i) => (
                                                 item.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={item} key={i} /> : null
-                                            ))
-                                            :
-                                            <h2 className='text-4xl text-sky-900 px-6 pt-10 font-light text'>Страв не знайдено</h2>
+                                            )) : <h2 className='text-4xl text-sky-900 px-6 pt-10 font-light text'>Страв не знайдено</h2>
                                     }
                                 </tbody>
                             </table>

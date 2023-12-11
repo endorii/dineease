@@ -48,7 +48,7 @@ export const Service = () => {
                     </div>
                 </div>
             </aside>
-            <main className="flex-1">
+            <main className="">
                 <div className="bg-slate-100 text-black">
                     <Outlet />
                 </div>
