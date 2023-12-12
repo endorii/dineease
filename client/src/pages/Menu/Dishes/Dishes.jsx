@@ -93,7 +93,7 @@ const Dishes = () => {
                                 </tbody>
                             </table>
                         </div>
-                    ) : <h2 className='text-4xl p-6 text-center font-light bg-white'>Страв не знайдено</h2>}
+                    ) : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Страв не знайдено</h2>}
                 </div>
             </div>
         </div>

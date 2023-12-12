@@ -60,7 +60,7 @@ export const Feedback = () => {
                         </tbody>
                     ) : null}
                 </table>
-                {feedback.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Повідомлень не знайдено</h2>}
+                {feedback.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Повідомленя відсутні</h2>}
             </div>
         </div>
     )

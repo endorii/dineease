@@ -115,7 +115,7 @@ const Employees = () => {
                             </tbody>
                         ) : null}
                     </table>
-                    {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'>Працівників не знайдено</h2>}
+                    {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Працівників не знайдено</h2>}
                 </div>
 
             </div>

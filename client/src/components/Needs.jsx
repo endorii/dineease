@@ -67,7 +67,7 @@ export const Needs = () => {
                         </tbody>
                     ) : null}
                 </table>
-                {needs.length > 0 ? null : <h2 className='text-4xl p-6 text-center font-light bg-white'> не знайдено</h2>}
+                {needs.length > 0 ? null : <h2 className='text-4xl p-6 text-sky-950 text-center font-light bg-white'>Потреби відсутні</h2>}
             </div>
         </div>
     )
