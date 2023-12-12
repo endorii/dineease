@@ -1,0 +1,5 @@
+{
+    "PORT": 5000,
+    "secretKey": "secretKey",
+    "DBURL": "mongodb+srv://root:root@cluster0.vrkh1fd.mongodb.net/?retryWrites=true&w=majority"
+}
