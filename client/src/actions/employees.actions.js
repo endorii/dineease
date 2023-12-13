@@ -13,11 +13,11 @@ export const getEmployees = async () => {
 export const getEmployeesByRestaurant = (restaurantName) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get("http://localhost:3001/employees");
-            const employees = response.data;
-            const filteredEmployees = employees.filter(employee => employee.restaurant === restaurantName);
-            dispatch(setEmployeesByRestaurant(filteredEmployees))
-            return filteredEmployees;
+            const response = await axios.get(`http://localhost:5000/api/employees?restaurantName=${restaurantName}`);
+            const employees = response.data.employees;
+            
+            dispatch(setEmployeesByRestaurant(employees))
+            return employees;
         } catch (e) {
             console.log(e.response.data.message);
         }   
