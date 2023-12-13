@@ -10,6 +10,7 @@ import Settings from '../assets/svg/settings.svg';
 // import Waiter from '../assets/svg/waiter.svg';
 
 import { NavLink, Link, Outlet } from 'react-router-dom';
+import { auth } from '../actions/user.actions';
 
 const NestedItem = ({ item }) => (
     <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-sky-100">
@@ -21,6 +22,12 @@ const NestedItem = ({ item }) => (
 
 const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
     const [open, setOpen] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(auth());
+    }, []);
 
     useEffect(() => {
         if (!menuOpen) {

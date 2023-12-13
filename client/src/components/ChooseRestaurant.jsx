@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchRestaurants } from '../store/slices/restaurant.slice';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../actions/user.actions';
 
 export const ChooseRestaurant = () => {
 
@@ -12,10 +13,20 @@ export const ChooseRestaurant = () => {
     const { restaurants } = useSelector(state => state.restaurants);
 
     const navigate = useNavigate();
+
+    const token = localStorage.getItem('token')
     
     useEffect(() => {
         dispatch(fetchRestaurants());
-    }, [])
+        dispatch(auth());
+    }, []);
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/')
+        }
+    }, [token])
+
 
     return (
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
