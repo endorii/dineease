@@ -4,6 +4,7 @@ import { getEmployeeByRestaurantAndPin } from "../actions/employees.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NumPadWelcomeModal } from "./NumPadWeclomeModal";
+import { loginByPin } from "../actions/user.actions";
 
 
 export const NumberPad = () => {
@@ -53,7 +54,8 @@ export const NumberPad = () => {
                         0
                     </button>
                     <button onClick={async () => {
-                        await dispatch(getEmployeeByRestaurantAndPin(restaurant, pinInput));
+                        dispatch(getEmployeeByRestaurantAndPin(restaurant, pinInput));
+                        dispatch(loginByPin(pinInput));
                         setEmployee(employees[0]);
                         setOpen(true)
                     }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-teal-700 text-white w-24 h-24 text-2xl hover:bg-teal-900 font-medium disabled:opacity-25 disabled:hover:bg-teal-900 rounded-lg">

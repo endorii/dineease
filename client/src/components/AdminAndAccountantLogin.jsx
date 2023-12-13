@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { GoBackButton } from "../ui/buttons/GoBackButton";
-import { login } from "../actions/user.actions";
+import { auth, loginByPass } from "../actions/user.actions";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -54,7 +54,7 @@ export const AdminAndAccountantLogin = () => {
     const {restaurant, position} = useParams();
 
     useEffect(() => {
-
+        dispatch(auth());
     }, [])
 
     return (
@@ -116,7 +116,7 @@ export const AdminAndAccountantLogin = () => {
                             <button
                                 onClick={async (e) => {
                                     e.preventDefault();
-                                    await dispatch(login(restaurant, position, email, password));
+                                    dispatch(loginByPass(email, password));
                                     navigate(`/${restaurant}/${position}/panel`)
                                 }
                                 }
