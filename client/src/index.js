@@ -18,6 +18,7 @@ import Dishes from './pages/Menu/Dishes/Dishes';
 import { Needs } from './components/Needs';
 import { Feedback } from './components/Feedback';
 import UserAccount from './components/UserAccount';
+import { Sales } from './components/Sales';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -31,7 +32,7 @@ const router = createBrowserRouter(
                 <Route path='account' element={<CurrentEmployeeAccount />} />
             </Route>
             <Route path=':restaurant/Admin/panel' element={<Account />}>
-                <Route path='sales' element={<Checks />} />
+                <Route path='sales' element={<Sales />} />
                 <Route path='checks' element={<Checks />} />
                 <Route path='dishes' element={<Dishes />} />
                 <Route path='employees' element={<Employees />} />
