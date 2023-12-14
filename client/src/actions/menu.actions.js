@@ -3,11 +3,8 @@ import axios from "axios"
 
 export const getMenuByRestaurant = async (restaurantName) => {
     try {
-        const response = await axios.get("http://localhost:3001/restaurants");
-        const restaurants = response.data;
-        const filteredRestaurant = restaurants.filter(restaurant => restaurant.name === restaurantName);
-        const menu = filteredRestaurant[0].menu;
-        return menu;
+        const response = await axios.post("http://localhost:5000/api/restaurants/menu", {restaurantName});
+        return response.data.menu
     } catch (e) {
         console.log(e.response.data.message);
     }   
