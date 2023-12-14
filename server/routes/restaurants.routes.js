@@ -19,4 +19,64 @@ router.get('/restaurants',
     }
 );
 
+router.post('/restaurants/menu',
+    async (req, res) => {
+        try {
+            const {restaurantName} = req.body;
+            const restaurant = await Restaurant.find({name: restaurantName});
+            const menu = restaurant[0].menu;
+            return res.json({menu});
+
+        } catch (e) {
+            console.log(e);
+            res.send({message: "Server error"});
+        }
+    }
+);
+
+router.post('/restaurants/needs',
+    async (req, res) => {
+        try {
+            const {restaurantName} = req.body;
+            const restaurant = await Restaurant.find({name: restaurantName});
+            const needs = restaurant[0].needs;
+            return res.json({needs});
+
+        } catch (e) {
+            console.log(e);
+            res.send({message: "Server error"});
+        }
+    }
+);
+
+router.post('/restaurants/feedback',
+    async (req, res) => {
+        try {
+            const {restaurantName} = req.body;
+            const restaurant = await Restaurant.find({name: restaurantName});
+            const feedback = restaurant[0].feedback;
+            return res.json({feedback});
+
+        } catch (e) {
+            console.log(e);
+            res.send({message: "Server error"});
+        }
+    }
+);
+
+router.post('/restaurants/orders',
+    async (req, res) => {
+        try {
+            const {restaurantName} = req.body;
+            const restaurant = await Restaurant.find({name: restaurantName});
+            const orders = restaurant[0].orders;
+            return res.json({orders});
+
+        } catch (e) {
+            console.log(e);
+            res.send({message: "Server error"});
+        }
+    }
+);
+
 module.exports = router;
