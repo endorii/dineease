@@ -4,6 +4,7 @@ import { PayNumberPad } from './PayNumberPad'
 // import { getTotalOrderValue } from '../functions'
 // import { closeOrder } from './ordersActions'
 import { useDispatch } from 'react-redux'
+import { getTotalOrderValue } from '../functions'
 // import { fetchOrders } from '../store/slices/ordersSlice'
 
 export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
@@ -29,9 +30,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                         <div>
                             <div className='font-medium text-4xl mb-10'>
                                 <p className='font-thin text-lg text-gray-400 mb-5'>Замовлення: {currentOrder._id}</p>
-                                <p>Разом до сплати: 
-                                    {/* {getTotalOrderValue(currentOrder)} */}
-                                    ₴</p>
+                                <p>Разом до сплати: {getTotalOrderValue(currentOrder)}₴</p>
                             </div>
 
                             <div>

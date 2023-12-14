@@ -36,7 +36,6 @@ const router = createBrowserRouter(
                 <Route path='dishes' element={<Dishes />} />
                 <Route path='employees' element={<Employees />} />
                 <Route path='positions' element={<Checks />} />
-                <Route path='cash-registers' element={<Checks />} />
                 <Route path='feedback' element={<Feedback />} />
                 <Route path='needs' element={<Needs />} />
                 <Route path='general' element={<Checks />} />

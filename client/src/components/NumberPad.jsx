@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Delete from '../assets/svg/delete.svg'
-import { getEmployeeByRestaurantAndPin } from "../actions/employees.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NumPadWelcomeModal } from "./NumPadWeclomeModal";
@@ -54,7 +53,6 @@ export const NumberPad = () => {
                         0
                     </button>
                     <button onClick={async () => {
-                        dispatch(getEmployeeByRestaurantAndPin(restaurant, pinInput));
                         dispatch(loginByPin(pinInput));
                         setEmployee(employees[0]);
                         setOpen(true)

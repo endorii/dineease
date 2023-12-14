@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux"
 import { getEmployeeByRestaurantAndPin } from "../actions/employees.actions"
 import Logout from '../assets/svg/logout.svg'
 import Send from '../assets/svg/send.svg'
+import { logout } from "../store/slices/user.slice"
 // import { addNeed } from "./needs.actions"
 // import { addContactText } from "./contactText.actions"
 
@@ -33,10 +34,7 @@ export const CurrentEmployeeAccount = () => {
     };
 
     const now = new Date().toLocaleString();
-
-    useEffect(() => {
-        dispatch(getEmployeeByRestaurantAndPin(restaurant, 1111));
-    }, []);
+    const {user} = useSelector(state => state.user);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -55,7 +53,7 @@ export const CurrentEmployeeAccount = () => {
                         <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                         <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
                         <div className="w-full text-center mt-4">
-                            <button className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
+                            <button onClick={() => {dispatch(logout()); navigate('/')}} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
                                 Закінчити робочу зміну
                                 <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                             </button>
@@ -73,8 +71,8 @@ export const CurrentEmployeeAccount = () => {
                     <div className="flex flex-col gap-6 bg-white border shadow-inner p-10 rounded-lg">
                         <div className="text-3xl text-sky-900 font-medium text-center">Загальна інформація:</div>
                         <ul className="text-xl text-sky-800">
-                            <li>Ім'я: <span className="text-xl underline font-medium text-sky-950">Користувач</span></li>
-                            <li>Посада: <span className="text-xl underline font-medium text-sky-950">Офіціант</span></li>
+                            <li>Ім'я: <span className="text-xl underline font-medium text-sky-950">{user.name}</span></li>
+                            <li>Посада: <span className="text-xl underline font-medium text-sky-950">{user.position}</span></li>
                         </ul>
                     </div>
 

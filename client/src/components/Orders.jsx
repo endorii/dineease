@@ -28,7 +28,6 @@ export const Orders = () => {
     useEffect(() => {
         dispatch(fetchOrders(restaurant));
         dispatch(fetchMenu(restaurant));
-        // dispatch(fetchMenuItems());
     }, [])
 
     return (
@@ -74,7 +73,7 @@ export const Orders = () => {
                                                 {order.tableNumber !== undefined ? `Столик ${order.tableNumber}` : "З  собою"} | Замовлення {order._id}
                                             </th>
                                             <td className="px-6 py-4">
-                                                {order.openingTime ? order.openingTime : "-"}
+                                                {order.time || order.date ? `${order.time} | ${order.date}` : "-"}
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex justify items-center">

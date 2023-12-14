@@ -59,10 +59,14 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Статистика", icon: Statistic, children:
                 [
                     { title: "Продажі", path: "sales" },
+                ]
+        },
+        {
+            title: "Фінанси", icon: Finances, children:
+                [
                     { title: "Чеки", path: "checks" },
                 ]
         },
-        { title: "Фінанси", icon: Finances },
         {
             title: "Меню", icon: Menu, children:
                 [
@@ -75,8 +79,8 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Персонал", icon: Access, children:
                 [
                     { title: "Працівники", path: "employees" },
-                    { title: "Посади", path: "positions" },
-                    { title: "Касси", path: "cash-registers" },
+                    // { title: "Посади", path: "positions" },
+                    // { title: "Касси", path: "cash-registers" },
                     { title: "Зв'язок", path: "feedback" },
                     { title: "Потреби", path: "needs" }
                 ]

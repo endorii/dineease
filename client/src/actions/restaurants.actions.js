@@ -8,3 +8,4 @@ export const getRestaurants = async () => {
         console.log(e.response.data.message);
     }   
 }
+

@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom"
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom"
 // import Notification from '../assets/icons/notification.svg';
 import { useDispatch, useSelector } from "react-redux";
 // import GreenDot from '../assets/img/green_dot.png'
@@ -9,9 +9,15 @@ import { auth } from "../actions/user.actions";
 
 export const Service = () => {
     const dispatch = useDispatch();
+    const {user} = useSelector(state => state.user);
+    const token = localStorage.getItem("token");
+    const navigate = useNavigate();
+
     useEffect(() => {
-        dispatch(auth());
-    }, [])
+        if (!token) {
+            navigate('/')
+        }
+    }, [token])
     // const { name } = useSelector(state => state.currentEmployee.currentEmployee);
     // const { isAuth } = useSelector(state => state.currentEmployee);
     return (
@@ -39,7 +45,7 @@ export const Service = () => {
                                 <NavLink className={({ isActive, isPending }) =>
                                     isPending ? "pending" : isActive ? "p-5 text-center bg-sky-50 text-sky-950" : "p-5 text-center hover:bg-sky-50 hover:text-sky-950 text-sky-50"
                                 } to="account">
-                                    {/* {name} */} ALEX
+                                    {user.name}
                                 </NavLink>
                             </div>
                             <div className="p-5 border-r-0 text-center hover:bg-sky-900 flex items-center" >

@@ -20,7 +20,7 @@ export const Feedback = () => {
             <h2 className="text-3xl font-medium">Зворотній зв'язок</h2>
             <hr className='border-t-1 border-slate-300 my-10' />
             <div className="relative overflow-y-scroll rounded-md">
-                <div className='px-5 py-3 text-xl capitalize bg-sky-950 text-sky-100'>
+                <div className='px-5 py-3 text-xl bg-sky-950 text-sky-100'>
                     Список повідомлень
                 </div>
                 <table className="w-full text-left text-sky-900">

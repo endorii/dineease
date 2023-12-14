@@ -61,7 +61,7 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                                             // notify();
                                             setTimeout(() => {
                                                 navigate(`/${restaurant}/${position}/panel`);
-                                            }, 10000);
+                                            }, 1000);
                                         }} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md">Так</button>
 
                                     </div>
