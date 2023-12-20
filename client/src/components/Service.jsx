@@ -14,6 +14,9 @@ export const Service = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        
+        dispatch(auth());
+
         if (!token) {
             navigate('/')
         }
