@@ -2,12 +2,13 @@ import Plus from '../../../assets/svg/plus.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AddEmployee from '../../../components/AddEmployee';
-import { getEmployeesByRestaurant, getStaffByRestaurant } from '../../../actions/employees.actions';
+import { deleteEmployee, getEmployeesByRestaurant, getStaffByRestaurant } from '../../../actions/employees.actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
 import { AddButton } from '../../../ui/buttons/AddButton';
 import { Modal } from '../../../components/Modal';
+import EditEmployee from './EditEmployee';
 // import { deleteEmployee } from './employee';
 // import EditEmployee from './EditEmployee';
 // import { Modal } from '../../../../components/Modal';
@@ -35,11 +36,11 @@ const Employees = () => {
                     <AddEmployee setOpen={setAddEmployeeModalOpen} />
                 </Modal>
             }
-            {/* {editEmployeeModalOpen &&
+            {editEmployeeModalOpen &&
                 <Modal>
                     <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
                 </Modal>
-            } */}
+            }
 
             <div className='flex flex-col' >
                 <div className="flex justify-between ">
@@ -98,8 +99,8 @@ const Employees = () => {
                                     </td>
                                     <td className="px-2 py-1 text-right">
                                         <button onClick={async () => {
-                                            // setCurrentEmployee(employee)
-                                            // setEditEmployeeModalOpen(true);
+                                            setCurrentEmployee(employee)
+                                            setEditEmployeeModalOpen(true);
                                             dispatch(getEmployeesByRestaurant(restaurant));
                                         }}
 
@@ -107,7 +108,7 @@ const Employees = () => {
                                     </td>
                                     <td className="px-2 py-1 text-left">
                                         <button onClick={async () => {
-                                            // await deleteEmployee(employee._id); 
+                                            await deleteEmployee(employee._id); 
                                             dispatch(getEmployeesByRestaurant(restaurant));
                                         }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10">Видалити</button>
                                     </td>
