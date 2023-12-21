@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { auth } from '../modules/auth/user';
 import Statistic from '../assets/svg/statistic.svg';
 import Finances from '../assets/svg/finances.svg';
@@ -7,7 +7,7 @@ import Menu from '../assets/svg/menu.svg';
 // import Storage from '../assets/svg/storage.svg';
 import Access from '../assets/svg/access.svg';
 import Settings from '../assets/svg/settings.svg';
-// import Waiter from '../assets/svg/waiter.svg';
+import User from '../assets/svg/user.svg';
 
 import { NavLink, Link, Outlet } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
@@ -22,6 +22,8 @@ const NestedItem = ({ item }) => (
 
 const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
     const [open, setOpen] = useState(false);
+
+
 
     const dispatch = useDispatch();
 
@@ -42,7 +44,7 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
 
                 <div className="px-3 py-2 inline text-lg font-medium " onClick={() => children ? setOpen(!open) : null}>
                     {menuOpen ? title : null} {' '}
-                    {children && menuOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`h-3 w-3 inline transform transition duration-150 ease-out ${open ? 'rotate-180' : ''}`}>
+                    {children && menuOpen ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={` transform transition duration-150 ease-out h-3 w-3 inline${open ? 'rotate-180' : ''}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                     </svg> : null}
                 </div>
@@ -54,6 +56,8 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
 }
 
 const Accordion = ({ menuOpen, setMenuOpen }) => {
+
+    const { user } = useSelector(state => state.user);
     const items = [
         {
             title: "Статистика", icon: Statistic, children:
@@ -97,15 +101,29 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
     ];
 
     return (
-        <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-00">
-            {items.map((item, index) => (
-                <AccordionItem key={index} title={item.title} icon={item.icon} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
-                    {item.children?.map((item, index) => (
-                        <NestedItem key={index} item={item} />
-                    ))}
-                </AccordionItem>
-            ))}
-        </ul>
+        <div className='flex flex-col justify-between items-center h-[88vh]'>
+            <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-00">
+                {items.map((item, index) => (
+                    <AccordionItem key={index} title={item.title} icon={item.icon} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
+                        {item.children?.map((item, index) => (
+                            <NestedItem key={index} item={item} />
+                        ))}
+                    </AccordionItem>
+                ))}
+            </ul>
+            <button className='transition ease-in-out border-t-2 w-full flex justify-center hover:bg-sky-900/70 hover:border-x-2 hover:border-b-2' onClick={() => setMenuOpen(true)}>
+                <div className='text-black p-3 flex items-center'>
+                    <div>
+                        <img className='w-8' src={User} alt="" />
+                    </div>
+                    <div className=''>
+                        <div className='text-sky-50 text-lg font-medium'>
+                            {user.name}
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </div>
     )
 }
 
@@ -115,13 +133,14 @@ const Account = () => {
 
     return (
         <div className="fixed flex w-screen h-screen">
-            <aside className={menuOpen ? " text-white w-[260px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300 overflow-auto"}>
+            <aside className={menuOpen ? " text-white w-[260px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
                     </svg>
                 </div>
                 <Accordion menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+
             </aside>
             <main className="flex-1">
                 <div className="bg-slate-100 p-10 h-screen">

@@ -3,15 +3,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import Left from '../assets/svg/angle-left.svg';
 import { useEffect } from "react";
 import { getEmployeesByRestaurant } from "../actions/employees.actions";
+import { Loader } from "./Loader";
 
 export const LoginAs = () => {
 
-    const { employees } = useSelector(state => state.employees);
+    const { employees, isLoading } = useSelector(state => state.employees);
 
     const { restaurant } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
+
     const positions = [...new Set(employees.map(employee => employee.position))];
 
     useEffect(() => {
@@ -26,15 +27,17 @@ export const LoginAs = () => {
             </button>
             <div className="text-4xl">Увійти в ресторан <span className="text-5xl font-medium text-sky-950">{restaurant}</span> як:</div>
             <div>
-                <ul className="flex justify-center items-center gap-12 px-7 py-10 mt-10">
-                    {employees ? positions.map((position, i) =>
-                        <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" key={i} onClick={() => { navigate(`/login/${restaurant}/${position}`) }}>
-                            <div className="flex flex-col">
-                                <div className="text-2xl inline-block font-medium">{position}</div>
-                            </div>
-                        </li>
-                    ) : <div>Нічого не знайдено</div>}
-                </ul>
+                {isLoading ? <Loader /> :
+                    <ul className="flex justify-center items-center gap-12 px-7 py-10 mt-10">
+                        {employees ? positions.map((position, i) =>
+                            <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" key={i} onClick={() => { navigate(`/login/${restaurant}/${position}`) }}>
+                                <div className="flex flex-col">
+                                    <div className="text-2xl inline-block font-medium">{position}</div>
+                                </div>
+                            </li>
+                        ) : <div>Нічого не знайдено</div>}
+                    </ul>}
+
             </div>
         </div>
     )

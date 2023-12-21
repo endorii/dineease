@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/slices/employees.slice";
 import { addEmployee } from "../actions/employees.actions";
 import { useParams } from "react-router-dom";
+import Close from '../assets/svg/close.svg';
 
 const AddEmployee = ({ setOpen }) => {
 
@@ -72,19 +73,6 @@ const AddEmployee = ({ setOpen }) => {
         }
     }
 
-    // const handlePosition = (e) => {
-    //     setPosition(e.target.value);
-    //     const re = /^[а-яА-ЯҐґЄєІіЇїҐґa-zA-Z\s]+$/;
-    //     if (position) {
-    //         setPositionError('')
-    //     }
-
-    //     if (!re.test(String(position))) {
-    //         setPositionError('Невірно веедено посаду')
-    //     } else {
-    //         setPositionError('')
-    //     }
-    // }
     const handleAge = (e) => {
         setAge(e.target.value);
         const re = /^\d+$/;
@@ -169,17 +157,11 @@ const AddEmployee = ({ setOpen }) => {
         }
     }
 
-    useEffect(() => {
-        // dispatch(fetchPositions());
-    }, [])
-
     return (
         <div className='flex justify-center '>
             <div className='absolute bg-white shadow-xl w-[60%] h-auto z-10 rounded-md mt-16'>
                 <div className='flex flex-col items-center mx-3 gap-3'>
-                    <span className='top-2 right-2 absolute cursor-pointer'
-                        onClick={() => setOpen(false)}>✖
-                    </span>
+                    <img className="absolute top-2 right-2 w-12 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
                     <span className='text-center text-3xl mt-6 text-sky-900 font-semibold'>Ведіть дані нового працівника</span>
                     <ul className='flex justify-center w-[60%] m-10 gap-10 text-sky-900'>
                         <div className="flex flex-col gap-5 w-full">

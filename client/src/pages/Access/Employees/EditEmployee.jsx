@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchEmployees } from "../../../store/slices/employees.slice";
 import { editEmployee } from "../../../actions/employees.actions";
+import Close from '../../../assets/svg/close.svg';
 // import { fetchEmployees } from "../../../../store/slices/employeesSlice";
 
 const EditEmployee = ({ setOpen, currentEmployee }) => {
@@ -203,9 +204,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
         <div className='flex justify-center '>
             <div className='absolute bg-white shadow-xl w-1/2 h-auto z-10 rounded-md mt-16'>
                 <div className='flex flex-col items-center mx-3 gap-3'>
-                    <span className='top-2 right-2 absolute cursor-pointer'
-                        onClick={() => setOpen(false)}>✖
-                    </span>
+                    <img className="absolute top-2 right-2 w-12 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
                     <span className='text-center text-2xl mt-6 font-semibold'>Змінити дані працівника</span>
                     <ul className='flex justify-center w-[60%] m-10 gap-10 text-sky-900'>
                         <div className="flex flex-col gap-5 w-full">
@@ -333,10 +332,10 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                         </div>
                     </ul>
 
-                    <button disabled={nameError || positionError} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-green-900/20 disabled:hover:bg-green-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                    <button disabled={nameError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
                         onClick={async () => {
                             setOpen(false);
-                            await editEmployee(_id, 
+                            await editEmployee(_id,
                                 name,
                                 age,
                                 restaurantName,
