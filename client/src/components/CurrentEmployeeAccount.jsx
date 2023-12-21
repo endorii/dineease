@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { getEmployeeByRestaurantAndPin } from "../actions/employees.actions"
+// import { getEmployeeByRestaurantAndPin } from "../actions/employees.actions"
 import Logout from '../assets/svg/logout.svg'
 import Send from '../assets/svg/send.svg'
 import { logout } from "../store/slices/user.slice"
-import { addNeedToRestaurant } from "../actions/needs.actions"
+// import { addNeedToRestaurant } from "../actions/needs.actions"
 // import { addNeed } from "./needs.actions"
 // import { addContactText } from "./contactText.actions"
 
@@ -84,7 +84,7 @@ export const CurrentEmployeeAccount = () => {
                         <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
                             <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
                             <button onClick={() => {
-                                addNeedToRestaurant(restaurant, wishesAreaText, user.name, now); 
+                                // addNeedToRestaurant(restaurant, wishesAreaText, user.name, now); 
                                 setWishesAreaText('');
                             }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md "><img className="w-10" src={Send} alt="" /></button>
                         </div>
