@@ -33,7 +33,7 @@ const AddEmployee = ({ setOpen }) => {
     const [ageError, setAgeError] = useState('Поле не може бути пустим');
     const [restaurantError, setRestaurantError] = useState('Поле не може бути пустим');
     const [experienceError, setExperienceError] = useState('Поле не може бути пустим');
-    const [positionError, setPositionError] = useState('Поле не може бути пустим');
+    // const [positionError, setPositionError] = useState('Поле не може бути пустим');
     const [salaryError, setSalaryError] = useState('Поле не може бути пустим');
     const [passwordError, setPasswordError] = useState('Поле не може бути пустим');
     const [emailError, setEmailError] = useState('Поле не може бути пустим');
@@ -72,19 +72,19 @@ const AddEmployee = ({ setOpen }) => {
         }
     }
 
-    const handlePosition = (e) => {
-        setPosition(e.target.value);
-        const re = /^[а-яА-ЯҐґЄєІіЇїҐґa-zA-Z\s]+$/;
-        if (position) {
-            setPositionError('')
-        }
+    // const handlePosition = (e) => {
+    //     setPosition(e.target.value);
+    //     const re = /^[а-яА-ЯҐґЄєІіЇїҐґa-zA-Z\s]+$/;
+    //     if (position) {
+    //         setPositionError('')
+    //     }
 
-        if (!re.test(String(position))) {
-            setPositionError('Невірно веедено посаду')
-        } else {
-            setPositionError('')
-        }
-    }
+    //     if (!re.test(String(position))) {
+    //         setPositionError('Невірно веедено посаду')
+    //     } else {
+    //         setPositionError('')
+    //     }
+    // }
     const handleAge = (e) => {
         setAge(e.target.value);
         const re = /^\d+$/;
@@ -243,14 +243,14 @@ const AddEmployee = ({ setOpen }) => {
                                 <select id='positions'
                                     value={position}
                                     name="position"
-                                    onChange={(e) => handlePosition(e)}
+                                    // onChange={(e) => handlePosition(e)}
                                     onBlur={(e) => { blurHandler(e) }}
                                     className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required >
                                     <option value="Waiter">Waiter</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Accountant">Accountant</option>
                                 </select>
-                                {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>}
+                                {/* {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>} */}
                             </li>
                             <li>
                                 <label htmlFor="salary" className="block font-medium mb-1">Зарплата</label>
@@ -265,19 +265,6 @@ const AddEmployee = ({ setOpen }) => {
                                 />
                                 {(salaryTouched && salaryError) && <div className="text-red-600">{salaryError}</div>}
                             </li>
-                            <li>
-                                <label htmlFor="password" className="block font-medium mb-1">Пароль</label>
-                                <input
-                                    value={password}
-                                    onChange={(e) => handlePassword(e)}
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required
-                                    onBlur={(e) => { blurHandler(e) }}
-                                />
-                                {(passwordTouched && passwordError) && <div className="text-red-600">{passwordError}</div>}
-                            </li>
 
                             {position === "Waiter" ? <li>
                                 <label htmlFor="pin" className="block font-medium mb-1 ">ПІН-код</label>
@@ -290,22 +277,37 @@ const AddEmployee = ({ setOpen }) => {
                                     id="pin"
                                     className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required />
                                 {(pinTouched && pinError) && <div className="text-red-600">{pinError}</div>}
-                            </li> : <li>
-                                <label htmlFor="login" className="block font-medium mb-1 ">Логін</label>
-                                <input
-                                    value={email}
-                                    onChange={(e) => handleEmail(e)}
-                                    onBlur={(e) => { blurHandler(e) }}
-                                    type="text"
-                                    name="login"
-                                    id="login"
-                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required />
-                                {(emailTouched && emailError) && <div className="text-red-600">{emailError}</div>}
-                            </li>}
+                            </li> : <>
+                                <li>
+                                    <label htmlFor="login" className="block font-medium mb-1 ">Логін</label>
+                                    <input
+                                        value={email}
+                                        onChange={(e) => handleEmail(e)}
+                                        onBlur={(e) => { blurHandler(e) }}
+                                        type="text"
+                                        name="login"
+                                        id="login"
+                                        className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required />
+                                    {(emailTouched && emailError) && <div className="text-red-600">{emailError}</div>}
+                                </li>
+                                <li>
+                                    <label htmlFor="password" className="block font-medium mb-1">Пароль</label>
+                                    <input
+                                        value={password}
+                                        onChange={(e) => handlePassword(e)}
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required
+                                        onBlur={(e) => { blurHandler(e) }}
+                                    />
+                                    {(passwordTouched && passwordError) && <div className="text-red-600">{passwordError}</div>}
+                                </li>
+                            </>}
                         </div>
                     </ul>
 
-                    <button disabled={nameError || emailError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                    <button disabled={nameError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
                         onClick={async () => {
                             setOpen(false);
                             await addEmployee(name,
@@ -317,7 +319,7 @@ const AddEmployee = ({ setOpen }) => {
                                 password,
                                 email,
                                 pin);
-                                
+
                             dispatch(fetchEmployees());
                         }}
                     >Підтвердити

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "./Modal";
 import { useNavigate, useParams } from "react-router-dom";
+import { logout } from "../store/slices/user.slice";
 // import { toast } from 'react-toastify';
 // import { loginEmployee } from "../view/pages/Access/Employees/employee";
 // import { setCurrentEmployee } from "../store/slices/currentEmployee.Slice";
@@ -48,7 +49,8 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                                 <div className="font-thin text-xl">Початок зміни о: {now}</div>
                                 <div className="flex flex-row gap-x-5 mt-4">
                                     <button className="flex items-center bg-red-500 hover:bg-red-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md" onClick={() => {
-                                        setEmployee({})
+                                        setEmployee({});
+                                        dispatch(logout());
                                         setOpen(false)
                                     }}>Ні</button>
                                     <div>
@@ -74,7 +76,7 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                                 }} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md">Ок</button>
                             </>}
 
-                        <div className="absolute top-1 right-1 cursor-pointer" onClick={() => { setEmployee({}); setOpen(false) }}>✖</div>
+                        <div className="absolute top-1 right-1 cursor-pointer" onClick={() => { setEmployee({}); dispatch(logout()); setOpen(false) }}>✖</div>
                     </div>
                 </div>
             </div>

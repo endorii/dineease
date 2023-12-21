@@ -54,7 +54,7 @@ export const NumberPad = () => {
                     </button>
                     <button onClick={async () => {
                         dispatch(loginByPin(pinInput));
-                        setEmployee(employees[0]);
+                        setEmployee(employees.filter(employee => employee.pin === pinInput)[0]);
                         setOpen(true)
                     }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-teal-700 text-white w-24 h-24 text-2xl hover:bg-teal-900 font-medium disabled:opacity-25 disabled:hover:bg-teal-900 rounded-lg">
                         Go
