@@ -9,8 +9,8 @@ const initialState = {
 
 export const fetchOrders = createAsyncThunk(
     "orders/fetchOrders",
-    async (restaurantName) => {
-        const response = getOrdersByRestaurant(restaurantName);
+    async (restaurantId) => {
+        const response = getOrdersByRestaurant(restaurantId);
         return response;
     }
 )
