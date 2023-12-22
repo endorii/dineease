@@ -14,6 +14,8 @@ export const AdminAndAccountantLogin = () => {
 
     const dispatch = useDispatch();
 
+    const {restaurantId, position} = useParams();
+
     const [emailError, setEmailError] = useState("Email не може бути пустим");
     const [passwordError, setPasswordError] = useState("Пароль не може бути пустим");
 
@@ -51,7 +53,6 @@ export const AdminAndAccountantLogin = () => {
     }
 
     const navigate = useNavigate();
-    const {restaurant, position} = useParams();
 
     useEffect(() => {
         dispatch(auth());
@@ -116,8 +117,8 @@ export const AdminAndAccountantLogin = () => {
                             <button
                                 onClick={async (e) => {
                                     e.preventDefault();
-                                    dispatch(loginByPass(email, password));
-                                    navigate(`/${restaurant}/${position}/panel`)
+                                    dispatch(loginByPass(restaurantId, email, password));
+                                    navigate(`/${restaurantId}/${position}/panel`)
                                 }
                                 }
                                 disabled={emailError || passwordError}

@@ -13,7 +13,7 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {restaurant, position} = useParams();
+    const {restaurantId, position} = useParams();
 
     const [now, setNow] = useState(new Date().toLocaleTimeString());
 
@@ -62,7 +62,7 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                                             setOpen(false);
                                             // notify();
                                             setTimeout(() => {
-                                                navigate(`/${restaurant}/${position}/panel`);
+                                                navigate(`/${restaurantId}/${position}/panel`);
                                             }, 1000);
                                         }} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md">Так</button>
 

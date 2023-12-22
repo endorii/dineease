@@ -24,14 +24,14 @@ const router = createBrowserRouter(
     createRoutesFromElements(
         <>
             <Route path='/' element={<ChooseRestaurant />}></Route>
-            <Route path='login/:restaurant' element={<LoginAs />}></Route>
-            <Route path='login/:restaurant/:position' element={<Login />}></Route>
-            <Route path=':restaurant/Waiter/panel' element={<Service />}>
+            <Route path='login/:restaurantId' element={<LoginAs />}></Route>
+            <Route path='login/:restaurantId/:position' element={<Login />}></Route>
+            <Route path=':restaurantId/Waiter/panel' element={<Service />}>
                 <Route path='orders' element={<Orders />} />
                 <Route path='tables' element={<Tables />} />
                 <Route path='account' element={<CurrentEmployeeAccount />} />
             </Route>
-            <Route path=':restaurant/Admin/panel' element={<Account />}>
+            <Route path=':restaurantId/Admin/panel' element={<Account />}>
                 <Route path='sales' element={<Sales />} />
                 <Route path='checks' element={<Checks />} />
                 <Route path='dishes' element={<Dishes />} />
@@ -43,7 +43,7 @@ const router = createBrowserRouter(
                 <Route path='account' element={<UserAccount />} />
 
             </Route>
-            <Route path=':restaurant/Accountant/panel' element={<Account />}>
+            <Route path=':restaurantId/Accountant/panel' element={<Account />}>
 
             </Route>
         </>

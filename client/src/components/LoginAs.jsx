@@ -9,14 +9,14 @@ export const LoginAs = () => {
 
     const { employees, isLoading } = useSelector(state => state.employees);
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const positions = [...new Set(employees.map(employee => employee.position))];
 
     useEffect(() => {
-        dispatch(getEmployeesByRestaurant(restaurant));
+        dispatch(getEmployeesByRestaurant(restaurantId));
     }, [])
 
     return (
@@ -25,12 +25,14 @@ export const LoginAs = () => {
                 <img className="w-12" src={Left} alt="" />
                 Повернутися назад
             </button>
-            <div className="text-4xl">Увійти в ресторан <span className="text-5xl font-medium text-sky-950">{restaurant}</span> як:</div>
+            <div className="text-4xl">Увійти в ресторан
+                <span className="text-5xl font-medium text-sky-950"> {restaurantId} </span>
+                як:</div>
             <div>
                 {isLoading ? <Loader /> :
                     <ul className="flex justify-center items-center gap-12 px-7 py-10 mt-10">
-                        {employees ? positions.map((position, i) =>
-                            <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" key={i} onClick={() => { navigate(`/login/${restaurant}/${position}`) }}>
+                        {employees.length > 0 ? positions.map((position, i) =>
+                            <li className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" key={i} onClick={() => { navigate(`/login/${restaurantId}/${position}`) }}>
                                 <div className="flex flex-col">
                                     <div className="text-2xl inline-block font-medium">{position}</div>
                                 </div>

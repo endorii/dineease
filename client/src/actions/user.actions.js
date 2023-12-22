@@ -12,10 +12,10 @@ import { setUser } from '../store/slices/user.slice';
 //     }   
 // }
 
-export const loginByPass = (email, password) => {
+export const loginByPass = (restaurantId, email, password) => {
     return async dispatch => {
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/loginByPass", {email, password});
+            const response = await axios.post(`http://localhost:5000/api/auth/loginByPass/${restaurantId}`, {email, password});
             dispatch(setUser(response.data.employee));
             localStorage.setItem('token', response.data.token);
             console.log(response.data.message);

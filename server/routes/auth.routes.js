@@ -9,11 +9,13 @@ const router = new Router();
 
 const authMiddleware = require('../middlewares/auth.middleware');
 
-router.post('/loginByPass', 
+router.post('/loginByPass/:restaurantId', 
     async (req, res) => {
         try {
+
+            const {restaurantId} = req.params;
             const {email, password} = req.body;
-            const user = await Employee.findOne({email, password});
+            const user = await Employee.findOne({email, password, restaurant: restaurantId});
 
             if (!user) {
                 return res.status(404).json({message: 'Користувача не знайдено'})

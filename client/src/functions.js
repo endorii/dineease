@@ -1,4 +1,4 @@
-// import { addOrder } from './components/ordersActions';
+import { addOrdersToRestaurant } from "./actions/orders.actions";
 
 export const getTotalInsideOrderValue = (guests) => {
     let totalValue = 0;
@@ -21,9 +21,7 @@ export const getTotalOrderValue = (order) => {
     return totalValue;
 }
 
-
-
-export const configureOrder = (guests, currentTable) => {
+export const configureOrder = (guests, currentTable, restaurantId) => {
     const now = new Date().toLocaleString();
 
     const order = {
@@ -31,5 +29,6 @@ export const configureOrder = (guests, currentTable) => {
         openingTime: now,
         tableNumber: currentTable
     }
-    // addOrder(order);
+
+    addOrdersToRestaurant(order)
 }

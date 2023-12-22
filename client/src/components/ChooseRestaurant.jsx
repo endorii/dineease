@@ -36,8 +36,8 @@ export const ChooseRestaurant = () => {
                     <ul className="flex justify-center items-center gap-12 px-7 py-10">
                         {restaurants.length > 0 ? restaurants.map((restaurant, i) =>
                             <li key={restaurant._id} className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" onClick={() => {
-                                dispatch(getEmployeesByRestaurant(restaurant.name));
-                                navigate(`/login/${restaurant.name}`)
+                                // dispatch(getEmployeesByRestaurant(restaurant._id));
+                                navigate(`/login/${restaurant._id}`)
                             }}>
                                 <img className="w-10 mr-2 inline-block" src={Restaurant} alt="" />
                                 <div className="flex flex-col">
