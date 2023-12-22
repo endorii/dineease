@@ -13,7 +13,7 @@ const Employee = new Schema({
     password: String,
     position: String,
     pin: String,
-    restaurant: String,
+    restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
     salary: String,
     workingTime: { type: WorkingTime }
 });

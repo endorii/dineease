@@ -1,15 +1,6 @@
 import axios from "axios"
 import { setEmployeesByRestaurant } from "../store/slices/employees.slice";
 
-export const getEmployees = async () => {
-    try {
-        const response = await axios.get("http://localhost:3001/employees");
-        return response.data
-    } catch (e) {
-        console.log(e.response.data.message);
-    }
-}
-
 export const addEmployee = async (name, age, restaurantName, experience, position, salary, password, email, pin) => {
     try {
         const response = await axios.post("http://localhost:5000/api/employees", { name, age, restaurantName, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
@@ -20,10 +11,10 @@ export const addEmployee = async (name, age, restaurantName, experience, positio
     }
 };
 
-export const getEmployeesByRestaurant = (restaurantName) => {
+export const getEmployeesByRestaurant = (restaurantId) => {
     return async (dispatch) => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/employees?restaurantName=${restaurantName}`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+            const response = await axios.get(`http://localhost:5000/api/employees/${restaurantId}`);
             const employees = response.data.employees;
 
             dispatch(setEmployeesByRestaurant(employees))

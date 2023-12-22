@@ -21,12 +21,12 @@ const Employees = () => {
 
     const dispatch = useDispatch();
 
-    const { restaurant } = useParams()
+    const { restaurantId } = useParams()
 
     const { employees } = useSelector(state => state.employees);
 
     useEffect(() => {
-        dispatch(getEmployeesByRestaurant(restaurant));
+        dispatch(getEmployeesByRestaurant(restaurantId));
     }, [])
 
     return (
@@ -101,7 +101,7 @@ const Employees = () => {
                                         <button onClick={async () => {
                                             setCurrentEmployee(employee)
                                             setEditEmployeeModalOpen(true);
-                                            dispatch(getEmployeesByRestaurant(restaurant));
+                                            dispatch(getEmployeesByRestaurant(restaurantId));
                                         }}
 
                                         className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10">Редагувати</button>
@@ -109,7 +109,7 @@ const Employees = () => {
                                     <td className="px-2 py-1 text-left">
                                         <button onClick={async () => {
                                             await deleteEmployee(employee._id); 
-                                            dispatch(getEmployeesByRestaurant(restaurant));
+                                            dispatch(getEmployeesByRestaurant(restaurantId));
                                         }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10">Видалити</button>
                                     </td>
                                 </tr>

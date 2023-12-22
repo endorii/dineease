@@ -5,16 +5,15 @@ const Employee = require('../models/Employee');
 
 const router = new Router();
 
-router.get('/employees',
+router.get('/employees/:restaurantId',
     async (req, res) => {
         try {
-            const { restaurantName } = req.query;
-
+            const { restaurantId } = req.params;
             let employees;
-            if (restaurantName) {
-                employees = await Employee.find({ restaurant: restaurantName });
+            if (restaurantId) {
+                employees = await Employee.find({ restaurant: restaurantId });
             } else {
-                employees = await Employee.find({});
+                return res.status(400).json({ message: `Робітників не знайдено` })
             }
 
             return res.json({ employees });
