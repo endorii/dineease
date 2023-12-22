@@ -23,6 +23,7 @@ import { Modal } from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenu } from '../store/slices/menu.slice';
 import { useParams } from 'react-router-dom';
+import { configureOrder } from '../functions';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder, currentTable }) => {
     const [guests, setGuests] = useState([]);
@@ -151,7 +152,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
                                         <button onClick={async () => {
-                                            // configureOrder(guests, currentTable); dispatch(fetchOrders()); 
+                                            configureOrder(guests, currentTable); 
                                             setOpenNewOrderMenu(false)
                                         }} className="w-full bg-teal-700 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
                                     </div>

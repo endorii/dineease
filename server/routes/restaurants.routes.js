@@ -64,19 +64,4 @@ router.post('/restaurants/feedback',
     }
 );
 
-router.post('/restaurants/orders',
-    async (req, res) => {
-        try {
-            const {restaurantName} = req.body;
-            const restaurant = await Restaurant.find({name: restaurantName});
-            const orders = restaurant[0].orders;
-            return res.json({orders});
-
-        } catch (e) {
-            console.log(e);
-            res.send({message: "Server error"});
-        }
-    }
-);
-
 module.exports = router;
