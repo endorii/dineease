@@ -27,16 +27,6 @@ const Feedback = new Schema({
     date: String
 });
 
-const Order = new Schema({
-    orderId: String,
-    tableNumber: String,
-    isOpen: Boolean,
-    items: [{
-        item: String,
-        quantity: String
-    }]
-});
-
 const Restaurant = new Schema({
     name: {type: String, required: true},
     address: String,
@@ -44,7 +34,7 @@ const Restaurant = new Schema({
     menu: [MenuItem],
     needs: [Need],
     feedback: [Feedback],
-    orders: [Order]
+    orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }]
 });
 
 module.exports = model("Restaurant", Restaurant);
