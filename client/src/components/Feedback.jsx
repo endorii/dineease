@@ -7,12 +7,12 @@ export const Feedback = () => {
 
     const dispatch = useDispatch();
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const { feedback } = useSelector(state => state.feedback);
 
     useEffect(() => {
-        dispatch(fetchFeedback(restaurant))
+        dispatch(fetchFeedback(restaurantId))
     }, [])
 
     return (

@@ -9,8 +9,8 @@ const initialState = {
 
 export const fetchFeedback = createAsyncThunk(
     "feedback/fetchFeedback",
-    async (restaurantName) => {
-        const response = getFeedbackByRestaurant(restaurantName);
+    async (restaurantId) => {
+        const response = getFeedbackByRestaurant(restaurantId);
         return response;
     }
 )
