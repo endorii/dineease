@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getNeedsByRestaurant } from '../../actions/needs.actions';
-// import { getNeedsByRestaurant } from '../../actions/menu.actions';
 
 const initialState = {
     needs: [],
@@ -10,8 +9,8 @@ const initialState = {
 
 export const fetchNeeds = createAsyncThunk(
     "needs/fetchNeeds",
-    async (restaurantName) => {
-        const response = getNeedsByRestaurant(restaurantName);
+    async (restaurantId) => {
+        const response = getNeedsByRestaurant(restaurantId);
         return response;
     }
 )
