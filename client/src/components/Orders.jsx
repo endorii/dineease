@@ -21,13 +21,15 @@ export const Orders = () => {
     const dispatch = useDispatch()
     const { orders } = useSelector(state => state.orders)
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
+
+    console.log(restaurantId);
 
     const openOrders = orders.filter(order => order.isOpen);
 
     useEffect(() => {
-        dispatch(fetchOrders(restaurant));
-        dispatch(fetchMenu(restaurant));
+        dispatch(fetchOrders(restaurantId));
+        dispatch(fetchMenu(restaurantId));
     }, [])
 
     return (

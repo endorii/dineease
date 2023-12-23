@@ -43,7 +43,6 @@ const Order = new Schema({
         default: true,
         required: true
     },
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
     restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
     openingTime: String,
     order: [GuestSchema]
