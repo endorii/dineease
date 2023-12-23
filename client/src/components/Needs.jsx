@@ -7,12 +7,12 @@ export const Needs = () => {
 
     const dispatch = useDispatch();
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const { needs } = useSelector(state => state.needs);
 
     useEffect(() => {
-        dispatch(fetchNeeds(restaurant));
+        dispatch(fetchNeeds(restaurantId));
     }, [])
 
     return (

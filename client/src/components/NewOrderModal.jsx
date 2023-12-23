@@ -33,6 +33,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
     const { menu } = useSelector(state => state.menu);
 
     const dispatch = useDispatch();
+    const {restaurantId} = useParams();
 
     const addGuest = () => {
         const newGuest = {
@@ -81,6 +82,10 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
         }
         return totalValue
     }
+
+    useEffect(() => {
+        dispatch(fetchMenu(restaurantId))
+    }, [])
 
     return (
         <>

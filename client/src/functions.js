@@ -21,14 +21,14 @@ export const getTotalOrderValue = (order) => {
     return totalValue;
 }
 
-export const configureOrder = (guests, currentTable, restaurantId) => {
+export const configureOrder = (guests, currentTable) => {
     const now = new Date().toLocaleString();
 
     const order = {
-        order: [...guests],
+        items: [...guests],
         openingTime: now,
-        tableNumber: currentTable
+        tableNumber: currentTable,
     }
 
-    addOrdersToRestaurant(order)
+    addOrdersToRestaurant({...order});
 }

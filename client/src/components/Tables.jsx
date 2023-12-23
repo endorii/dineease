@@ -14,7 +14,7 @@ export const Tables = () => {
     const dispatch = useDispatch();
 
     const { orders } = useSelector(state => state.orders);
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const tables = [
         { table_id: 1, busy: false, booked: false },
@@ -61,7 +61,7 @@ export const Tables = () => {
     const [currentTable, setCurrentTable] = useState();
 
     useEffect(() => {
-        dispatch(fetchOrders(restaurant));
+        dispatch(fetchOrders(restaurantId));
         // dispatch(fetchMenu());
         // dispatch(fetchMenuItems());
     }, [])

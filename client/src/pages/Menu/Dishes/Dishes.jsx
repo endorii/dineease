@@ -18,14 +18,14 @@ const Dishes = () => {
     const [searchInput, setSearchInput] = useState('');
     const [openAddDishModal, setOpenAddDishModal] = useState(false);
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const dispatch = useDispatch();
 
     const { menu } = useSelector(state => state.menu);
 
     useEffect(() => {
-        dispatch(fetchMenu(restaurant));
+        dispatch(fetchMenu(restaurantId));
     }, [])
 
     return (
