@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { NewOrderModal } from "./NewOrderModal";
 import { fetchMenu } from "../store/slices/menu.slice";
 import { PayOrder } from "./PayOrder";
+import { getTotalOrderValue } from "../functions";
 
 export const Orders = () => {
 
@@ -84,8 +85,7 @@ export const Orders = () => {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 font-medium">
-                                                {/* {getTotalOrderValue(order)} */}
-                                                300₴
+                                                {getTotalOrderValue(order)}₴
                                             </td>
                                         </tr>
                                     </tbody>

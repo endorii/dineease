@@ -1,7 +1,7 @@
 import Restaurant from '../assets/svg/house.svg';
 import { getEmployeesByRestaurant } from "../actions/employees.actions";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { fetchRestaurants } from '../store/slices/restaurant.slice';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
@@ -28,11 +28,14 @@ export const ChooseRestaurant = () => {
         }
     }, [token])
 
+    
+
     return (
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
             <div className="text-4xl">Виберіть ваш ресторан</div>
             <div className='flex justify-center'>
-                {isLoading ? <Loader /> :
+
+                    <Suspense fallback={<Loader/>}>
                     <ul className="flex justify-center items-center gap-12 px-7 py-10">
                         {restaurants.length > 0 ? restaurants.map((restaurant, i) =>
                             <li key={restaurant._id} className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5" onClick={() => {
@@ -46,7 +49,8 @@ export const ChooseRestaurant = () => {
                                 </div>
                             </li>
                         ) : <div>Немає доступних ресторанів</div>}
-                    </ul>}
+                    </ul>
+                    </Suspense>
 
             </div>
         </div>

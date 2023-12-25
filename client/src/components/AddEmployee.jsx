@@ -2,17 +2,18 @@ import { useState, useEffect } from "react";
 // import { addEmployee } from "./employee";
 import { useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/slices/employees.slice";
-import { addEmployee } from "../actions/employees.actions";
+import { addEmployee, getEmployeesByRestaurant } from "../actions/employees.actions";
 import { useParams } from "react-router-dom";
 import Close from '../assets/svg/close.svg';
+import { getRestaurantById } from "../actions/restaurants.actions";
 
 const AddEmployee = ({ setOpen }) => {
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
-    const [restaurantName, setRestaurantName] = useState(`${restaurant}`);
+    const [restaurantName, setRestaurantName] = useState('');
     const [experience, setExperience] = useState('');
     const [position, setPosition] = useState('Waiter');
     const [salary, setSalary] = useState('');
@@ -157,6 +158,19 @@ const AddEmployee = ({ setOpen }) => {
         }
     }
 
+    useEffect(() => {
+        dispatch(getEmployeesByRestaurant(restaurantId))
+    }, []);
+
+    useEffect(() => {
+        const fetchRestaurant = async () => {
+            const restaurant = await getRestaurantById(restaurantId);
+            setRestaurantName(restaurant.name);
+        };
+
+        fetchRestaurant();
+    }, [restaurantId]);
+
     return (
         <div className='flex justify-center '>
             <div className='absolute bg-white shadow-xl w-[60%] h-auto z-10 rounded-md mt-16'>
@@ -225,7 +239,7 @@ const AddEmployee = ({ setOpen }) => {
                                 <select id='positions'
                                     value={position}
                                     name="position"
-                                    // onChange={(e) => handlePosition(e)}
+                                    onChange={(e) => setPosition(e.target.value)}
                                     onBlur={(e) => { blurHandler(e) }}
                                     className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required >
                                     <option value="Waiter">Waiter</option>
@@ -294,7 +308,7 @@ const AddEmployee = ({ setOpen }) => {
                             setOpen(false);
                             await addEmployee(name,
                                 age,
-                                restaurantName,
+                                restaurantId,
                                 experience,
                                 position,
                                 salary,
@@ -302,7 +316,7 @@ const AddEmployee = ({ setOpen }) => {
                                 email,
                                 pin);
 
-                            dispatch(fetchEmployees());
+                            dispatch(getEmployeesByRestaurant(restaurantId));
                         }}
                     >Підтвердити
                     </button>

@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import Left from '../assets/svg/angle-left.svg';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getEmployeesByRestaurant } from "../actions/employees.actions";
 import { Loader } from "./Loader";
+import { getRestaurantById } from "../actions/restaurants.actions";
 
 export const LoginAs = () => {
 
     const { employees, isLoading } = useSelector(state => state.employees);
+    const [restaurantName, setRestaurantName] = useState('');
 
     const { restaurantId } = useParams();
     const navigate = useNavigate();
@@ -19,6 +21,15 @@ export const LoginAs = () => {
         dispatch(getEmployeesByRestaurant(restaurantId));
     }, [])
 
+    useEffect(() => {
+        const fetchRestaurant = async () => {
+            const restaurant = await getRestaurantById(restaurantId);
+            setRestaurantName(restaurant.name);
+        };
+
+        fetchRestaurant();
+    }, [restaurantId]);
+
     return (
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
             <button onClick={() => navigate(-1)} className="absolute flex flex-row items-center top-10 left-10 text-center shadow-lg rounded-lg text-lg px-5 py-1 hover:bg-gray-100 font-medium">
@@ -26,7 +37,7 @@ export const LoginAs = () => {
                 Повернутися назад
             </button>
             <div className="text-4xl">Увійти в ресторан
-                <span className="text-5xl font-medium text-sky-950"> {restaurantId} </span>
+                <span className="text-5xl font-medium text-sky-950"> {restaurantName} </span>
                 як:</div>
             <div>
                 {isLoading ? <Loader /> :
