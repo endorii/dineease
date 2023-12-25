@@ -17,5 +17,20 @@ router.get('/restaurants',
     }
 );
 
+router.get('/restaurants/:restaurantId',
+    async (req, res) => {
+        try {
+            const {restaurantId} = req.params;
+            const restaurant = await Restaurant.findOne({_id: restaurantId});
+
+            return res.json({restaurant});
+
+        } catch (e) {
+            console.log(e);
+            res.send({message: "Server error"});
+        }
+    }
+);
+
 
 module.exports = router;

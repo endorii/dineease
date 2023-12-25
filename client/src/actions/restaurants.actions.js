@@ -9,3 +9,12 @@ export const getRestaurants = async () => {
     }   
 }
 
+export const getRestaurantById = async (restaurantId) => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/restaurants/${restaurantId}`);
+        console.log(response.data.restaurant.name);
+        return response.data.restaurant
+    } catch (e) {
+        console.log(e.response.data.message);
+    }   
+}
