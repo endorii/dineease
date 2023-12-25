@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux"
 import Logout from '../assets/svg/logout.svg'
 import Send from '../assets/svg/send.svg'
 import { logout } from "../store/slices/user.slice"
+import { addFeedbackToRestaurant } from "../actions/feedback.actions"
+import { addNeedToRestaurant } from "../actions/needs.actions"
 // import { addNeedToRestaurant } from "../actions/needs.actions"
 // import { addNeed } from "./needs.actions"
 // import { addContactText } from "./contactText.actions"
@@ -17,10 +19,11 @@ export const CurrentEmployeeAccount = () => {
     const navigate = useNavigate();
 
     const [currentTime, setCurrentTime] = useState('');
+    const [priority, setPriority] = useState('');
 
     const [contactAreaText, setContactAreaText] = useState('');
     const [wishesAreaText, setWishesAreaText] = useState('');
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const dispatch = useDispatch();
 
@@ -35,7 +38,7 @@ export const CurrentEmployeeAccount = () => {
     };
 
     const now = new Date().toLocaleString();
-    const {user} = useSelector(state => state.user);
+    const { user } = useSelector(state => state.user);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -54,7 +57,7 @@ export const CurrentEmployeeAccount = () => {
                         <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                         <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
                         <div className="w-full text-center mt-4">
-                            <button onClick={() => {dispatch(logout()); navigate('/')}} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
+                            <button onClick={() => { dispatch(logout()); navigate('/') }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
                                 Закінчити робочу зміну
                                 <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                             </button>
@@ -82,21 +85,36 @@ export const CurrentEmployeeAccount = () => {
                     <div className="flex flex-col gap-4 bg-white border shadow-inner p-10 rounded-lg">
                         <div className="text-3xl text-sky-900 font-medium text-center">Побажання та потреби:</div>
                         <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
-                            <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
-                            <button onClick={() => {
-                                // addNeedToRestaurant(restaurant, wishesAreaText, user.name, now); 
+                            <div className="flex flex-col w-full">
+                                <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
+                                <div className="flex justify-around items-center text text-xl font-medium my-3">
+                                    <div className="flex items-center gap-3 bg-sky-500 text-white px-5 py-2 rounded-md">
+                                        <input value="low" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />LOW
+                                    </div>
+                                    <div className="flex items-center gap-3 bg-sky-700 text-white px-5 py-2 rounded-md">
+                                        <input value="medium" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />MEDIUM
+                                    </div>
+                                    <div className="flex items-center gap-3 bg-sky-900 text-white px-5 py-2 rounded-md">
+                                        <input value="high" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />HIGH
+                                    </div>
+                                </div>
+
+                            </div>
+                            <button disabled={wishesAreaText === ''} onClick={() => {
+                                addNeedToRestaurant(restaurantId, user.name, wishesAreaText, now.split(', ')[1], now.split(', ')[0], priority);
                                 setWishesAreaText('');
-                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md "><img className="w-10" src={Send} alt="" /></button>
+                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed"><img className="w-10" src={Send} alt="" /></button>
                         </div>
                     </div>
                     <div className="flex flex-col gap-4 bg-white border shadow-inner p-10 rounded-lg">
                         <div className="text-3xl text-sky-900 font-medium text-center">Зворотній зв'язок:</div>
                         <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
-                            <textarea onChange={(e) => { setContactAreaText(e.target.value) }} value={contactAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
-                            <button onClick={() => {
-                                // addContactText(contactAreaText, currentEmployee.name, now); 
+                            <textarea onChange={(e) => { setContactAreaText(e.target.value) }} value={contactAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium " name="" id="" rows="7"></textarea>
+                            <button disabled={contactAreaText === ''} onClick={() => {
+                                addFeedbackToRestaurant(restaurantId, user.name, contactAreaText, now.split(', ')[1], now.split(', ')[0]);
+                                setPriority('');
                                 setContactAreaText('');
-                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md "><img className="w-10" src={Send} alt="" /></button>
+                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed"><img className="w-10" src={Send} alt="" /></button>
                         </div>
                     </div>
                 </div>

@@ -16,4 +16,21 @@ router.get('/feedback/:restaurantId',
         }
     })
 
+router.post('/feedback/:restaurantId',
+    async (req, res) => {
+        try {
+            const { restaurantId } = req.params;
+            const { waiterName, message, time, date } = req.body;
+            const feedback = new Feedback({ restaurant: restaurantId, waiterName, message, time, date });
+
+            await feedback.save();
+
+            return res.json({ message: 'Повідомлення було відправлено' });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    })
+
 module.exports = router;

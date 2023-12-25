@@ -18,4 +18,21 @@ router.get('/needs/:restaurantId',
         }
     })
 
+router.post('/needs/:restaurantId',
+    async (req, res) => {
+        try {
+            const { restaurantId } = req.params;
+            const { waiterName, message, time, date, priority } = req.body;
+            const need = new Need({ restaurant: restaurantId, waiterName, message, time, date, priority });
+
+            await need.save();
+
+            return res.json({ message: 'Повідомлення було відправлено' });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    })
+
 module.exports = router;

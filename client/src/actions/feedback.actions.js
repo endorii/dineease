@@ -9,3 +9,13 @@ export const getFeedbackByRestaurant = async (restaurantId) => {
     }   
 }
 
+export const addFeedbackToRestaurant = async (restaurantId, waiterName, message, time, date) => {
+    try {
+        const response = await axios.post(`http://localhost:5000/api/feedback/${restaurantId}`, {waiterName, message, time, date});
+
+        console.log(response.data.message);
+    } catch (e) {
+        console.log(e.response.data.message);
+    }   
+}
+
