@@ -1,10 +1,10 @@
 import axios from "axios"
 import { setEmployeesByRestaurant } from "../store/slices/employees.slice";
 
-export const addEmployee = async (name, age, restaurantName, experience, position, salary, password, email, pin) => {
+export const addEmployee = async (name, age, restaurantId, experience, position, salary, password, email, pin) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/employees", { name, age, restaurantName, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
-
+        const response = await axios.post("http://localhost:5000/api/employees", { name, age, restaurantId, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        
         console.log(response.data.message);
     } catch (e) {
         console.log(e.response.data.message);
@@ -25,9 +25,9 @@ export const getEmployeesByRestaurant = (restaurantId) => {
     }
 }
 
-export const editEmployee = async (_id, name, age, restaurantName, experience, position, salary, password, email, pin) => {
+export const editEmployee = async (_id, name, age, restaurantId, experience, position, salary, password, email, pin) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${_id}`, { _id, name, age, restaurantName, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.put(`http://localhost:5000/api/employees/${_id}`, { _id, name, age, restaurantId, experience, position, salary, password, email, pin}, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {

@@ -2,7 +2,7 @@ import Plus from '../../../assets/svg/plus.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AddEmployee from '../../../components/AddEmployee';
-import { deleteEmployee, getEmployeesByRestaurant, getStaffByRestaurant } from '../../../actions/employees.actions';
+import { deleteEmployee, getEmployeesByRestaurant} from '../../../actions/employees.actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
@@ -27,7 +27,7 @@ const Employees = () => {
 
     useEffect(() => {
         dispatch(getEmployeesByRestaurant(restaurantId));
-    }, [])
+    }, []);
 
     return (
         <>

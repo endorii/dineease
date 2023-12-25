@@ -25,22 +25,19 @@ router.get('/employees/:restaurantId',
     }
 );
 
-router.post('/employees', authMiddleware,
+router.post('/employees',
     async (req, res) => {
         try {
 
-            const { name, age, restaurantName, experience, position, salary, password, email, pin } = req.body;
+            const { name, age, restaurantId, experience, position, salary, password, email, pin } = req.body;
 
-            const candidate = await Employee.findOne({
-                user: req.user.id,
-                $or: [{ pin: pin }, { email: email }]
-            });
+            const candidate = await Employee.findOne({ pin: pin });
 
             if (candidate) {
-                return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${login} вже існує` })
+                return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${email} вже існує` })
             }
 
-            const employee = new Employee({ user: req.user.id, name, age, restaurant: restaurantName, experience, position, salary, password, email, pin});
+            const employee = new Employee({ name, age, restaurant: restaurantId, experience, position, salary, password, email, pin});
 
             await employee.save();
 
