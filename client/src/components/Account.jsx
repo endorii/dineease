@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { auth } from '../modules/auth/user';
 import Statistic from '../assets/svg/statistic.svg';
 import Finances from '../assets/svg/finances.svg';
 import Menu from '../assets/svg/menu.svg';
-// import Storage from '../assets/svg/storage.svg';
 import Access from '../assets/svg/access.svg';
 import Settings from '../assets/svg/settings.svg';
 import User from '../assets/svg/user.svg';
-
-import { NavLink, Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
 
 const NestedItem = ({ item }) => (
@@ -22,8 +19,6 @@ const NestedItem = ({ item }) => (
 
 const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
     const [open, setOpen] = useState(false);
-
-
 
     const dispatch = useDispatch();
 
@@ -75,8 +70,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Меню", icon: Menu, children:
                 [
                     { title: "Товари", path: "dishes" },
-                    // { title: "Інгредієнти", path: "ingredients" },
-                    // { title: "QR - меню", path: "qrmenu" }
                 ]
         },
         {
@@ -84,7 +77,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                 [
                     { title: "Працівники", path: "employees" },
                     // { title: "Посади", path: "positions" },
-                    // { title: "Касси", path: "cash-registers" },
                     { title: "Зв'язок", path: "feedback" },
                     { title: "Потреби", path: "needs" }
                 ]

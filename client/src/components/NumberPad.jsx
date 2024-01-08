@@ -42,21 +42,21 @@ export const NumberPad = () => {
 
                 <div className="flex flex-wrap justify-center text-sky-900 gap-y-5 gap-x-10">
                     {numbers.map((number) => (
-                        <button key={number} onClick={() => handleClick(number)} className="w-1/4 text-center bg-sky-950/5 w-24 h-24 text-2xl hover:bg-sky-900/10 rounded-lg">
+                        <button key={number} onClick={() => handleClick(number)} className="w-1/4 text-center bg-sky-950/5 w-24 h-24 text-2xl hover:bg-sky-900/10 rounded-lg transition ease-out hover:ease-in">
                             {number}
                         </button>
                     ))}
-                    <button onClick={() => clearPad()} className="w-1/2 text-center bg-yellow-700 w-24 h-24 text-2xl hover:bg-yellow-800 rounded-lg">
+                    <button onClick={() => clearPad()} className="w-1/2 text-center bg-yellow-700 w-24 h-24 text-2xl hover:bg-yellow-800 rounded-lg transition ease-out hover:ease-in">
                         <img className="ml-5 h-12" src={Delete} alt="" />
                     </button>
-                    <button onClick={() => handleClick(0)} className="w-1/2 text-center bg-gray-200 w-24 h-24 text-2xl hover:bg-gray-300 rounded-lg">
+                    <button onClick={() => handleClick(0)} className="w-1/2 text-center bg-gray-200 w-24 h-24 text-2xl hover:bg-gray-300 rounded-lg transition ease-out hover:ease-in">
                         0
                     </button>
                     <button onClick={async () => {
                         dispatch(loginByPin(pinInput));
                         setEmployee(employees.filter(employee => employee.pin === pinInput)[0]);
                         setOpen(true)
-                    }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-teal-700 text-white w-24 h-24 text-2xl hover:bg-teal-900 font-medium disabled:opacity-25 disabled:hover:bg-teal-900 rounded-lg">
+                    }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-teal-700 text-white w-24 h-24 text-2xl hover:bg-teal-900 font-medium disabled:opacity-25 disabled:hover:bg-teal-900 rounded-lg transition ease-out hover:ease-in">
                         Go
                     </button>
                 </div></>}

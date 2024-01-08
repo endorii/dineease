@@ -24,8 +24,6 @@ export const Orders = () => {
 
     const { restaurantId } = useParams();
 
-    console.log(restaurantId);
-
     const openOrders = orders.filter(order => order.isOpen);
 
     useEffect(() => {
@@ -43,7 +41,7 @@ export const Orders = () => {
             </Modal> : null}
             <div className="flex flex-col text-white justify-center bg-sky-50">
                 <div className='flex justify-end p-3'>
-                    <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg' onClick={() => {
+                    <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg transition ease-out hover:ease-in' onClick={() => {
                         setOpenNewOrderMenu(true)
                     }}>Нове замовлення</button>
                 </div>
@@ -81,7 +79,7 @@ export const Orders = () => {
                                             <td className="px-6 py-4">
                                                 <div className="flex justify items-center">
                                                     <div className="mr-7">Нове</div>
-                                                    <button onClick={() => { setcurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-white'>Оплатити замовлення</button>
+                                                    <button onClick={() => { setcurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-white transition ease-out hover:ease-in'>Оплатити замовлення</button>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 font-medium">

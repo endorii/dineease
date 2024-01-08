@@ -7,9 +7,9 @@ const router = new Router();
 router.get(`/menu/:restaurantId`,
     async (req, res) => {
         try {
-            const {restaurantId} = req.params;
-            const menu = await Menu.find({restaurant: restaurantId})
-            
+            const { restaurantId } = req.params;
+            const menu = await Menu.find({ restaurant: restaurantId })
+
             return res.json({ menu })
 
         } catch (e) {
@@ -28,7 +28,7 @@ router.get(`/menu/:restaurantId`,
 //             if (candidate) {
 //                 return res.status(400).json({ message: 'Невірний запит', errors })
 //             }
-            
+
 //             const menuCategory = new Menu({ logo, category })
 
 //             await menuCategory.save();

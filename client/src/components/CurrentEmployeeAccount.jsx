@@ -2,19 +2,14 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux"
-// import { getEmployeeByRestaurantAndPin } from "../actions/employees.actions"
 import Logout from '../assets/svg/logout.svg'
 import Send from '../assets/svg/send.svg'
 import { logout } from "../store/slices/user.slice"
 import { addFeedbackToRestaurant } from "../actions/feedback.actions"
 import { addNeedToRestaurant } from "../actions/needs.actions"
-// import { addNeedToRestaurant } from "../actions/needs.actions"
-// import { addNeed } from "./needs.actions"
-// import { addContactText } from "./contactText.actions"
 
 export const CurrentEmployeeAccount = () => {
 
-    const { employees } = useSelector(state => state.employees);
     const startTime = new Date('Sun Dec 10 2023 20:30:57 GMT+0300');
     const navigate = useNavigate();
 
@@ -31,7 +26,6 @@ export const CurrentEmployeeAccount = () => {
         const now = new Date();
         const diffInMilliseconds = now - startTime;
         const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
-        // const seconds = diffInSeconds % 60;
         const minutes = Math.floor(diffInSeconds / 60) % 60;
         const hours = Math.floor(diffInSeconds / 3600);
         return `${hours.toString().padStart(2, '0')}год. ${minutes.toString().padStart(2, '0')}хв.`;
