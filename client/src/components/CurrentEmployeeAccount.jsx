@@ -8,7 +8,33 @@ import { logout } from "../store/slices/user.slice"
 import { addFeedbackToRestaurant } from "../actions/feedback.actions"
 import { addNeedToRestaurant } from "../actions/needs.actions"
 
+import toast, { Toaster } from 'react-hot-toast';
+
 export const CurrentEmployeeAccount = () => {
+
+    const notify = () => toast.success('Повідомлення надіслано!', {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
+
+      const notifyExit = () => toast.success('Ви закінчили робочу зміну!', {
+        style: {
+          border: '1px solid #713200',
+          padding: '16px',
+          color: '#713200',
+        },
+        iconTheme: {
+          primary: '#713200',
+          secondary: '#FFFAEE',
+        },
+      });
 
     const startTime = new Date('Sun Dec 10 2023 20:30:57 GMT+0300');
     const navigate = useNavigate();
@@ -51,10 +77,11 @@ export const CurrentEmployeeAccount = () => {
                         <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                         <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
                         <div className="w-full text-center mt-4">
-                            <button onClick={() => { dispatch(logout()); navigate('/') }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
+                            <button onClick={() => { dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
                                 Закінчити робочу зміну
                                 <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                             </button>
+                            
                         </div>
                     </div>
 
@@ -94,10 +121,16 @@ export const CurrentEmployeeAccount = () => {
                                 </div>
 
                             </div>
-                            <button disabled={wishesAreaText === ''} onClick={() => {
+                            <button disabled={wishesAreaText === '' || !priority} onClick={() => {
+                                notify();
+                                setPriority('');
                                 addNeedToRestaurant(restaurantId, user.name, wishesAreaText, now.split(', ')[1], now.split(', ')[0], priority);
                                 setWishesAreaText('');
                             }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed"><img className="w-10" src={Send} alt="" /></button>
+                            <Toaster
+                                position="top-right"
+                                reverseOrder={false}
+                            />
                         </div>
                     </div>
                     <div className="flex flex-col gap-4 bg-white border shadow-inner p-10 rounded-lg">
@@ -105,10 +138,14 @@ export const CurrentEmployeeAccount = () => {
                         <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
                             <textarea onChange={(e) => { setContactAreaText(e.target.value) }} value={contactAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium " name="" id="" rows="7"></textarea>
                             <button disabled={contactAreaText === ''} onClick={() => {
+                                notify();
                                 addFeedbackToRestaurant(restaurantId, user.name, contactAreaText, now.split(', ')[1], now.split(', ')[0]);
-                                setPriority('');
                                 setContactAreaText('');
                             }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed"><img className="w-10" src={Send} alt="" /></button>
+                            <Toaster
+                                position="top-right"
+                                reverseOrder={false}
+                            />
                         </div>
                     </div>
                 </div>

@@ -28,14 +28,14 @@ export const ChooseRestaurant = () => {
         }
     }, [token])
 
-    
+
 
     return (
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
             <div className="text-4xl">Виберіть ваш ресторан</div>
             <div className='flex justify-center'>
 
-                    <Suspense fallback={<Loader/>}>
+                <Suspense fallback={<Loader />}>
                     <ul className="flex justify-center items-center gap-12 px-7 py-10">
                         {restaurants.length > 0 ? restaurants.map((restaurant, i) =>
                             <li key={restaurant._id} className="flex items-center p-14 rounded-lg cursor-pointer shadow-lg hover:bg-sky-900/5 transition ease-out hover:ease-in" onClick={() => {
@@ -50,7 +50,7 @@ export const ChooseRestaurant = () => {
                             </li>
                         ) : <div>Немає доступних ресторанів</div>}
                     </ul>
-                    </Suspense>
+                </Suspense>
 
             </div>
         </div>

@@ -1,39 +1,26 @@
 import { useEffect, useState } from "react";
-// import { fetchOnlineEmployees } from "../store/slices/onlineEmployee.Slice";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "./Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import { logout } from "../store/slices/user.slice";
-// import { toast } from 'react-toastify';
-// import { loginEmployee } from "../view/pages/Access/Employees/employee";
-// import { setCurrentEmployee } from "../store/slices/currentEmployee.Slice";
 
 export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const {restaurantId, position} = useParams();
+    const { restaurantId, position } = useParams();
 
     const [now, setNow] = useState(new Date().toLocaleTimeString());
 
-    // const notify = () => toast.info("Робочу зміну почато!", {
-    //     position: "top-right",
-    //     autoClose: 3000,
-    //     hideProgressBar: false,
-    //     closeOnClick: false,
-    //     pauseOnHover: false,
-    //     draggable: false,
-    //     progress: undefined,
-    //     theme: "light"
-    // });
+
 
     useEffect(() => {
         const timer = setInterval(() => {
             setNow(new Date().toLocaleTimeString());
         }, 1000);
-    
-        
+
+
         return () => clearInterval(timer);
     }, []);
 
@@ -55,15 +42,9 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                                     }}>Ні</button>
                                     <div>
                                         <button onClick={async () => {
-                                            
-                                            // await loginEmployee(employee.pin);
-                                            // dispatch(setCurrentEmployee(employee));
-                                            // dispatch(fetchOnlineEmployees());
-                                            
                                             setOpen(false);
-                                            // notify();
                                             setTimeout(() => {
-                                                navigate(`/${restaurantId}/${position}/panel`);
+                                                navigate(`/${restaurantId}/${position}/panel/orders`);
                                             }, 1000);
                                         }} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in">Так</button>
 
