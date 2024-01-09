@@ -16,29 +16,34 @@ import Close from '../assets/svg/close.svg'
 import Time from '../assets/svg/time.svg'
 import Trash from '../assets/svg/trash.svg'
 import { useEffect, useState } from "react";
-// import { configureOrder, getTotalInsideOrderValue } from "../functions";
 import { Modal } from './Modal';
-// import { PayOrder } from './PayOrder';
-// import { fetchOrders } from '../store/slices/ordersSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenu } from '../store/slices/menu.slice';
 import { useParams } from 'react-router-dom';
-import { configureOrder } from '../functions';
+import { configureOrder, getTotalInsideOrderValue } from '../functions';
+import { fetchOrders } from '../store/slices/orders.slice';
 
-export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrder, currentTable }) => {
+import toast, { Toaster } from 'react-hot-toast';
+
+export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     const [guests, setGuests] = useState([]);
     const [currentCategoryFood, setCurrentCategoryFood] = useState('');
     const [currentGuest, setCurrentGuest] = useState({});
 
+    const notifySuccess = () => {
+        toast.success('Successfully sent to the kitchen!');
+    };
+
+
     const { menu } = useSelector(state => state.menu);
 
     const dispatch = useDispatch();
-    const {restaurantId} = useParams();
+    const { restaurantId } = useParams();
 
     const addGuest = () => {
         const newGuest = {
             id: guests.length + 1,
-            guest: [],
+            orderInfo: [],
         };
 
         setGuests([...guests, newGuest]);
@@ -46,7 +51,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
 
     const selectFoodForGuest = (currentGuest, foodItem) => {
         const updatedGuests = [...guests];
-        currentGuest.guest.push(foodItem);
+        currentGuest.orderInfo.push(foodItem);
         setGuests(updatedGuests);
     };
 
@@ -61,37 +66,13 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
         return dishesList;
     }
 
-    const getTotalInsideOrderValue = (guests) => {
-        let totalValue = 0;
-
-        for (let i = 0; i < guests.length; i++) {
-            for (let j = 0; j < guests[i].guest.length; j++) {
-                totalValue += guests[i].guest[j].price;
-            }
-        }
-        return totalValue
-    }
-
-    const getTotalOrderValue = (order) => {
-        let totalValue = 0;
-
-        for (let i = 0; i < order.order.length; i++) {
-            for (let j = 0; j < order.order[i].guest.length; j++) {
-                totalValue += order.order[i].guest[j].price;
-            }
-        }
-        return totalValue
-    }
-
     useEffect(() => {
-        dispatch(fetchMenu(restaurantId))
+        dispatch(fetchMenu(restaurantId));
+        dispatch(fetchOrders(restaurantId));
     }, [])
 
     return (
         <>
-            {/* {openPayOrder ? <Modal>
-                <PayOrder setOpenPayOrder={setOpenPayOrder} />
-            </Modal> : null} */}
             <div className='flex justify-center'>
                 <div className=""><img className="absolute top-14 right-20 z-20 w-12 cursor-pointer" src={Close} alt="" onClick={() => {
                     setOpenNewOrderMenu(false)
@@ -127,11 +108,11 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                                         </button>
                                                     </div>
                                                     <div className='flex justify-center mb-4'>
-                                                        <hr  className='w-full'/>
+                                                        <hr className='w-full' />
                                                     </div>
                                                     <div className='w-full'>
                                                         <tbody className='bg-gray-100 p-1 m-2 rounded-xl w-full '>
-                                                            {guest.guest.map((dish, i) => {
+                                                            {guest.orderInfo.map((dish, i) => {
                                                                 return (
                                                                     <tr key={i} className="bg-white border-b border-gray-300 text-gray-700 text-xl">
                                                                         <td className="w-[40%] px-3 py-1 text-left">
@@ -156,10 +137,14 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
                                 </div>
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
-                                        <button onClick={async () => {
-                                            configureOrder(guests, currentTable); 
-                                            setOpenNewOrderMenu(false)
-                                        }} className="w-full bg-teal-700 p-3 rounded-lg text-white font-medium">Відправити на кухню</button>
+                                        <button onClick={() => {
+                                            notifySuccess();
+                                            configureOrder(restaurantId, guests, currentTable);
+                                            dispatch(fetchOrders(restaurantId));
+                                            setOpenNewOrderMenu(false);
+                                        }} className="w-full bg-teal-700 p-3 rounded-lg text-white font-medium">
+                                            Відправити на кухню
+                                        </button>
                                     </div>
                                     <div className='bg-white rounded-lg p-7 flex flex-col gap-3'>
                                         <div className="flex justify-between items-center">
@@ -188,7 +173,6 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, setOpenPayOrder, openPayOrd
 
                                                             <div className="font-medium px-4 py-2 text-xl">{dish.price} ₴</div>
                                                         </div>
-                                                        {/* <div className="flex items-center text-gray-400 font-thin px-4 py-2 text-s"> залишилося <span className='text-red-800 mx-2'> {dish.amount} </span> шт.</div> */}
                                                     </li>
                                                 ))
                                             ) : (<div className="text-center text-5xl font-thin">Товарів не знайдено</div>)

@@ -10,9 +10,9 @@ export const getOrdersByRestaurant = async (restaurantId) => {
     }   
 }
 
-export const addOrdersToRestaurant = async (restaurantId, order) => {
+export const addOrdersToRestaurant = async (restaurantId, items, date, time, tableNumber) => {
     try {
-        const response = await axios.post(`http://localhost:5000/api/orders/${restaurantId}`, {order});
+        const response = await axios.post(`http://localhost:5000/api/orders/${restaurantId}`, {items, date, time, tableNumber});
         
         return response.data.orders;
     } catch (e) {

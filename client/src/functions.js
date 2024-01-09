@@ -4,8 +4,8 @@ export const getTotalInsideOrderValue = (guests) => {
     let totalValue = 0;
 
     for (let i = 0; i < guests.length; i++) {
-        for (let j = 0; j < guests[i].guest.length; j++) {
-            totalValue += guests[i].guest[j].value;
+        for (let j = 0; j < guests[i].orderInfo.length; j++) {
+            totalValue += guests[i].orderInfo[j].price;
         }
     }
     return totalValue
@@ -15,20 +15,24 @@ export const getTotalOrderValue = (order) => {
     let totalValue = 0;
 
     for (let i = 0; i < order.items.length; i++) {
-        totalValue += Number(order.items[i].price);
+        const orderInfoList = order.items[i].orderInfo;
+
+        for (let j = 0; j < orderInfoList.length; j++) {
+            totalValue += Number(orderInfoList[j].price);
+        }
     }
 
-    return totalValue;
+    return Number(totalValue);
 }
 
-export const configureOrder = (guests, currentTable) => {
+export const configureOrder = (restaurantId, guests, currentTable) => {
     const now = new Date().toLocaleString();
 
     const order = {
-        items: [...guests],
-        openingTime: now,
+        items: guests,
+        date: now.split(',')[0],
+        time: now.split(',')[1],
         tableNumber: currentTable,
     }
-
-    addOrdersToRestaurant({...order});
+    addOrdersToRestaurant(restaurantId, order.items, order.date, order.time, order.tableNumber);
 }

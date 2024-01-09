@@ -3,37 +3,21 @@ const { Schema, model } = require('mongoose');
 const OrderItemSchema = new Schema({
     name: {
         type: String,
-        required: true
+        // required: true
     },
-    src: {
-        type: String,
-        required: true
-    },
-    value: {
+    quantity: {
         type: Number,
-        required: true
+        // required: true
     },
-    time: {
+    price: {
         type: Number,
-        required: true
-    },
-    amount: {
-        type: Number,
-        required: true
-    },
-    weight: {
-        type: Number,
-        required: false
-    },
-    ingredients: {
-        type: [String],
-        required: false
+        // required: true
     }
 });
 
 const GuestSchema = new Schema({
     id: Number,
-    guest: [OrderItemSchema]
+    orderInfo: [OrderItemSchema]
 });
 
 const Order = new Schema({
@@ -44,8 +28,9 @@ const Order = new Schema({
         required: true
     },
     restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
-    openingTime: String,
-    order: [GuestSchema]
+    date: String,
+    time: String,
+    items: [GuestSchema]
 });
 
 module.exports = model("Order", Order); 

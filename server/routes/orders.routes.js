@@ -8,7 +8,7 @@ const router = new Router();
 router.get('/orders/:restaurantId',
     async (req, res) => {
         try {
-            const {restaurantId} = req.params;
+            const { restaurantId } = req.params;
             const orders = await Order.find({ restaurant: restaurantId });
             return res.json({ orders })
 
@@ -18,24 +18,27 @@ router.get('/orders/:restaurantId',
         }
     })
 
-    router.post('/orders/:restaurantId',
+router.post('/orders/:restaurantId',
     async (req, res) => {
         try {
-            const {restaurantId} = req.params;
-            const {order} = req.body;
+            const { restaurantId } = req.params;
+            const { items, date, time, tableNumber } = req.body;
 
             const newOrder = new Order({
                 restaurant: restaurantId,
-                ...order
+                items, 
+                date,
+                time, 
+                tableNumber
             });
 
             await newOrder.save();
 
-            return res.json({newOrder});
-
+            return res.json({ message: "Замовлення відправлено" });
+            
         } catch (e) {
             console.log(e);
-            res.send({message: "Server error"});
+            res.send({ message: "Server error" });
         }
     }
 );

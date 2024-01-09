@@ -13,6 +13,8 @@ import { fetchMenu } from "../store/slices/menu.slice";
 import { PayOrder } from "./PayOrder";
 import { getTotalOrderValue } from "../functions";
 
+import { Toaster } from 'react-hot-toast';
+
 export const Orders = () => {
 
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
@@ -36,6 +38,10 @@ export const Orders = () => {
             {openNewOrderMenu ? <Modal>
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
             </Modal> : null}
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
             {openPayOrder ? <Modal>
                 <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder} />
             </Modal> : null}
