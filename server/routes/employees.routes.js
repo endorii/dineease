@@ -91,4 +91,53 @@ router.delete('/employees/:_id', authMiddleware,
         }
     });
 
+    router.put('/employees/:employeeId/updateStartWorkingTime', authMiddleware, async (req, res) => {
+        try {
+            const { employeeId } = req.params;
+            const { currentDate, currentTime } = req.body;
+    
+            const employee = await Employee.findById(employeeId);
+    
+            if (!employee) {
+                return res.status(404).json({ message: `Employee with id ${employeeId} not found` });
+            }
+    
+            employee.workingTime.push({
+                date: currentDate,
+                entries: {start: currentTime, end: null, servedTablesNumber: 0}
+            });
+    
+            const updatedEmployee = await employee.save();
+    
+            return res.json({ message: "Employee was updated" });
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+    });
+
+    router.put('/employees/:employeeId/updateEndWorkingTime', authMiddleware, async (req, res) => {
+        try {
+            const { employeeId } = req.params;
+            const { endTime } = req.body;
+    
+            const updatedEmployee = await Employee.findOneAndUpdate(
+                { _id: employeeId, 'workingTime.entries.end': null },
+                { 'workingTime.$.entries.end': endTime },
+                { new: true }
+            );
+    
+            if (!updatedEmployee) {
+                return res.status(404).json({ message: `Employee with id ${employeeId} not found or end time already set` });
+            }
+    
+            return res.json({ message: "Employee end time was updated" });
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+    });
+    
+   
+
 module.exports = router;

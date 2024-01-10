@@ -1,7 +1,14 @@
 const { Schema, model } = require('mongoose');
 
+const WorkingTimeEntry = new Schema({
+    start: {type: String, default: '00:00:00'},
+    end: {type: String, default: '00:00:00'},
+});
+
 const WorkingTime = new Schema({
-    date: {type: String, default: '00:00-00:00' }
+    date: {type: String},
+    entries: WorkingTimeEntry,
+    servedTablesNumber: {type: Number, default: 0}
 });
 
 const Employee = new Schema({
@@ -15,8 +22,7 @@ const Employee = new Schema({
     pin: String,
     restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
     salary: String,
-    workingTime: { type: WorkingTime }
+    workingTime: [WorkingTime]
 });
-
 
 module.exports = model("Employee", Employee);

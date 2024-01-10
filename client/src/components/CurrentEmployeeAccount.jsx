@@ -9,34 +9,35 @@ import { addFeedbackToRestaurant } from "../actions/feedback.actions"
 import { addNeedToRestaurant } from "../actions/needs.actions"
 
 import toast, { Toaster } from 'react-hot-toast';
+import { updateEmployeeEndWorkingTime } from "../actions/employees.actions"
 
 export const CurrentEmployeeAccount = () => {
 
     const notify = () => toast.success('Повідомлення надіслано!', {
         style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
         },
         iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
+            primary: '#713200',
+            secondary: '#FFFAEE',
         },
-      });
+    });
 
-      const notifyExit = () => toast.success('Ви закінчили робочу зміну!', {
+    const notifyExit = () => toast.success('Ви закінчили робочу зміну!', {
         style: {
-          border: '1px solid #713200',
-          padding: '16px',
-          color: '#713200',
+            border: '1px solid #713200',
+            padding: '16px',
+            color: '#713200',
         },
         iconTheme: {
-          primary: '#713200',
-          secondary: '#FFFAEE',
+            primary: '#713200',
+            secondary: '#FFFAEE',
         },
-      });
+    });
 
-    const startTime = new Date('Sun Dec 10 2023 20:30:57 GMT+0300');
+
     const navigate = useNavigate();
 
     const [currentTime, setCurrentTime] = useState('');
@@ -48,24 +49,39 @@ export const CurrentEmployeeAccount = () => {
 
     const dispatch = useDispatch();
 
-    const getCurrentOnlineTime = (startTime) => {
-        const now = new Date();
-        const diffInMilliseconds = now - startTime;
-        const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
-        const minutes = Math.floor(diffInSeconds / 60) % 60;
-        const hours = Math.floor(diffInSeconds / 3600);
-        return `${hours.toString().padStart(2, '0')}год. ${minutes.toString().padStart(2, '0')}хв.`;
-    };
-
     const now = new Date().toLocaleString();
     const { user } = useSelector(state => state.user);
+    const startTime = user?.workingTime?.[0]?.entries?.start;
 
+    function msToTime(duration) {
+        const seconds = Math.floor((duration / 1000) % 60),
+            minutes = Math.floor((duration / (1000 * 60)) % 60),
+            hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    
+        const pad = (num) => (num < 10 ? "0" + num : num);
+    
+        return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    }
+    
+    const getCurrentOnlineTime = (startTime) => {
+    
+        const [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
+        const now = new Date();
+        const start = new Date();
+        start.setHours(startHours, startMinutes, startSeconds);
+    
+        const result = now - start;
+    
+        return msToTime(result);
+    };
+    
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentTime(getCurrentOnlineTime(startTime));
         }, 1000);
         return () => clearInterval(timer);
-    }, []);
+    }, [startTime]);
+
 
     return (
         <div className="bg-sky-50 overflow-y-scroll h-[93vh]">
@@ -77,19 +93,19 @@ export const CurrentEmployeeAccount = () => {
                         <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                         <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
                         <div className="w-full text-center mt-4">
-                            <button onClick={() => { dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
+                            <button onClick={() => { updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
                                 Закінчити робочу зміну
                                 <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                             </button>
-                            
+
                         </div>
                     </div>
 
                     <div className=" flex flex-col gap-6 bg-white border shadow-inner p-10 rounded-lg">
                         <div className="text-3xl text-sky-900 font-medium text-center">Інформація за зміну:</div>
                         <ul className="text-xl text-sky-800">
-                            <li>Кількість обслужених столиків: <span className="text-xl underline font-medium text-sky-950">10</span></li>
-                            <li>Початок робочої зміни о: <span className="text-xl underline font-medium text-sky-950">20:30:57</span></li>
+                            <li>Кількість обслужених столиків: <span className="text-xl underline font-medium text-sky-950">{user?.workingTime?.filter(date => date.date === now.split(', ')[0])[0].servedTablesNumber}</span></li>
+                            <li>Початок робочої зміни о: <span className="text-xl underline font-medium text-sky-950">{startTime}</span></li>
                         </ul>
                     </div>
 

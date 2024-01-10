@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "./Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import { logout } from "../store/slices/user.slice";
+import {  updateEmployeeStartWorkingTime } from "../actions/employees.actions";
 
 export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
 
@@ -11,16 +12,15 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
 
     const { restaurantId, position } = useParams();
 
-    const [now, setNow] = useState(new Date().toLocaleTimeString());
+    const [now, setNow] = useState(new Date().toLocaleString());
 
-
+    const currentDate = now.split(', ')[0];
+    const currentTime = now.split(', ')[1];
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setNow(new Date().toLocaleTimeString());
+            setNow(new Date().toLocaleString());
         }, 1000);
-
-
         return () => clearInterval(timer);
     }, []);
 
@@ -33,20 +33,21 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                             <>
                                 <div className="font-thin text-xl">Вітаємо, {employee.name}</div>
                                 <div className="font-thin text-xl">Розпочати робочу зміну?</div>
-                                <div className="font-thin text-xl">Початок зміни о: {now}</div>
+                                <div className="font-thin text-xl">Початок зміни о: {now.split(', ')[1]}</div>
                                 <div className="flex flex-row gap-x-5 mt-4">
-                                    <button className="flex items-center bg-red-500 hover:bg-red-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in" onClick={() => {
+                                    <button className="flex items-center bg-yellow-600 hover:bg-yellow-700 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in" onClick={() => {
                                         setEmployee({});
                                         dispatch(logout());
                                         setOpen(false)
                                     }}>Ні</button>
                                     <div>
                                         <button onClick={async () => {
+                                            updateEmployeeStartWorkingTime(employee._id, currentDate, currentTime);
                                             setOpen(false);
                                             setTimeout(() => {
                                                 navigate(`/${restaurantId}/${position}/panel/orders`);
                                             }, 1000);
-                                        }} className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in">Так</button>
+                                        }} className="flex items-center bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in">Так</button>
 
                                     </div>
                                 </div>

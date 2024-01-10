@@ -30,8 +30,8 @@ export const configureOrder = (restaurantId, guests, currentTable) => {
 
     const order = {
         items: guests,
-        date: now.split(',')[0],
-        time: now.split(',')[1],
+        date: now.split(', ')[0],
+        time: now.split(', ')[1],
         tableNumber: currentTable,
     }
     addOrdersToRestaurant(restaurantId, order.items, order.date, order.time, order.tableNumber);

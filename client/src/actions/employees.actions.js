@@ -45,3 +45,23 @@ export const deleteEmployee = async (_id) => {
         console.log(e.response.data.message);
     }
 }
+
+export const updateEmployeeStartWorkingTime = async (employeeId, currentDate, currentTime) => {
+    try {
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateStartWorkingTime`, { currentDate, currentTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        console.log(response.data.message);
+        return response.data
+    } catch (e) {
+        console.log(e.response.data.message);
+    }
+}
+
+export const updateEmployeeEndWorkingTime = async (employeeId, endTime) => {
+    try {
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateEndWorkingTime`, { endTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        console.log(response.data.message);
+        return response.data
+    } catch (e) {
+        console.log(e.response.data.message);
+    }
+}

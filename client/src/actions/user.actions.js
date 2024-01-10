@@ -1,17 +1,6 @@
 import axios from 'axios';
 import { setUser } from '../store/slices/user.slice';
 
-// export const registration = async (email, name, phone, company, password) => {
-//     try {
-//         const response = await axios.post("http://localhost:5000/api/auth/signup", {email, name, phone, company, password});
-        
-//         console.log(response.data.message);
-
-//     } catch (e) {
-//         console.log(e.response.data.message);
-//     }   
-// }
-
 export const loginByPass = (restaurantId, email, password) => {
     return async dispatch => {
         try {
