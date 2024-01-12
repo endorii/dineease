@@ -1,17 +1,24 @@
 import { useState } from 'react'
 import Close from '../assets/svg/close.svg'
 import { PayNumberPad } from './PayNumberPad'
-// import { getTotalOrderValue } from '../functions'
-// import { closeOrder } from './ordersActions'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getTotalOrderValue } from '../functions'
-// import { fetchOrders } from '../store/slices/ordersSlice'
+import { closeOrder } from '../actions/orders.actions'
+import { fetchOrders } from '../store/slices/orders.slice'
+import { useParams } from 'react-router-dom'
+import { updateWaiterServedTables } from '../actions/employees.actions'
 
 export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
     const [cashInputValue, setCashInputValue] = useState(0);
     const [cardInputValue, setCardInputValue] = useState(0);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('cash');
+
+    const {restaurantId} = useParams();
+
+    const {user} = useSelector(state => state.user)
+
+    console.log(user.workingTime.filter(item => item.entries.end === null)[0].entries.start);
 
     const dispatch = useDispatch();
 
@@ -35,7 +42,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
                             <div>
                                 <ul className='flex flex-col font-medium text-xl gap-1 '>Виберіть спосіб оплати:
-                                    <li onClick={() => {setSelectedPaymentMethod('cash')}} className={`text-2xl border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500 ${selectedPaymentMethod === 'cash' ? 'border-sky-700' : null}`}>
+                                    <li onClick={() => { setSelectedPaymentMethod('cash') }} className={`text-2xl border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500 ${selectedPaymentMethod === 'cash' ? 'border-sky-700' : null}`}>
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💵 Готівкою</p>
                                             <div className='flex'>
@@ -44,7 +51,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                             </div>
                                         </div>
                                     </li>
-                                    <li onClick={() => {setSelectedPaymentMethod('card')}} className={`text-2xl border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500 ${selectedPaymentMethod === 'card' ? 'border-sky-700' : null}`}>
+                                    <li onClick={() => { setSelectedPaymentMethod('card') }} className={`text-2xl border-2 w-full px-4 py-2 rounded-lg hover:border-blue-500 ${selectedPaymentMethod === 'card' ? 'border-sky-700' : null}`}>
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💳 Карткою</p>
                                             <div className='flex'>
@@ -64,7 +71,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                     <span className="text-xl text-black pb-1">Друкувати чек</span>
                                 </div>
                                 <div className='text-3xl'>
-                                    Сума: 
+                                    Сума:
                                     <p className='text-4xl inline font-medium'> {Number(cardInputValue) + Number(cashInputValue)}₴</p>
                                 </div>
                             </div>
@@ -72,10 +79,11 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                         <div className='flex gap-[20%] justify-center items-center text-white'>
                             <button className='bg-yellow-600 px-6 py-4 text-2xl font-medium hover:bg-yellow-700 rounded-md'>Закрити без оплати</button>
                             <button onClick={async () => {
-                                // await closeOrder(currentOrder._id);
-                                 setOpenPayOrder(false); 
-                                //  dispatch(fetchOrders())
-                                 }} className='bg-teal-600 px-6 py-4 text-2xl font-medium hover:bg-teal-700 rounded-md'>Сплатити замовлення</button>
+                                await closeOrder(restaurantId, currentOrder._id);
+                                await updateWaiterServedTables(user._id, user.workingTime.filter(item => item.entries.end === null)[0].entries.start);
+                                setOpenPayOrder(false);
+                                dispatch(fetchOrders(restaurantId));
+                            }} disabled={cardInputValue < 0 || cashInputValue < 0 || (cardInputValue + cashInputValue) < getTotalOrderValue(currentOrder)} className='bg-teal-600 px-6 py-4 text-2xl font-medium hover:bg-teal-700 rounded-md disabled:bg-teal-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in'>Сплатити замовлення</button>
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ export const getTotalOrderValue = (order) => {
     return Number(totalValue);
 }
 
-export const configureOrder = (restaurantId, guests, currentTable) => {
+export const configureOrder = (restaurantId, guests, currentTable, waiterId) => {
     const now = new Date().toLocaleString();
 
     const order = {
@@ -33,6 +33,7 @@ export const configureOrder = (restaurantId, guests, currentTable) => {
         date: now.split(', ')[0],
         time: now.split(', ')[1],
         tableNumber: currentTable,
+        waiter: waiterId
     }
-    addOrdersToRestaurant(restaurantId, order.items, order.date, order.time, order.tableNumber);
+    addOrdersToRestaurant(restaurantId, order.items, order.date, order.time, order.tableNumber, order.waiter);
 }

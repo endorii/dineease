@@ -34,6 +34,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
         toast.success('Successfully sent to the kitchen!');
     };
 
+    const { user } = useSelector(state => state.user)
 
     const { menu } = useSelector(state => state.menu);
 
@@ -137,11 +138,11 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                 </div>
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
-                                        <button onClick={() => {
+                                        <button onClick={ () => {
                                             notifySuccess();
-                                            configureOrder(restaurantId, guests, currentTable);
-                                            dispatch(fetchOrders(restaurantId));
+                                            configureOrder(restaurantId, guests, currentTable, user._id);
                                             setOpenNewOrderMenu(false);
+                                            dispatch(fetchOrders(restaurantId));
                                         }} className="w-full bg-teal-700 p-3 rounded-lg text-white font-medium">
                                             Відправити на кухню
                                         </button>

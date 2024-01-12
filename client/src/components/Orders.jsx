@@ -16,15 +16,15 @@ import { getTotalOrderValue } from "../functions";
 import { Toaster } from 'react-hot-toast';
 
 export const Orders = () => {
-
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
     const [openPayOrder, setOpenPayOrder] = useState(false);
     const [currentOrder, setcurrentOrder] = useState([])
 
     const dispatch = useDispatch()
-    const { orders } = useSelector(state => state.orders)
 
     const { restaurantId } = useParams();
+
+    const { orders } = useSelector(state => state.orders)
 
     const openOrders = orders.filter(order => order.isOpen);
 

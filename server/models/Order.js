@@ -28,6 +28,7 @@ const Order = new Schema({
         required: true
     },
     restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
+    waiter: { type: Schema.Types.ObjectId, ref: 'Employee'},
     date: String,
     time: String,
     items: [GuestSchema]
