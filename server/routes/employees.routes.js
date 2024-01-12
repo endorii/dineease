@@ -37,7 +37,7 @@ router.post('/employees',
                 return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${email} вже існує` })
             }
 
-            const employee = new Employee({ name, age, restaurant: restaurantId, experience, position, salary, password, email, pin});
+            const employee = new Employee({ name, age, restaurant: restaurantId, experience, position, salary, password, email, pin });
 
             await employee.save();
 
@@ -54,7 +54,7 @@ router.put('/employees/:_id', authMiddleware,
     async (req, res) => {
         try {
             const { _id } = req.params;
-            const { name, age, restaurantName, experience, position, salary, password, email, pin  } = req.body;
+            const { name, age, restaurantName, experience, position, salary, password, email, pin } = req.body;
 
             const updatedEmployee = await Employee.findOneAndUpdate(
                 { _id },
@@ -91,53 +91,77 @@ router.delete('/employees/:_id', authMiddleware,
         }
     });
 
-    router.put('/employees/:employeeId/updateStartWorkingTime', authMiddleware, async (req, res) => {
-        try {
-            const { employeeId } = req.params;
-            const { currentDate, currentTime } = req.body;
-    
-            const employee = await Employee.findById(employeeId);
-    
-            if (!employee) {
-                return res.status(404).json({ message: `Employee with id ${employeeId} not found` });
-            }
-    
-            employee.workingTime.push({
-                date: currentDate,
-                entries: {start: currentTime, end: null, servedTablesNumber: 0}
-            });
-    
-            const updatedEmployee = await employee.save();
-    
-            return res.json({ message: "Employee was updated" });
-        } catch (e) {
-            console.log(e);
-            res.send({ message: "Server error" });
-        }
-    });
+router.put('/employees/:employeeId/updateStartWorkingTime', authMiddleware, async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+        const { currentDate, currentTime } = req.body;
 
-    router.put('/employees/:employeeId/updateEndWorkingTime', authMiddleware, async (req, res) => {
-        try {
-            const { employeeId } = req.params;
-            const { endTime } = req.body;
-    
-            const updatedEmployee = await Employee.findOneAndUpdate(
-                { _id: employeeId, 'workingTime.entries.end': null },
-                { 'workingTime.$.entries.end': endTime },
-                { new: true }
-            );
-    
-            if (!updatedEmployee) {
-                return res.status(404).json({ message: `Employee with id ${employeeId} not found or end time already set` });
-            }
-    
-            return res.json({ message: "Employee end time was updated" });
-        } catch (e) {
-            console.log(e);
-            res.send({ message: "Server error" });
+        const employee = await Employee.findById(employeeId);
+
+        if (!employee) {
+            return res.status(404).json({ message: `Employee with id ${employeeId} not found` });
         }
-    });
-    
-   
+
+        employee.workingTime.push({
+            date: currentDate,
+            entries: { start: currentTime, end: null, servedTablesNumber: 0 }
+        });
+
+        await employee.save();
+
+        return res.json({ message: "Employee was updated" });
+    } catch (e) {
+        console.log(e);
+        res.send({ message: "Server error" });
+    }
+});
+
+router.put('/employees/:employeeId/updateEndWorkingTime', authMiddleware, async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+        const { endTime } = req.body;
+
+        const updatedEmployee = await Employee.findOneAndUpdate(
+            { _id: employeeId, 'workingTime.entries.end': null },
+            { 'workingTime.$.entries.end': endTime },
+            { new: true }
+        );
+
+        if (!updatedEmployee) {
+            return res.status(404).json({ message: `Employee with id ${employeeId} not found or end time already set` });
+        }
+
+        return res.json({ message: "Employee end time was updated" });
+    } catch (e) {
+        console.log(e);
+        res.send({ message: "Server error" });
+    }
+});
+
+router.put('/employees/:employeeId/updateWaiterServedTables', async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+        const { startTime } = req.body;
+
+        const employee = await Employee.findOne({ _id: employeeId, 'workingTime.entries.end': null });
+
+        // Перевірте, чи знайдено співробітника
+        if (!employee) {
+            return res.status(404).json({ message: `Employee with id ${employeeId} not found or end time already set` });
+        }
+        const currentServedTablesNumber = employee.workingTime[0].servedTablesNumber;
+
+        const updatedWaiterServedTables = await Employee.findOneAndUpdate(
+            { _id: employeeId, 'workingTime.entries.end': null },
+            { 'workingTime.$.servedTablesNumber': currentServedTablesNumber + 1 },
+            { new: true }
+        );
+
+        return res.json({ message: "Employee served tables number was updated" });
+    } catch (e) {
+        console.log(e);
+        res.send({ message: "Server error" });
+    }
+});
 
 module.exports = router;

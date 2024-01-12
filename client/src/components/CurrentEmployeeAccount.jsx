@@ -51,30 +51,32 @@ export const CurrentEmployeeAccount = () => {
 
     const now = new Date().toLocaleString();
     const { user } = useSelector(state => state.user);
-    const startTime = user?.workingTime?.[0]?.entries?.start;
+    const lastIndex = user?.workingTime?.length - 1;
+    const startTime = user?.workingTime?.[lastIndex]?.entries?.start;
+
 
     function msToTime(duration) {
         const seconds = Math.floor((duration / 1000) % 60),
             minutes = Math.floor((duration / (1000 * 60)) % 60),
             hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-    
+
         const pad = (num) => (num < 10 ? "0" + num : num);
-    
+
         return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
     }
-    
+
     const getCurrentOnlineTime = (startTime) => {
-    
+
         const [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
         const now = new Date();
         const start = new Date();
         start.setHours(startHours, startMinutes, startSeconds);
-    
+
         const result = now - start;
-    
+
         return msToTime(result);
     };
-    
+
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentTime(getCurrentOnlineTime(startTime));
@@ -93,7 +95,7 @@ export const CurrentEmployeeAccount = () => {
                         <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                         <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
                         <div className="w-full text-center mt-4">
-                            <button onClick={() => { updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
+                            <button onClick={async () => { await updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
                                 Закінчити робочу зміну
                                 <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                             </button>

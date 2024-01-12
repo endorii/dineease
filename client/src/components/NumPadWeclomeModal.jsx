@@ -10,7 +10,7 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { restaurantId, position } = useParams();
+    const { restaurantId, position, waiterId } = useParams();
 
     const [now, setNow] = useState(new Date().toLocaleString());
 

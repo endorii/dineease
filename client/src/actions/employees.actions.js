@@ -65,3 +65,13 @@ export const updateEmployeeEndWorkingTime = async (employeeId, endTime) => {
         console.log(e.response.data.message);
     }
 }
+
+export const updateWaiterServedTables = async (employeeId, startTime) => {
+    try {
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateWaiterServedTables`, {startTime});
+        console.log(response.data.message);
+        return response.data
+    } catch (e) {
+        console.log(e.response.data.message);
+    }
+}

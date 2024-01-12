@@ -1,8 +1,6 @@
-import { Link, NavLink, Outlet, useNavigate } from "react-router-dom"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
 // import Notification from '../assets/icons/notification.svg';
 import { useDispatch, useSelector } from "react-redux";
-// import GreenDot from '../assets/img/green_dot.png'
-// import RedDot from '../assets/img/red_dot.png'
 import { useEffect } from "react";
 import { auth } from "../actions/user.actions";
 
