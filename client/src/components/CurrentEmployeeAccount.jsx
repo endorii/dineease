@@ -10,6 +10,7 @@ import { addNeedToRestaurant } from "../actions/needs.actions"
 
 import toast, { Toaster } from 'react-hot-toast';
 import { updateEmployeeEndWorkingTime } from "../actions/employees.actions"
+import { auth } from "../actions/user.actions"
 
 export const CurrentEmployeeAccount = () => {
 
@@ -78,6 +79,7 @@ export const CurrentEmployeeAccount = () => {
     };
 
     useEffect(() => {
+        dispatch(auth());
         const timer = setInterval(() => {
             setCurrentTime(getCurrentOnlineTime(startTime));
         }, 1000);
@@ -95,7 +97,7 @@ export const CurrentEmployeeAccount = () => {
                         <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                         <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
                         <div className="w-full text-center mt-4">
-                            <button onClick={async () => { await updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md m">
+                            <button onClick={async () => { await updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); navigate('/'); notifyExit() }} className="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 text-lg rounded-md transition ease-out hover:ease-in">
                                 Закінчити робочу зміну
                                 <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                             </button>
@@ -144,7 +146,7 @@ export const CurrentEmployeeAccount = () => {
                                 setPriority('');
                                 addNeedToRestaurant(restaurantId, user.name, wishesAreaText, now.split(', ')[1], now.split(', ')[0], priority);
                                 setWishesAreaText('');
-                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed"><img className="w-10" src={Send} alt="" /></button>
+                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in"><img className="w-10" src={Send} alt="" /></button>
                             <Toaster
                                 position="top-right"
                                 reverseOrder={false}
@@ -159,7 +161,7 @@ export const CurrentEmployeeAccount = () => {
                                 notify();
                                 addFeedbackToRestaurant(restaurantId, user.name, contactAreaText, now.split(', ')[1], now.split(', ')[0]);
                                 setContactAreaText('');
-                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed"><img className="w-10" src={Send} alt="" /></button>
+                            }} className="p-6 bg-sky-800 hover:bg-sky-900 active:bg-sky-950 rounded-md disabled:bg-sky-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in"><img className="w-10" src={Send} alt="" /></button>
                             <Toaster
                                 position="top-right"
                                 reverseOrder={false}
