@@ -8,19 +8,20 @@ import { fetchOrders } from '../store/slices/orders.slice'
 import { useParams } from 'react-router-dom'
 import { updateWaiterServedTables } from '../actions/employees.actions'
 
+import toast from 'react-hot-toast';
+
 export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
     const [cashInputValue, setCashInputValue] = useState(0);
     const [cardInputValue, setCardInputValue] = useState(0);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('cash');
-
     const {restaurantId} = useParams();
-
     const {user} = useSelector(state => state.user)
-
-    console.log(user.workingTime.filter(item => item.entries.end === null)[0].entries.start);
-
     const dispatch = useDispatch();
+
+    const notifySuccess = () => {
+        toast.success('Замовлення успішно закрито!');
+    };
 
     return (
         <div className='flex justify-center'>
@@ -82,6 +83,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                 await closeOrder(restaurantId, currentOrder._id);
                                 await updateWaiterServedTables(user._id, user.workingTime.filter(item => item.entries.end === null)[0].entries.start);
                                 setOpenPayOrder(false);
+                                notifySuccess();
                                 dispatch(fetchOrders(restaurantId));
                             }} disabled={cardInputValue < 0 || cashInputValue < 0 || (cardInputValue + cashInputValue) < getTotalOrderValue(currentOrder)} className='bg-teal-600 px-6 py-4 text-2xl font-medium hover:bg-teal-700 rounded-md disabled:bg-teal-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in'>Сплатити замовлення</button>
                         </div>

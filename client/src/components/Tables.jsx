@@ -8,6 +8,7 @@ import { fetchOrders } from '../store/slices/orders.slice';
 // import { fetchMenuItems } from "../store/slices/menuItemsSlice";
 import { useParams } from "react-router-dom";
 import { NewOrderModal } from './NewOrderModal';
+import { Toaster } from 'react-hot-toast';
 
 export const Tables = () => {
 
@@ -68,6 +69,10 @@ export const Tables = () => {
 
     return (
         <div className='h-screen'>
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
             {openNewOrderMenu ? <Modal>
                 <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} openPayOrder={openPayOrder} currentTable={currentTable} />
             </Modal> : null}

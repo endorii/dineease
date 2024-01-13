@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "./Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import { logout } from "../store/slices/user.slice";
-import {  updateEmployeeStartWorkingTime } from "../actions/employees.actions";
+import { updateEmployeeStartWorkingTime } from "../actions/employees.actions";
+import toast from 'react-hot-toast';
 
 export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
 
@@ -16,6 +17,10 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
 
     const currentDate = now.split(', ')[0];
     const currentTime = now.split(', ')[1];
+
+    const notifySuccess = () => {
+        toast.success('Ви успішно розпочали зміну!');
+    };
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -41,12 +46,11 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
                                         setOpen(false)
                                     }}>Ні</button>
                                     <div>
-                                        <button onClick={async () => {
+                                        <button onClick={() => {
+                                            notifySuccess();
                                             updateEmployeeStartWorkingTime(employee._id, currentDate, currentTime);
                                             setOpen(false);
-                                            setTimeout(() => {
-                                                navigate(`/${restaurantId}/${position}/panel/orders`);
-                                            }, 1000);
+                                            navigate(`/${restaurantId}/${position}/panel/orders`);
                                         }} className="flex items-center bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in">Так</button>
 
                                     </div>
@@ -66,3 +70,7 @@ export const NumPadWelcomeModal = ({ setOpen, employee, setEmployee }) => {
         </Modal>
     )
 }
+
+
+
+

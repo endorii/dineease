@@ -1,16 +1,3 @@
-// import Dinners from "../assets/img/dinners.jpg";
-// import Coctailes from "../assets/img/coctaіles.jpg";
-// import Pasta from "../assets/img/pasta.jpg";
-// import Salades from "../assets/img/salades.jpg";
-// import Tea from "../assets/img/tea.jpg";
-// import Coffee from "../assets/img/coffee.jpg";
-// import Pizza from "../assets/img/pizza.jpg";
-// import ColdDrinks from "../assets/img/coldDrinks.jpg";
-// import Sirniki from "../assets/img/sirniki.jpg";
-// import Oladki from "../assets/img/oladki.jpg";
-// import Mlintsi from "../assets/img/mlintsi.jpg";
-// import Egg from "../assets/img/egg.jpg";
-// import Vareniki from "../assets/img/vareniki.jpg";
 import Test from '../../src/assets/img/test.jpg'
 import Close from '../assets/svg/close.svg'
 import Time from '../assets/svg/time.svg'
@@ -23,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import { configureOrder, getTotalInsideOrderValue } from '../functions';
 import { fetchOrders } from '../store/slices/orders.slice';
 
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     const [guests, setGuests] = useState([]);
@@ -31,7 +18,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     const [currentGuest, setCurrentGuest] = useState({});
 
     const notifySuccess = () => {
-        toast.success('Successfully sent to the kitchen!');
+        toast.success('Замовлення успішно відправлено на кухню!');
     };
 
     const { user } = useSelector(state => state.user)
@@ -101,12 +88,20 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                     <div className="p-5 flex flex-col gap-y-3 items-start">
                                         {guests.map((guest, i) => {
                                             return (
-                                                <div key={i} className={`bg-white w-full rounded-lg px-3 py-3 cursor-pointer ${currentGuest === guest ? 'border-4 border-sky-800' : null}`} onClick={() => setCurrentGuest(guest)}>
+                                                <div
+                                                    key={i}
+                                                    className={`bg-white w-full rounded-lg px-3 py-3 cursor-pointer ${currentGuest.id === guest.id ? 'border-4 border-sky-800' : ''}`} onClick={() => setCurrentGuest(guest)}>
                                                     <div className='flex justify-between px-4 py-2 items-center'>
                                                         <div className="text-lg font-bold">Гість {guest.id}</div>
-                                                        <button className="text-lg font-bold px-4 py-2 bg-yellow-700 text-white rounded-xl" onClick={() => { removeGuest(guest.id) }}>
+                                                        <button
+                                                            className="text-lg font-bold px-4 py-2 bg-yellow-700 hover:bg-yellow-800 text-white rounded-xl transition ease-out hover:ease-in"
+                                                            onClick={() => {
+                                                                removeGuest(guest.id);
+                                                            }}
+                                                        >
                                                             <img className='w-8 h-8' src={Trash} alt="" />
                                                         </button>
+
                                                     </div>
                                                     <div className='flex justify-center mb-4'>
                                                         <hr className='w-full' />
@@ -138,12 +133,12 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                 </div>
                                 <div className="flex flex-col gap-3 m-7 rounded-lg">
                                     <div className="flex justify-center bg-white px-7 py-5 rounded-lg">
-                                        <button onClick={ () => {
+                                        <button disabled={(!guests.every((order) => order.orderInfo[0])) || !guests.length} onClick={() => {
                                             notifySuccess();
                                             configureOrder(restaurantId, guests, currentTable, user._id);
                                             setOpenNewOrderMenu(false);
                                             dispatch(fetchOrders(restaurantId));
-                                        }} className="w-full bg-teal-700 p-3 rounded-lg text-white font-medium">
+                                        }} className="w-full bg-teal-700 hover:bg-teal-800 p-3 rounded-lg text-white font-medium transition ease-out hover:ease-in disabled:bg-teal-900/40 disabled:cursor-not-allowed">
                                             Відправити на кухню
                                         </button>
                                     </div>
@@ -157,16 +152,17 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                             </div>
                             <div className="flex-1 bg-white px-10 py-5 overflow-x-auto">
                                 <div className="">
-                                    <button onClick={() => {
+                                    <button disabled={currentCategoryFood === ""} onClick={() => {
                                         setCurrentCategoryFood('')
-                                    }} className="text-lg font-medium mb-10 bg-teal-600/20 px-5 py-2 rounded-xl hover:bg-teal-500/20">Назад</button>
+                                    }} className="text-lg text-white font-medium mb-10 bg-teal-700 px-5 py-2 rounded-xl hover:bg-teal-800 disabled:cursor-not-allowed disabled:bg-teal-900/40 transition ease-out hover:ease-in">Назад</button>
                                 </div>
                                 <div className="">
                                     <ul className="flex flex-wrap gap-10 justify-center">
                                         {currentCategoryFood ? (
                                             filteredDishes(currentCategoryFood).length > 0 ? (
                                                 filteredDishes(currentCategoryFood).map((dish, i) => (
-                                                    <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer" onClick={() => { selectFoodForGuest(currentGuest, dish) }}>
+                                                    <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer"
+                                                        onClick={() => { if (Object.keys(currentGuest).length !== 0) { selectFoodForGuest(currentGuest, dish) } }}>
                                                         <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={dish.name} />
                                                         <div className="font-thin px-4 py-2 text-xl">{dish.name}</div>
                                                         <div className="flex justify-between">
