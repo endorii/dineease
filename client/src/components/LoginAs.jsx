@@ -50,7 +50,6 @@ export const LoginAs = () => {
                             </li>
                         ) : <div>Нічого не знайдено</div>}
                     </ul>}
-
             </div>
         </div>
     )

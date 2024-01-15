@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Delete from '../assets/svg/delete.svg'
+import Enter from '../assets/svg/enter.svg'
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NumPadWelcomeModal } from "./NumPadWeclomeModal";
 import { loginByPin } from "../actions/user.actions";
-
 
 export const NumberPad = () => {
 
@@ -12,7 +12,6 @@ export const NumberPad = () => {
     const [pinInput, setPinInput] = useState('');
     const [open, setOpen] = useState(false);
     const [employee, setEmployee] = useState({});
-    const { restaurant, position } = useParams();
     const dispatch = useDispatch();
 
     const { employees } = useSelector(state => state.employees)
@@ -46,7 +45,7 @@ export const NumberPad = () => {
                             {number}
                         </button>
                     ))}
-                    <button onClick={() => clearPad()} className="w-1/2 text-center bg-yellow-700 w-24 h-24 text-2xl hover:bg-yellow-800 rounded-lg transition ease-out hover:ease-in">
+                    <button disabled={!pinInput} onClick={() => clearPad()} className="w-1/2 text-center bg-yellow-700 w-24 h-24 text-2xl hover:bg-yellow-800 rounded-lg disabled:bg-yellow-800/30 transition ease-out hover:ease-in">
                         <img className="ml-5 h-12" src={Delete} alt="" />
                     </button>
                     <button onClick={() => handleClick(0)} className="w-1/2 text-center bg-gray-200 w-24 h-24 text-2xl hover:bg-gray-300 rounded-lg transition ease-out hover:ease-in">
@@ -57,7 +56,7 @@ export const NumberPad = () => {
                         setEmployee(employees.filter(employee => employee.pin === pinInput)[0]);
                         setOpen(true)
                     }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-teal-700 text-white w-24 h-24 text-2xl hover:bg-teal-900 font-medium disabled:opacity-25 disabled:hover:bg-teal-900 rounded-lg transition ease-out hover:ease-in">
-                        Go
+                        <img className="ml-5 h-12" src={Enter} alt="" />
                     </button>
                 </div></>}
 
