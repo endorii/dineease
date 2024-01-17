@@ -41,7 +41,7 @@ export const NumberPad = () => {
 
                 <div className="flex flex-wrap justify-center text-sky-900 gap-y-5 gap-x-10">
                     {numbers.map((number) => (
-                        <button key={number} onClick={() => handleClick(number)} className="w-1/4 text-center bg-sky-950/5 w-24 h-24 text-2xl hover:bg-sky-900/10 rounded-lg transition ease-out hover:ease-in">
+                        <button key={number} onClick={() => handleClick(number)} className="w-1/4 text-center bg-sky-950/5 w-24 h-24 text-2xl hover:bg-sky-900/10 rounded-lg transition ease-out hover:ease-in active:bg-sky-900 active:text-white active:ease-in-out">
                             {number}
                         </button>
                     ))}

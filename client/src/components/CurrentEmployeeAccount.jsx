@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import Logout from '../assets/svg/logout.svg'
 import Send from '../assets/svg/send.svg'
-import { logout } from "../store/slices/user.slice"
 import { addFeedbackToRestaurant } from "../actions/feedback.actions"
 import { addNeedToRestaurant } from "../actions/needs.actions"
 
 import toast, { Toaster } from 'react-hot-toast';
-import { updateEmployeeEndWorkingTime } from "../actions/employees.actions"
 import { auth } from "../actions/user.actions"
 import { Modal } from "./Modal"
 import { ExitModal } from "./ExitModal";
@@ -69,7 +67,7 @@ export const CurrentEmployeeAccount = () => {
             {
                 exitModalOpen ?
                     <Modal>
-                        <ExitModal now={now} setExitModalOpen={setExitModalOpen}/>
+                        <ExitModal now={now} setExitModalOpen={setExitModalOpen} />
                     </Modal> : null
             }
             <div className="bg-sky-50 overflow-y-scroll h-[93vh]">

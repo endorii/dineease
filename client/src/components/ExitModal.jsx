@@ -16,7 +16,9 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
 
     const {user} = useSelector(state => state.user);
 
-    const notifyExit = () => toast.success('Ви закінчили робочу зміну!');
+    const notifyExit = () => toast('Good Job!', {
+        icon: 'ℹ️',
+      });
     const notifyInvalid = () => toast.error('Введено невірний пін-код!');
 
     return (
@@ -35,7 +37,7 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
                         <div>
                             <button disabled={!pinInput || pinInput.length < 4} onClick={async () => {
                                 if (pinInput === user.pin) {
-                                    await updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); navigate('/'); notifyExit();
+                                    await updateEmployeeEndWorkingTime(user._id, now.split(', ')[1]); dispatch(logout()); notifyExit(); navigate('/');
                                 } else {
                                     notifyInvalid();
                                 }

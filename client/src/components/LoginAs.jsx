@@ -18,10 +18,6 @@ export const LoginAs = () => {
     const positions = [...new Set(employees.map(employee => employee.position))];
 
     useEffect(() => {
-        dispatch(getEmployeesByRestaurant(restaurantId));
-    }, [])
-
-    useEffect(() => {
         const fetchRestaurant = async () => {
             const restaurant = await getRestaurantById(restaurantId);
             setRestaurantName(restaurant.name);
@@ -29,6 +25,10 @@ export const LoginAs = () => {
 
         fetchRestaurant();
     }, [restaurantId]);
+
+    useEffect(() => {
+        dispatch(getEmployeesByRestaurant(restaurantId));
+    }, [])
 
     return (
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
