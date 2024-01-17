@@ -18,7 +18,7 @@ import { Toaster } from 'react-hot-toast';
 export const Orders = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
     const [openPayOrder, setOpenPayOrder] = useState(false);
-    const [currentOrder, setcurrentOrder] = useState([])
+    const [currentOrder, setCurrentOrder] = useState([])
 
     const dispatch = useDispatch()
 
@@ -85,7 +85,7 @@ export const Orders = () => {
                                             <td className="px-6 py-4">
                                                 <div className="flex justify items-center">
                                                     <div className="mr-7">Нове</div>
-                                                    <button onClick={() => { setcurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-white transition ease-out hover:ease-in'>Оплатити замовлення</button>
+                                                    <button onClick={() => { setCurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-white transition ease-out hover:ease-in'>Оплатити замовлення</button>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 font-medium">

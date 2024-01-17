@@ -15,8 +15,8 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
     const [cashInputValue, setCashInputValue] = useState(0);
     const [cardInputValue, setCardInputValue] = useState(0);
     const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('cash');
-    const {restaurantId} = useParams();
-    const {user} = useSelector(state => state.user)
+    const { restaurantId } = useParams();
+    const { user } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
     const notifySuccess = () => {
@@ -32,7 +32,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
             <div className='absolute flex bg-white shadow-xl w-[95%] z-10 rounded-md mt-10 bg-gray-400'>
                 <div className="flex rounded-xl h-[90vh]">
                     <div className="bg-gray-200 w-[30%] h-full flex items-center">
-                        <PayNumberPad />
+                        <PayNumberPad selectedPaymentMethod={selectedPaymentMethod} setCashInputValue={setCashInputValue} setCardInputValue={setCardInputValue} cashInputValue={cashInputValue} cardInputValue={cardInputValue} />
                     </div>
                     <div className="flex-1 flex flex-col bg-white px-32 py-10 justify-between">
                         <div>
@@ -47,7 +47,9 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💵 Готівкою</p>
                                             <div className='flex'>
-                                                <input onChange={(e) => { setCashInputValue(e.target.value) }} value={cashInputValue} className='w-auto text-right px-1 text-4xl focus:outline-none' type="number" />
+                                                <input onClick={() => {if (cashInputValue <= 0) {
+                                                        setCashInputValue('')
+                                                    }}} onChange={(e) => { setCashInputValue(e.target.value) }} value={cashInputValue} className='w-auto text-right px-1 text-4xl focus:outline-none' type="number" />
                                                 <p className='text-4xl'>₴</p>
                                             </div>
                                         </div>
@@ -56,7 +58,9 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                         <div className='flex w-full justify-between items-center'>
                                             <p>💳 Карткою</p>
                                             <div className='flex'>
-                                                <input onChange={(e) => { setCardInputValue(e.target.value) }} value={cardInputValue} className='text-right text-4xl px-1 focus:outline-none' type="number" />
+                                                <input onClick={() => {if (cardInputValue <= 0) {
+                                                        setCardInputValue('')
+                                                    }}} onChange={(e) => { setCardInputValue(e.target.value) }} value={cardInputValue} className='text-right text-4xl px-1 focus:outline-none' type="number" />
                                                 <p className='text-4xl'>₴</p>
                                             </div>
                                         </div>
@@ -85,7 +89,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                 setOpenPayOrder(false);
                                 notifySuccess();
                                 dispatch(fetchOrders(restaurantId));
-                            }} disabled={cardInputValue < 0 || cashInputValue < 0 || (cardInputValue + cashInputValue) < getTotalOrderValue(currentOrder)} className='bg-teal-600 px-6 py-4 text-2xl font-medium hover:bg-teal-700 rounded-md disabled:bg-teal-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in'>Сплатити замовлення</button>
+                            }} disabled={(Number(cardInputValue) + Number(cashInputValue)) < getTotalOrderValue(currentOrder)} className='bg-teal-600 px-6 py-4 text-2xl font-medium hover:bg-teal-700 rounded-md disabled:bg-teal-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in'>Сплатити замовлення</button>
                         </div>
                     </div>
                 </div>
