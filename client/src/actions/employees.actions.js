@@ -11,17 +11,19 @@ export const addEmployee = async (name, age, restaurantId, experience, position,
     }
 };
 
-export const getEmployeesByRestaurant = (restaurantId) =>
-    async (dispatch) => {
+export const getEmployeesByRestaurant = (restaurantId) => {
+    return async (dispatch) => {
         try {
             const response = await axios.get(`http://localhost:5000/api/employees/${restaurantId}`);
-            dispatch(setEmployeesByRestaurant(response.data.employees));
-            return response.data.employees;
+            const employees = response.data.employees;
+
+            dispatch(setEmployeesByRestaurant(employees))
+            return employees;
         } catch (e) {
             console.log(e.response.data.message);
         }
-    };
-
+    }
+}
 
 export const editEmployee = async (_id, name, age, restaurantId, experience, position, salary, password, email, pin) => {
     try {
@@ -66,7 +68,7 @@ export const updateEmployeeEndWorkingTime = async (employeeId, endTime) => {
 
 export const updateWaiterServedTables = async (employeeId, startTime) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateWaiterServedTables`, { startTime });
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateWaiterServedTables`, {startTime});
         console.log(response.data.message);
         return response.data
     } catch (e) {

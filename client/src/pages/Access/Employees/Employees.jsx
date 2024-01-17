@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom';
 import { AddButton } from '../../../ui/buttons/AddButton';
 import { Modal } from '../../../components/Modal';
 import EditEmployee from './EditEmployee';
-import { fetchEmployees } from '../../../store/slices/employees.slice';
 // import { deleteEmployee } from './employee';
 // import EditEmployee from './EditEmployee';
 // import { Modal } from '../../../../components/Modal';
@@ -27,7 +26,7 @@ const Employees = () => {
     const { employees } = useSelector(state => state.employees);
 
     useEffect(() => {
-        dispatch(fetchEmployees(restaurantId));
+        dispatch(getEmployeesByRestaurant(restaurantId));
     }, []);
 
     return (
@@ -102,16 +101,16 @@ const Employees = () => {
                                         <button onClick={async () => {
                                             setCurrentEmployee(employee)
                                             setEditEmployeeModalOpen(true);
-                                            dispatch(fetchEmployees(restaurantId));
+                                            dispatch(getEmployeesByRestaurant(restaurantId));
                                         }}
 
-                                        className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
+                                        className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10">Редагувати</button>
                                     </td>
                                     <td className="px-2 py-1 text-left">
                                         <button onClick={async () => {
                                             await deleteEmployee(employee._id); 
-                                            dispatch(fetchEmployees(restaurantId));
-                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in">Видалити</button>
+                                            dispatch(getEmployeesByRestaurant(restaurantId));
+                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10">Видалити</button>
                                     </td>
                                 </tr>
                             </tbody>

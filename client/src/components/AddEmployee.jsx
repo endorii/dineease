@@ -159,7 +159,7 @@ const AddEmployee = ({ setOpen }) => {
     }
 
     useEffect(() => {
-        dispatch(getEmployeesByRestaurant(restaurantId))
+        dispatch(fetchEmployees(restaurantId))
     }, []);
 
     useEffect(() => {
@@ -175,7 +175,7 @@ const AddEmployee = ({ setOpen }) => {
         <div className='flex justify-center '>
             <div className='absolute bg-white shadow-xl w-[60%] h-auto z-10 rounded-md mt-16'>
                 <div className='flex flex-col items-center mx-3 gap-3'>
-                    <img className="absolute top-2 right-2 w-12 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
+                    <img className="absolute top-2 right-2 w-8 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
                     <span className='text-center text-3xl mt-6 text-sky-900 font-semibold'>Ведіть дані нового працівника</span>
                     <ul className='flex justify-center w-[60%] m-10 gap-10 text-sky-900'>
                         <div className="flex flex-col gap-5 w-full">
@@ -303,7 +303,7 @@ const AddEmployee = ({ setOpen }) => {
                         </div>
                     </ul>
 
-                    <button disabled={nameError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                    <button disabled={nameError || ageError || pinError || experienceError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
                             setOpen(false);
                             await addEmployee(name,

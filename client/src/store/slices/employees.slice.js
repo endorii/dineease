@@ -10,7 +10,7 @@ const initialState = {
 export const fetchEmployees = createAsyncThunk(
     "employees/fetchEmployees",
     async (restaurantId) => {
-        const response = getEmployeesByRestaurant(restaurantId);
+        const response = await getEmployeesByRestaurant(restaurantId);
         return response;
     }
 )
