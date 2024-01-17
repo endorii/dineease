@@ -6,16 +6,17 @@ import { useParams } from "react-router-dom";
 import { fetchEmployees } from "../../../store/slices/employees.slice";
 import { editEmployee } from "../../../actions/employees.actions";
 import Close from '../../../assets/svg/close.svg';
+import { getRestaurantById } from "../../../actions/restaurants.actions";
 // import { fetchEmployees } from "../../../../store/slices/employeesSlice";
 
 const EditEmployee = ({ setOpen, currentEmployee }) => {
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const [_id, setId] = useState(currentEmployee._id);
     const [name, setName] = useState(currentEmployee.name);
     const [age, setAge] = useState(currentEmployee.age);
-    const [restaurantName, setRestaurantName] = useState(`${restaurant}`);
+    const [restaurantName, setRestaurantName] = useState(currentEmployee.restaurant);
     const [experience, setExperience] = useState(currentEmployee.experience);
     const [position, setPosition] = useState(currentEmployee.position);
     const [salary, setSalary] = useState(currentEmployee.salary);
@@ -199,12 +200,20 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
         }
     }, []);
 
+    useEffect(() => {
+        const fetchRestaurant = async () => {
+            const restaurant = await getRestaurantById(restaurantId);
+            setRestaurantName(restaurant.name);
+        };
+
+        fetchRestaurant();
+    }, [restaurantId]);
 
     return (
         <div className='flex justify-center '>
             <div className='absolute bg-white shadow-xl w-1/2 h-auto z-10 rounded-md mt-16'>
                 <div className='flex flex-col items-center mx-3 gap-3'>
-                    <img className="absolute top-2 right-2 w-12 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
+                    <img className="absolute top-2 right-2 w-8 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
                     <span className='text-center text-2xl mt-6 font-semibold'>Змінити дані працівника</span>
                     <ul className='flex justify-center w-[60%] m-10 gap-10 text-sky-900'>
                         <div className="flex flex-col gap-5 w-full">
@@ -332,7 +341,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                         </div>
                     </ul>
 
-                    <button disabled={nameError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                    <button disabled={nameError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
                             setOpen(false);
                             await editEmployee(_id,
@@ -345,7 +354,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                                 password,
                                 email,
                                 pin);
-                            dispatch(fetchEmployees());
+                            dispatch(fetchEmployees(restaurantId));
                         }}
 
                     >Підтвердити
