@@ -2,7 +2,7 @@ import Plus from '../../../assets/svg/plus.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AddEmployee from '../../../components/AddEmployee';
-import { deleteEmployee } from '../../../actions/employees.actions';
+import { deleteEmployee, getEmployeesByRestaurant} from '../../../actions/employees.actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
@@ -105,13 +105,13 @@ const Employees = () => {
                                             dispatch(fetchEmployees(restaurantId));
                                         }}
 
-                                        className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10">Редагувати</button>
+                                        className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
                                     </td>
                                     <td className="px-2 py-1 text-left">
                                         <button onClick={async () => {
                                             await deleteEmployee(employee._id); 
                                             dispatch(fetchEmployees(restaurantId));
-                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10">Видалити</button>
+                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in">Видалити</button>
                                     </td>
                                 </tr>
                             </tbody>

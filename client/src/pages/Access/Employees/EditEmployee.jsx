@@ -11,7 +11,7 @@ import { getRestaurantById } from "../../../actions/restaurants.actions";
 
 const EditEmployee = ({ setOpen, currentEmployee }) => {
 
-    const { restaurant } = useParams();
+    const { restaurantId } = useParams();
 
     const [_id, setId] = useState(currentEmployee._id);
     const [name, setName] = useState(currentEmployee.name);
@@ -45,8 +45,6 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [pinError, setPinError] = useState('Поле не може бути пустим');
 
     const dispatch = useDispatch();
-
-    const { restaurantId } = useParams();
 
     const handleName = (e) => {
         setName(e.target.value);
@@ -202,7 +200,6 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
         }
     }, []);
 
-
     useEffect(() => {
         const fetchRestaurant = async () => {
             const restaurant = await getRestaurantById(restaurantId);
@@ -211,6 +208,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
 
         fetchRestaurant();
     }, [restaurantId]);
+
     return (
         <div className='flex justify-center '>
             <div className='absolute bg-white shadow-xl w-1/2 h-auto z-10 rounded-md mt-16'>
@@ -343,7 +341,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                         </div>
                     </ul>
 
-                    <button disabled={nameError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                    <button disabled={nameError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
                             setOpen(false);
                             await editEmployee(_id,
@@ -356,7 +354,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                                 password,
                                 email,
                                 pin);
-                            dispatch(fetchEmployees());
+                            dispatch(fetchEmployees(restaurantId));
                         }}
 
                     >Підтвердити

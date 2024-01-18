@@ -36,7 +36,11 @@ router.post('/employees',
                 return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${email} вже існує` })
             }
 
-            const employeeData = { name, age, restaurant: restaurantId, experience, position, salary, email };
+            const employeeData = { name, age, restaurant: restaurantId, experience, position, salary };
+
+            if (email) {
+                employeeData.email = email;
+            }
 
             if (password) {
                 employeeData.password = password;
@@ -167,7 +171,6 @@ router.put('/employees/:employeeId/updateWaiterServedTables', async (req, res) =
 
         const employee = await Employee.findOne({ _id: employeeId, 'workingTime.entries.end': null });
 
-        // Перевірте, чи знайдено співробітника
         if (!employee) {
             return res.status(404).json({ message: `Employee with id ${employeeId} not found or end time already set` });
         }
