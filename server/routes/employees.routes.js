@@ -28,7 +28,6 @@ router.get('/employees/:restaurantId',
 router.post('/employees',
     async (req, res) => {
         try {
-
             const { name, age, restaurantId, experience, position, salary, password, email, pin } = req.body;
 
             const candidate = await Employee.findOne({ pin: pin });
@@ -37,7 +36,17 @@ router.post('/employees',
                 return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${email} вже існує` })
             }
 
-            const employee = new Employee({ name, age, restaurant: restaurantId, experience, position, salary, password, email, pin });
+            const employeeData = { name, age, restaurant: restaurantId, experience, position, salary, email };
+
+            if (password) {
+                employeeData.password = password;
+            }
+
+            if (pin) {
+                employeeData.pin = pin;
+            }
+
+            const employee = new Employee(employeeData);
 
             await employee.save();
 
@@ -48,7 +57,8 @@ router.post('/employees',
             res.send({ message: "Помилка сервера" })
         }
     }
-);
+)
+
 
 router.put('/employees/:_id', authMiddleware,
     async (req, res) => {
@@ -56,9 +66,19 @@ router.put('/employees/:_id', authMiddleware,
             const { _id } = req.params;
             const { name, age, restaurantName, experience, position, salary, password, email, pin } = req.body;
 
+            const employeeData = { user: req.user.id, name, age, restaurantName, experience, position, salary, email };
+
+            if (password) {
+                employeeData.password = password;
+            }
+
+            if (pin) {
+                employeeData.pin = pin;
+            }
+
             const updatedEmployee = await Employee.findOneAndUpdate(
                 { _id },
-                { user: req.user.id, name, age, restaurantName, experience, position, salary, password, email, pin },
+                employeeData,
                 { new: true }
             );
 
@@ -71,7 +91,9 @@ router.put('/employees/:_id', authMiddleware,
             console.log(e);
             res.send({ message: "Server error" });
         }
-    });
+    }
+)
+
 
 router.delete('/employees/:_id', authMiddleware,
     async (req, res) => {

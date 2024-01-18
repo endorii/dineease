@@ -6,6 +6,7 @@ import { addEmployee, getEmployeesByRestaurant } from "../actions/employees.acti
 import { useParams } from "react-router-dom";
 import Close from '../assets/svg/close.svg';
 import { getRestaurantById } from "../actions/restaurants.actions";
+import { fetchRestaurants } from "../store/slices/restaurant.slice";
 
 const AddEmployee = ({ setOpen }) => {
 
@@ -316,7 +317,7 @@ const AddEmployee = ({ setOpen }) => {
                                 email,
                                 pin);
 
-                            dispatch(getEmployeesByRestaurant(restaurantId));
+                            dispatch(fetchRestaurants(restaurantId));
                         }}
                     >Підтвердити
                     </button>

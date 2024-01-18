@@ -35,11 +35,12 @@ router.post('/loginByPass/:restaurantId',
     }
 )
 
-router.post('/loginByPin', 
+router.post('/loginByPin/:restaurantId', 
     async (req, res) => {
         try {
             const {pin} = req.body;
-            const user = await Employee.findOne({pin});
+            const {restaurantId} = req.params;
+            const user = await Employee.findOne({pin, restaurant: restaurantId});
 
             if (!user) {
                 return res.status(404).json({message: 'Користувача не знайдено'})

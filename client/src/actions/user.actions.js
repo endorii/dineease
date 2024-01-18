@@ -1,24 +1,31 @@
 import axios from 'axios';
 import { setUser } from '../store/slices/user.slice';
+import toast, { Toaster } from 'react-hot-toast';
 
-export const loginByPass = (restaurantId, email, password) => {
+const notifyError = (message) => toast.error(message);
+const notifySuccess = (message) => toast.success(message);
+
+export const loginByPass = (restaurantId, email, password, routeChange) => {
     return async dispatch => {
         try {
             const response = await axios.post(`http://localhost:5000/api/auth/loginByPass/${restaurantId}`, {email, password});
             dispatch(setUser(response.data.employee));
             localStorage.setItem('token', response.data.token);
+            routeChange();
+            notifySuccess(response.data.message)
             console.log(response.data.message);
 
         } catch (e) {
+            notifyError(e.response.data.message)
             console.log(e.response.data.message);
         }       
     }
 }
 
-export const loginByPin = (pin) => {
+export const loginByPin = (restaurantId, pin) => {
     return async dispatch => {
         try {
-            const response = await axios.post("http://localhost:5000/api/auth/loginByPin", {pin});
+            const response = await axios.post(`http://localhost:5000/api/auth/loginByPin/${restaurantId}`, {pin});
             dispatch(setUser(response.data.employee));
             localStorage.setItem('token', response.data.token);
             console.log(response.data.message);

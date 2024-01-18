@@ -9,7 +9,7 @@ import { auth } from "../actions/user.actions";
 export const WaiterLogin = () => {
 
     const dispatch = useDispatch();
-    const {restaurantId, position} = useParams();
+    const {restaurantId} = useParams();
 
     useEffect(() => {
         dispatch(getEmployeesByRestaurant(restaurantId));

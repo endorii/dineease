@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { GoBackButton } from "../ui/buttons/GoBackButton";
 import { auth, loginByPass } from "../actions/user.actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 
 export const AdminAndAccountantLogin = () => {
 
@@ -14,10 +15,11 @@ export const AdminAndAccountantLogin = () => {
 
     const dispatch = useDispatch();
 
-    const {restaurantId, position} = useParams();
+    const { restaurantId, position } = useParams();
 
     const [emailError, setEmailError] = useState("Email не може бути пустим");
     const [passwordError, setPasswordError] = useState("Пароль не може бути пустим");
+
 
 
     const emailHandler = (e) => {
@@ -52,6 +54,10 @@ export const AdminAndAccountantLogin = () => {
         }
     }
 
+    const routeChange = () => {
+        return navigate(`/${restaurantId}/${position}/panel`);
+    }
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -60,7 +66,10 @@ export const AdminAndAccountantLogin = () => {
 
     return (
         <div className="flex flex-row justify-center px-6 py-12 lg:px-8 text-sky-900">
-
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
             <GoBackButton />
             <div className="w-full">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -115,10 +124,9 @@ export const AdminAndAccountantLogin = () => {
 
                         <div>
                             <button
-                                onClick={async (e) => {
+                                onClick={(e) => {
                                     e.preventDefault();
-                                    dispatch(loginByPass(restaurantId, email, password));
-                                    navigate(`/${restaurantId}/${position}/panel`)
+                                    dispatch(loginByPass(restaurantId, email, password, routeChange));
                                 }
                                 }
                                 disabled={emailError || passwordError}

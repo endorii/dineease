@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getEmployeesByRestaurant } from "../actions/employees.actions";
 import { Loader } from "./Loader";
 import { getRestaurantById } from "../actions/restaurants.actions";
+import { fetchEmployees } from "../store/slices/employees.slice";
 
 export const LoginAs = () => {
 
@@ -27,7 +28,7 @@ export const LoginAs = () => {
     }, [restaurantId]);
 
     useEffect(() => {
-        dispatch(getEmployeesByRestaurant(restaurantId));
+        dispatch(fetchEmployees(restaurantId));
     }, [])
 
     return (

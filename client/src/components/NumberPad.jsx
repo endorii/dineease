@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Delete from '../assets/svg/delete.svg'
 import Enter from '../assets/svg/enter.svg'
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { NumPadWelcomeModal } from "./NumPadWeclomeModal";
 import { loginByPin } from "../actions/user.actions";
+import { useParams } from "react-router-dom";
 
 export const NumberPad = () => {
 
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     const [pinInput, setPinInput] = useState('');
     const [open, setOpen] = useState(false);
-    const [employee, setEmployee] = useState({});
     const dispatch = useDispatch();
 
-    const { employees } = useSelector(state => state.employees)
+    const {restaurantId} = useParams();
 
     const handleClick = (number) => {
         if (pinInput.length < 4) {
@@ -28,7 +27,7 @@ export const NumberPad = () => {
 
     return (
         <>
-            {open ? <NumPadWelcomeModal setOpen={setOpen} employee={employee} setEmployee={setEmployee} /> : <>
+            {open ? <NumPadWelcomeModal setOpen={setOpen}/> : <>
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 className="mt-5 text-center text-sky-900 text-3xl font-bold">
                         Введіть пін-код
@@ -52,8 +51,7 @@ export const NumberPad = () => {
                         0
                     </button>
                     <button onClick={async () => {
-                        dispatch(loginByPin(pinInput));
-                        setEmployee(employees.filter(employee => employee.pin === pinInput)[0]);
+                        dispatch(loginByPin(restaurantId, pinInput));
                         setOpen(true)
                     }} disabled={pinInput.length < 4} className="w-1/2 text-center bg-teal-700 text-white w-24 h-24 text-2xl hover:bg-teal-900 font-medium disabled:opacity-25 disabled:hover:bg-teal-900 rounded-lg transition ease-out hover:ease-in">
                         <img className="ml-5 h-12" src={Enter} alt="" />

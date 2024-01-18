@@ -16,7 +16,7 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
 
     const {user} = useSelector(state => state.user);
 
-    const notifyExit = () => toast('Good Job!', {
+    const notifyExit = () => toast('Робочу зміну закінчено.', {
         icon: 'ℹ️',
       });
     const notifyInvalid = () => toast.error('Введено невірний пін-код!');

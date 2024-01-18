@@ -8,6 +8,7 @@ import Settings from '../assets/svg/settings.svg';
 import User from '../assets/svg/user.svg';
 import { NavLink, Outlet } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
+import toast, { Toaster } from 'react-hot-toast';
 
 const NestedItem = ({ item }) => (
     <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-sky-100">
@@ -125,6 +126,10 @@ const Account = () => {
 
     return (
         <div className="fixed flex w-screen h-screen">
+            <Toaster
+                position="top-right"
+                reverseOrder={false}
+            />
             <aside className={menuOpen ? " text-white w-[270px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
