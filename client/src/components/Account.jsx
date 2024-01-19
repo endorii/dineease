@@ -34,7 +34,7 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
     }, [menuOpen]);
 
     return (
-        <li className="">
+        <li className="hover:bg-sky-900/30 hover:shadow-md py-2 transition ease-out hover:ease-in rounded-md">
             <div className='cursor-pointer' onClick={() => setMenuOpen(true)}>
                 <img src={icon} alt="" className='inline w-6' />
 
@@ -84,10 +84,10 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
         },
 
         {
-            title: "Налаштування", icon: Settings, children:
+            title: "Аккаунт", icon: Settings, children:
                 [
-                    { title: "Загальні", path: "general" },
-                    { title: "Аккаунт", path: "account" },
+                    { title: "Налаштування", path: "settings" },
+                    { title: "Інформація", path: "information" },
                     // { title: "Сповіщення", path: "notifications" },
                 ]
         }
@@ -104,7 +104,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                     </AccordionItem>
                 ))}
             </ul>
-            <button className='transition ease-in-out border-t-2 w-full flex justify-center hover:bg-sky-900/70 hover:border-x-2 hover:border-b-2' onClick={() => setMenuOpen(true)}>
+            <button className='border-b-2' onClick={() => setMenuOpen(true)}>
                 <div className='text-black p-3 flex items-center'>
                     <div>
                         <img className='w-8' src={User} alt="" />

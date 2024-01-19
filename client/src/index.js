@@ -39,8 +39,8 @@ const router = createBrowserRouter(
                 <Route path='positions' element={<Checks />} />
                 <Route path='feedback' element={<Feedback />} />
                 <Route path='needs' element={<Needs />} />
-                <Route path='general' element={<Checks />} />
-                <Route path='account' element={<UserAccount />} />
+                <Route path='settings' element={<Checks />} />
+                <Route path='information' element={<UserAccount />} />
 
             </Route>
             <Route path=':restaurantId/Accountant/panel' element={<Account />}>
