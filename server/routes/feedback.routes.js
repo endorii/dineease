@@ -33,4 +33,22 @@ router.post('/feedback/:restaurantId',
         }
     })
 
+router.delete('/feedback/:restaurantId/:messageId',
+    async (req, res) => {
+        try {
+            const { restaurantId, messageId } = req.params;
+            const message = await Feedback.findOneAndDelete({ restaurant: restaurantId, _id: messageId });
+
+            if (!message) {
+                return res.status(404).json({ message: `Message with id ${messageId} not found` });
+            }
+
+            return res.json({ message: 'Повідомлення було видалено' });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    })
+
 module.exports = router;
