@@ -1,19 +1,13 @@
 import { useEffect } from 'react';
 import Logout from '../assets/svg/logout.svg';
-// import { logout } from '../store/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { logout } from '../store/slices/user.slice';
 import { useNavigate } from 'react-router-dom';
-// import { useNavigate } from 'react-router-dom';
 
 const UserAccount = () => {
 
     const dispatch = useDispatch();
-
-    // const navigate = useNavigate();
-    // const { name, phone, email, company } = useSelector(state => state.user.user)
-    // const token = localStorage.getItem("token");
 
     const { user } = useSelector(state => state.user);
     const token = localStorage.getItem("token");
@@ -33,7 +27,6 @@ const UserAccount = () => {
             return `${experience} років`;
         }
     }
-
 
     useEffect(() => {
         if (!token) {
@@ -79,7 +72,6 @@ const UserAccount = () => {
                 </div>
 
                 <div className='flex gap-5'>
-
                     <div className='bg-white shadow-xl p-10 rounded-xl min-w-[60%] h-auto'>
                         <div>
                             <div className=''>
@@ -148,9 +140,7 @@ const UserAccount = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     )
 }

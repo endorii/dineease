@@ -3,8 +3,8 @@ import { GoBackButton } from '../ui/buttons/GoBackButton';
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getEmployeesByRestaurant } from "../actions/employees.actions";
 import { auth } from "../actions/user.actions";
+import { fetchEmployees } from "../store/slices/employees.slice";
 
 export const WaiterLogin = () => {
 
@@ -12,7 +12,7 @@ export const WaiterLogin = () => {
     const {restaurantId} = useParams();
 
     useEffect(() => {
-        dispatch(getEmployeesByRestaurant(restaurantId));
+        dispatch(fetchEmployees(restaurantId));
         dispatch(auth());
     }, [])
 

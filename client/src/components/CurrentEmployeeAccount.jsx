@@ -110,15 +110,15 @@ export const CurrentEmployeeAccount = () => {
                             <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
                                 <div className="flex flex-col w-full">
                                     <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
-                                    <div className="flex justify-around items-center text text-xl font-medium my-3">
+                                    <div className="flex justify-around items-center text text-xl font-medium my-3 h-auto">
                                         <div className="flex items-center gap-3 bg-sky-500 text-white px-5 py-2 rounded-md">
-                                            <input value="low" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />LOW
+                                            <input value="Не терміново" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Не терміново
                                         </div>
                                         <div className="flex items-center gap-3 bg-sky-700 text-white px-5 py-2 rounded-md">
-                                            <input value="medium" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />MEDIUM
+                                            <input value="Терміново" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Терміново
                                         </div>
                                         <div className="flex items-center gap-3 bg-sky-900 text-white px-5 py-2 rounded-md">
-                                            <input value="high" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />HIGH
+                                            <input value="Дуже терміново" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Дуже терміново
                                         </div>
                                     </div>
 

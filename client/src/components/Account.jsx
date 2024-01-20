@@ -104,7 +104,7 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                     </AccordionItem>
                 ))}
             </ul>
-            <button className='border-b-2' onClick={() => setMenuOpen(true)}>
+            <button onClick={() => setMenuOpen(true)}>
                 <div className='text-black p-3 flex items-center'>
                     <div>
                         <img className='w-8' src={User} alt="" />
