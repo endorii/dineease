@@ -37,3 +37,28 @@ export const configureOrder = (restaurantId, guests, currentTable, waiterId) => 
     }
     addOrdersToRestaurant(restaurantId, order.items, order.date, order.time, order.tableNumber, order.waiter);
 }
+
+export const formatDateString = (inputDate) => {
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+
+    const [day, month, year] = inputDate.split('.').map(Number);
+    const date = new Date(year, month - 1, day);
+    
+    if (
+        date.getDate() === today.getDate() &&
+        date.getMonth() === today.getMonth() &&
+        date.getFullYear() === today.getFullYear()
+    ) {
+        return "Сьогодні";
+    } else if (
+        date.getDate() === yesterday.getDate() &&
+        date.getMonth() === yesterday.getMonth() &&
+        date.getFullYear() === yesterday.getFullYear()
+    ) {
+        return "Вчора";
+    } else {
+        return date.toLocaleDateString("uk-UA", { day: "numeric", month: "numeric", year: "numeric" });
+    }
+};
