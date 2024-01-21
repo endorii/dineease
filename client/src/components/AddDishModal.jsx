@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Close from '../assets/svg/close.svg'
+import { useParams } from 'react-router-dom';
+import { fetchMenuCategories } from '../store/slices/menuCategories.slice';
+import { addMenuCategory, addMenuItemToCategory } from '../actions/menu.actions';
 // import { addMenuCategory } from '../view/pages/Menu/Dishes/menuActions';
 // import { fetchMenu } from '../store/slices/menuSlice';
 // import { addMenuItem } from '../view/pages/Menu/Dishes/menuItemActions';
@@ -10,7 +13,9 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
 
     const dispatch = useDispatch();
 
-    const { menu } = useSelector(state => state.menu);
+    const { restaurantId } = useParams();
+
+    const { menuCategories } = useSelector(state => state.menuCategories);
 
     const [dishName, setDishName] = useState('');
     const [dishPrice, setDishPrice] = useState();
@@ -18,6 +23,9 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
     const [dishAmount, setDishAmount] = useState();
     const [dishWeight, setDishWeight] = useState();
     const [dishCategory, setDishCategory] = useState('');
+
+    const [dishCategoryId, setDishCategoryId] = useState(null);
+
     const [dishIngredients, setDishIngredients] = useState(['']);
     const [dishLogo, setDishLogo] = useState('');
 
@@ -161,14 +169,15 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
     }, [])
 
     return (
-        <div className='flex justify-center'>
-            <div className=""><img className="absolute top-16 right-20 z-20 w-12 cursor-pointer bg-white rounded-3xl" src={Close} alt="" onClick={() => {
-                setOpenAddDishModal(false)
-            }} />
+        <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl'>
+            <div className="">
+                <img className="absolute right-2 top-2 z-20 w-12 cursor-pointer bg-white rounded-3xl" src={Close} alt="" onClick={() => {
+                    setOpenAddDishModal(false)
+                }} />
             </div>
-            <div className='absolute flex w-auto z-10 rounded-md mt-10'>
+            <div className='flex w-auto z-10 rounded-md mt-10 '>
                 <div className="flex justify-around w-full rounded-xl gap-3 p-10">
-                    <div className='flex flex-col p-10 bg-white rounded-xl'>
+                    <div className='flex flex-col p-10 bg-white w rounded-xl shadow-xl'>
                         <div className='text-3xl font-medium text-center text-sky-900'>Додати страву</div>
                         <form className='flex flex-col justify-around m-10 gap-3 text-sky-900' action="">
                             <div className='flex gap-3'>
@@ -238,6 +247,19 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                                     {(dishWeightTouched && dishWeightError) && <div className="text-red-600">{dishWeightError}</div>}
                                 </div>
                                 <div>
+                                    <label htmlFor="dishcal" className="block font-medium mb-1">Калорійність</label>
+                                    <input
+                                        value={dishWeight}
+                                        // onChange={(e) => { handleDishWeight(e) }}
+                                        type="number"
+                                        name="dishcal"
+                                        id="dishcal"
+                                        // onBlur={(e) => { blurHandler(e) }}
+                                        className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                        required />
+                                    {(dishWeightTouched && dishWeightError) && <div className="text-red-600">{dishWeightError}</div>}
+                                </div>
+                                <div>
                                     <label htmlFor="dishcategory" className="block font-medium mb-1 ">Категорія</label>
                                     <select id='dishcategory'
                                         value={dishCategory}
@@ -245,8 +267,8 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                                         name="dishcategory"
                                         onBlur={(e) => { blurHandler(e) }}
                                         className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required >
-                                        {menu.map((category, i) => {
-                                            return <option key={i} value={category.category}>{category.category}</option>
+                                        {menuCategories.map((category, i) => {
+                                            return <option onClick={() => { setDishCategoryId(category._id) }} key={i} value={category.category}>{category.category}</option>
                                         })}
                                     </select>
                                     {(dishCategoryTouched && dishCategoryError) && <div className="text-red-600">{dishCategoryError}</div>}
@@ -254,7 +276,7 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                             </div>
                             <div className='flex gap-5'>
                                 <div>
-                                    <label htmlFor="dishingredients" className="block font-medium mb-1 ">Інгредієнти, (через кому з великої букви)</label>
+                                    <label htmlFor="dishingredients" className="block font-medium mb-1 ">Інгредієнти, (через кому з великої літери)</label>
                                     <textarea
                                         value={dishIngredients}
                                         onChange={(e) => { handleDishIngredients(e) }}
@@ -262,7 +284,7 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                                         name="dishingredients"
                                         id="dishingredients"
                                         cols="50"
-                                        rows="11">
+                                        rows="6">
                                         onBlur={(e) => { blurHandler(e) }}
 
                                     </textarea>
@@ -285,7 +307,10 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                             <button
                                 onClick={async (e) => {
                                     e.preventDefault();
-                                    // await addMenuItem(dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo); dispatch(fetchMenuItems()); dispatch(fetchMenu()); setOpenAddDishModal(false) 
+                                    await addMenuItemToCategory(restaurantId, dishCategoryId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo);
+                                    // dispatch(fetchMenuItems()); 
+                                    dispatch(fetchMenuCategories(restaurantId));
+                                    setOpenAddDishModal(false)
                                 }}
                                 disabled={dishNameError || dishPriceError || dishTimeError || dishAmountError || dishWeightError || dishCategoryError}
                                 className="bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 mx-[30%] mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
@@ -293,7 +318,7 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                             </button>
                         </form>
                     </div>
-                    <div className='w-[35%] p-10 flex flex-col bg-white rounded-xl'>
+                    <div className='w-[35%] p-10 flex flex-col bg-white rounded-xl shadow-xl'>
                         <div className='text-3xl font-medium text-center text-sky-900'>Додати категорію страв</div>
                         <form className='flex flex-col justify-center m-10 gap-4 text-sky-900' action="POST">
                             <div>
@@ -325,10 +350,12 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                             <button
                                 onClick={async (e) => {
                                     e.preventDefault();
-                                    // await addMenuCategory(categoryLogo, categoryName); dispatch(fetchMenuItems()); dispatch(fetchMenu());
+                                    await addMenuCategory(restaurantId, categoryName, categoryLogo);
+                                    // dispatch(fetchMenuItems()); 
+                                    dispatch(fetchMenuCategories(restaurantId));
                                     setOpenAddDishModal(false)
                                 }}
-                                disabled={categoryNameError} 
+                                // disabled={categoryNameError} 
                                 className="bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 mx-[30%] mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
                                 Підтвердити
                             </button>

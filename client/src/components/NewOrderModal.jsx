@@ -5,7 +5,7 @@ import Trash from '../assets/svg/trash.svg'
 import { useEffect, useState } from "react";
 import { Modal } from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMenu } from '../store/slices/menu.slice';
+import { fetchMenuCategories } from '../store/slices/menuCategories.slice';
 import { useParams } from 'react-router-dom';
 import { configureOrder, getTotalInsideOrderValue } from '../functions';
 import { fetchOrders } from '../store/slices/orders.slice';
@@ -55,7 +55,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     }
 
     useEffect(() => {
-        dispatch(fetchMenu(restaurantId));
+        dispatch(fetchMenuCategories(restaurantId));
         dispatch(fetchOrders(restaurantId));
     }, [])
 

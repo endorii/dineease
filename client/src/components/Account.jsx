@@ -13,7 +13,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const NestedItem = ({ item }) => (
     <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-sky-100">
         <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "pr-10 py-3 pl-3 bg-sky-50/20 rounded-md border-r-4" : "font-light"
+            isPending ? "pending" : isActive ? "border-b-2" : "font-light"
         } to={item.path}>{item.title}</NavLink>
     </div>
 );
@@ -130,7 +130,7 @@ const Account = () => {
                 position="top-right"
                 reverseOrder={false}
             />
-            <aside className={menuOpen ? " text-white w-[270px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300"}>
+            <aside className={menuOpen ? " text-white w-[220px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>

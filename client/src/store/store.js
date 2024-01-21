@@ -3,16 +3,18 @@ import restaurantSlice from './slices/restaurant.slice';
 import employeesSlice from './slices/employees.slice';
 import userSlice from './slices/user.slice';
 import ordersSlice from './slices/orders.slice';
-import menuSlice from './slices/menu.slice';
+import menuCategoriesSlice from './slices/menuCategories.slice';
 import needsSlice from './slices/needs.slice';
 import feedbackSlice from './slices/feedback.slice';
+import menuDishesSlice from './slices/menuDishes.slice';
 
 const rootReducer = {
     restaurants: restaurantSlice,
     employees: employeesSlice,
     user: userSlice,
     orders: ordersSlice,
-    menu: menuSlice,
+    menuCategories: menuCategoriesSlice,
+    menuDishes: menuDishesSlice,
     needs: needsSlice,
     feedback: feedbackSlice
 }

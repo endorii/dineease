@@ -9,7 +9,7 @@ import { fetchOrders } from "../store/slices/orders.slice";
 // import { fetchMenuItems } from "../store/slices/menuItemsSlice";
 import { useParams } from "react-router-dom";
 import { NewOrderModal } from "./NewOrderModal";
-import { fetchMenu } from "../store/slices/menu.slice";
+import { fetchMenuCategories } from "../store/slices/menuCategories.slice";
 import { PayOrder } from "./PayOrder";
 import { getTotalOrderValue } from "../functions";
 
@@ -30,7 +30,7 @@ export const Orders = () => {
 
     useEffect(() => {
         dispatch(fetchOrders(restaurantId));
-        dispatch(fetchMenu(restaurantId));
+        dispatch(fetchMenuCategories(restaurantId));
     }, [])
 
     return (

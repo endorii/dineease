@@ -1,5 +1,4 @@
 import Restaurant from '../assets/svg/house.svg';
-import { getEmployeesByRestaurant } from "../actions/employees.actions";
 import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, useEffect } from 'react';
 import { fetchRestaurants } from '../store/slices/restaurant.slice';
@@ -12,7 +11,7 @@ export const ChooseRestaurant = () => {
 
     const dispatch = useDispatch();
 
-    const { restaurants, isLoading } = useSelector(state => state.restaurants);
+    const { restaurants } = useSelector(state => state.restaurants);
 
     const navigate = useNavigate();
 
@@ -28,8 +27,6 @@ export const ChooseRestaurant = () => {
             navigate('/')
         }
     }, [token])
-
-
 
     return (
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
