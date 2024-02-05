@@ -112,13 +112,13 @@ export const CurrentEmployeeAccount = () => {
                                     <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
                                     <div className="flex justify-around items-center text text-xl font-medium my-3 h-auto">
                                         <div className="flex items-center gap-3 bg-sky-500 text-white px-5 py-2 rounded-md">
-                                            <input value="Не терміново" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Не терміново
+                                            <input value="Низька" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Низька
                                         </div>
                                         <div className="flex items-center gap-3 bg-sky-700 text-white px-5 py-2 rounded-md">
-                                            <input value="Терміново" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Терміново
+                                            <input value="Середня" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Середня
                                         </div>
                                         <div className="flex items-center gap-3 bg-sky-900 text-white px-5 py-2 rounded-md">
-                                            <input value="Дуже терміново" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Дуже терміново
+                                            <input value="Висока" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Висока
                                         </div>
                                     </div>
 

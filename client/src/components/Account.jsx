@@ -34,7 +34,7 @@ const AccordionItem = ({ title, children, icon, menuOpen, setMenuOpen }) => {
     }, [menuOpen]);
 
     return (
-        <li className="hover:bg-sky-900/30 hover:shadow-md py-2 transition ease-out hover:ease-in rounded-md">
+        <li className="hover:bg-sky-900/30 hover:shadow-md p-2 py-2 transition ease-out hover:ease-in rounded-md">
             <div className='cursor-pointer' onClick={() => setMenuOpen(true)}>
                 <img src={icon} alt="" className='inline w-6' />
 
@@ -130,7 +130,7 @@ const Account = () => {
                 position="top-right"
                 reverseOrder={false}
             />
-            <aside className={menuOpen ? " text-white w-[220px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[85px] h-screen bg-sky-950 p-7 border-r border-slate-300"}>
+            <aside className={menuOpen ? " text-white w-[240px] h-screen bg-sky-950 p-7 border-slate-300 overflow-auto shadow-3xl zindex-10" : "shadow-3xl text-white w-[100px] h-screen bg-sky-950 p-7 border-r border-slate-300"}>
                 <div>
                     <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={`mb-6 h-6 w-6 inline transform transition duration-150 cursor-pointer ease-out ${menuOpen ? 'rotate-90' : 'rotate-[260deg]'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>

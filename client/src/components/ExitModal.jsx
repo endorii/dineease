@@ -47,7 +47,7 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
                     </div>
 
                     <div className="absolute top-4 right-4 cursor-pointer" onClick={() => { setExitModalOpen(false) }}>
-                        <img className="h-8" src={Close} alt="" />
+                        <img className="h-10" src={Close} alt="" />
                     </div>
                 </div>
             </div>

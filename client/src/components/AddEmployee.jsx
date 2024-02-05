@@ -304,7 +304,7 @@ const AddEmployee = ({ setOpen }) => {
                         </div>
                     </ul>
 
-                    <button disabled={nameError || ageError || pinError || experienceError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
+                    <button disabled={nameError || ageError || experienceError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
                             setOpen(false);
                             await addEmployee(name,

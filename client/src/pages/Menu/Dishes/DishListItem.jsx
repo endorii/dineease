@@ -8,7 +8,7 @@ import Info from "../../../assets/svg/info.svg"
 import { Modal } from "../../../components/Modal";
 import { DishInfoModal } from "../../../components/DishInfoModal";
 
-export const DishListItem = ({ item }) => {
+export const DishListItem = ({ item, categoryFilter, setCategoryFilter }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
 
@@ -27,7 +27,7 @@ export const DishListItem = ({ item }) => {
 
 
 
-            <tr className="bg-white border-b border-gray-300 text-gray-700" >
+            {categoryFilter === 'all' || item.categoryName === categoryFilter ? <tr className="bg-white border-b border-gray-300 text-gray-700" >
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900">
                     {item.name}
                 </th>
@@ -53,7 +53,7 @@ export const DishListItem = ({ item }) => {
                     }}
                         className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in">Видалити</button>
                 </td>
-            </tr>
+            </tr> : null}
         </>
     )
 }
