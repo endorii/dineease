@@ -17,6 +17,7 @@ import { fetchMenuDishes } from '../../../store/slices/menuDishes.slice';
 const Dishes = () => {
 
     const [searchInput, setSearchInput] = useState('');
+    const [categoryFilter, setCategoryFilter] = useState('all');
     const [openAddDishModal, setOpenAddDishModal] = useState(false);
 
     const { restaurantId } = useParams();
@@ -48,16 +49,19 @@ const Dishes = () => {
                     <hr className='border-t-1 border-slate-300 my-10' />
                     <div className="flex w-full justify-between px-3 pb-4">
                         <div className='flex gap-3 items-center flex-wrap'>
-                            <div className='px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer'>
+                            <div className='px-4 py-2 text-gray-500'>
+                                Фільтри:
+                            </div>
+                            <div className='px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer' onClick={() => { setCategoryFilter('all') }}>
                                 Скинути фільтр
                             </div>
                             {menuCategories.length > 0 ? menuCategories.map((category, i) =>
-                                <div className='px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer'>
+                                <div className={categoryFilter === category.category ? 'px-4 py-2 bg-sky-950 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer' : 'px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer'} onClick={() => { setCategoryFilter(category.category) }}>
                                     {category.category}
                                 </div>
                             ) : null}
                         </div>
-                        <div className='flex'>
+                        <div className='flex items-center'>
                             <img
                                 src={Search}
                                 alt="" className="w-6 mr-2" />
@@ -95,9 +99,11 @@ const Dishes = () => {
                             <tbody >
                                 {
                                     menuDishes.length > 0 ? menuDishes.map((dish, i) => (
-                                        dish.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={dish} key={i} /> : null
+                                        dish.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={dish} key={i} categoryFilter={categoryFilter}
+                                        setCategoryFilter={setCategoryFilter}/> : null
                                     )) : <h2 className='text-4xl text-sky-900 px-6 pt-10 font-light text'>Страв не знайдено</h2>
                                 }
+
                             </tbody>
                         </table>
                     </div>
