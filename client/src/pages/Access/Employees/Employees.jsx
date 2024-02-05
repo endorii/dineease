@@ -1,8 +1,7 @@
-import Plus from '../../../assets/svg/plus.svg'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import AddEmployee from '../../../components/AddEmployee';
-import { deleteEmployee, getEmployeesByRestaurant} from '../../../actions/employees.actions';
+import { deleteEmployee } from '../../../actions/employees.actions';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
@@ -10,15 +9,13 @@ import { AddButton } from '../../../ui/buttons/AddButton';
 import { Modal } from '../../../components/Modal';
 import EditEmployee from './EditEmployee';
 import { fetchEmployees } from '../../../store/slices/employees.slice';
-// import { deleteEmployee } from './employee';
-// import EditEmployee from './EditEmployee';
-// import { Modal } from '../../../../components/Modal';
-// import { fetchPositions } from '../../../../store/slices/positions.Slice';
+import { ConfirmModal } from '../../../components/ConfirmModal';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
     const [editEmployeeModalOpen, setEditEmployeeModalOpen] = useState(false);
     const [currentEmployee, setCurrentEmployee] = useState(null);
+    const [deleteEmployeeModalOpen, setDeleteEmployeeModalOpen] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -42,11 +39,21 @@ const Employees = () => {
                     <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
                 </Modal>
             }
+            {deleteEmployeeModalOpen &&
+                <ConfirmModal
+                    setModalOpen={setDeleteEmployeeModalOpen}
+                    onConfirm={async () => {
+                        await deleteEmployee(currentEmployee._id);
+                        dispatch(fetchEmployees(restaurantId));
+                        setDeleteEmployeeModalOpen(false);
+                    }}
+                />
+            }
 
             <div className='flex flex-col' >
                 <div className="flex justify-between ">
                     <h2 className="text-3xl font-medium text-sky-950">Працівники</h2>
-                    <AddButton customFunction={setAddEmployeeModalOpen}/>
+                    <AddButton customFunction={setAddEmployeeModalOpen} />
                 </div>
                 <hr className='border-t-1 border-slate-300 my-10' />
 
@@ -55,7 +62,7 @@ const Employees = () => {
                         Список працівників
                     </div>
                     <table className="w-full text-left text-gray-500">
-                        <thead className="text-xs text-gray-700 uppercase bg-teal-800/30">
+                        <thead className="text-xs text-gray-700 uppercase bg-sky-900/20">
                             <tr>
                                 <th scope="col" className="px-6 py-3">
                                     Ім'я
@@ -96,7 +103,7 @@ const Employees = () => {
                                         {employee.position}
                                     </td>
                                     <td className="px-1 py-4">
-                                        14 вересня 13:30
+                                        {employee.workingTime[employee.workingTime.length - 1]?.entries.start} | {employee.workingTime[employee.workingTime.length - 1]?.date}
                                     </td>
                                     <td className="px-2 py-1 text-right">
                                         <button onClick={async () => {
@@ -105,12 +112,12 @@ const Employees = () => {
                                             dispatch(fetchEmployees(restaurantId));
                                         }}
 
-                                        className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
+                                            className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
                                     </td>
                                     <td className="px-2 py-1 text-left">
-                                        <button onClick={async () => {
-                                            await deleteEmployee(employee._id); 
-                                            dispatch(fetchEmployees(restaurantId));
+                                        <button onClick={() => {
+                                            setCurrentEmployee(employee);
+                                            setDeleteEmployeeModalOpen(true);
                                         }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in">Видалити</button>
                                     </td>
                                 </tr>
