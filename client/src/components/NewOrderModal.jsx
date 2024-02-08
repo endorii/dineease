@@ -11,6 +11,7 @@ import { configureOrder, getTotalInsideOrderValue } from '../functions';
 import { fetchOrders } from '../store/slices/orders.slice';
 
 import toast from 'react-hot-toast';
+import { fetchMenuDishes } from '../store/slices/menuDishes.slice';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     const [guests, setGuests] = useState([]);
@@ -23,7 +24,8 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
 
     const { user } = useSelector(state => state.user)
 
-    const { menu } = useSelector(state => state.menu);
+    const { menuCategories } = useSelector(state => state.menuCategories);
+    const { menuDishes } = useSelector(state => state.menuDishes);
 
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
@@ -48,14 +50,9 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
         setGuests(updatedGuests);
     };
 
-    const filteredDishes = (selectedCategory) => {
-        const foundedMenu = menu.filter((category) => category.category === selectedCategory);
-        const dishesList = foundedMenu[0].items;
-        return dishesList;
-    }
-
     useEffect(() => {
         dispatch(fetchMenuCategories(restaurantId));
+        dispatch(fetchMenuDishes(restaurantId));
         dispatch(fetchOrders(restaurantId));
     }, [])
 
@@ -158,27 +155,23 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                 </div>
                                 <div className="">
                                     <ul className="flex flex-wrap gap-10 justify-center">
-                                        {currentCategoryFood ? (
-                                            filteredDishes(currentCategoryFood).length > 0 ? (
-                                                filteredDishes(currentCategoryFood).map((dish, i) => (
-                                                    <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer"
-                                                        onClick={() => { if (Object.keys(currentGuest).length !== 0) { selectFoodForGuest(currentGuest, dish) } }}>
-                                                        <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={dish.name} />
-                                                        <div className="font-thin px-4 py-2 text-xl">{dish.name}</div>
-                                                        <div className="flex justify-between">
-                                                            <div className="flex items-center font-thin px-4 py-2 text-lg"> <img className="w-4 mr-1" src={Time} alt="" />{dish.readyTime}</div>
+                                        {currentCategoryFood ?
+                                            menuDishes.map((dish, i) => currentCategoryFood === dish.categoryName ? <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer"
+                                            onClick={() => { if (Object.keys(currentGuest).length !== 0) { selectFoodForGuest(currentGuest, dish) } }}>
+                                            <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={dish.name} />
+                                            <div className="font-thin px-4 py-2 text-xl">{dish.name}</div>
+                                            <div className="flex justify-between">
+                                                <div className="flex items-center font-thin px-4 py-2 text-lg"> <img className="w-4 mr-1" src={Time} alt="" />{dish.readyTime}</div>
 
-                                                            <div className="font-medium px-4 py-2 text-xl">{dish.price} ₴</div>
-                                                        </div>
-                                                    </li>
-                                                ))
-                                            ) : (<div className="text-center text-5xl font-thin">Товарів не знайдено</div>)
-                                        ) : (menu.map((category, i) => (
-                                            <li key={i} onClick={() => { setCurrentCategoryFood(category.category); }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer ">
-                                                <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={category.alt} />
-                                                <div className="font-thin text-xl px-4 py-2">{category.category}</div>
-                                            </li>
-                                        )))}
+                                                <div className="font-medium px-4 py-2 text-xl">{dish.price} ₴</div>
+                                            </div>
+                                        </li> : null
+                                            ) : (menuCategories.map((category, i) => (
+                                                <li key={i} onClick={() => { setCurrentCategoryFood(category.category); }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer ">
+                                                    <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg" src={Test} alt={category.alt} />
+                                                    <div className="font-thin text-xl px-4 py-2">{category.category}</div>
+                                                </li>
+                                            )))}
                                     </ul>
                                 </div>
                             </div>

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 // import { addEmployee } from "./employee";
 import { useDispatch } from "react-redux";
 import { fetchEmployees } from "../store/slices/employees.slice";
-import { addEmployee, getEmployeesByRestaurant } from "../actions/employees.actions";
+import { addEmployee } from "../actions/employees.actions";
 import { useParams } from "react-router-dom";
 import Close from '../assets/svg/close.svg';
 import { getRestaurantById } from "../actions/restaurants.actions";
 import { fetchRestaurants } from "../store/slices/restaurant.slice";
+import toast from "react-hot-toast";
 
 const AddEmployee = ({ setOpen }) => {
 
@@ -43,6 +44,8 @@ const AddEmployee = ({ setOpen }) => {
     const [pinError, setPinError] = useState('Поле не може бути пустим');
 
     const dispatch = useDispatch();
+
+    const notifyConfirm = (message) => toast.success(message);
 
     const handleName = (e) => {
         setName(e.target.value);
@@ -306,7 +309,6 @@ const AddEmployee = ({ setOpen }) => {
 
                     <button disabled={nameError || ageError || experienceError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
-                            setOpen(false);
                             await addEmployee(name,
                                 age,
                                 restaurantId,
@@ -318,6 +320,8 @@ const AddEmployee = ({ setOpen }) => {
                                 pin);
 
                             dispatch(fetchRestaurants(restaurantId));
+                            notifyConfirm('Користувача створено!');
+                            setOpen(false);
                         }}
                     >Підтвердити
                     </button>

@@ -8,7 +8,7 @@ import Settings from '../assets/svg/settings.svg';
 import User from '../assets/svg/user.svg';
 import { NavLink, Outlet } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 const NestedItem = ({ item }) => (
     <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-sky-100">

@@ -14,6 +14,7 @@ import { PayOrder } from "./PayOrder";
 import { getTotalOrderValue } from "../functions";
 
 import { Toaster } from 'react-hot-toast';
+import { fetchMenuDishes } from "../store/slices/menuDishes.slice";
 
 export const Orders = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
@@ -31,6 +32,7 @@ export const Orders = () => {
     useEffect(() => {
         dispatch(fetchOrders(restaurantId));
         dispatch(fetchMenuCategories(restaurantId));
+        dispatch(fetchMenuDishes(restaurantId));
     }, [])
 
     return (

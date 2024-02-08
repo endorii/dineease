@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { logout } from '../store/slices/user.slice';
 import { useNavigate } from 'react-router-dom';
+import { auth } from '../actions/user.actions';
 
 const UserAccount = () => {
 
@@ -32,6 +33,7 @@ const UserAccount = () => {
         if (!token) {
             navigate('/')
         }
+        dispatch(auth());
     }, [token])
 
     return (

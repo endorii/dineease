@@ -7,6 +7,7 @@ import { fetchEmployees } from "../../../store/slices/employees.slice";
 import { editEmployee } from "../../../actions/employees.actions";
 import Close from '../../../assets/svg/close.svg';
 import { getRestaurantById } from "../../../actions/restaurants.actions";
+import toast from "react-hot-toast";
 // import { fetchEmployees } from "../../../../store/slices/employeesSlice";
 
 const EditEmployee = ({ setOpen, currentEmployee }) => {
@@ -45,6 +46,8 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [pinError, setPinError] = useState('Поле не може бути пустим');
 
     const dispatch = useDispatch();
+
+    const notifyConfirm = (message) => toast.success(message);
 
     const handleName = (e) => {
         setName(e.target.value);
@@ -343,7 +346,6 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
 
                     <button disabled={nameError || positionError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
-                            setOpen(false);
                             await editEmployee(_id,
                                 name,
                                 age,
@@ -355,10 +357,11 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                                 email,
                                 pin);
                             dispatch(fetchEmployees(restaurantId));
+                            notifyConfirm('Інформацію робітника змінено.');
+                            setOpen(false);
                         }}
 
                     >Підтвердити
-                        <img className='w-7 inline pl-2' src={Plus} alt="" />
                     </button>
                 </div>
             </div>

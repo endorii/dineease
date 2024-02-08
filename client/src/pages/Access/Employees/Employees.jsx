@@ -10,6 +10,7 @@ import { Modal } from '../../../components/Modal';
 import EditEmployee from './EditEmployee';
 import { fetchEmployees } from '../../../store/slices/employees.slice';
 import { ConfirmModal } from '../../../components/ConfirmModal';
+import toast from 'react-hot-toast';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
@@ -22,6 +23,8 @@ const Employees = () => {
     const { restaurantId } = useParams()
 
     const { employees } = useSelector(state => state.employees);
+
+    const notifyConfirm = (message) => {toast.success(message)}
 
     useEffect(() => {
         dispatch(fetchEmployees(restaurantId));
@@ -45,6 +48,7 @@ const Employees = () => {
                     onConfirm={async () => {
                         await deleteEmployee(currentEmployee._id);
                         dispatch(fetchEmployees(restaurantId));
+                        notifyConfirm('Робітника звільнено.');
                         setDeleteEmployeeModalOpen(false);
                     }}
                 />
