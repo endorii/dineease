@@ -21,7 +21,7 @@ router.get(`/menuDishes/:restaurantId`,
 router.post(`/menuDishes/:restaurantId/:categoryId`,
     async (req, res) => {
         try {
-            const {restaurantId, categoryId} = req.params;
+            const { restaurantId, categoryId } = req.params;
             const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo } = req.body;
 
             const dish = await Dish.findOne({ category });
@@ -30,23 +30,76 @@ router.post(`/menuDishes/:restaurantId/:categoryId`,
             }
 
             const configuredDishData = {
-                restaurant: restaurantId, 
-                category: categoryId, 
-                categoryName:  dishCategory,
-                name: dishName, 
-                price: dishPrice, 
-                time: dishTime, 
-                amount: dishAmount, 
-                weigh: dishWeight, 
-                ingredients: dishIngredients, 
+                restaurant: restaurantId,
+                category: categoryId,
+                categoryName: dishCategory,
+                name: dishName,
+                price: dishPrice,
+                time: dishTime,
+                amount: dishAmount,
+                weigh: dishWeight,
+                ingredients: dishIngredients,
                 logoPath: dishLogo
             }
 
-            const item = new Dish({configuredDishData})
+            const item = new Dish({ configuredDishData })
 
             await item.save();
 
             return res.json({ message: 'Страву було додано' });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    });
+
+router.put(`/menuDishes/:restaurantId/:dishId`,
+    async (req, res) => {
+        try {
+            const { restaurantId, dishId } = req.params;
+            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo } = req.body;
+
+            const configuredDishData = {
+                restaurant: restaurantId,
+                categoryName: dishCategory,
+                name: dishName,
+                price: dishPrice,
+                time: dishTime,
+                amount: dishAmount,
+                weigh: dishWeight,
+                ingredients: dishIngredients,
+                logoPath: dishLogo
+            }
+
+            const dish = await Dish.findOneAndUpdate({ _id: dishId, restaurant: restaurantId },
+                configuredDishData,
+                { new: true }
+            );
+
+            if (!dish) {
+                return res.status(400).json({ message: 'Страву не знайдено!' })
+            }
+
+            return res.json({ message: 'Страву було змінено' });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Помилка сервера" });
+        }
+    });
+
+router.delete(`/menuDishes/:restaurantId/:dishId`,
+    async (req, res) => {
+        try {
+            const { restaurantId, dishId } = req.params;
+
+            const dish = await Dish.findOneAndDelete({ _id: dishId, restaurant: restaurantId });
+            if (!dish) {
+                return res.status(400).json({ message: 'Страви не знайдено' })
+            };
+
+            return res.json({ message: 'Страву виделенно' });
 
         } catch (e) {
             console.log(e);
