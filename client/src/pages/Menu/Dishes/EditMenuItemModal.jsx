@@ -21,6 +21,7 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
     const [dishTime, setDishTime] = useState(currentDish.time);
     const [dishAmount, setDishAmount] = useState(currentDish.amount);
     const [dishWeight, setDishWeight] = useState(currentDish.weight);
+    const [dishCal, setDishCal] = useState(currentDish.calories);
     const [dishCategory, setdishCategory] = useState(currentDish.toCategory);
     const [dishIngredients, setDishIngredients] = useState(currentDish.ingredients);
     const [dishLogo, setDishLogo] = useState('');
@@ -99,6 +100,18 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                             type="text"
                                             name="weight"
                                             id="weight"
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                                            required />
+                                    </div>
+
+                                    <div>
+                                        <label htmlFor="cal" className="block text-sm font-medium text-gray-900 mb-1">Калорійність</label>
+                                        <input
+                                            value={dishCal}
+                                            onChange={(e) => { setDishCal(e.target.value) }}
+                                            type="text"
+                                            name="cal"
+                                            id="cal"
                                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                                             required />
                                     </div>

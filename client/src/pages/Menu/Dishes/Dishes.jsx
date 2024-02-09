@@ -13,12 +13,14 @@ import { AddButton } from '../../../ui/buttons/AddButton';
 import { Modal } from '../../../components/Modal';
 import { AddDishModal } from '../../../components/AddDishModal';
 import { fetchMenuDishes } from '../../../store/slices/menuDishes.slice';
+import { AddCategoryModal } from '../../../components/AddCategoryModal';
 
 const Dishes = () => {
 
     const [searchInput, setSearchInput] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [openAddDishModal, setOpenAddDishModal] = useState(false);
+    const [openAddCategoryModal, setOpenAddCategoryModal] = useState(false);
 
     const { restaurantId } = useParams();
 
@@ -32,19 +34,19 @@ const Dishes = () => {
         dispatch(fetchMenuDishes(restaurantId));
     }, [])
 
-    return (
+    return (    
 
         <div className="flex flex-col h-full">
-            {openAddDishModal ?
-                <Modal>
-                    <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />
-                </Modal>
-                : null}
+            {openAddDishModal && <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />}
+            {openAddCategoryModal && <AddCategoryModal setOpenAddCategoryModal={setOpenAddCategoryModal} />}
             <div className='h-full flex flex-col'>
                 <div className='mb-5'>
                     <div className="flex justify-between ">
                         <h2 className="text-3xl font-medium text-sky-950">Доступні страви для замовлень</h2>
-                        <AddButton customFunction={setOpenAddDishModal} />
+                        <div className='flex gap-5'>
+                            <AddButton customFunction={setOpenAddDishModal} buttonText={'Додати страву'}/>
+                            <AddButton customFunction={setOpenAddCategoryModal} buttonText={'Додати категорію'}/>
+                        </div>
                     </div>
                     <hr className='border-t-1 border-slate-300 my-10' />
                     <div className="flex w-full justify-between px-3 pb-4">
@@ -100,7 +102,7 @@ const Dishes = () => {
                                 {
                                     menuDishes.length > 0 ? menuDishes.map((dish, i) => (
                                         dish.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={dish} key={i} categoryFilter={categoryFilter}
-                                        setCategoryFilter={setCategoryFilter}/> : null
+                                            setCategoryFilter={setCategoryFilter} /> : null
                                     )) : <h2 className='text-4xl text-sky-900 px-6 pt-10 font-light text'>Страв не знайдено</h2>
                                 }
 

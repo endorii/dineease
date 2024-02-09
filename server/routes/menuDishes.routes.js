@@ -18,13 +18,13 @@ router.get(`/menuDishes/:restaurantId`,
         }
     })
 
-router.post(`/menuDishes/:restaurantId/:categoryId`,
+    router.post(`/menuDishes/:restaurantId`,
     async (req, res) => {
         try {
-            const { restaurantId, categoryId } = req.params;
-            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo } = req.body;
+            const { restaurantId } = req.params;
+            const { categoryId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo } = req.body;
 
-            const dish = await Dish.findOne({ category });
+            const dish = await Dish.findOne({ name: dishName });
             if (dish) {
                 return res.status(400).json({ message: 'Страва вже існує' })
             }
@@ -37,12 +37,13 @@ router.post(`/menuDishes/:restaurantId/:categoryId`,
                 price: dishPrice,
                 time: dishTime,
                 amount: dishAmount,
-                weigh: dishWeight,
+                weight: dishWeight,
+                calories: dishCal,
                 ingredients: dishIngredients,
                 logoPath: dishLogo
             }
 
-            const item = new Dish({ configuredDishData })
+            const item = new Dish(configuredDishData);
 
             await item.save();
 
@@ -58,7 +59,7 @@ router.put(`/menuDishes/:restaurantId/:dishId`,
     async (req, res) => {
         try {
             const { restaurantId, dishId } = req.params;
-            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo } = req.body;
+            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo } = req.body;
 
             const configuredDishData = {
                 restaurant: restaurantId,
@@ -67,7 +68,8 @@ router.put(`/menuDishes/:restaurantId/:dishId`,
                 price: dishPrice,
                 time: dishTime,
                 amount: dishAmount,
-                weigh: dishWeight,
+                weight: dishWeight,
+                calories: dishCal,
                 ingredients: dishIngredients,
                 logoPath: dishLogo
             }

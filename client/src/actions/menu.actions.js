@@ -18,9 +18,9 @@ export const addMenuCategory = async (restaurantId, category, logoPath) => {
     }
 }
 
-export const addMenuItemToCategory = async (restaurantId, categoryId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo) => {
+export const addDish = async (restaurantId, categoryId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo) => {
     try {
-        const response = await axios.post(`http://localhost:5000/api/menuDishes/${restaurantId}/${categoryId}`, { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo });
+        const response = await axios.post(`http://localhost:5000/api/menuDishes/${restaurantId}`, { dishName, categoryId, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo });
         return response.data.menu
     } catch (e) {
         console.log(e.response.data.message);
@@ -45,9 +45,9 @@ export const deleteDish = async (restaurantId, dishId) => {
     }
 }
 
-export const editDish = async (restaurantId, dishId,  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo) => {
+export const editDish = async (restaurantId, dishId,  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/menuDishes/${restaurantId}/${dishId}`, {  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo });
+        const response = await axios.put(`http://localhost:5000/api/menuDishes/${restaurantId}/${dishId}`, {  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo });
         return response.data;
     } catch (e) {
         console.log(e.response.data.message);
