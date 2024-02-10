@@ -43,7 +43,7 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
     const [dishAmountError, setDishAmountError] = useState('Поле не може бути пустим');
     const [dishWeightError, setDishWeightError] = useState('Поле не може бути пустим');
     const [dishCalError, setDishCalError] = useState('Поле не може бути пустим');
-    const [dishCategoryError, setDishCategoryError] = useState('Поле не може бути пустим');
+    const [dishCategoryError, setDishCategoryError] = useState('');
     const [dishIngredientsError, setDishIngredientsError] = useState('Поле не може бути пустим');
     const [dishLogoError, setDishLogoError] = useState('Поле не може бути пустим');
 
@@ -172,9 +172,9 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
 
     return (
         <Modal>
-            <div className='relative bg-gray-50 m-16 rounded-3xl shadow-xl w-[66%]'>
+            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%]'>
                 <div className="">
-                    <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer bg-white rounded-3xl" src={Close} alt="" onClick={() => {
+                    <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer" src={Close} alt="" onClick={() => {
                         setOpenAddDishModal(false)
                     }} />
                 </div>
@@ -184,127 +184,131 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                     <hr className='border-t-1 border-slate-300' />
                 </div>
 
-                <div className='flex gap-3 p-7 mt-5'>
-                    <div className='flex flex-col'>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishcategory" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Категорія:</label>
-                            <select id='dishcategory'
-                                value={dishCategory}
-                                onChange={(e) => {
-                                    handleDishCategory(e);
-                                    const selectedCategoryId = e.target.value;
-                                    const selectedCategory = menuCategories.find(category => category.category === selectedCategoryId);
-                                    console.log(selectedCategory);
-                                    if (selectedCategory) {
-                                        setDishCategoryId(selectedCategory._id);
-                                    }
-                                }}
-                                name="dishcategory"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5" required >
-                                {menuCategories.map((category, i) => {
-                                    return <option key={i} value={category.category}>{category.category}</option>
-                                })}
-                            </select>
-                            {(dishCategoryTouched && dishCategoryError) && <div className="text-red-600">{dishCategoryError}</div>}
+                <div className='flex flex-col gap-3 px-10 py-7 mt-5'>
+                    <div className='flex gap-2'>
+                        <div className='flex flex-col gap-8'>
+                            <div className='flex gap-5 items-center relative'>
+                                <label htmlFor="dishcategory" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Категорія:</label>
+                                <div className='flex flex-col justify-between'>
+                                    <select id='dishcategory'
+                                        value={dishCategory}
+                                        onChange={(e) => {
+                                            handleDishCategory(e);
+                                            const selectedCategoryId = e.target.value;
+                                            const selectedCategory = menuCategories.find(category => category.category === selectedCategoryId);
+                                            console.log(selectedCategory);
+                                            if (selectedCategory) {
+                                                setDishCategoryId(selectedCategory._id);
+                                            }
+                                        }}
+                                        name="dishcategory"
+                                        onBlur={(e) => { blurHandler(e) }}
+                                        className={dishCategoryTouched && dishCategoryError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required >
+                                        {menuCategories.map((category, i) => {
+                                            return <option key={i} value={category.category}>{category.category}</option>
+                                        })}
+                                    </select>
+                                </div>
+                                {(dishCategoryTouched && dishCategoryError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishCategoryError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishname" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Назва:</label>
+                                <input
+                                    value={dishName}
+                                    onChange={(e) => { handleDishName(e) }}
+                                    type="text"
+                                    id="dishname"
+                                    name="dishname"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishNameTouched && dishNameError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                />
+                                {(dishNameTouched && dishNameError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishNameError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishprice" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Ціна:</label>
+                                <input
+                                    value={dishPrice}
+                                    onChange={(e) => { handleDishPrice(e) }}
+                                    type="number"
+                                    name="dishprice"
+                                    id="dishprice"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishPriceTouched && dishPriceError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+                                {(dishPriceTouched && dishPriceError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishPriceError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishtime" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Час:</label>
+                                <input
+                                    value={dishTime}
+                                    onChange={(e) => { handleDishTime(e) }}
+                                    type="number"
+                                    name="dishtime"
+                                    id="dishtime"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishTimeTouched && dishTimeError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+                                {(dishTimeTouched && dishTimeError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishTimeError}</div>}
+                            </div>
                         </div>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishname" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Назва:</label>
-                            <input
-                                value={dishName}
-                                onChange={(e) => { handleDishName(e) }}
-                                type="text"
-                                id="dishname"
-                                name="dishname"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " required
-                            />
-                            {(dishNameTouched && dishNameError) && <div className="text-red-600">{dishNameError}</div>}
-                        </div>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishprice" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Ціна:</label>
-                            <input
-                                value={dishPrice}
-                                onChange={(e) => { handleDishPrice(e) }}
-                                type="number"
-                                name="dishprice"
-                                id="dishprice"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 "
-                                required />
-                            {(dishPriceTouched && dishPriceError) && <div className="text-red-600">{dishPriceError}</div>}
-                        </div>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishtime" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Час:</label>
-                            <input
-                                value={dishTime}
-                                onChange={(e) => { handleDishTime(e) }}
-                                type="number"
-                                name="dishtime"
-                                id="dishtime"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 "
-                                required />
-                            {(dishTimeTouched && dishTimeError) && <div className="text-red-600">{dishTimeError}</div>}
-                        </div>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishamount" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Кількість:</label>
-                            <input
-                                value={dishAmount}
-                                onChange={(e) => { handleDishAmount(e) }}
-                                type="number"
-                                name="dishamount"
-                                id="dishamount"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 "
-                                required />
-                            {(dishAmountTouched && dishAmountError) && <div className="text-red-600">{dishAmountError}</div>}
-                        </div>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishweight" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Вага:</label>
-                            <input
-                                value={dishWeight}
-                                onChange={(e) => { handleDishWeight(e) }}
-                                type="number"
-                                name="dishweight"
-                                id="dishweight"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 "
-                                required />
-                            {(dishWeightTouched && dishWeightError) && <div className="text-red-600">{dishWeightError}</div>}
-                        </div>
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishcal" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Калорійність:</label>
-                            <input
-                                value={dishCal}
-                                onChange={(e) => { handleDishCal(e) }}
-                                type="number"
-                                name="dishcal"
-                                id="dishcal"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 "
-                                required />
-                            {(dishCalTouched && dishCalError) && <div className="text-red-600">{dishCalError}</div>}
-                        </div>
-
-
-                        <div className='flex gap-5 items-center'>
-                            <label htmlFor="dishlogo" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Завантажити фотографію:</label>
-                            <input
-                                value={dishLogo}
-                                onChange={(e) => { handleDishLogo(e) }}
-                                type="file"
-                                id="dishlogo"
-                                name="dishlogo"
-                                onBlur={(e) => { blurHandler(e) }}
-                                className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " required
-                            />
-                            {(dishLogoTouched && dishLogoError) && <div className="text-red-600">{dishLogoError}</div>}
+                        <div className='flex flex-col gap-8'>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishamount" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Кількість:</label>
+                                <input
+                                    value={dishAmount}
+                                    onChange={(e) => { handleDishAmount(e) }}
+                                    type="number"
+                                    name="dishamount"
+                                    id="dishamount"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishAmountTouched && dishAmountError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+                                {(dishAmountTouched && dishAmountError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishAmountError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishweight" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Вага:</label>
+                                <input
+                                    value={dishWeight}
+                                    onChange={(e) => { handleDishWeight(e) }}
+                                    type="text"
+                                    name="dishweight"
+                                    id="dishweight"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishWeightTouched && dishWeightError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+                                {(dishWeightTouched && dishWeightError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishWeightError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishcal" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Калорійність:</label>
+                                <input
+                                    value={dishCal}
+                                    onChange={(e) => { handleDishCal(e) }}
+                                    type="number"
+                                    name="dishcal"
+                                    id="dishcal"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishCalTouched && dishCalError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+                                {(dishCalTouched && dishCalError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishCalError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishlogo" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Фотографія:</label>
+                                <input
+                                    value={dishLogo}
+                                    onChange={(e) => { handleDishLogo(e) }}
+                                    type="file"
+                                    id="dishlogo"
+                                    name="dishlogo"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={dishLogoTouched && dishLogoError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                />
+                                {(dishLogoTouched && dishLogoError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishLogoError}</div>}
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div className='flex flex-col gap-5'>
-                            <label htmlFor="dishingredients" className="block font-medium mb-1 text-xl bg-sky-950 text-white px-4 py-3 rounded-xl">Інгредієнти, (через кому):</label>
+                    <div className='flex mt-5'>
+                        <div className='flex flex-col gap-5 w-[75%] relative'>
+                            <label htmlFor="dishingredients" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Інгредієнти, (через кому):</label>
                             <textarea
                                 value={dishIngredients}
                                 onChange={(e) => { handleDishIngredients(e) }}
@@ -316,25 +320,26 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                                 onBlur={(e) => { blurHandler(e) }}
 
                             </textarea>
-                            {(dishIngredientsTouched && dishIngredientsError) && <div className="text-red-600">{dishIngredientsError}</div>}
+                            {(dishIngredientsTouched && dishIngredientsError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{dishIngredientsError}</div>}
+                        </div>
+                        <div className='flex justify-center w-[25%]'>
+                            <button
+                                onClick={async (e) => {
+                                    e.preventDefault();
+                                    await addDish(restaurantId, dishCategoryId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo);
+                                    dispatch(fetchMenuDishes(restaurantId));
+                                    dispatch(fetchMenuCategories(restaurantId));
+                                    setOpenAddDishModal(false);
+                                    notifySuccess('Страву добавлено');
+                                }}
+                                disabled={dishNameError || dishPriceError || dishTimeError || dishAmountError || dishWeightError || dishCategoryError}
+                                className="bg-teal-600 hover:bg-teal-700 rounded-lg mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
+                                Підтвердити
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div className='flex justify-center'>
-                    <button
-                        onClick={async (e) => {
-                            e.preventDefault();
-                            await addDish(restaurantId, dishCategoryId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo);
-                            dispatch(fetchMenuDishes(restaurantId));
-                            dispatch(fetchMenuCategories(restaurantId));
-                            setOpenAddDishModal(false);
-                            notifySuccess('Страву добавлено');
-                        }}
-                        disabled={dishNameError || dishPriceError || dishTimeError || dishAmountError || dishWeightError || dishCategoryError}
-                        className="bg-teal-600 hover:bg-teal-700 rounded-lg mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
-                        Підтвердити
-                    </button>
-                </div>
+
             </div>
         </Modal>
     )

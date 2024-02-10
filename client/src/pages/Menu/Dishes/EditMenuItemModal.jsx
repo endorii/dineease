@@ -22,10 +22,46 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
     const [dishAmount, setDishAmount] = useState(currentDish.amount);
     const [dishWeight, setDishWeight] = useState(currentDish.weight);
     const [dishCal, setDishCal] = useState(currentDish.calories);
-    const [dishCategory, setdishCategory] = useState(currentDish.toCategory);
+    const [dishCategory, setDishCategory] = useState(currentDish.categoryName);
+    const [dishCategoryId, setDishCategoryId] = useState(currentDish.category);
     const [dishIngredients, setDishIngredients] = useState(currentDish.ingredients);
-    const [dishLogo, setDishLogo] = useState('');
+    const [dishLogo, setDishLogo] = useState(currentDish.logoPath);
 
+    const handleDishName = (e) => {
+        setDishName(e.target.value);
+    };
+
+    const handleDishPrice = (e) => {
+        setDishPrice(e.target.value);
+    };
+
+    const handleDishTime = (e) => {
+        setDishTime(e.target.value);
+    };
+
+    const handleDishAmount = (e) => {
+        setDishAmount(e.target.value);
+    };
+
+    const handleDishWeight = (e) => {
+        setDishWeight(e.target.value);
+    };
+
+    const handleDishCal = (e) => {
+        setDishCal(e.target.value);
+    };
+
+    const handleDishCategory = (e) => {
+        setDishCategory(e.target.value);
+    };
+
+    const handleDishIngredients = (e) => {
+        setDishIngredients(e.target.value);
+    };
+
+    const handleDishLogo = (e) => {
+        setDishLogo(e.target.value);
+    };
     const notifyEdit = (message) => { toast.success(message) };
 
     useEffect(() => {
@@ -36,143 +72,170 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
 
     return (
         <Modal>
-            <div className='flex justify-center'>
-                <div className=""><img className="absolute top-16 right-20 z-20 w-12 cursor-pointer bg-white rounded-3xl" src={Close} alt="" onClick={() => {
-                    setEditModal(false)
-                }} />
+            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%]'>
+                <div className="">
+                    <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer" src={Close} alt="" onClick={() => {
+                        setEditModal(false)
+                    }} />
                 </div>
-                <div className='absolute flex bg-gray-none w-[95%] z-10 rounded-md mt-10'>
-                    <div className="flex justify-around w-full rounded-xl h-full gap-3 p-10">
-                        <div className='w-full flex flex-col p-10 bg-white rounded-xl'>
-                            <div className='text-3xl font-medium text-center'>Змінити страву</div>
-                            <form className='flex flex-wrap justify-around m-10 gap-3' action="">
-                                <div className='flex flex-col w-1/2'>
-                                    <div>
-                                        <label htmlFor="dish_name" className="block text-sm font-medium text-gray-900 mb-1 ">Назва продукту</label>
-                                        <input
-                                            value={dishName}
-                                            onChange={(e) => { setDishName(e.target.value) }}
-                                            type="text"
-                                            id="first_name"
-                                            name="name"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required
-                                        />
-                                        {/* {(nameTouched && nameError) && <div className="text-red-600">{nameError}</div>} */}
-                                    </div>
-                                    <div>
-                                        <label htmlFor="value" className="block text-sm font-medium text-gray-900 mb-1">Ціна</label>
-                                        <input
-                                            value={dishPrice}
-                                            onChange={(e) => { setDishPrice(e.target.value) }}
-                                            type="number"
-                                            name="value"
-                                            id="value"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                                            required />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="time" className="block text-sm font-medium text-gray-900 mb-1">Час приготування</label>
-                                        <input
-                                            value={dishTime}
-                                            onChange={(e) => { setDishTime(e.target.value) }}
-                                            type="number"
-                                            name="time"
-                                            id="time"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                                            required />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="amount" className="block text-sm font-medium text-gray-900 mb-1">Кількість</label>
-                                        <input
-                                            value={dishAmount}
-                                            onChange={(e) => { setDishAmount(e.target.value) }}
-                                            type="number"
-                                            name="amount"
-                                            id="amount"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                                            required />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="weight" className="block text-sm font-medium text-gray-900 mb-1">Вага</label>
-                                        <input
-                                            value={dishWeight}
-                                            onChange={(e) => { setDishWeight(e.target.value) }}
-                                            type="text"
-                                            name="weight"
-                                            id="weight"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                                            required />
-                                    </div>
 
-                                    <div>
-                                        <label htmlFor="cal" className="block text-sm font-medium text-gray-900 mb-1">Калорійність</label>
-                                        <input
-                                            value={dishCal}
-                                            onChange={(e) => { setDishCal(e.target.value) }}
-                                            type="text"
-                                            name="cal"
-                                            id="cal"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                                            required />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="category" className="block text-sm font-medium text-gray-900 mb-1 ">Категорія</label>
-                                        <select id='category'
-                                            value={dishCategory}
-                                            onChange={(e) => setdishCategory(e.target.value)}
-                                            name="category"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required >
-                                            {menuCategories.map((category, i) => {
-                                                return <option key={i} value={category.category}>{category.category}</option>
-                                            })}
-                                        </select>
-                                        {/* {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>} */}
-                                    </div>
-                                </div>
-                                <div className='flex flex-col'>
-                                    <div>
-                                        <label htmlFor="file" className="block text-sm font-medium text-gray-900 mb-1 ">Інгредієнти, (через кому з великої букви)</label>
-                                        <textarea
-                                            value={dishIngredients}
-                                            onChange={(e) => { setDishIngredients([e.target.value]) }}
-                                            className='border p-3'
-                                            name=""
-                                            id=""
-                                            cols="50"
-                                            rows="11">
+                <div>
+                    <div className='text-3xl font-medium text-sky-950 text-center px-12 py-7'>Змінити інформацію про страву</div>
+                    <hr className='border-t-1 border-slate-300' />
+                </div>
 
-                                        </textarea>
-                                        {/* {(nameTouched && nameError) && <div className="text-red-600">{nameError}</div>} */}
-                                    </div>
-                                    <div>
-                                        <label htmlFor="file" className="block text-sm font-medium text-gray-900 mb-1 ">Завантажити фотографію</label>
-                                        <input
-                                            value={dishLogo}
-                                            onChange={(e) => { setDishLogo(e.target.value) }}
-                                            type="file"
-                                            id="file"
-                                            name="file"
-                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required
-                                        />
-                                        {/* {(nameTouched && nameError) && <div className="text-red-600">{nameError}</div>} */}
-                                    </div>
+                <div className='flex flex-col gap-3 px-10 py-7 mt-5'>
+                    <div className='flex gap-2'>
+                        <div className='flex flex-col gap-8'>
+                            <div className='flex gap-5 items-center relative'>
+                                <label htmlFor="dishcategory" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Категорія:</label>
+                                <div className='flex flex-col justify-between'>
+                                    <select id='dishcategory'
+                                        value={dishCategory}
+                                        onChange={(e) => {
+                                            handleDishCategory(e);
+                                            const selectedCategoryId = e.target.value;
+                                            const selectedCategory = menuCategories.find(category => category.category === selectedCategoryId);
+                                            console.log(selectedCategory);
+                                        }}
+                                        name="dishcategory"
+
+                                        className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required >
+                                        {menuCategories.map((category, i) => {
+                                            return <option key={i} value={category.category}>{category.category}</option>
+                                        })}
+                                    </select>
                                 </div>
-                                <button
-                                    onClick={async (e) => {
-                                        e.preventDefault();
-                                        await editDish(restaurantId, currentDish._id, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCategory, dishIngredients, dishLogo);
-                                        dispatch(fetchMenuDishes(restaurantId));
-                                        dispatch(fetchMenuCategories(restaurantId));
-                                        setEditModal(false);
-                                        notifyEdit('Інформацію про страву успішно оновлено!')
-                                    }}
-                                    className="flex items-center bg-green-500 hover:bg-green-600 rounded-lg mt-10 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-green-900/20 disabled:hover:bg-green-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
-                                >Підтвердити зміну
-                                </button>
-                            </form>
+
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishname" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Назва:</label>
+                                <input
+                                    value={dishName}
+                                    onChange={(e) => { handleDishName(e) }}
+                                    type="text"
+                                    id="dishname"
+                                    name="dishname"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                />
+
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishprice" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Ціна:</label>
+                                <input
+                                    value={dishPrice}
+                                    onChange={(e) => { handleDishPrice(e) }}
+                                    type="number"
+                                    name="dishprice"
+                                    id="dishprice"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishtime" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Час:</label>
+                                <input
+                                    value={dishTime}
+                                    onChange={(e) => { handleDishTime(e) }}
+                                    type="number"
+                                    name="dishtime"
+                                    id="dishtime"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+
+                            </div>
+                        </div>
+                        <div className='flex flex-col gap-8'>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishamount" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Кількість:</label>
+                                <input
+                                    value={dishAmount}
+                                    onChange={(e) => { handleDishAmount(e) }}
+                                    type="number"
+                                    name="dishamount"
+                                    id="dishamount"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishweight" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Вага:</label>
+                                <input
+                                    value={dishWeight}
+                                    onChange={(e) => { handleDishWeight(e) }}
+                                    type="text"
+                                    name="dishweight"
+                                    id="dishweight"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishcal" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Калорійність:</label>
+                                <input
+                                    value={dishCal}
+                                    onChange={(e) => { handleDishCal(e) }}
+                                    type="number"
+                                    name="dishcal"
+                                    id="dishcal"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    required />
+
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishlogo" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Фотографія:</label>
+                                <input
+                                    value={dishLogo}
+                                    onChange={(e) => { handleDishLogo(e) }}
+                                    type="file"
+                                    id="dishlogo"
+                                    name="dishlogo"
+
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className='flex mt-5'>
+                        <div className='flex flex-col gap-5 w-[75%] relative'>
+                            <label htmlFor="dishingredients" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Інгредієнти, (через кому):</label>
+                            <textarea
+                                value={dishIngredients}
+                                onChange={(e) => { handleDishIngredients(e) }}
+                                className='border bg-gray-50 border-sky-950 border-4 rounded-xl p-3 h-full'
+                                name="dishingredients"
+                                id="dishingredients"
+                                cols="50"
+                                rows="6">
+
+                            </textarea>
+
+                        </div>
+                        <div className='flex justify-center w-[25%]'>
+                            <button
+                            disabled={!dishName || !dishPrice || !dishTime || !dishAmount || !dishWeight || !dishCal || !dishCategory}
+                                onClick={async (e) => {
+                                    e.preventDefault();
+                                    await editDish(restaurantId, dishCategoryId, currentDish._id, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo);
+                                    dispatch(fetchMenuDishes(restaurantId));
+                                    dispatch(fetchMenuCategories(restaurantId));
+                                    setEditModal(false);
+                                    notifyEdit('Інформацію про страву успішно оновлено!')
+                                }}
+                                className="flex items-center bg-teal-600 hover:bg-teal-700 rounded-lg mt-10 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-green-900/20 disabled:hover:bg-green-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                            >Підтвердити зміну
+                            </button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </Modal>
     )

@@ -59,10 +59,11 @@ router.put(`/menuDishes/:restaurantId/:dishId`,
     async (req, res) => {
         try {
             const { restaurantId, dishId } = req.params;
-            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo } = req.body;
+            const { dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishCategoryId, dishIngredients, dishLogo } = req.body;
 
             const configuredDishData = {
                 restaurant: restaurantId,
+                category: dishCategoryId,
                 categoryName: dishCategory,
                 name: dishName,
                 price: dishPrice,

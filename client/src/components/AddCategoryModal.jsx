@@ -7,6 +7,7 @@ import { addMenuCategory } from '../actions/menu.actions';
 import { fetchMenuDishes } from '../store/slices/menuDishes.slice';
 import toast from 'react-hot-toast';
 import { Modal } from './Modal';
+// import { Transition } from '@headlessui/react'
 
 export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
 
@@ -65,58 +66,65 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
 
     return (
         <Modal>
-            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[40%]'>
+            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl h-[450px]'>
                 <div className="">
-                    <img className="absolute right-2 top-2 z-20 w-12 cursor-pointer bg-white rounded-3xl" src={Close} alt="" onClick={() => {
+                    <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer " src={Close} alt="" onClick={() => {
                         setOpenAddCategoryModal(false)
                     }} />
                 </div>
-                <div className='flex w-auto z-10 rounded-md mt-10'>
-                    <div className="flex justify-around w-full rounded-xl gap-3 p-10">
-                        <div className='p-10 flex flex-col bg-white rounded-xl shadow-xl w-full'>
-                            <div className='text-3xl font-medium text-center text-sky-900'>Додати категорію страв</div>
-                            <form className='flex flex-col justify-center m-10 gap-4 text-sky-900' action="POST">
-                                <div>
-                                    <label htmlFor="categoryname" className="block font-medium mb-1 ">Назва категорії</label>
-                                    <input
-                                        value={categoryName}
-                                        onChange={(e) => { handleCategoryName(e) }}
-                                        type="text"
-                                        name="categoryname"
-                                        id="categoryname"
-                                        onBlur={(e) => { blurHandler(e) }}
-                                        className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required />
-                                    {(categoryNameTouched && categoryNameError) && <div className="text-red-600">{categoryNameError}</div>}
-                                </div>
-                                <div>
-                                    <label htmlFor="categorylogo" className="block font-medium mb-1 ">Завантажити фотографію</label>
-                                    <input
-                                        value={categoryLogo}
-                                        onChange={(e) => { handleCategoryLogo(e) }}
-                                        type="file"
-                                        id="categorylogo"
-                                        name="categorylogo"
-                                        onBlur={(e) => { blurHandler(e) }}
-                                        className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        required
-                                    />
-                                    {(categoryLogoTouched && categoryLogoError) && <div className="text-red-600">{categoryLogoError}</div>}
-                                </div>
-                                <button
-                                    onClick={async (e) => {
-                                        e.preventDefault();
-                                        await addMenuCategory(restaurantId, categoryName, categoryLogo);
-                                        dispatch(fetchMenuCategories(restaurantId));
-                                        dispatch(fetchMenuCategories(restaurantId));
-                                        setOpenAddCategoryModal(false);
-                                        notifySuccess('Категорію додано!');
-                                    }}
-                                    disabled={categoryNameError}
-                                    className="bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 mx-[30%] mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
-                                    Підтвердити
-                                </button>
-                            </form>
+
+                <div>
+                    <div className='text-3xl font-medium text-sky-950 text-center px-12 py-7'>Додати страву</div>
+                    <hr className='border-t-1 border-slate-300' />
+                </div>
+
+
+                <div className='flex flex-col gap-3 px-10 py-7 mt-5'>
+                    <div className='flex gap-2'>
+                        <div className='flex flex-col gap-8'>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishname" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Назва:</label>
+                                <input
+                                    value={categoryName}
+                                    onChange={(e) => { handleCategoryName(e) }}
+                                    type="text"
+                                    id="dishname"
+                                    name="dishname"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={categoryNameTouched && categoryNameError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                />
+                                {(categoryNameTouched && categoryNameError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{categoryNameError}</div>}
+                            </div>
+                            <div className='flex gap-5 items-center justify-between relative'>
+                                <label htmlFor="dishlogo" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Фотографія:</label>
+                                <input
+                                    value={categoryLogo}
+                                    onChange={(e) => { handleCategoryLogo(e) }}
+                                    type="file"
+                                    id="dishlogo"
+                                    name="dishlogo"
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className={categoryLogoTouched && categoryLogoError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                />
+                                {(categoryLogoTouched && categoryLogoError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{categoryLogoError}</div>}
+                            </div>
                         </div>
+
+                    </div>
+                    <div className='flex justify-center'>
+                        <button
+                            onClick={async (e) => {
+                                e.preventDefault();
+                                await addMenuCategory(restaurantId, categoryName, categoryLogo);
+                                dispatch(fetchMenuCategories(restaurantId));
+                                dispatch(fetchMenuCategories(restaurantId));
+                                setOpenAddCategoryModal(false);
+                                notifySuccess('Категорію додано!');
+                            }}
+                            disabled={categoryNameError}
+                            className="bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
+                            Підтвердити
+                        </button>
                     </div>
                 </div>
             </div>

@@ -38,7 +38,7 @@ const Dishes = () => {
 
         <div className="flex flex-col h-full">
             {openAddDishModal && <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />}
-            {openAddCategoryModal && <AddCategoryModal setOpenAddCategoryModal={setOpenAddCategoryModal} />}
+            {openAddCategoryModal && <AddCategoryModal openAddCategoryModal={openAddCategoryModal} setOpenAddCategoryModal={setOpenAddCategoryModal} />}
             <div className='h-full flex flex-col'>
                 <div className='mb-5'>
                     <div className="flex justify-between ">

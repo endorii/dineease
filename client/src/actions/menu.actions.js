@@ -45,9 +45,9 @@ export const deleteDish = async (restaurantId, dishId) => {
     }
 }
 
-export const editDish = async (restaurantId, dishId,  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo) => {
+export const editDish = async (restaurantId, dishCategoryId, dishId, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/menuDishes/${restaurantId}/${dishId}`, {  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo });
+        const response = await axios.put(`http://localhost:5000/api/menuDishes/${restaurantId}/${dishId}`, {  dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishCategoryId, dishIngredients, dishLogo });
         return response.data;
     } catch (e) {
         console.log(e.response.data.message);
