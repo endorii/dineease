@@ -3,8 +3,7 @@ import Close from '../assets/svg/close.svg'
 import { PayNumberPad } from './PayNumberPad'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTotalOrderValue } from '../functions'
-import { closeOrder } from '../actions/orders.actions'
-import { fetchOrders } from '../store/slices/orders.slice'
+import { closeOrder, getOrdersByWaiter } from '../actions/orders.actions'
 import { useParams } from 'react-router-dom'
 import { updateWaiterServedTables } from '../actions/employees.actions'
 
@@ -88,7 +87,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                 await updateWaiterServedTables(user._id, user.workingTime.filter(item => item.entries.end === null)[0].entries.start);
                                 setOpenPayOrder(false);
                                 notifySuccess();
-                                dispatch(fetchOrders(restaurantId));
+                                dispatch(getOrdersByWaiter(restaurantId, user._id));
                             }} disabled={(Number(cardInputValue) + Number(cashInputValue)) < getTotalOrderValue(currentOrder)} className='bg-teal-600 px-6 py-4 text-2xl font-medium hover:bg-teal-700 rounded-md disabled:bg-teal-900/30 disabled:cursor-not-allowed transition ease-out hover:ease-in'>Сплатити замовлення</button>
                         </div>
                     </div>

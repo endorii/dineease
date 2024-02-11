@@ -1,16 +1,10 @@
-// import { MenuItems } from "../../../../functions";
 import Search from '../../../assets/svg/search.svg'
 import { useEffect, useState } from "react";
 import { DishListItem } from "./DishListItem";
-// import { Modal } from '../../../../components/Modal'
-// import { AddDishModal } from "../../../../components/AddDishModal";
-// import { fetchMenu } from "../../../../store/slices/menuSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMenuCategories } from "../../../store/slices/menuCategories.slice";
 import { useParams } from "react-router-dom";
-import Plus from '../../../assets/svg/plus.svg'
 import { AddButton } from '../../../ui/buttons/AddButton';
-import { Modal } from '../../../components/Modal';
 import { AddDishModal } from '../../../components/AddDishModal';
 import { fetchMenuDishes } from '../../../store/slices/menuDishes.slice';
 import { AddCategoryModal } from '../../../components/AddCategoryModal';

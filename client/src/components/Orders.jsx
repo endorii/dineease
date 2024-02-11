@@ -1,20 +1,14 @@
 import { useEffect, useState } from "react"
 import { Modal } from "./Modal";
-// import { NewOrderModal } from "./NewOrderModal";
-// import { PayOrder } from "./PayOrder";
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchOrders } from "../store/slices/orders.slice";
-// import { getTotalOrderValue } from "../functions";
-// import { fetchMenu } from "../store/slices/menuSlice";
-// import { fetchMenuItems } from "../store/slices/menuItemsSlice";
 import { useParams } from "react-router-dom";
 import { NewOrderModal } from "./NewOrderModal";
 import { fetchMenuCategories } from "../store/slices/menuCategories.slice";
 import { PayOrder } from "./PayOrder";
 import { getTotalOrderValue } from "../functions";
-
 import { Toaster } from 'react-hot-toast';
 import { fetchMenuDishes } from "../store/slices/menuDishes.slice";
+import { getOrdersByWaiter } from "../actions/orders.actions";
 
 export const Orders = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
@@ -26,11 +20,12 @@ export const Orders = () => {
     const { restaurantId } = useParams();
 
     const { orders } = useSelector(state => state.orders)
+    const { user } = useSelector(state => state.user)
 
     const openOrders = orders.filter(order => order.isOpen);
 
     useEffect(() => {
-        dispatch(fetchOrders(restaurantId));
+        dispatch(getOrdersByWaiter(restaurantId, user._id));
         dispatch(fetchMenuCategories(restaurantId));
         dispatch(fetchMenuDishes(restaurantId));
     }, [])

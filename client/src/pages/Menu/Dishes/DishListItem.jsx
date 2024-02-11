@@ -1,9 +1,5 @@
 import { useState } from "react"
-// import { deleteMenuItem } from "./menuItemActions";
-// import { fetchMenuItems } from "../../../../store/slices/menuItemsSlice";
 import { useDispatch } from "react-redux";
-// import { Modal } from "../../../../components/Modal";
-// import { EditMenuItemModal } from "./EditMenuItemModal";
 import Info from "../../../assets/svg/info.svg"
 import { Modal } from "../../../components/Modal";
 import { DishInfoModal } from "../../../components/DishInfoModal";
@@ -15,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { EditMenuItemModal } from "./EditMenuItemModal";
 import toast from "react-hot-toast";
 
-export const DishListItem = ({ item, categoryFilter, setCategoryFilter }) => {
+export const DishListItem = ({ item, categoryFilter }) => {
 
     const [openInfo, setOpenInfo] = useState(false);
 

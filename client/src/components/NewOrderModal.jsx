@@ -12,6 +12,7 @@ import { fetchOrders } from '../store/slices/orders.slice';
 
 import toast from 'react-hot-toast';
 import { fetchMenuDishes } from '../store/slices/menuDishes.slice';
+import { getOrdersByWaiter } from '../actions/orders.actions';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     const [guests, setGuests] = useState([]);
@@ -53,7 +54,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     useEffect(() => {
         dispatch(fetchMenuCategories(restaurantId));
         dispatch(fetchMenuDishes(restaurantId));
-        dispatch(fetchOrders(restaurantId));
+        dispatch(getOrdersByWaiter(restaurantId));
     }, [])
 
     return (
