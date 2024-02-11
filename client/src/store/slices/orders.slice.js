@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getOrdersByRestaurant } from '../../actions/orders.actions';
+import { getAllOrders, getOrdersByRestaurant } from '../../actions/orders.actions';
 
 const initialState = {
     orders: [],
@@ -10,7 +10,7 @@ const initialState = {
 export const fetchOrders = createAsyncThunk(
     "orders/fetchOrders",
     async (restaurantId) => {
-        const response = getOrdersByRestaurant(restaurantId);
+        const response = getAllOrders(restaurantId);
         return response;
     }
 )
@@ -18,7 +18,11 @@ export const fetchOrders = createAsyncThunk(
 const ordersSlice = createSlice({
     name: 'orders',
     initialState,
-    reducers: {},
+    reducers: {
+        setOrders(state, action) {
+            state.orders = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchOrders.pending, (state) => {
@@ -35,5 +39,7 @@ const ordersSlice = createSlice({
             })
     },
 })
+
+export const {setOrders} = ordersSlice.actions;
 
 export default ordersSlice.reducer

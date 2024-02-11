@@ -5,11 +5,24 @@ const Order = require('../models/Order');
 
 const router = new Router();
 
-router.get('/orders/:restaurantId', authMiddleware, async (req, res) => {
+router.get('/orders/:restaurantId', async (req, res) => {
     try {
         const { restaurantId } = req.params;
 
-        const orders = await Order.find({ restaurant: restaurantId, waiter: req.user._id });
+        const orders = await Order.find({ restaurant: restaurantId});
+        return res.json({ orders });
+
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.get('/orders/:restaurantId/:waiterId', async (req, res) => {
+    try {
+        const { restaurantId, waiterId } = req.params;
+
+        const orders = await Order.find({ restaurant: restaurantId, waiter: waiterId });
         return res.json({ orders });
 
     } catch (e) {
@@ -44,11 +57,10 @@ router.post('/orders/:restaurantId',
     }
 );
 
-router.put('/orders/:restaurantId',
+router.put('/orders/:restaurantId/:orderId',
     async (req, res) => {
         try {
-            const { restaurantId } = req.params;
-            const { orderId } = req.body;
+            const { restaurantId, orderId } = req.params;
 
             const order = await Order.findOneAndUpdate(
                 { restaurant: restaurantId, _id: orderId, isOpen: true },
@@ -56,9 +68,25 @@ router.put('/orders/:restaurantId',
                 { new: true }
             );
 
-            await order.save();
-
             return res.json({ message: "Замовлення закрито" });
+
+        } catch (e) {
+            console.log(e);
+            res.send({ message: "Server error" });
+        }
+    }
+);
+
+router.delete('/orders/:restaurantId/:orderId',
+    async (req, res) => {
+        try {
+            const { restaurantId, orderId} = req.params;
+
+            const order = await Order.findOneAndDelete(
+                { restaurant: restaurantId, _id: orderId },
+            );
+
+            return res.json({ message: "Замовлення видалено" });
 
         } catch (e) {
             console.log(e);
