@@ -25,7 +25,7 @@ export const Orders = () => {
     const openOrders = orders.filter(order => order.isOpen);
 
     useEffect(() => {
-        dispatch(getOrdersByWaiter(restaurantId, user._id));
+        dispatch(getOrdersByWaiter(restaurantId));
         dispatch(fetchMenuCategories(restaurantId));
         dispatch(fetchMenuDishes(restaurantId));
     }, [])

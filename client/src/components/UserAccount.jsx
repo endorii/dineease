@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { logout } from '../store/slices/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
+import { experienceCounter } from '../functions';
 
 const UserAccount = () => {
 
@@ -14,20 +15,7 @@ const UserAccount = () => {
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
 
-    const experienceCounter = (experience) => {
-        let lastDigit = experience % 10;
-        let lastTwoDigits = experience % 100;
-
-        if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
-            return `${experience} років`;
-        } else if (lastDigit === 1) {
-            return `${experience} рік`;
-        } else if (lastDigit >= 2 && lastDigit <= 4) {
-            return `${experience} роки`;
-        } else {
-            return `${experience} років`;
-        }
-    }
+    
 
     useEffect(() => {
         if (!token) {

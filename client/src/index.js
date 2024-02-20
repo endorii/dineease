@@ -19,6 +19,8 @@ import { Needs } from './components/Needs';
 import { Feedback } from './components/Feedback';
 import UserAccount from './components/UserAccount';
 import { Sales } from './components/Sales';
+import AccountantPanel from './components/AccountantPanel';
+import { AccountantEmployees } from './components/AccountantEmployees';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -43,8 +45,12 @@ const router = createBrowserRouter(
                 <Route path='information' element={<UserAccount />} />
 
             </Route>
-            <Route path=':restaurantId/Accountant/panel' element={<Account />}>
-
+            <Route path=':restaurantId/Accountant/panel' element={<AccountantPanel />}>
+                <Route path='sales' element={<Sales />} />
+                <Route path='checks' element={<Checks />} />
+                <Route path='hours' element={<Dishes />} />
+                <Route path='employees' element={<AccountantEmployees />} />
+                <Route path='information' element={<UserAccount />} />
             </Route>
         </>
     )

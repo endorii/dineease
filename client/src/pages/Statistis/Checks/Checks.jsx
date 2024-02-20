@@ -5,7 +5,7 @@ import TrashDone from "../../../assets/svg/trashDone.svg"
 import { fetchOrders } from "../../../store/slices/orders.slice";
 import Info from "../../../assets/svg/info.svg"
 import { ConfirmModal } from "../../../components/ConfirmModal";
-import { closeOrder, deleteOrder } from "../../../actions/orders.actions";
+import { deleteOrder } from "../../../actions/orders.actions";
 import toast from "react-hot-toast";
 import { OrderInfoModal } from "../../../components/OrderInfoModal";
 
@@ -73,9 +73,7 @@ export const Checks = () => {
                                 <th scope="col" className="px-1 py-3 text-center">
                                     Стан
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
-
-                                </th>
+                                <th scope="col" className="px-1 py-3 text-center"></th>
                             </tr>
                         </thead>
                         {orders.length > 0 ? orders.map((order, i) =>

@@ -135,7 +135,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                             notifySuccess();
                                             configureOrder(restaurantId, guests, currentTable, user._id);
                                             setOpenNewOrderMenu(false);
-                                            dispatch(fetchOrders(restaurantId));
+                                            dispatch(getOrdersByWaiter(restaurantId));
                                         }} className="w-full bg-teal-700 hover:bg-teal-800 p-3 rounded-lg text-white font-medium transition ease-out hover:ease-in disabled:bg-teal-900/40 disabled:cursor-not-allowed">
                                             Відправити на кухню
                                         </button>

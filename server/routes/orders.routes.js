@@ -18,7 +18,20 @@ router.get('/orders/:restaurantId', async (req, res) => {
     }
 });
 
-router.get('/orders/:restaurantId/:waiterId', async (req, res) => {
+router.get('/orders/:restaurantId/waiter', authMiddleware, async (req, res) => {
+    try {
+        const { restaurantId } = req.params;
+
+        const orders = await Order.find({ restaurant: restaurantId, waiter: req.user._id });
+        return res.json({ orders });
+
+    } catch (e) {
+        console.error(e);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+router.get('/orders/:restaurantId/:waiterId', authMiddleware, async (req, res) => {
     try {
         const { restaurantId, waiterId } = req.params;
 

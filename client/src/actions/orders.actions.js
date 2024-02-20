@@ -11,10 +11,23 @@ export const getAllOrders = async (restaurantId) => {
     }
 }
 
-export const getOrdersByWaiter = (restaurantId, waiterId) => {
+export const getOrdersByWaiter = (restaurantId) => {
     return async dispatch => {
         try {
-            const response = await axios.get(`http://localhost:5000/api/orders/${restaurantId}/${waiterId}`);
+            const response = await axios.get(`http://localhost:5000/api/orders/${restaurantId}/waiter`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
+            dispatch(setOrders(response.data.orders));
+            return response.data.orders;
+
+        } catch (e) {
+            console.log(e.response.data.message);
+        }
+    }
+}
+
+export const getOrdersByWaiterId = (restaurantId, waiterId) => {
+    return async dispatch => {
+        try {
+            const response = await axios.get(`http://localhost:5000/api/orders/${restaurantId}/${waiterId}`, {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}});
             dispatch(setOrders(response.data.orders));
             return response.data.orders;
 

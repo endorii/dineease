@@ -1,22 +1,11 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import AddEmployee from '../../../components/AddEmployee';
-import { deleteEmployee } from '../../../actions/employees.actions';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
-import { AddButton } from '../../../ui/buttons/AddButton';
-import { Modal } from '../../../components/Modal';
-import EditEmployee from './EditEmployee';
-import { fetchEmployees } from '../../../store/slices/employees.slice';
-import { ConfirmModal } from '../../../components/ConfirmModal';
-import toast from 'react-hot-toast';
+import { fetchEmployees } from '../store/slices/employees.slice';
+import { EmployeeInformation } from './EmployeeInformation';
 
-const Employees = () => {
-    const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
-    const [editEmployeeModalOpen, setEditEmployeeModalOpen] = useState(false);
-    const [currentEmployee, setCurrentEmployee] = useState(null);
-    const [deleteEmployeeModalOpen, setDeleteEmployeeModalOpen] = useState(false);
+export const AccountantEmployees = () => {
 
     const dispatch = useDispatch();
 
@@ -24,40 +13,21 @@ const Employees = () => {
 
     const { employees } = useSelector(state => state.employees);
 
-    const notifyConfirm = (message) => {toast.success(message)}
+    const [openInfo, setOpenInfo] = useState(false);
+    const [currentEmployee, setCurrentEmployee] = useState(false);
 
     useEffect(() => {
         dispatch(fetchEmployees(restaurantId));
+     
     }, []);
 
     return (
         <>
-            {addEmployeeModalOpen &&
-                <Modal>
-                    <AddEmployee setOpen={setAddEmployeeModalOpen} />
-                </Modal>
-            }
-            {editEmployeeModalOpen &&
-                <Modal>
-                    <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
-                </Modal>
-            }
-            {deleteEmployeeModalOpen &&
-                <ConfirmModal
-                    setModalOpen={setDeleteEmployeeModalOpen}
-                    onConfirm={async () => {
-                        await deleteEmployee(currentEmployee._id);
-                        dispatch(fetchEmployees(restaurantId));
-                        notifyConfirm('Робітника звільнено.');
-                        setDeleteEmployeeModalOpen(false);
-                    }}
-                />
-            }
 
+        {openInfo && <EmployeeInformation employee={currentEmployee} setOpenInfo={setOpenInfo}/>}
             <div className='flex flex-col' >
                 <div className="flex justify-between ">
                     <h2 className="text-3xl font-medium text-sky-950">Працівники</h2>
-                    <AddButton customFunction={setAddEmployeeModalOpen} buttonText={"Додати"}/>
                 </div>
                 <hr className='border-t-1 border-slate-300 my-10' />
 
@@ -75,19 +45,13 @@ const Employees = () => {
                                     Логін
                                 </th>
                                 <th scope="col" className="px-6 py-3">
-                                    Пінкод
-                                </th>
-                                <th scope="col" className="px-6 py-3">
                                     Посада
                                 </th>
                                 <th scope="col" className="px-1 py-3">
                                     Востаннє здійснено вхід
                                 </th>
                                 <th scope="col" className="px-1 py-1">
-                                    <span className="sr-only">Змінити</span>
-                                </th>
-                                <th scope="col" className="px-1 py-1">
-                                    <span className="sr-only">Опції</span>
+                                    <span className="sr-only"></span>
                                 </th>
                             </tr>
                         </thead>
@@ -101,28 +65,19 @@ const Employees = () => {
                                         {employee.email ? employee.email : "-"}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {employee.pin ? employee.pin : "-"}
-                                    </td>
-                                    <td className="px-6 py-4">
                                         {employee.position}
                                     </td>
                                     <td className="px-1 py-4">
                                         {employee.workingTime[employee.workingTime.length - 1]?.entries.start} | {employee.workingTime[employee.workingTime.length - 1]?.date}
                                     </td>
-                                    <td className="px-2 py-1 text-right">
+                                    <td className="px-2 py-1 text-center">
                                         <button onClick={async () => {
-                                            setCurrentEmployee(employee)
-                                            setEditEmployeeModalOpen(true);
+                                            setCurrentEmployee(employee);
+                                            setOpenInfo(!openInfo);
                                             dispatch(fetchEmployees(restaurantId));
                                         }}
 
-                                            className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
-                                    </td>
-                                    <td className="px-2 py-1 text-left">
-                                        <button onClick={() => {
-                                            setCurrentEmployee(employee);
-                                            setDeleteEmployeeModalOpen(true);
-                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in">Видалити</button>
+                                            className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Інформація</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -135,5 +90,3 @@ const Employees = () => {
         </>
     )
 }
-
-export default Employees;

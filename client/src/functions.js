@@ -62,3 +62,18 @@ export const formatDateString = (inputDate) => {
         return date.toLocaleDateString("uk-UA", { day: "numeric", month: "numeric", year: "numeric" });
     }
 };
+
+export const experienceCounter = (experience) => {
+    let lastDigit = experience % 10;
+    let lastTwoDigits = experience % 100;
+
+    if (lastTwoDigits >= 11 && lastTwoDigits <= 14) {
+        return `${experience} років`;
+    } else if (lastDigit === 1) {
+        return `${experience} рік`;
+    } else if (lastDigit >= 2 && lastDigit <= 4) {
+        return `${experience} роки`;
+    } else {
+        return `${experience} років`;
+    }
+}

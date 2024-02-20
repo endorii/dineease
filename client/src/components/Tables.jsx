@@ -9,6 +9,9 @@ import { fetchOrders } from '../store/slices/orders.slice';
 import { useParams } from "react-router-dom";
 import { NewOrderModal } from './NewOrderModal';
 import { Toaster } from 'react-hot-toast';
+import { getOrdersByWaiter } from '../actions/orders.actions';
+import { fetchMenuCategories } from '../store/slices/menuCategories.slice';
+import { fetchMenuDishes } from '../store/slices/menuDishes.slice';
 
 export const Tables = () => {
 
@@ -63,8 +66,8 @@ export const Tables = () => {
 
     useEffect(() => {
         dispatch(fetchOrders(restaurantId));
-        // dispatch(fetchMenu());
-        // dispatch(fetchMenuItems());
+        dispatch(fetchMenuCategories(restaurantId));
+        dispatch(fetchMenuDishes(restaurantId));
     }, [])
 
     return (
