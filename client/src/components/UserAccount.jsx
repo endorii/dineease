@@ -15,13 +15,7 @@ const UserAccount = () => {
     const { user } = useSelector(state => state.user);
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
-
-
     const [date, setDate] = useState(new Date());
-    const dates = user.workingTime.map(item => {
-        const [day, month, year] = item.date.split(".");
-        return new Date(year, month - 1, day);
-    });
 
     const onChange = date => setDate(date);
 
@@ -31,12 +25,20 @@ const UserAccount = () => {
         }
     }
 
+    const dates = user?.workingTime ? user.workingTime.map(item => {
+        const [day, month, year] = item.date.split(".");
+        return new Date(year, month - 1, day);
+    }) : [];
+
     useEffect(() => {
         if (!token) {
             navigate('/')
         }
+    }, [token]);
+
+    useEffect(() => {
         dispatch(auth());
-    }, [token])
+    }, []);
 
     return (
         <div className='flex flex-col h-full' >
@@ -146,7 +148,6 @@ const UserAccount = () => {
                                 />
                                 <style>{`
                                             .react-calendar {
-                                            
                                                 border: none;
                                                 margin: 30px
                                             }

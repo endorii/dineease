@@ -14,12 +14,16 @@ const WorkingTime = new Schema({
 const Employee = new Schema({
     name: String,
     age: Number,
+    location: String,
     experience: String,
     isOnline: { type: Boolean, default: false },
     email: String,
     password: String,
     position: String,
     pin: String,
+    phone: String,
+    registrationDate: String,
+    typeOfWorkingTime: String,
     restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
     salary: String,
     workingTime: [WorkingTime]

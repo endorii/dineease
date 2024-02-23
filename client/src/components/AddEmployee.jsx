@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 const AddEmployee = ({ setOpen }) => {
 
-    const { restaurantId } = useParams();
+    const { restaurantId } = useParams()
 
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
@@ -23,6 +23,12 @@ const AddEmployee = ({ setOpen }) => {
     const [email, setEmail] = useState('');
     const [pin, setPin] = useState('');
 
+    const [location, setLocation] = useState('');
+    const [phone, setPhone] = useState('+');
+    const [typeOfWorking, setTypeOfWorking] = useState('Повний робочий день');
+
+    const [registrationDate, setRegistrationDate] = useState('');
+
     const [nameTouched, setNameTouched] = useState(false);
     const [ageTouched, setAgeTouched] = useState('');
     const [restaurantTouched, setRestaurantTouched] = useState('');
@@ -33,6 +39,10 @@ const AddEmployee = ({ setOpen }) => {
     const [emailTouched, setEmailTouched] = useState(false);
     const [pinTouched, setPinTouched] = useState(false);
 
+    const [locationTouched, setLocationTouched] = useState(false);
+    const [phoneTouched, setPhoneTouched] = useState(false);
+    const [typeOfWorkingTouched, setTypeOfWorkingTouched] = useState(false);
+
     const [nameError, setNameError] = useState('Поле не може бути пустим');
     const [ageError, setAgeError] = useState('Поле не може бути пустим');
     const [restaurantError, setRestaurantError] = useState('Поле не може бути пустим');
@@ -42,6 +52,10 @@ const AddEmployee = ({ setOpen }) => {
     const [passwordError, setPasswordError] = useState('Поле не може бути пустим');
     const [emailError, setEmailError] = useState('Поле не може бути пустим');
     const [pinError, setPinError] = useState('Поле не може бути пустим');
+
+    const [locationError, setLocationError] = useState('Поле не може бути пустим');
+    const [phoneError, setPhoneError] = useState('Поле не може бути пустим');
+    const [typeOfWorkingError, setTypeOfWorkingError] = useState('Поле не може бути пустим');
 
     const dispatch = useDispatch();
 
@@ -108,6 +122,26 @@ const AddEmployee = ({ setOpen }) => {
         }
     }
 
+    const handlePhoneNumber = (e) => {
+        setPhone(e.target.value);
+        const re = /^\+380\d{9}$/;
+        if (!re.test(String(e.target.value))) {
+            setPhoneError('Невірно введено номер телефону')
+        } else {
+            setPhoneError('')
+        }
+    }
+
+    const handleLocation = (e) => {
+        setLocation(e.target.value);
+        const re = /^[a-zA-Zа-яА-Я0-9\s,.'-]{3,}$/;
+        if (!re.test(String(e.target.value))) {
+            setLocationError('Невірно введено адресу')
+        } else {
+            setLocationError('')
+        }
+    }
+
     const handleSalary = (e) => {
         setSalary(e.target.value);
         const re = /^\d+$/;
@@ -128,7 +162,6 @@ const AddEmployee = ({ setOpen }) => {
         }
     }
 
-
     const blurHandler = (e) => {
         switch (e.target.name) {
             case 'name':
@@ -148,6 +181,15 @@ const AddEmployee = ({ setOpen }) => {
                 break;
             case 'salary':
                 setSalaryTouched(true);
+                break;
+            case 'typeOfWorking':
+                setTypeOfWorkingTouched(true);
+                break;
+            case 'phone':
+                setPhoneTouched(true);
+                break;
+            case 'location':
+                setLocationTouched(true);
                 break;
             case 'password':
                 setPasswordTouched(true);
@@ -210,6 +252,19 @@ const AddEmployee = ({ setOpen }) => {
                                 {(ageTouched && ageError) && <div className="text-red-600">{ageError}</div>}
                             </li>
                             <li>
+                                <label htmlFor="location" className="block font-medium mb-1">Місце проживання</label>
+                                <input
+                                    value={location}
+                                    onChange={(e) => handleLocation(e)}
+                                    type="text"
+                                    id="location"
+                                    name="location"
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required
+                                    onBlur={(e) => { blurHandler(e) }}
+                                />
+                                {(locationTouched && locationError) && <div className="text-red-600">{locationError}</div>}
+                            </li>
+                            <li>
                                 <label htmlFor="restaurant" className="block font-medium mb-1">Ресторан</label>
                                 <input
                                     disabled
@@ -239,6 +294,19 @@ const AddEmployee = ({ setOpen }) => {
                         </div>
                         <div className="flex flex-col gap-5 w-full">
                             <li>
+                                <label htmlFor="phone" className="block font-medium mb-1">Телефон</label>
+                                <input
+                                    value={phone}
+                                    onChange={(e) => handlePhoneNumber(e)}
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required
+                                    onBlur={(e) => { blurHandler(e) }}
+                                />
+                                {(phoneTouched && phoneError) && <div className="text-red-600">{phoneError}</div>}
+                            </li>
+                            <li>
                                 <label htmlFor="position" className="block font-medium mb-1 ">Посада</label>
                                 <select id='positions'
                                     value={position}
@@ -251,6 +319,20 @@ const AddEmployee = ({ setOpen }) => {
                                     <option value="Accountant">Accountant</option>
                                 </select>
                                 {/* {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>} */}
+                            </li>
+                            <li>
+                                <label htmlFor="typeOfWorking" className="block font-medium mb-1 ">Тип часу роботи</label>
+                                <select id='typeOfWorking'
+                                    value={typeOfWorking}
+                                    name="typeOfWorking"
+                                    onChange={(e) => setTypeOfWorking(e.target.value)}
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required >
+                                    <option value="Не повний робочий день">Не повний робочий день</option>
+                                    <option value="Повний робочий день">Повний робочий день</option>
+                                    <option value="Понаднормова зміна">Понаднормова зміна</option>
+                                </select>
+                                {(typeOfWorkingTouched && typeOfWorkingError) && <div className="text-red-600">{typeOfWorkingError}</div>}
                             </li>
                             <li>
                                 <label htmlFor="salary" className="block font-medium mb-1">Зарплата</label>
@@ -309,15 +391,21 @@ const AddEmployee = ({ setOpen }) => {
 
                     <button disabled={nameError || ageError || experienceError} className="flex items-center bg-teal-700 hover:bg-teal-800 rounded-lg mb-7 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed transition ease-out hover:ease-in"
                         onClick={async () => {
-                            await addEmployee(name,
+                            await addEmployee(
+                                name,
                                 age,
+                                location,
                                 restaurantId,
                                 experience,
+                                phone,
                                 position,
+                                typeOfWorking,
                                 salary,
                                 password,
                                 email,
-                                pin);
+                                pin,
+                                registrationDate
+                            );
 
                             dispatch(fetchRestaurants(restaurantId));
                             notifyConfirm('Користувача створено!');

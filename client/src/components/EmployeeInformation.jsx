@@ -79,11 +79,11 @@ export const EmployeeInformation = ({ employee, setOpenInfo }) => {
                                         <div className='flex gap-5 pb-5'>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800 '>Ресторан</p>
-                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>restaurant.name</p>
+                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{employee.restaurant}</p>
                                             </div>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800 '>Дата реєстрації</p>
-                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.registrationDate</p>
+                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{employee.registrationDate}</p>
                                             </div>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800 '>ID робітника</p>
@@ -97,7 +97,7 @@ export const EmployeeInformation = ({ employee, setOpenInfo }) => {
                                         <div className='flex gap-5 pb-5'>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800 '>Тип часу роботи</p>
-                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>Повний робочий день</p>
+                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{employee.typeOfWorkingTime}</p>
                                             </div>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800 '>Професія</p>
@@ -105,7 +105,7 @@ export const EmployeeInformation = ({ employee, setOpenInfo }) => {
                                             </div>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800 '>Локація</p>
-                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.restaurant.location</p>
+                                                <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{employee.location}</p>
                                             </div>
                                             <div className='p-3'>
                                                 <p className='font-medium text-xl text-sky-800'>Стаж роботи</p>
@@ -138,7 +138,7 @@ export const EmployeeInformation = ({ employee, setOpenInfo }) => {
                                 <div className="flex px-7">
                                     
                                     <div className="w-full h-full">
-                                        <Line className='p-5' data={data}></Line>
+                                        {/* <Line className='p-5' data={data}></Line> */}
                                     </div>
                                 </div>
                             </div> : null}

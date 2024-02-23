@@ -28,7 +28,7 @@ router.get('/employees/:restaurantId',
 router.post('/employees',
     async (req, res) => {
         try {
-            const { name, age, restaurantId, experience, position, salary, password, email, pin } = req.body;
+            const { name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin, registrationDate } = req.body;
 
             const candidate = await Employee.findOne({ pin: pin });
 
@@ -36,7 +36,7 @@ router.post('/employees',
                 return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${email} вже існує` })
             }
 
-            const employeeData = { name, age, restaurant: restaurantId, experience, position, salary };
+            const employeeData = { name, age, location, restaurant: restaurantId, experience, phone, position, typeOfWorkingTime, salary, registrationDate };
 
             if (email) {
                 employeeData.email = email;
@@ -62,7 +62,6 @@ router.post('/employees',
         }
     }
 )
-
 
 router.put('/employees/:_id', authMiddleware,
     async (req, res) => {
@@ -98,7 +97,6 @@ router.put('/employees/:_id', authMiddleware,
     }
 )
 
-
 router.delete('/employees/:_id', authMiddleware,
     async (req, res) => {
         try {
@@ -115,7 +113,7 @@ router.delete('/employees/:_id', authMiddleware,
             console.log(e);
             res.send({ message: "Server error" });
         }
-    });
+});
 
 router.put('/employees/:employeeId/updateStartWorkingTime', authMiddleware, async (req, res) => {
     try {

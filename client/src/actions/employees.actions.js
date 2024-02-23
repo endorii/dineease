@@ -1,9 +1,9 @@
 import axios from "axios"
 import { setEmployeesByRestaurant } from "../store/slices/employees.slice";
 
-export const addEmployee = async (name, age, restaurantId, experience, position, salary, password, email, pin) => {
+export const addEmployee = async (name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email,pin, registrationDate) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/employees", { name, age, restaurantId, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.post("http://localhost:5000/api/employees", { name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin, registrationDate }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
 
         console.log(response.data.message);
     } catch (e) {
