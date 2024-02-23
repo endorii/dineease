@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Logout from '../assets/svg/logout.svg';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import { logout } from '../store/slices/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../actions/user.actions';
 import { experienceCounter } from '../functions';
+import Calendar from 'react-calendar';
 
 const UserAccount = () => {
 
@@ -15,7 +16,20 @@ const UserAccount = () => {
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
 
-    
+
+    const [date, setDate] = useState(new Date());
+    const dates = user.workingTime.map(item => {
+        const [day, month, year] = item.date.split(".");
+        return new Date(year, month - 1, day);
+    });
+
+    const onChange = date => setDate(date);
+
+    const tileClassName = ({ date, view }) => {
+        if (dates.find(d => d.getTime() === date.getTime())) {
+            return 'highlight';
+        }
+    }
 
     useEffect(() => {
         if (!token) {
@@ -39,7 +53,7 @@ const UserAccount = () => {
             </div>
             <hr className='border-t-1 border-slate-300 my-5' />
 
-            <div className='flex flex-col p-10 gap-5 overflow-y-scroll'>
+            <div className='flex flex-col pb-10 gap-5 overflow-y-scroll'>
 
                 <div className='flex gap-5 justify-center w-full'>
                     <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
@@ -120,13 +134,29 @@ const UserAccount = () => {
                         </div>
                     </div>
                     <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
-                        <div className='p-3'>
-                            <p className='font-medium text-2xl text-center mb-5'>Ще деяка інформація</p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam eligendi autem earum esse quam provident nam inventore culpa quas tempore aspernatur cum laboriosam, cupiditate deserunt, officiis odio impedit ipsam dolores.
-                            Et neque unde possimus quisquam mollitia explicabo eveniet in nisi, vero totam. Eligendi explicabo consequatur adipisci dolorum vitae, facere obcaecati deserunt! Culpa possimus, repudiandae quae at eos a tenetur quasi.
-                            Voluptatem id earum nam quis optio obcaecati aliquid consequuntur laborum at fugiat, veniam atque repudiandae maiores et, alias ducimus saepe excepturi molestias perferendis cupiditate quibusdam voluptas iusto. Nulla, maxime optio.
-                            Amet possimus, nesciunt minus sunt soluta, ut nisi sit ipsa asperiores dolorem pariatur veritatis architecto voluptate, eos aperiam illo. Eligendi quae voluptatibus eveniet officia harum laboriosam accusamus quidem quibusdam illo.
-                            Non, dignissimos quos quis molestias voluptas, nisi ipsa quasi, totam possimus velit tenetur provident eius. Veniam, soluta? Aut, nisi, deleniti nemo libero ex cum aliquid accusantium odit commodi, non sunt!
+                        <div className="flex flex-col items-center">
+                            <div>
+                                <h3 className="text-2xl font-medium px-10 py-5">Робочі години та відвідуваність:</h3>
+                            </div>
+                            <div className="bg-white rounded-xl shadow-lg m-5 p-5">
+                                <Calendar
+                                    onChange={onChange}
+                                    value={date}
+                                    tileClassName={tileClassName}
+                                />
+                                <style>{`
+                                            .react-calendar {
+                                            
+                                                border: none;
+                                                margin: 30px
+                                            }
+                                            .highlight {
+                                            background: rgb(8 47 73);;
+                                            color: white;
+                                            }
+                            
+                                        `}</style>
+                            </div>
                         </div>
                     </div>
                 </div>

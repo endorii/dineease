@@ -153,67 +153,68 @@ export const Sales = () => {
     const yearlyProfitAndLoss = calculateProfitAndLoss(Object.values(yearlySales));
 
     return (
-        <div className='h-full overflow-y-scroll'>
-            <h2 className="text-3xl font-medium">Статистика продажів</h2>
-            <hr className='border-t-1 border-slate-300 my-6' />
-            <div className='grid grid-cols-4 gap-5 w-full h-full p-5'>
-                <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
-                    <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
-                        За день:
-                    </div>
-                    <Line className='p-5' data={dataDaily}></Line>
-                    <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
-                        <div className='p-3 bg-teal-700/80 rounded-md text-white'>
-                            Прибуток: {dailyProfitAndLoss.profit}$
-                        </div>
-                        <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
-                            Втрати: {dailyProfitAndLoss.loss}$
-                        </div>
-                    </div>
-                </div>
-                <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
-                    <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
-                        За тиждень:
-                    </div>
-                    <Line className='p-5' data={dataWeekly}></Line>
-                    <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
-                        <div className='p-3 bg-teal-700/80 rounded-md text-white'>
-                            Прибуток: {weeklyProfitAndLoss.profit}$
-                        </div>
-                        <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
-                            Втрати: {weeklyProfitAndLoss.loss}$
-                        </div>
-                    </div>
-                </div>
-                <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
-                    <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
-                        За місяць:
-                    </div>
-                    <Line className='p-5' data={dataMonthly}></Line>
-                    <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
-                        <div className='p-3 bg-teal-700/80 rounded-md text-white'>
-                            Прибуток: {monthlyProfitAndLoss.profit}$
-                        </div>
-                        <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
-                            Втрати: {monthlyProfitAndLoss.loss}$
-                        </div>
-                    </div>
-                </div>
-                <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
-                    <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
-                        За рік:
-                    </div>
-                    <Line className='p-5 ' data={dataYearly}></Line>
-                    <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
-                        <div className='p-3 bg-teal-700/80 rounded-md text-white'>
-                            Прибуток: {yearlyProfitAndLoss.profit}$
-                        </div>
-                        <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
-                            Втрати: {yearlyProfitAndLoss.loss}$
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        null
+        // <div className='h-full overflow-y-scroll'>
+        //     <h2 className="text-3xl font-medium">Статистика продажів</h2>
+        //     <hr className='border-t-1 border-slate-300 my-6' />
+        //     <div className='grid grid-cols-4 gap-5 w-full h-full p-5'>
+        //         <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
+        //             <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
+        //                 За день:
+        //             </div>
+        //             <Line className='p-5' data={dataDaily}></Line>
+        //             <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
+        //                 <div className='p-3 bg-teal-700/80 rounded-md text-white'>
+        //                     Прибуток: {dailyProfitAndLoss.profit}$
+        //                 </div>
+        //                 <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
+        //                     Втрати: {dailyProfitAndLoss.loss}$
+        //                 </div>
+        //             </div>
+        //         </div>
+        //         <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
+        //             <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
+        //                 За тиждень:
+        //             </div>
+        //             <Line className='p-5' data={dataWeekly}></Line>
+        //             <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
+        //                 <div className='p-3 bg-teal-700/80 rounded-md text-white'>
+        //                     Прибуток: {weeklyProfitAndLoss.profit}$
+        //                 </div>
+        //                 <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
+        //                     Втрати: {weeklyProfitAndLoss.loss}$
+        //                 </div>
+        //             </div>
+        //         </div>
+        //         <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
+        //             <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
+        //                 За місяць:
+        //             </div>
+        //             <Line className='p-5' data={dataMonthly}></Line>
+        //             <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
+        //                 <div className='p-3 bg-teal-700/80 rounded-md text-white'>
+        //                     Прибуток: {monthlyProfitAndLoss.profit}$
+        //                 </div>
+        //                 <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
+        //                     Втрати: {monthlyProfitAndLoss.loss}$
+        //                 </div>
+        //             </div>
+        //         </div>
+        //         <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
+        //             <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl'>
+        //                 За рік:
+        //             </div>
+        //             <Line className='p-5 ' data={dataYearly}></Line>
+        //             <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
+        //                 <div className='p-3 bg-teal-700/80 rounded-md text-white'>
+        //                     Прибуток: {yearlyProfitAndLoss.profit}$
+        //                 </div>
+        //                 <div className='p-3 bg-yellow-600/80 rounded-md text-white'>
+        //                     Втрати: {yearlyProfitAndLoss.loss}$
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
     );
 };

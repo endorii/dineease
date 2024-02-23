@@ -43,9 +43,9 @@ export const Checks = () => {
 
             <div className="flex flex-col h-full">
                 <h2 className="text-3xl font-medium">Замовлення та чеки</h2>
-                <hr className='border-t-1 border-slate-300 my-10' />
-                <div className='flex gap-3 items-center flex-wrap px-3 pb-10'>
-                    <div className='px-4 py-2 text-gray-500'>
+                <hr className='border-t-1 border-slate-300 my-5' />
+                <div className='flex gap-3 items-center flex-wrap pb-5'>
+                    <div className='py-2 text-gray-500'>
                         Фільтри:
                     </div>
                     <div className='px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer' onClick={() => { setOrderState('all') }}>

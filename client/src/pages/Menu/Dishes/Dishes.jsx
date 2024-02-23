@@ -42,10 +42,10 @@ const Dishes = () => {
                             <AddButton customFunction={setOpenAddCategoryModal} buttonText={'Додати категорію'}/>
                         </div>
                     </div>
-                    <hr className='border-t-1 border-slate-300 my-10' />
-                    <div className="flex w-full justify-between px-3 pb-4">
+                    <hr className='border-t-1 border-slate-300 my-5' />
+                    <div className="flex w-full justify-between">
                         <div className='flex gap-3 items-center flex-wrap'>
-                            <div className='px-4 py-2 text-gray-500'>
+                            <div className='py-2 text-gray-500'>
                                 Фільтри:
                             </div>
                             <div className='px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer' onClick={() => { setCategoryFilter('all') }}>
@@ -69,6 +69,9 @@ const Dishes = () => {
                 </div>
                 <div className="overflow-y-scroll shadow-md gap-5 rounded-md">
                     <div className='w-full text-blue-100 '>
+                    <div className='px-5 py-3 text-xl bg-sky-950 text-sky-100'>
+                        Список пропозицій
+                    </div>
                         <table className="w-full text-left">
                             <thead className="text-xs text-gray-700 uppercase bg-sky-900/20 ">
                                 <tr>

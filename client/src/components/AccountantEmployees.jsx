@@ -18,7 +18,6 @@ export const AccountantEmployees = () => {
 
     useEffect(() => {
         dispatch(fetchEmployees(restaurantId));
-     
     }, []);
 
     return (
@@ -85,7 +84,6 @@ export const AccountantEmployees = () => {
                     </table>
                     {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Працівників не знайдено</h2>}
                 </div>
-
             </div>
         </>
     )
