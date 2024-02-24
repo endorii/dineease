@@ -28,7 +28,7 @@ router.get('/employees/:restaurantId',
 router.post('/employees',
     async (req, res) => {
         try {
-            const { name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin, registrationDate } = req.body;
+            const { name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin } = req.body;
 
             const candidate = await Employee.findOne({ pin: pin });
 
@@ -36,6 +36,7 @@ router.post('/employees',
                 return res.status(400).json({ message: `Користувач пін-кодом ${pin} або логіном ${email} вже існує` })
             }
 
+            let registrationDate = new Date().toLocaleString();
             const employeeData = { name, age, location, restaurant: restaurantId, experience, phone, position, typeOfWorkingTime, salary, registrationDate };
 
             if (email) {
@@ -143,7 +144,11 @@ router.put('/employees/:employeeId/updateStartWorkingTime', authMiddleware, asyn
 router.put('/employees/:employeeId/updateEndWorkingTime', authMiddleware, async (req, res) => {
     try {
         const { employeeId } = req.params;
-        const { endTime } = req.body;
+        let { endTime } = req.body;
+
+        if (!endTime) {
+            endTime = new Date().toLocaleTimeString();
+        }
 
         const updatedEmployee = await Employee.findOneAndUpdate(
             { _id: employeeId, 'workingTime.entries.end': null },

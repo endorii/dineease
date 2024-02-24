@@ -21,6 +21,13 @@ router.post('/loginByPass/:restaurantId',
                 return res.status(404).json({message: 'Користувача не знайдено'})
             }
 
+            user.workingTime.push({
+                date: new Date().toLocaleDateString(),
+                entries: { start: new Date().toLocaleTimeString(), end: null  }
+            });
+
+            await user.save();
+
             const token = jwt.sign({_id: user._id}, config.get("secretKey"), {expiresIn: "1h"});
 
             return res.json({

@@ -403,8 +403,7 @@ const AddEmployee = ({ setOpen }) => {
                                 salary,
                                 password,
                                 email,
-                                pin,
-                                registrationDate
+                                pin
                             );
 
                             dispatch(fetchRestaurants(restaurantId));

@@ -4,6 +4,7 @@ import { auth, loginByPass } from "../actions/user.actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
+import { updateEmployeeStartWorkingTime } from "../actions/employees.actions";
 
 export const AdminAndAccountantLogin = () => {
 
@@ -20,6 +21,13 @@ export const AdminAndAccountantLogin = () => {
     const [emailError, setEmailError] = useState("Email не може бути пустим");
     const [passwordError, setPasswordError] = useState("Пароль не може бути пустим");
 
+    const [now, setNow] = useState(new Date().toLocaleString());
+
+    const currentDate = now.split(', ')[0];
+    const currentTime = now.split(', ')[1];
+
+
+    const {user} = useSelector(state => state.user);
 
 
     const emailHandler = (e) => {
@@ -124,9 +132,9 @@ export const AdminAndAccountantLogin = () => {
 
                         <div>
                             <button
-                                onClick={(e) => {
+                                onClick={async (e) => {
                                     e.preventDefault();
-                                    dispatch(loginByPass(restaurantId, email, password, routeChange));
+                                    await dispatch(loginByPass(restaurantId, email, password, routeChange));
                                 }
                                 }
                                 disabled={emailError || passwordError}
