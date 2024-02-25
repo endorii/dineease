@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getAllOrders, getOrdersByRestaurant } from '../../actions/orders.actions';
+import { getAllOrders } from '../../actions/orders.actions';
 
 const initialState = {
     orders: [],
@@ -40,6 +40,6 @@ const ordersSlice = createSlice({
     },
 })
 
-export const {setOrders} = ordersSlice.actions;
+export const { setOrders } = ordersSlice.actions;
 
 export default ordersSlice.reducer

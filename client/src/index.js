@@ -4,23 +4,23 @@ import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } 
 import './index.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
-import { Login } from './components/Login';
-import { ChooseRestaurant } from './components/ChooseRestaurant';
-import { LoginAs } from './components/LoginAs';
-import Account from './components/Account';
-import { Orders } from './components/Orders';
-import { Tables } from './components/Tables';
-import { CurrentEmployeeAccount } from './components/CurrentEmployeeAccount';
-import { Service } from './components/Service';
-import { Checks } from './pages/Statistis/Checks/Checks';
-import Employees from './pages/Access/Employees/Employees';
-import Dishes from './pages/Menu/Dishes/Dishes';
-import { Needs } from './components/Needs';
-import { Feedback } from './components/Feedback';
-import UserAccount from './components/UserAccount';
-import { Sales } from './components/Sales';
-import AccountantPanel from './components/AccountantPanel';
-import { AccountantEmployees } from './components/AccountantEmployees';
+import { Login } from './pages/App/Login';
+import { ChooseRestaurant } from './pages/App/ChooseRestaurant';
+import { LoginAs } from './pages/App/LoginAs';
+import Account from './pages/Admin/Account';
+import { Orders } from './pages/Waiter/Orders/Orders';
+import { Tables } from './pages/Waiter/Tables/Tables';
+import { CurrentEmployeeAccount } from './pages/Waiter/Account/CurrentEmployeeAccount';
+import { Service } from './pages/Waiter/Service';
+import { Checks } from './pages/Admin/Finances/Checks/Checks';
+import Employees from './pages/Admin/Staff/Employees/Employees';
+import Dishes from './pages/Admin/Menu/Dishes/Dishes';
+import { Needs } from './pages/Admin/Staff/Needs/Needs';
+import { Feedback } from './pages/Admin/Staff/Feedback/Feedback';
+import UserAccount from './pages/Admin/Account/Information/UserAccount';
+import { Sales } from './pages/Admin/Statistis/Sales/Sales';
+import AccountantPanel from './pages/Accountant/AccountantPanel'
+import { AccountantEmployees } from './pages/Accountant/AccountantEmployees';
 
 const router = createBrowserRouter(
     createRoutesFromElements(

@@ -10,17 +10,17 @@ export const getFeedbackByRestaurant = async (restaurantId) => {
         return response.data.feedbacks;
     } catch (e) {
         console.log(e.response.data.message);
-    }   
+    }
 }
 
 export const addFeedbackToRestaurant = async (restaurantId, waiterName, message, time, date) => {
     try {
-        const response = await axios.post(`http://localhost:5000/api/feedback/${restaurantId}`, {waiterName, message, time, date});
+        const response = await axios.post(`http://localhost:5000/api/feedback/${restaurantId}`, { waiterName, message, time, date });
 
         console.log(response.data.message);
     } catch (e) {
         console.log(e.response.data.message);
-    }   
+    }
 }
 
 export const closeFeedbackMessage = async (restaurantId, messageId) => {
@@ -31,6 +31,6 @@ export const closeFeedbackMessage = async (restaurantId, messageId) => {
     } catch (e) {
         notifyError(e.response.data.message)
         console.log(e.response.data.message);
-    }   
+    }
 }
 

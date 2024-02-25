@@ -2,7 +2,7 @@ import axios from "axios"
 
 export const addEmployee = async (name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/employees", { name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.post("http://localhost:5000/api/employees", { name, age, location, restaurantId, experience, phone, position, typeOfWorkingTime, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
 
         console.log(response.data.message);
     } catch (e) {
@@ -22,7 +22,7 @@ export const getEmployeesByRestaurant = async (restaurantId) => {
 
 export const editEmployee = async (_id, name, age, restaurantId, experience, position, salary, password, email, pin) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${_id}`, { _id, name, age, restaurantId, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.put(`http://localhost:5000/api/employees/${_id}`, { _id, name, age, restaurantId, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {
@@ -33,7 +33,7 @@ export const editEmployee = async (_id, name, age, restaurantId, experience, pos
 
 export const deleteEmployee = async (_id) => {
     try {
-        const response = await axios.delete(`http://localhost:5000/api/employees/${_id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.delete(`http://localhost:5000/api/employees/${_id}`, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {
@@ -43,7 +43,7 @@ export const deleteEmployee = async (_id) => {
 
 export const updateEmployeeStartWorkingTime = async (employeeId, currentDate, currentTime) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateStartWorkingTime`, { currentDate, currentTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateStartWorkingTime`, { currentDate, currentTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {
@@ -53,7 +53,7 @@ export const updateEmployeeStartWorkingTime = async (employeeId, currentDate, cu
 
 export const updateEmployeeEndWorkingTime = async (employeeId, endTime) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateEndWorkingTime`, { endTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateEndWorkingTime`, { endTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {

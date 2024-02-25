@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
+const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = config.get('PORT')
 const cors = require('cors');
@@ -13,6 +14,7 @@ const needsRoutes = require('../server/routes/needs.routes');
 const feedbackRoutes = require('../server/routes/feedback.routes');
 const employeesRoutes = require('../server/routes/employees.routes');
 
+app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 
