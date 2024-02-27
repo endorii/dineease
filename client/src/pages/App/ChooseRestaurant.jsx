@@ -15,7 +15,7 @@ export const ChooseRestaurant = () => {
 
     const navigate = useNavigate();
 
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('accessToken')
 
     useEffect(() => {
         dispatch(fetchRestaurants());

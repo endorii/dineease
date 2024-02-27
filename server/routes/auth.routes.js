@@ -21,11 +21,11 @@ router.post('/loginByPass/:restaurantId',
                 return res.status(404).json({ message: 'Користувача не знайдено' })
             }
 
-            const isPasswordEquals = await bcrypt.compare(password, user.password);
+            // const isPasswordEquals = await bcrypt.compare(password, user.password);
 
-            if (!isPasswordEquals) {
-                res.send({ message: "Невірний пароль" })
-            }
+            // if (!isPasswordEquals) {
+            //     res.send({ message: "Невірний пароль" })
+            // }
 
             user.workingTime.push({
                 date: new Date().toLocaleDateString(),
@@ -51,7 +51,7 @@ router.post('/loginByPass/:restaurantId',
             })
         } catch (e) {
             console.log(e);
-            res.send({ message: "Помилка сервера" })
+            return res.status(500).send({ message: "Помилка сервера" });
         }
     }
 )

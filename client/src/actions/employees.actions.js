@@ -20,9 +20,9 @@ export const getEmployeesByRestaurant = async (restaurantId) => {
     }
 }
 
-export const editEmployee = async (_id, name, age, restaurantId, experience, position, salary, password, email, pin) => {
+export const editEmployee = async (_id,  name, age, location, restaurantId, experience, phone, position, typeOfWorking, salary, password, email, pin) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${_id}`, { _id, name, age, restaurantId, experience, position, salary, password, email, pin }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
+        const response = await axios.put(`http://localhost:5000/api/employees/${_id}`, { name, age, location, restaurantId, experience, phone, position, typeOfWorking, salary, password, email, pin}, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {

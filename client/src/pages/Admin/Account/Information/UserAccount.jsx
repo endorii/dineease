@@ -76,7 +76,7 @@ const UserAccount = () => {
                             <hr />
                             <div className='flex flex-col gap-2 m-2 '>
                                 <div className='text-gray-500'>Е-пошта:<span className='ml-6 text-lg text-black'>{user.email}</span></div>
-                                <div className='text-gray-500'>Телефон:<span className='ml-6 text-lg text-black'>user.phone</span></div>
+                                <div className='text-gray-500'>Телефон:<span className='ml-6 text-lg text-black'>{user.phone}</span></div>
                             </div>
                         </div>
                         <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
@@ -99,7 +99,7 @@ const UserAccount = () => {
                                         </div>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>Дата реєстрації</p>
-                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.registrationDate</p>
+                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{user.registrationDate}</p>
                                         </div>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>ID робітника</p>
@@ -117,7 +117,7 @@ const UserAccount = () => {
                                         </div>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800'>Адреса</p>
-                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.location</p>
+                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{user.location}</p>
                                         </div>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800'>Стаж роботи</p>
@@ -131,15 +131,15 @@ const UserAccount = () => {
                                     <div className='flex gap-5 pb-5'>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>Тип часу роботи</p>
-                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>Повний робочий день</p>
+                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{user.typeOfWorkingTime}</p>
                                         </div>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>Професія</p>
-                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.position</p>
+                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{user.position}</p>
                                         </div>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>Локація</p>
-                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.restaurant.location</p>
+                                            <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>restaurant.location</p>
                                         </div>
                                     </div>
                                 </div>

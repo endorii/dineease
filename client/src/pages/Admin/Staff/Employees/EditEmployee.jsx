@@ -22,6 +22,10 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [email, setEmail] = useState(currentEmployee.email);
     const [pin, setPin] = useState(currentEmployee.pin);
 
+    const [location, setLocation] = useState(currentEmployee.location || '-');
+    const [phone, setPhone] = useState(currentEmployee.phone || '-');
+    const [typeOfWorking, setTypeOfWorking] = useState(currentEmployee.typeOfWorkingTime || '-');
+
     const [nameTouched, setNameTouched] = useState(false);
     const [ageTouched, setAgeTouched] = useState('');
     const [restaurantTouched, setRestaurantTouched] = useState('');
@@ -32,6 +36,10 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [emailTouched, setEmailTouched] = useState(false);
     const [pinTouched, setPinTouched] = useState(false);
 
+    const [locationTouched, setLocationTouched] = useState(false);
+    const [phoneTouched, setPhoneTouched] = useState(false);
+    const [typeOfWorkingTouched, setTypeOfWorkingTouched] = useState(false);
+
     const [nameError, setNameError] = useState('Поле не може бути пустим');
     const [ageError, setAgeError] = useState('Поле не може бути пустим');
     const [restaurantError, setRestaurantError] = useState('Поле не може бути пустим');
@@ -41,6 +49,10 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [passwordError, setPasswordError] = useState('Поле не може бути пустим');
     const [emailError, setEmailError] = useState('Поле не може бути пустим');
     const [pinError, setPinError] = useState('Поле не може бути пустим');
+
+    const [locationError, setLocationError] = useState('Поле не може бути пустим');
+    const [phoneError, setPhoneError] = useState('Поле не може бути пустим');
+    const [typeOfWorkingError, setTypeOfWorkingError] = useState('Поле не може бути пустим');
 
     const dispatch = useDispatch();
 
@@ -140,6 +152,27 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
         }
     }
 
+
+    const handlePhoneNumber = (e) => {
+        setPhone(e.target.value);
+        const re = /^\+380\d{9}$/;
+        if (!re.test(String(e.target.value))) {
+            setPhoneError('Невірно введено номер телефону')
+        } else {
+            setPhoneError('')
+        }
+    }
+
+    const handleLocation = (e) => {
+        setLocation(e.target.value);
+        const re = /^[a-zA-Zа-яА-Я0-9\s,.'-]{3,}$/;
+        if (!re.test(String(e.target.value))) {
+            setLocationError('Невірно введено адресу')
+        } else {
+            setLocationError('')
+        }
+    }
+
     const blurHandler = (e) => {
         switch (e.target.name) {
             case 'name':
@@ -168,6 +201,15 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                 break;
             case 'pin':
                 setPinTouched(true);
+                break;
+            case 'typeOfWorking':
+                setTypeOfWorkingTouched(true);
+                break;
+            case 'phone':
+                setPhoneTouched(true);
+                break;
+            case 'location':
+                setLocationTouched(true);
                 break;
             default: ;
         }
@@ -244,6 +286,19 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                                 {(ageTouched && ageError) && <div className="text-red-600">{ageError}</div>}
                             </li>
                             <li>
+                                <label htmlFor="location" className="block font-medium mb-1">Місце проживання</label>
+                                <input
+                                    value={location}
+                                    onChange={(e) => handleLocation(e)}
+                                    type="text"
+                                    id="location"
+                                    name="location"
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required
+                                    onBlur={(e) => { blurHandler(e) }}
+                                />
+                                {(locationTouched && locationError) && <div className="text-red-600">{locationError}</div>}
+                            </li>
+                            <li>
                                 <label htmlFor="restaurant" className="block font-medium mb-1">Ресторан</label>
                                 <input
                                     disabled
@@ -273,6 +328,19 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                         </div>
                         <div className="flex flex-col gap-5 w-full">
                             <li>
+                                <label htmlFor="phone" className="block font-medium mb-1">Телефон</label>
+                                <input
+                                    value={phone}
+                                    onChange={(e) => handlePhoneNumber(e)}
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required
+                                    onBlur={(e) => { blurHandler(e) }}
+                                />
+                                {(phoneTouched && phoneError) && <div className="text-red-600">{phoneError}</div>}
+                            </li>
+                            <li>
                                 <label htmlFor="position" className="block font-medium mb-1 ">Посада</label>
                                 <select id='positions'
                                     value={position}
@@ -285,6 +353,20 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                                     <option value="Accountant">Accountant</option>
                                 </select>
                                 {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>}
+                            </li>
+                            <li>
+                                <label htmlFor="typeOfWorking" className="block font-medium mb-1 ">Тип часу роботи</label>
+                                <select id='typeOfWorking'
+                                    value={typeOfWorking}
+                                    name="typeOfWorking"
+                                    onChange={(e) => setTypeOfWorking(e.target.value)}
+                                    onBlur={(e) => { blurHandler(e) }}
+                                    className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required >
+                                    <option value="Не повний робочий день">Не повний робочий день</option>
+                                    <option value="Повний робочий день">Повний робочий день</option>
+                                    <option value="Понаднормова зміна">Понаднормова зміна</option>
+                                </select>
+                                {(typeOfWorkingTouched && typeOfWorkingError) && <div className="text-red-600">{typeOfWorkingError}</div>}
                             </li>
                             <li>
                                 <label htmlFor="salary" className="block font-medium mb-1">Зарплата</label>
@@ -346,9 +428,12 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                             await editEmployee(_id,
                                 name,
                                 age,
-                                restaurantName,
+                                location,
+                                restaurantId,
                                 experience,
+                                phone,
                                 position,
+                                typeOfWorking,
                                 salary,
                                 password,
                                 email,

@@ -68,9 +68,9 @@ router.put('/employees/:_id', authMiddleware,
     async (req, res) => {
         try {
             const { _id } = req.params;
-            const { name, age, restaurantName, experience, position, salary, password, email, pin } = req.body;
+            const { name, age, location, restaurantId, experience, phone, position, typeOfWorking, salary, password, email, pin} = req.body;
 
-            const employeeData = { user: req.user.id, name, age, restaurantName, experience, position, salary, email };
+            const employeeData = { user: req.user.id, name, age, location, restaurant: restaurantId, experience, phone, typeOfWorkingTime: typeOfWorking, position, salary, email };
 
             if (password) {
                 employeeData.password = password;

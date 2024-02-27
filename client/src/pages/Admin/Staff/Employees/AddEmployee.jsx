@@ -26,8 +26,6 @@ const AddEmployee = ({ setOpen }) => {
     const [phone, setPhone] = useState('+');
     const [typeOfWorking, setTypeOfWorking] = useState('Повний робочий день');
 
-    const [registrationDate, setRegistrationDate] = useState('');
-
     const [nameTouched, setNameTouched] = useState(false);
     const [ageTouched, setAgeTouched] = useState('');
     const [restaurantTouched, setRestaurantTouched] = useState('');
