@@ -10,6 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { auth } from "../../../actions/user.actions"
 import { Modal } from "../../App/Modal"
 import { ExitModal } from "../ExitModal"
+import { AnimatePresence } from "framer-motion"
 
 export const CurrentEmployeeAccount = () => {
 
@@ -63,12 +64,9 @@ export const CurrentEmployeeAccount = () => {
     return (
 
         <>
-            {
-                exitModalOpen ?
-                    <Modal>
-                        <ExitModal now={now} setExitModalOpen={setExitModalOpen} />
-                    </Modal> : null
-            }
+            <AnimatePresence initial={exitModalOpen}>
+                {exitModalOpen && <ExitModal now={now} setExitModalOpen={setExitModalOpen} />}
+            </AnimatePresence>
             <div className="bg-sky-50 overflow-y-scroll h-[93vh]">
                 <div className="p-10 flex justify-center gap-7 ">
 

@@ -7,7 +7,8 @@ import { addMenuCategory } from '../../../../actions/menu.actions';
 import { fetchMenuDishes } from '../../../../store/slices/menuDishes.slice';
 import toast from 'react-hot-toast';
 import { Modal } from '../../../App/Modal';
-// import { Transition } from '@headlessui/react'
+import { motion } from 'framer-motion'
+import { dropIn } from '../../../../functions';
 
 export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
 
@@ -65,8 +66,8 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
     }, [])
 
     return (
-        <Modal>
-            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl h-[450px]'>
+        <Modal onClick={() => setOpenAddCategoryModal(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative bg-gray-50 m-16 rounded-lg shadow-xl h-[450px] cursor-default'>
                 <div className="">
                     <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer " src={Close} alt="" onClick={() => {
                         setOpenAddCategoryModal(false)
@@ -127,7 +128,7 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </Modal>
     )
 }

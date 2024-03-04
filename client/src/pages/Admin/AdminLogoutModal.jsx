@@ -1,12 +1,13 @@
 import { Modal } from '../App/Modal';
 import Close from '../../assets/svg/close.svg';
-
+import {motion} from 'framer-motion'
+import { dropIn } from '../../functions';
 
 export const AdminLogoutModal = ({setExitModal, onConfirm}) => {
     return (
-        <Modal>
-            <div className='flex justify-center'>
-                <div className='absolute bg-gray-200 shadow-xl w-[40%] h-auto z-10 rounded-md mt-12'>
+        <Modal onClick={() => setExitModal(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute flex justify-center mt-16 cursor-default'>
+                <div className='relative bg-gray-200 shadow-xl h-auto z-10 rounded-md'>
                     <div className='flex flex-col items-center mx-3 gap-4 mt-5 p-10'>
                         <div className="text-xl text-center mb-5">"Ви впевнені, що хочете завершити робочу зміну? Натисніть 'Так' для видалення або 'Ні' для скасування." </div>
                         <div className="flex gap-10">
@@ -18,7 +19,7 @@ export const AdminLogoutModal = ({setExitModal, onConfirm}) => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </Modal>
     )
 } 

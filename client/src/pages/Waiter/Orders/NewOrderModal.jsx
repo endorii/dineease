@@ -6,10 +6,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMenuCategories } from '../../../store/slices/menuCategories.slice';
 import { useParams } from 'react-router-dom';
-import { configureOrder, getTotalInsideOrderValue } from '../../../functions';
+import { configureOrder, dropIn, getTotalInsideOrderValue, popUp } from '../../../functions';
 import toast from 'react-hot-toast';
 import { fetchMenuDishes } from '../../../store/slices/menuDishes.slice';
 import { getOrdersByWaiter } from '../../../actions/orders.actions';
+import { Modal } from '../../App/Modal';
+import { motion } from 'framer-motion';
 
 export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     const [guests, setGuests] = useState([]);
@@ -51,12 +53,12 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     useEffect(() => {
         dispatch(fetchMenuCategories(restaurantId));
         dispatch(fetchMenuDishes(restaurantId));
-        dispatch(getOrdersByWaiter(restaurantId));
+        // dispatch(getOrdersByWaiter(restaurantId));
     }, [])
 
     return (
-        <>
-            <div className='flex justify-center'>
+        <Modal onClick={() => setOpenNewOrderMenu(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute w-full flex justify-center cursor-default'>
                 <div className=""><img className="absolute top-14 right-20 z-20 w-12 cursor-pointer" src={Close} alt="" onClick={() => {
                     setOpenNewOrderMenu(false)
                 }} /></div>
@@ -176,8 +178,8 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </>
+            </motion.div>
+        </Modal>
     )
 };
 

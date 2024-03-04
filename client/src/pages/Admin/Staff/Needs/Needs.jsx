@@ -6,6 +6,7 @@ import { formatDateString } from "../../../../functions";
 import TrashDone from "../../../../assets/svg/trashDone.svg"
 import { ConfirmModal } from "../../ConfirmModal";
 import { closeNeedsMessage } from "../../../../actions/needs.actions";
+import { AnimatePresence } from "framer-motion";
 
 export const Needs = () => {
 
@@ -25,14 +26,16 @@ export const Needs = () => {
 
     return (
         <>
-            {confirm ? <ConfirmModal
-                setModalOpen={setConfirm}
-                onConfirm={async () => {
-                    await closeNeedsMessage(currentNeed.restaurant, currentNeed._id);
-                    dispatch(fetchNeeds(restaurantId));
-                    setConfirm(false);
-                }}
-            /> : null}
+            <AnimatePresence initial={confirm}>
+                {confirm && <ConfirmModal
+                    setModalOpen={setConfirm}
+                    onConfirm={async () => {
+                        await closeNeedsMessage(currentNeed.restaurant, currentNeed._id);
+                        dispatch(fetchNeeds(restaurantId));
+                        setConfirm(false);
+                    }} />}
+            </AnimatePresence>
+            
             <div className="flex flex-col h-full ">
                 <h2 className="text-3xl font-medium">Потреби, побажання та прохання</h2>
                 <hr className='border-t-1 border-slate-300 my-10' />

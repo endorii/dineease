@@ -45,7 +45,7 @@ export const formatDateString = (inputDate) => {
 
     const [day, month, year] = inputDate.split('.').map(Number);
     const date = new Date(year, month - 1, day);
-    
+
     if (
         date.getDate() === today.getDate() &&
         date.getMonth() === today.getMonth() &&
@@ -75,5 +75,151 @@ export const experienceCounter = (experience) => {
         return `${experience} роки`;
     } else {
         return `${experience} років`;
+    }
+}
+
+export const tables = [
+    { table_id: 1, busy: false, booked: false },
+    { table_id: 2, busy: false, booked: false },
+    { table_id: 3, busy: false, booked: false },
+    { table_id: 4, busy: false, booked: false },
+    { table_id: 5, busy: false, booked: false },
+    { table_id: 6, busy: false, booked: false },
+    { table_id: 7, busy: false, booked: false },
+    { table_id: 8, busy: false, booked: false },
+    { table_id: 9, busy: false, booked: false },
+    { table_id: 10, busy: false, booked: false },
+    { table_id: 11, busy: false, booked: false },
+    { table_id: 12, busy: false, booked: false },
+    { table_id: 13, busy: false, booked: false },
+    { table_id: 14, busy: false, booked: false },
+    { table_id: 15, busy: false, booked: false },
+    { table_id: 16, busy: false, booked: false },
+    { table_id: 17, busy: false, booked: false },
+    { table_id: 18, busy: false, booked: false },
+    { table_id: 19, busy: false, booked: false },
+    { table_id: 20, busy: false, booked: false },
+    { table_id: 21, busy: false, booked: false },
+    { table_id: 22, busy: false, booked: false },
+    { table_id: 23, busy: false, booked: false },
+    { table_id: 24, busy: false, booked: false },
+    { table_id: 25, busy: false, booked: false },
+    { table_id: 26, busy: false, booked: false },
+    { table_id: 27, busy: false, booked: false },
+    { table_id: 28, busy: false, booked: false },
+    { table_id: 29, busy: false, booked: false },
+    { table_id: 30, busy: false, booked: false },
+    { table_id: 31, busy: false, booked: false },
+    { table_id: 32, busy: false, booked: false },
+    { table_id: 33, busy: false, booked: false },
+    { table_id: 34, busy: false, booked: false },
+    { table_id: 35, busy: false, booked: false },
+    { table_id: 36, busy: false, booked: false },
+];
+
+export const dropIn = {
+    hidden: {
+        opacity: 0,
+        y: '-100vh'
+    },
+    visible: {
+        y: '0',
+        opacity: 1,
+        transition: {
+            duration: 0.1,
+            type: 'spring',
+            damping: 80,
+            stiffness: 600
+        }
+    },
+    exit: {
+        opacity: 0,
+        y: '-100vh'
+    }
+}
+
+export const dropInToLeft = {
+    hidden: {
+        opacity: 0,
+        x: '-100vh'
+    },
+    visible: {
+        x: '0',
+        opacity: 1,
+        transition: {
+            duration: 0.2,
+            type: 'spring',
+            damping: 50,
+            stiffness: 500
+        }
+    },
+    exit: {
+        opacity: 0,
+        x: '-100vh'
+    }
+}
+
+export const popUp = {
+    hidden: {
+        opacity: 0,
+        // y: '-100vh'
+    },
+    visible: {
+        // y: '0',
+        opacity: 1,
+        transition: {
+            duration: 0.3,
+            // type: 'spring',
+            // damping: 80,
+            // stiffness: 600
+        }
+    },
+    exit: {
+        opacity: 0,
+        // y: '-100vh'
+    }
+}
+
+export const accordionAnim = {
+    // hidden: {
+    //     width: '300px',
+    //     // opacity: 0,
+    //     // y: '-100vh'
+    // },
+    visible: {
+        // y: '0',
+        width: '240px',
+        // opacity: 1,
+        transition: {
+            duration: 0.3,
+            // type: 'spring',
+            // damping: 80,
+            // stiffness: 600
+        }
+    },
+    exit: {
+        width: '100px',
+        // opacity: 0,
+        // y: '-100vh'
+    }
+}
+
+export const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            delayChildren: 0.01,
+            staggerChildren: 0.04
+        }
+    }
+}
+
+export const itemAnim = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1
     }
 }

@@ -7,6 +7,8 @@ import { addDish } from '../../../../actions/menu.actions';
 import { fetchMenuDishes } from '../../../../store/slices/menuDishes.slice';
 import toast from 'react-hot-toast';
 import { Modal } from '../../../App/Modal';
+import { motion } from 'framer-motion'
+import { dropIn } from '../../../../functions';
 
 export const AddDishModal = ({ setOpenAddDishModal }) => {
 
@@ -171,9 +173,9 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
     }, [])
 
     return (
-        <Modal>
-            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%]'>
-                <div className="">
+        <Modal onClick={() => setOpenAddDishModal(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%] cursor-default'>
+                <div>
                     <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer" src={Close} alt="" onClick={() => {
                         setOpenAddDishModal(false)
                     }} />
@@ -340,7 +342,7 @@ export const AddDishModal = ({ setOpenAddDishModal }) => {
                     </div>
                 </div>
 
-            </div>
+            </motion.div>
         </Modal>
     )
 }

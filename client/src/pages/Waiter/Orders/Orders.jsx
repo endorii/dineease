@@ -9,6 +9,7 @@ import { getTotalOrderValue } from "../../../functions";
 import { Toaster } from 'react-hot-toast';
 import { fetchMenuDishes } from "../../../store/slices/menuDishes.slice";
 import { getOrdersByWaiter } from "../../../actions/orders.actions";
+import { AnimatePresence } from "framer-motion";
 
 export const Orders = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
@@ -27,16 +28,18 @@ export const Orders = () => {
 
     return (
         <div className="h-[65%]">
-            {openNewOrderMenu ? <Modal>
-                <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} setOpenPayOrder={setOpenPayOrder} />
-            </Modal> : null}
             <Toaster
-                position="top-right"
-                reverseOrder={false}
-            />
-            {openPayOrder ? <Modal>
-                <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder} />
-            </Modal> : null}
+                    position="top-right"
+                    reverseOrder={false}
+                />
+            <AnimatePresence initial={openNewOrderMenu}>
+                {openNewOrderMenu && <NewOrderModal setOpenNewOrderMenu={setOpenNewOrderMenu} />}
+
+            </AnimatePresence>
+            <AnimatePresence initial={openPayOrder}>
+                {openPayOrder && <PayOrder setOpenPayOrder={setOpenPayOrder} currentOrder={currentOrder} />}
+            </AnimatePresence>
+
             <div className="flex flex-col text-white justify-center bg-sky-50">
                 <div className='flex justify-end p-3'>
                     <button className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-lg transition ease-out hover:ease-in' onClick={() => {

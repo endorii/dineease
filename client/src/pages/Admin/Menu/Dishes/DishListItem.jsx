@@ -10,6 +10,7 @@ import { fetchMenuDishes } from "../../../../store/slices/menuDishes.slice";
 import { useParams } from "react-router-dom";
 import { EditMenuItemModal } from "./EditMenuItemModal";
 import toast from "react-hot-toast";
+import { AnimatePresence } from "framer-motion";
 
 export const DishListItem = ({ item, categoryFilter }) => {
 
@@ -26,20 +27,23 @@ export const DishListItem = ({ item, categoryFilter }) => {
 
     return (
         <>
-            {editModal && <EditMenuItemModal setEditModal={setEditModal} currentDish={item} />}
+            <AnimatePresence initial={editModal}>
+                {editModal && <EditMenuItemModal setEditModal={setEditModal} currentDish={item} />}
+            </AnimatePresence>
 
-            {openInfo ? <Modal>
-                <DishInfoModal setOpenInfo={setOpenInfo} item={item} />
-            </Modal> : null}
+            <AnimatePresence initial={openInfo}>
+                {openInfo && < DishInfoModal setOpenInfo={setOpenInfo} item={item} />}
+            </AnimatePresence>
 
-            {openConfirm && <ConfirmModal setModalOpen={setOpenConfirm} onConfirm={async () => {
-
-                await deleteDish(restaurantId, item._id);
-                dispatch(fetchMenuCategories(restaurantId));
-                dispatch(fetchMenuDishes(restaurantId));
-                notifyConfirm("Страву успішно видалено");
-                setOpenConfirm(false);
-            }} />}
+            <AnimatePresence initial={openConfirm}>
+                {openConfirm && <ConfirmModal setModalOpen={setOpenConfirm} onConfirm={async () => {
+                    await deleteDish(restaurantId, item._id);
+                    dispatch(fetchMenuCategories(restaurantId));
+                    dispatch(fetchMenuDishes(restaurantId));
+                    notifyConfirm("Страву успішно видалено");
+                    setOpenConfirm(false);
+                }} />}
+            </AnimatePresence>
 
             {categoryFilter === 'all' || item.categoryName === categoryFilter ? <tr className="bg-white border-b border-gray-300 text-gray-700" >
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900">

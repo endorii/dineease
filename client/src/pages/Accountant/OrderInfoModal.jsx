@@ -1,11 +1,13 @@
 import Close from '../../assets/svg/close.svg';
 import { Modal } from '../App/Modal';
+import { motion } from 'framer-motion'
+import { dropIn } from '../../functions';
 
 
 export const OrderInfoModal = ({ setOpenInfo, order }) => {
     return (
-        <Modal>
-            <div className='relative flex items-center m-24 bg-gray-50 w-[70%] rounded-md shadow-xl'>
+        <Modal onClick={() => setOpenInfo(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative flex items-center m-24 bg-gray-50 w-[70%] rounded-md shadow-xl cursor-default'>
                 <div>
                     <img className=' absolute top-2 right-2 w-10 cursor-pointer' onClick={() => { setOpenInfo(false) }} src={Close} alt="" />
                 </div>
@@ -83,7 +85,7 @@ export const OrderInfoModal = ({ setOpenInfo, order }) => {
                     </div>
 
                 </div>
-            </div>
+            </motion.div>
         </Modal>
     )
 }

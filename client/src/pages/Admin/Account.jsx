@@ -9,6 +9,8 @@ import User from '../../assets/svg/user.svg';
 import { NavLink, Outlet } from 'react-router-dom';
 import { auth } from '../../actions/user.actions';
 import { Toaster } from 'react-hot-toast';
+import { motion } from 'framer-motion'
+import { container, itemAnim } from '../../functions';
 
 const NestedItem = ({ item }) => (
     <div className="px-1 mt-3 text-blue-600 text-lg font-medium text-sky-100">
@@ -82,7 +84,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                     { title: "Потреби", path: "needs" }
                 ]
         },
-
         {
             title: "Аккаунт", icon: Settings, children:
                 [
@@ -95,15 +96,19 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
 
     return (
         <div className='flex flex-col justify-between items-center h-[88vh]'>
-            <ul className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-00">
+            <motion.ul variants={container}
+                initial="hidden"
+                animate="visible" className="w-full max-w-md mx-auto mt-4 flex flex-col gap-6 text-blue-00">
                 {items.map((item, index) => (
-                    <AccordionItem key={index} title={item.title} icon={item.icon} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
-                        {item.children?.map((item, index) => (
-                            <NestedItem key={index} item={item} />
-                        ))}
-                    </AccordionItem>
+                    <motion.li variants={itemAnim}>
+                        <AccordionItem key={index} title={item.title} icon={item.icon} menuOpen={menuOpen} setMenuOpen={setMenuOpen}>
+                            {item.children?.map((item, index) => (
+                                <NestedItem key={index} item={item} />
+                            ))}
+                        </AccordionItem>
+                    </motion.li>
                 ))}
-            </ul>
+            </motion.ul>
             <button onClick={() => setMenuOpen(true)}>
                 <div className='text-black p-3 flex items-center'>
                     <div>

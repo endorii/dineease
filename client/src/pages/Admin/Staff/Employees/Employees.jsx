@@ -11,6 +11,7 @@ import { fetchEmployees } from '../../../../store/slices/employees.slice';
 import { ConfirmModal } from '../../ConfirmModal';
 import toast from 'react-hot-toast';
 import AddEmployee from './AddEmployee';
+import { AnimatePresence } from 'framer-motion';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
@@ -32,27 +33,24 @@ const Employees = () => {
 
     return (
         <>
-            {addEmployeeModalOpen &&
-                <Modal>
-                    <AddEmployee setOpen={setAddEmployeeModalOpen} />
-                </Modal>
-            }
-            {editEmployeeModalOpen &&
-                <Modal>
-                    <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />
-                </Modal>
-            }
-            {deleteEmployeeModalOpen &&
-                <ConfirmModal
+            <AnimatePresence initial={addEmployeeModalOpen}>
+                {addEmployeeModalOpen && <AddEmployee setOpen={setAddEmployeeModalOpen} />}
+            </AnimatePresence>
+
+            <AnimatePresence initial={editEmployeeModalOpen}>
+                {editEmployeeModalOpen && <EditEmployee setOpen={setEditEmployeeModalOpen} currentEmployee={currentEmployee} />}
+            </AnimatePresence>
+
+            <AnimatePresence initial={deleteEmployeeModalOpen}>
+                {deleteEmployeeModalOpen && <ConfirmModal
                     setModalOpen={setDeleteEmployeeModalOpen}
                     onConfirm={async () => {
                         await deleteEmployee(currentEmployee._id);
                         dispatch(fetchEmployees(restaurantId));
                         notifyConfirm('Робітника звільнено.');
                         setDeleteEmployeeModalOpen(false);
-                    }}
-                />
-            }
+                    }} />}
+            </AnimatePresence>
 
             <div className='flex flex-col' >
                 <div className="flex justify-between ">

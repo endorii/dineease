@@ -6,6 +6,7 @@ import { formatDateString } from "../../../../functions";
 import TrashDone from "../../../../assets/svg/trashDone.svg"
 import { closeFeedbackMessage } from "../../../../actions/feedback.actions";
 import { ConfirmModal } from "../../ConfirmModal";
+import { AnimatePresence } from "framer-motion";
 
 export const Feedback = () => {
 
@@ -22,12 +23,16 @@ export const Feedback = () => {
 
     return (
         <>
-            {confirmModal && <ConfirmModal setModalOpen={setConfirmModal} onConfirm={
-                async () => {
-                    await closeFeedbackMessage(currentMessage.restaurant, currentMessage._id);
-                    dispatch(fetchFeedback(restaurantId));
-                    setConfirmModal(false);
-                }} />}
+            <AnimatePresence
+                initial={false} onExitComplete={() => null}
+                >
+                {confirmModal && <ConfirmModal setModalOpen={setConfirmModal} onConfirm={
+                    async () => {
+                        await closeFeedbackMessage(currentMessage.restaurant, currentMessage._id);
+                        dispatch(fetchFeedback(restaurantId));
+                        setConfirmModal(false);
+                    }} />}
+            </AnimatePresence>
 
             <div className="flex flex-col h-full">
                 <h2 className="text-3xl font-medium">Зворотній зв'язок</h2>

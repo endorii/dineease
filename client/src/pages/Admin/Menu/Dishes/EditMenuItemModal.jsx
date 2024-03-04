@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { editDish } from "../../../../actions/menu.actions";
 import { Modal } from "../../../App/Modal";
 import toast from "react-hot-toast";
+import { motion } from 'framer-motion'
+import { dropIn } from "../../../../functions";
 
 export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
 
@@ -71,9 +73,9 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
 
 
     return (
-        <Modal>
-            <div className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%]'>
-                <div className="">
+        <Modal onClick={() => setEditModal(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%] cursor-default'>
+                <div>
                     <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer" src={Close} alt="" onClick={() => {
                         setEditModal(false)
                     }} />
@@ -220,7 +222,7 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                         </div>
                         <div className='flex justify-center w-[25%]'>
                             <button
-                            disabled={!dishName || !dishPrice || !dishTime || !dishAmount || !dishWeight || !dishCal || !dishCategory}
+                                disabled={!dishName || !dishPrice || !dishTime || !dishAmount || !dishWeight || !dishCal || !dishCategory}
                                 onClick={async (e) => {
                                     e.preventDefault();
                                     await editDish(restaurantId, dishCategoryId, currentDish._id, dishName, dishPrice, dishTime, dishAmount, dishWeight, dishCal, dishCategory, dishIngredients, dishLogo);
@@ -236,7 +238,7 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                     </div>
                 </div>
 
-            </div>
+            </motion.div>
         </Modal>
     )
 }

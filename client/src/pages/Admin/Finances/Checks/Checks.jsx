@@ -8,6 +8,7 @@ import { ConfirmModal } from "../../ConfirmModal";
 import { deleteOrder } from "../../../../actions/orders.actions";
 import toast from "react-hot-toast";
 import { OrderInfoModal } from "../../../Accountant/OrderInfoModal";
+import { AnimatePresence } from "framer-motion";
 
 export const Checks = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export const Checks = () => {
     const [orderInfoOpen, setOrderInfoOpen] = useState(false);
     const [currentOrder, setCurrentOrder] = useState({});
 
-    const notifySuccess = (message) => {toast.success(message)};
+    const notifySuccess = (message) => { toast.success(message) };
 
     useEffect(() => {
         dispatch(fetchOrders(restaurantId));
@@ -31,15 +32,19 @@ export const Checks = () => {
 
     return (
         <>
-            {orderDeleteOpen && <ConfirmModal setModalOpen={setOrderDeleteOpen} onConfirm={
-                async () => {
-                    await deleteOrder(restaurantId, currentOrder._id);
-                    dispatch(fetchOrders(restaurantId));
-                    notifySuccess('Замовлення успішно видалено');
-                    setOrderDeleteOpen(false)
-                }
-            }/>}
-            {orderInfoOpen && <OrderInfoModal setOpenInfo={setOrderInfoOpen} order={currentOrder}/>}
+            <AnimatePresence initial={orderDeleteOpen}>
+                {orderDeleteOpen && <ConfirmModal setModalOpen={setOrderDeleteOpen} onConfirm={
+                    async () => {
+                        await deleteOrder(restaurantId, currentOrder._id);
+                        dispatch(fetchOrders(restaurantId));
+                        notifySuccess('Замовлення успішно видалено');
+                        setOrderDeleteOpen(false)
+                    }
+                } />}
+            </AnimatePresence>
+            <AnimatePresence initial={orderInfoOpen}>
+                {orderInfoOpen && <OrderInfoModal setOpenInfo={setOrderInfoOpen} order={currentOrder} />}
+            </AnimatePresence>
 
             <div className="flex flex-col h-full">
                 <h2 className="text-3xl font-medium">Замовлення та чеки</h2>
@@ -93,10 +98,10 @@ export const Checks = () => {
                                     </td>
                                     <td className="p-3 w-[15%] text-center">
                                         <div className="flex justify-end mr-10">
-                                            <div className="" onClick={() => {setCurrentOrder(order); setOrderInfoOpen(true)}}>
+                                            <div className="" onClick={() => { setCurrentOrder(order); setOrderInfoOpen(true) }}>
                                                 <img className="h-11 cursor-pointer hover:shadow-2xl hover:bg-sky-950/10 p-1 rounded-2xl transition ease-out hover:ease-in" src={Info} alt="" />
                                             </div>
-                                            <div className="" onClick={() => {setCurrentOrder(order); setOrderDeleteOpen(true) }}>
+                                            <div className="" onClick={() => { setCurrentOrder(order); setOrderDeleteOpen(true) }}>
                                                 <img className="h-11 cursor-pointer hover:shadow-2xl hover:bg-sky-950/10 p-1 rounded-2xl transition ease-out hover:ease-in" src={TrashDone} alt="" />
                                             </div>
                                         </div>

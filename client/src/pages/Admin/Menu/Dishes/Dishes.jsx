@@ -8,6 +8,7 @@ import { AddButton } from '../../../../ui/buttons/AddButton';
 import { AddDishModal } from './AddDishModal';
 import { fetchMenuDishes } from '../../../../store/slices/menuDishes.slice';
 import { AddCategoryModal } from './AddCategoryModal';
+import { AnimatePresence } from 'framer-motion';
 
 const Dishes = () => {
 
@@ -28,18 +29,22 @@ const Dishes = () => {
         dispatch(fetchMenuDishes(restaurantId));
     }, [])
 
-    return (    
+    return (
 
         <div className="flex flex-col h-full">
-            {openAddDishModal && <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />}
-            {openAddCategoryModal && <AddCategoryModal openAddCategoryModal={openAddCategoryModal} setOpenAddCategoryModal={setOpenAddCategoryModal} />}
+            <AnimatePresence initial={openAddDishModal}>
+                {openAddDishModal && <AddDishModal setOpenAddDishModal={setOpenAddDishModal} />}
+            </AnimatePresence>
+            <AnimatePresence initial={openAddCategoryModal}>
+                {openAddCategoryModal && <AddCategoryModal openAddCategoryModal={openAddCategoryModal} setOpenAddCategoryModal={setOpenAddCategoryModal} />}
+            </AnimatePresence>
             <div className='h-full flex flex-col'>
                 <div className='mb-5'>
                     <div className="flex justify-between ">
                         <h2 className="text-3xl font-medium text-sky-950">Доступні страви для замовлень</h2>
                         <div className='flex gap-5'>
-                            <AddButton customFunction={setOpenAddDishModal} buttonText={'Додати страву'}/>
-                            <AddButton customFunction={setOpenAddCategoryModal} buttonText={'Додати категорію'}/>
+                            <AddButton customFunction={setOpenAddDishModal} buttonText={'Додати страву'} />
+                            <AddButton customFunction={setOpenAddCategoryModal} buttonText={'Додати категорію'} />
                         </div>
                     </div>
                     <hr className='border-t-1 border-slate-300 my-5' />
@@ -69,9 +74,9 @@ const Dishes = () => {
                 </div>
                 <div className="overflow-y-scroll shadow-md gap-5 rounded-md">
                     <div className='w-full text-blue-100 '>
-                    <div className='px-5 py-3 text-xl bg-sky-950 text-sky-100'>
-                        Список пропозицій
-                    </div>
+                        <div className='px-5 py-3 text-xl bg-sky-950 text-sky-100'>
+                            Список пропозицій
+                        </div>
                         <table className="w-full text-left">
                             <thead className="text-xs text-gray-700 uppercase bg-sky-900/20 ">
                                 <tr>

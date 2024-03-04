@@ -9,6 +9,7 @@ import { experienceCounter } from '../../../../functions';
 import Calendar from 'react-calendar';
 import { updateEmployeeEndWorkingTime } from '../../../../actions/employees.actions';
 import { AdminLogoutModal } from '../../AdminLogoutModal';
+import { AnimatePresence } from 'framer-motion';
 
 const UserAccount = () => {
 
@@ -46,11 +47,13 @@ const UserAccount = () => {
 
     return (
         <>
-            {exitModal && <AdminLogoutModal setExitModal={setExitModal} onConfirm={async () => {
-                setExitModal(false)
-                await updateEmployeeEndWorkingTime(user._id);
-                dispatch(logout());
-            }} />}
+            <AnimatePresence initial={exitModal}>
+                {exitModal && <AdminLogoutModal setExitModal={setExitModal} onConfirm={async () => {
+                    setExitModal(false)
+                    await updateEmployeeEndWorkingTime(user._id);
+                    dispatch(logout());
+                }} />}
+            </AnimatePresence>
             <div className='flex flex-col h-full' >
                 <div className="flex justify-between ">
                     <h2 className="text-3xl font-medium text-sky-900">Інформація про аккаунт</h2>

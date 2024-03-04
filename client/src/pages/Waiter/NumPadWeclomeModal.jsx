@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { logout } from "../../store/slices/user.slice";
 import { updateEmployeeStartWorkingTime } from "../../actions/employees.actions";
 import toast from 'react-hot-toast';
+import { motion } from 'framer-motion'
+import { dropIn } from "../../functions";
 
 export const NumPadWelcomeModal = ({ setOpen }) => {
 
@@ -32,9 +34,9 @@ export const NumPadWelcomeModal = ({ setOpen }) => {
     }, []);
 
     return (
-        <Modal>
-            <div className='flex justify-center'>
-                <div className='absolute bg-gray-200 shadow-xl w-1/3 h-auto z-10 rounded-md mt-16'>
+        <Modal onClick={() => {setOpen(false); dispatch(logout())}}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute flex justify-center cursor-default mt-16'>
+                <div className='relative bg-gray-200 shadow-xl w-full h-auto z-10 rounded-md px-24'>
                     <div className='flex flex-col items-center mx-3 gap-4 mt-5'>
                         {user.name ?
                             <>
@@ -69,7 +71,7 @@ export const NumPadWelcomeModal = ({ setOpen }) => {
                         }}>✖</div>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </Modal>
     )
 }
