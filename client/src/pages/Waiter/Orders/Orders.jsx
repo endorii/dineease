@@ -10,6 +10,7 @@ import { Toaster } from 'react-hot-toast';
 import { fetchMenuDishes } from "../../../store/slices/menuDishes.slice";
 import { getOrdersByWaiter } from "../../../actions/orders.actions";
 import { AnimatePresence } from "framer-motion";
+import { SkeletonOrders } from "../../../ui/skeletons/SkeletonOrders";
 
 export const Orders = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
@@ -17,7 +18,7 @@ export const Orders = () => {
     const [currentOrder, setCurrentOrder] = useState([])
     const dispatch = useDispatch()
     const { restaurantId } = useParams();
-    const { orders } = useSelector(state => state.orders)
+    const { orders, isLoading } = useSelector(state => state.orders)
     const openOrders = orders.filter(order => order.isOpen);
 
     useEffect(() => {
@@ -67,7 +68,7 @@ export const Orders = () => {
                                     </th>
                                 </tr>
                             </thead>
-                            {openOrders.length > 0 ? openOrders.map((order, i) => {
+                            {openOrders.length > 0 || !isLoading ? openOrders.map((order, i) => {
                                 return (
                                     <tbody key={i}>
                                         <tr className="bg-white border-b border-gray-300 text-lg">
@@ -89,7 +90,7 @@ export const Orders = () => {
                                         </tr>
                                     </tbody>
                                 )
-                            }) : null}
+                            }) : <SkeletonOrders /> }
                         </table>
                         : <div className="text-3xl bg-white text-black p-10 text-center">Немає доступних замовлень, створіть нове, щоб побачити</div>}
                 </div>

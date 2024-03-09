@@ -7,12 +7,13 @@ import TrashDone from "../../../../assets/svg/trashDone.svg"
 import { closeFeedbackMessage } from "../../../../actions/feedback.actions";
 import { ConfirmModal } from "../../ConfirmModal";
 import { AnimatePresence } from "framer-motion";
+import { SkeletonFeedback } from "../../../../ui/skeletons/SkeletonFeedback";
 
 export const Feedback = () => {
 
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
-    const { feedback } = useSelector(state => state.feedback);
+    const { feedback, isLoading } = useSelector(state => state.feedback);
 
     const [confirmModal, setConfirmModal] = useState(false);
     const [currentMessage, setCurrentMessage] = useState(null);
@@ -58,7 +59,7 @@ export const Feedback = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {feedback.length > 0 ? feedback.map((message, i) =>
+                        {feedback.length > 0 || !isLoading ? feedback.map((message, i) =>
                             <tbody
                                 key={i}>
                                 <tr className="bg-white border-b border-gray-300 text-gray-700">
@@ -79,7 +80,7 @@ export const Feedback = () => {
                                     </td>
                                 </tr>
                             </tbody>
-                        ) : null}
+                        ) : <SkeletonFeedback /> }
                     </table>
                     {feedback.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Повідомленя відсутні</h2>}
                 </div>

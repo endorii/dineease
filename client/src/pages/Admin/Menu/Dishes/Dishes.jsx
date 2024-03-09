@@ -9,6 +9,7 @@ import { AddDishModal } from './AddDishModal';
 import { fetchMenuDishes } from '../../../../store/slices/menuDishes.slice';
 import { AddCategoryModal } from './AddCategoryModal';
 import { AnimatePresence } from 'framer-motion';
+import { SkeletonDishes } from '../../../../ui/skeletons/SkeletonDishes';
 
 const Dishes = () => {
 
@@ -22,7 +23,7 @@ const Dishes = () => {
     const dispatch = useDispatch();
 
     const { menuCategories } = useSelector(state => state.menuCategories);
-    const { menuDishes } = useSelector(state => state.menuDishes);
+    const { menuDishes, isLoading } = useSelector(state => state.menuDishes);
 
     useEffect(() => {
         dispatch(fetchMenuCategories(restaurantId));
@@ -83,11 +84,8 @@ const Dishes = () => {
                                     <th scope="col" className="w-auto px-6 py-3">
                                         Назва
                                     </th>
-                                    <th scope="col" className="w-[15%] px-1 py-1">
+                                    <th scope="col" className="w-[50%] px-7 py-1 text-center">
                                         Категорія
-                                    </th>
-                                    <th scope="col" className="w-[5%] px-1 py-1">
-
                                     </th>
                                     <th scope="col" className="w-[5%] px-1 py-1">
 
@@ -102,12 +100,11 @@ const Dishes = () => {
                             </thead>
                             <tbody >
                                 {
-                                    menuDishes.length > 0 ? menuDishes.map((dish, i) => (
+                                    menuDishes.length > 0 || !isLoading ? menuDishes.map((dish, i) => (
                                         dish.name.toLowerCase().includes(searchInput.toLowerCase()) ? <DishListItem item={dish} key={i} categoryFilter={categoryFilter}
                                             setCategoryFilter={setCategoryFilter} /> : null
-                                    )) : <h2 className='text-4xl text-sky-900 px-6 pt-10 font-light text'>Страв не знайдено</h2>
+                                    )) : <SkeletonDishes />
                                 }
-
                             </tbody>
                         </table>
                     </div>

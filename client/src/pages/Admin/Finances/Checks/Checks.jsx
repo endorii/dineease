@@ -9,11 +9,12 @@ import { deleteOrder } from "../../../../actions/orders.actions";
 import toast from "react-hot-toast";
 import { OrderInfoModal } from "../../../Accountant/OrderInfoModal";
 import { AnimatePresence } from "framer-motion";
+import { SkeletonChecks } from "../../../../ui/skeletons/SkeletonChecks";
 
 export const Checks = () => {
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
-    const { orders } = useSelector(state => state.orders)
+    const { orders, isLoading } = useSelector(state => state.orders)
 
     const ordersStates = [...new Set(orders.map(order => order.isOpen))];
     console.log(ordersStates);
@@ -69,7 +70,7 @@ export const Checks = () => {
                     <table className="w-full text-left text-sky-900">
                         <thead className="text-xs text-gray-700 uppercase bg-sky-950/10">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-center">
+                                <th scope="col" className="px-10 py-3">
                                     Замовлення
                                 </th>
                                 <th scope="col" className="px-1 py-3 text-center">
@@ -81,11 +82,11 @@ export const Checks = () => {
                                 <th scope="col" className="px-1 py-3 text-center"></th>
                             </tr>
                         </thead>
-                        {orders.length > 0 ? orders.map((order, i) =>
+                        {orders.length > 0 || !isLoading ? orders.map((order, i) =>
                             orderState === 'all' || orderState === order.isOpen ? <tbody
                                 key={i}>
                                 <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                    <th scope="row" className="p-3 font-medium text-gray-900 w-[20%] text-center">
+                                    <th scope="row" className="px-10 font-medium text-gray-900 w-[20%]">
                                         {order._id}
                                     </th>
                                     <td className="p-3 w-[15%] text-center text-sky-800 font-bold">
@@ -108,7 +109,7 @@ export const Checks = () => {
                                     </td>
                                 </tr>
                             </tbody> : null
-                        ) : null}
+                        ) : <SkeletonChecks/>}
                     </table>
                     {orders.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Повідомленя відсутні</h2>}
                 </div>

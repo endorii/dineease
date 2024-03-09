@@ -7,12 +7,13 @@ import TrashDone from "../../../../assets/svg/trashDone.svg"
 import { ConfirmModal } from "../../ConfirmModal";
 import { closeNeedsMessage } from "../../../../actions/needs.actions";
 import { AnimatePresence } from "framer-motion";
+import { SkeletonNeeds } from "../../../../ui/skeletons/SkeletonNeeds";
 
 export const Needs = () => {
 
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
-    const { needs } = useSelector(state => state.needs);
+    const { needs, isLoading } = useSelector(state => state.needs);
 
     const [priorityFilter, setPriorityFilter] = useState('all');
     const [confirm, setConfirm] = useState(false);
@@ -78,7 +79,7 @@ export const Needs = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {needs.length > 0 ? needs.map((need, i) =>
+                            {needs.length > 0 || !isLoading ? needs.map((need, i) =>
                                 priorityFilter === 'all' || need.priority === priorityFilter ?
                                     <tr className="bg-white border-b border-gray-300 text-gray-700" key={i}>
                                         <th scope="row" className="p-3 font-medium text-gray-900 whitespace-nowrap w-[10%] text-center">
@@ -110,7 +111,7 @@ export const Needs = () => {
                                             </div>
                                         </td>
                                     </tr> : null
-                            ) : null}
+                            ) : <SkeletonNeeds /> }
                         </tbody>
                     </table>
                     {needs.length > 0 ? null : <h2 className='text-4xl p-6 text-sky-950 text-center font-light bg-white'>Потреби відсутні</h2>}

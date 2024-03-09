@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 import { EditMenuItemModal } from "./EditMenuItemModal";
 import toast from "react-hot-toast";
 import { AnimatePresence } from "framer-motion";
+import { SkeletonDishes } from "../../../../ui/skeletons/SkeletonDishes";
 
 export const DishListItem = ({ item, categoryFilter }) => {
 
@@ -49,11 +50,8 @@ export const DishListItem = ({ item, categoryFilter }) => {
                 <th scope="row" className="px-6 py-4 font-medium text-gray-900">
                     {item.name}
                 </th>
-                <td className="px-2 py-1 text">
+                <td className="px-2 py-1 text-center">
                     {item.categoryName}
-                </td>
-                <td className="px-2 py-1 text-right">
-
                 </td>
                 <td className="px-2 py-1 text-right">
                     <img src="" alt="" />

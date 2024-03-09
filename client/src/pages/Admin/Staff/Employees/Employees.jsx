@@ -5,13 +5,14 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
 import { AddButton } from '../../../../ui/buttons/AddButton';
-import { Modal } from '../../../App/Modal';
 import EditEmployee from './EditEmployee';
 import { fetchEmployees } from '../../../../store/slices/employees.slice';
 import { ConfirmModal } from '../../ConfirmModal';
 import toast from 'react-hot-toast';
 import AddEmployee from './AddEmployee';
 import { AnimatePresence } from 'framer-motion';
+import { Loader } from '../../../App/Loader';
+import { SkeletonEmployees } from '../../../../ui/skeletons/SkeletonEmployees';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
@@ -23,7 +24,7 @@ const Employees = () => {
 
     const { restaurantId } = useParams()
 
-    const { employees } = useSelector(state => state.employees);
+    const { employees, isLoading } = useSelector(state => state.employees);
 
     const notifyConfirm = (message) => { toast.success(message) }
 
@@ -89,7 +90,7 @@ const Employees = () => {
                                 </th>
                             </tr>
                         </thead>
-                        {employees.length > 0 ? employees.map((employee, i) =>
+                        {employees.length > 0 || !isLoading ? employees.map((employee, i) =>
                             <tbody key={i}>
                                 <tr className="bg-white border-b border-gray-300 text-gray-700">
                                     <th scope="row" className="px-6 py-4 font-medium text-gray-900">
@@ -113,7 +114,6 @@ const Employees = () => {
                                             setEditEmployeeModalOpen(true);
                                             dispatch(fetchEmployees(restaurantId));
                                         }}
-
                                             className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
                                     </td>
                                     <td className="px-2 py-1 text-left">
@@ -124,7 +124,7 @@ const Employees = () => {
                                     </td>
                                 </tr>
                             </tbody>
-                        ) : null}
+                        ) : <SkeletonEmployees/>}
                     </table>
                     {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Працівників не знайдено</h2>}
                 </div>
