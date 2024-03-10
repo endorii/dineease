@@ -310,14 +310,14 @@ const AddEmployee = ({ setOpen }) => {
                                 <li>
                                     <label htmlFor="position" className="block font-medium mb-1 ">Посада</label>
                                     <select id='positions'
-                                        value={position}
+                                        value={position === 'Адмін' ? 'Admin' : position === 'Бухгалтер' ? 'Accountant' : position === 'Офіціант' ? 'Waiter' : null}
                                         name="position"
                                         onChange={(e) => setPosition(e.target.value)}
                                         onBlur={(e) => { blurHandler(e) }}
                                         className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required >
-                                        <option value="Waiter">Waiter</option>
-                                        <option value="Admin">Admin</option>
-                                        <option value="Accountant">Accountant</option>
+                                        <option value="Waiter">Офіціант</option>
+                                        <option value="Admin">Адмін</option>
+                                        <option value="Accountant">Бухгалтер</option>
                                     </select>
                                     {/* {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>} */}
                                 </li>

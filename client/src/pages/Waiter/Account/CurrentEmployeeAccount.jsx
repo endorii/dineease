@@ -8,9 +8,9 @@ import { addFeedbackToRestaurant } from "../../../actions/feedback.actions"
 import { addNeedToRestaurant } from "../../../actions/needs.actions"
 import toast, { Toaster } from 'react-hot-toast';
 import { auth } from "../../../actions/user.actions"
-import { Modal } from "../../App/Modal"
 import { ExitModal } from "../ExitModal"
 import { AnimatePresence } from "framer-motion"
+import { getCurrentOnlineTime, msToTime } from "../../../functions"
 
 export const CurrentEmployeeAccount = () => {
 
@@ -31,27 +31,7 @@ export const CurrentEmployeeAccount = () => {
     const startTime = user?.workingTime?.[lastIndex]?.entries?.start;
     const [exitModalOpen, setExitModalOpen] = useState(false);
 
-    function msToTime(duration) {
-        const seconds = Math.floor((duration / 1000) % 60),
-            minutes = Math.floor((duration / (1000 * 60)) % 60),
-            hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-        const pad = (num) => (num < 10 ? "0" + num : num);
-
-        return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-    }
-
-    const getCurrentOnlineTime = (startTime) => {
-
-        const [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
-        const now = new Date();
-        const start = new Date();
-        start.setHours(startHours, startMinutes, startSeconds);
-
-        const result = now - start;
-
-        return msToTime(result);
-    };
 
     useEffect(() => {
         dispatch(auth());

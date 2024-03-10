@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { WaiterLogin } from "./WaiterLogin";
-import { AdminAndAccountantLogin } from "../Admin/AdminAndAccountantLogin";
+import { AdminAndAccountantLogin } from "./AdminAndAccountantLogin";
 
 export const Login = () => {
 
@@ -8,8 +8,8 @@ export const Login = () => {
 
     return (
         <div>
-            {position === 'Accountant' || position === 'Admin' ? <AdminAndAccountantLogin/> : null}
-            {position === 'Waiter' ? <WaiterLogin/> : null}
+            {position === 'Admin' || position === 'Accountant' ? <AdminAndAccountantLogin /> : null}
+            {position === 'Waiter' ? <WaiterLogin /> : null}
         </div>
     )
 }

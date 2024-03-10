@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { GoBackButton } from "../../ui/buttons/GoBackButton";
 import { auth, loginByPass } from "../../actions/user.actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 
@@ -9,25 +9,13 @@ export const AdminAndAccountantLogin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [emailTouched, setEmailTouched] = useState(false);
     const [passwordTouched, setPasswordTouched] = useState(false);
-
-    const dispatch = useDispatch();
-
-    const { restaurantId, position } = useParams();
-
     const [emailError, setEmailError] = useState("Email не може бути пустим");
     const [passwordError, setPasswordError] = useState("Пароль не може бути пустим");
 
-    const [now, setNow] = useState(new Date().toLocaleString());
-
-    const currentDate = now.split(', ')[0];
-    const currentTime = now.split(', ')[1];
-
-
-    const { user } = useSelector(state => state.user);
-
+    const dispatch = useDispatch();
+    const { restaurantId, position } = useParams();
 
     const emailHandler = (e) => {
         setEmail(e.target.value);
@@ -133,7 +121,7 @@ export const AdminAndAccountantLogin = () => {
                             <button
                                 onClick={async (e) => {
                                     e.preventDefault();
-                                    await dispatch(loginByPass(restaurantId, email, password, routeChange));
+                                    dispatch(loginByPass(restaurantId, email, password, routeChange, position));
                                 }
                                 }
                                 disabled={emailError || passwordError}

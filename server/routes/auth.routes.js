@@ -14,8 +14,8 @@ router.post('/loginByPass/:restaurantId',
         try {
 
             const { restaurantId } = req.params;
-            const { email, password } = req.body;
-            const user = await Employee.findOne({ email, password, restaurant: restaurantId });
+            const { email, password, position } = req.body;
+            const user = await Employee.findOne({ email, password, restaurant: restaurantId, position: position });
 
             if (!user) {
                 return res.status(404).json({ message: 'Користувача не знайдено' })

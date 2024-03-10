@@ -146,8 +146,8 @@ export const EmployeeInformation = ({ employee, setOpenInfo }) => {
                                 <div>
                                     <h3 className="text-2xl font-medium px-10 py-5">Робочі години та відвідуваність:</h3>
                                 </div>
-                                <div className="flex gap-3 px-7 py-2 ">
-                                    <div className="bg-white rounded-xl shadow-lg">
+                                <div className="flex gap-3 px-7 ">
+                                    <div className="bg-white">
                                         <Calendar
                                             onChange={onChange}
                                             value={date}

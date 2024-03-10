@@ -103,7 +103,7 @@ const Employees = () => {
                                         {employee.pin ? employee.pin : "-"}
                                     </td>
                                     <td className="px-6 py-4">
-                                        {employee.position}
+                                        {employee.position === 'Admin' ? 'Адмін' : employee.position === 'Accountant' ? 'Бухгалтер' : employee.position === 'Waiter' ? 'Офіціант' : null}
                                     </td>
                                     <td className="px-1 py-4">
                                         {employee.workingTime[employee.workingTime.length - 1]?.entries.start} | {employee.workingTime[employee.workingTime.length - 1]?.date}
@@ -124,7 +124,7 @@ const Employees = () => {
                                     </td>
                                 </tr>
                             </tbody>
-                        ) : <SkeletonEmployees/>}
+                        ) : <SkeletonEmployees />}
                     </table>
                     {employees.length > 0 ? null : <h2 className='text-4xl p-6 text-center text-sky-950 font-light bg-white'>Працівників не знайдено</h2>}
                 </div>

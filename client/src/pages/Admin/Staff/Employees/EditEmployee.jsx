@@ -19,7 +19,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     const [age, setAge] = useState(currentEmployee.age);
     const [restaurantName, setRestaurantName] = useState(currentEmployee.restaurant);
     const [experience, setExperience] = useState(currentEmployee.experience);
-    const [position, setPosition] = useState(currentEmployee.position);
+    const [position, setPosition] = useState(currentEmployee.position === 'Admin' ? 'Адмін' : currentEmployee.position === 'Accountant' ? 'Бухгалтер' : currentEmployee.position === 'Waiter' ? 'Офіціант' : null);
     const [salary, setSalary] = useState(currentEmployee.salary);
     const [password, setPassword] = useState(currentEmployee.password);
     const [email, setEmail] = useState(currentEmployee.email);
@@ -257,7 +257,7 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
     return (
         <Modal onClick={() => setOpen(false)}>
             <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute w-[50%] flex justify-center mt-16 cursor-default'>
-            <div className='relative bg-white shadow-xl w-full h-auto z-10 rounded-md'>
+                <div className='relative bg-white shadow-xl w-full h-auto z-10 rounded-md'>
                     <div className='flex flex-col items-center mx-3 gap-3'>
                         <img className="absolute top-2 right-2 w-8 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
                         <span className='text-center text-2xl mt-6 font-semibold'>Змінити дані працівника</span>
@@ -347,14 +347,14 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
                                 <li>
                                     <label htmlFor="position" className="block font-medium mb-1 ">Посада</label>
                                     <select id='positions'
-                                        value={position}
+                                        value={position === 'Адмін' ? 'Admin' : position === 'Бухгалтер' ? 'Accountant' : position === 'Офіціант' ? 'Waiter' : null}
                                         name="position"
                                         onChange={(e) => handlePosition(e)}
                                         onBlur={(e) => { blurHandler(e) }}
                                         className="bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black" required >
-                                        <option value="Waiter">Waiter</option>
-                                        <option value="Admin">Admin</option>
-                                        <option value="Accountant">Accountant</option>
+                                        <option value="Waiter">Офіціант</option>
+                                        <option value="Admin">Адмін</option>
+                                        <option value="Accountant">Бухгалтер</option>
                                     </select>
                                     {(positionTouched && positionError) && <div className="text-red-600">{positionError}</div>}
                                 </li>

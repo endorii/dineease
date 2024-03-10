@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { logout } from '../../../../store/slices/user.slice';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../../actions/user.actions';
-import { experienceCounter } from '../../../../functions';
+import { experienceCounter, getCurrentOnlineTime } from '../../../../functions';
 import Calendar from 'react-calendar';
 import { updateEmployeeEndWorkingTime } from '../../../../actions/employees.actions';
 import { AdminLogoutModal } from '../../AdminLogoutModal';
@@ -21,6 +21,9 @@ const UserAccount = () => {
 
     const [date, setDate] = useState(new Date());
     const [exitModal, setExitModal] = useState(false);
+    const [currentTime, setCurrentTime] = useState('');
+    const lastIndex = user?.workingTime?.length - 1;
+    const startTime = user?.workingTime?.[lastIndex]?.entries?.start;
 
     const onChange = date => setDate(date);
 
@@ -43,7 +46,11 @@ const UserAccount = () => {
 
     useEffect(() => {
         dispatch(auth());
-    }, []);
+        const timer = setInterval(() => {
+            setCurrentTime(getCurrentOnlineTime(startTime));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, [startTime]);
 
     return (
         <>
@@ -84,8 +91,8 @@ const UserAccount = () => {
                         </div>
                         <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
                             <div className='p-3'>
-                                <p className='font-medium text-2xl text-center mb-5'>Час робочої зміни</p>
-                                <p className='bg-gray-100 text-black text-5xl mt-2 px-5 py-3 rounded-xl text-center'>01:29:31</p>
+                                <p className='font-medium text-2xl text-center mb-2'>Час робочої зміни</p>
+                                <p className='text-black text-8xl mt-2 px-5 py-3 rounded-xl text-center'>{currentTime}</p>
                             </div>
                         </div>
                     </div>

@@ -5,10 +5,10 @@ import toast, { Toaster } from 'react-hot-toast';
 const notifyError = (message) => toast.error(message);
 const notifySuccess = (message) => toast.success(message);
 
-export const loginByPass = (restaurantId, email, password, routeChange) => {
+export const loginByPass = (restaurantId, email, password, routeChange, position) => {
     return async dispatch => {
         try {
-            const response = await axios.post(`http://localhost:5000/api/auth/loginByPass/${restaurantId}`, {email, password});
+            const response = await axios.post(`http://localhost:5000/api/auth/loginByPass/${restaurantId}`, {email, password, position});
             dispatch(setUser(response.data.employee));
             localStorage.setItem('accessToken', response.data.accessToken);
             routeChange();

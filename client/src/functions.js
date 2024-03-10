@@ -78,6 +78,28 @@ export const experienceCounter = (experience) => {
     }
 }
 
+export const msToTime = (duration) => {
+    const seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    const pad = (num) => (num < 10 ? "0" + num : num);
+
+    return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+}
+
+export const getCurrentOnlineTime = (startTime) => {
+
+    const [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
+    const now = new Date();
+    const start = new Date();
+    start.setHours(startHours, startMinutes, startSeconds);
+
+    const result = now - start;
+
+    return msToTime(result);
+};
+
 export const tables = [
     { table_id: 1, busy: false, booked: false },
     { table_id: 2, busy: false, booked: false },
