@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux/es/hooks/useSelector';
 import { useParams } from 'react-router-dom';
 import { fetchEmployees } from '../../store/slices/employees.slice';
 import { EmployeeInformation } from './EmployeeInformation';
+import { AnimatePresence } from 'framer-motion';
 
 export const AccountantEmployees = () => {
 
@@ -22,8 +23,10 @@ export const AccountantEmployees = () => {
 
     return (
         <>
+            <AnimatePresence initial={openInfo}>
+                {openInfo && <EmployeeInformation employee={currentEmployee} setOpenInfo={setOpenInfo} />}
+            </AnimatePresence>
 
-        {openInfo && <EmployeeInformation employee={currentEmployee} setOpenInfo={setOpenInfo}/>}
             <div className='flex flex-col' >
                 <div className="flex justify-between ">
                     <h2 className="text-3xl font-medium text-sky-950">Працівники</h2>

@@ -1,5 +1,5 @@
 const Router = require('express');
-
+const bcrypt = require('bcrypt');
 const authMiddleware = require('../middlewares/auth.middleware');
 const Employee = require('../models/Employee');
 
@@ -44,7 +44,7 @@ router.post('/employees',
             }
 
             if (password) {
-                employeeData.password = password;
+                employeeData.password = await bcrypt.hash(password, 6);
             }
 
             if (pin) {

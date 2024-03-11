@@ -6,10 +6,10 @@ import { dropIn } from '../../functions';
 export const AdminLogoutModal = ({setExitModal, onConfirm}) => {
     return (
         <Modal onClick={() => setExitModal(false)}>
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute flex justify-center mt-16 cursor-default'>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute flex justify-center mt-16 cursor-default w-[40%]'>
                 <div className='relative bg-gray-200 shadow-xl h-auto z-10 rounded-md'>
-                    <div className='flex flex-col items-center mx-3 gap-4 mt-5 p-10'>
-                        <div className="text-xl text-center mb-5">"Ви впевнені, що хочете завершити робочу зміну? Натисніть 'Так' для видалення або 'Ні' для скасування." </div>
+                    <div className='flex flex-col items-center mx-3 gap-4 mt-10 px-10'>
+                        <div className="text-xl text-center mb-5">Ви впевнені, що хочете завершити робочу зміну? Натисніть 'Так' для видалення або 'Ні' для скасування. </div>
                         <div className="flex gap-10">
                             <button className="flex items-center bg-yellow-600 hover:bg-yellow-700 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in" onClick={() => setExitModal(false)}>Ні</button>
                             <button className="flex items-center bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md transition ease-out hover:ease-in" onClick={onConfirm}>Так</button>

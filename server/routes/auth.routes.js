@@ -3,7 +3,6 @@ const Employee = require('../models/Employee');
 const bcrypt = require('bcrypt');
 const config = require('config');
 const jwt = require('jsonwebtoken');
-// const {check, validationResult} = require('express-validator');
 
 const router = new Router();
 
@@ -15,17 +14,17 @@ router.post('/loginByPass/:restaurantId',
 
             const { restaurantId } = req.params;
             const { email, password, position } = req.body;
-            const user = await Employee.findOne({ email, password, restaurant: restaurantId, position: position });
+            const user = await Employee.findOne({ email, restaurant: restaurantId, position });
 
             if (!user) {
                 return res.status(404).json({ message: 'Користувача не знайдено' })
             }
 
-            // const isPasswordEquals = await bcrypt.compare(password, user.password);
+            const isPasswordEquals = await bcrypt.compare(password, user.password);
 
-            // if (!isPasswordEquals) {
-            //     res.send({ message: "Невірний пароль" })
-            // }
+            if (!isPasswordEquals) {
+                return res.status(401).json({ message: "Невірний пароль" });
+            }
 
             user.workingTime.push({
                 date: new Date().toLocaleDateString(),
@@ -40,7 +39,7 @@ router.post('/loginByPass/:restaurantId',
             res.cookie('refreshToken', refreshToken, {
                 httpOnly: true,
                 maxAge: 30 * 24 * 60 * 60 * 1000, // 30 днів в мілісекундах
-                secure: true // Застосовуйте це, якщо ви працюєте з HTTPS
+                // secure: true // якщо ви працюєте з HTTPS
             });
 
             return res.json({

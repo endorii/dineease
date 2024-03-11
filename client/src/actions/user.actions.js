@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setUser } from '../store/slices/user.slice';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const notifyError = (message) => toast.error(message);
 const notifySuccess = (message) => toast.success(message);
