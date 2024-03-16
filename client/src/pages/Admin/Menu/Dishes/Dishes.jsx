@@ -10,6 +10,7 @@ import { fetchMenuDishes } from '../../../../store/slices/menuDishes.slice';
 import { AddCategoryModal } from './AddCategoryModal';
 import { AnimatePresence } from 'framer-motion';
 import { SkeletonDishes } from '../../../../ui/skeletons/SkeletonDishes';
+import withHelmet from '../../../../utils/helpers/withHelmet';
 
 const Dishes = () => {
 
@@ -114,4 +115,4 @@ const Dishes = () => {
     )
 }
 
-export default Dishes;
+export default withHelmet(Dishes, "Доступні страви та список товарів");

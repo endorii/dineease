@@ -8,8 +8,9 @@ import { closeFeedbackMessage } from "../../../../actions/feedback.actions";
 import { ConfirmModal } from "../../ConfirmModal";
 import { AnimatePresence } from "framer-motion";
 import { SkeletonFeedback } from "../../../../ui/skeletons/SkeletonFeedback";
+import withHelmet from "../../../../utils/helpers/withHelmet";
 
-export const Feedback = () => {
+const Feedback = () => {
 
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
@@ -88,3 +89,5 @@ export const Feedback = () => {
         </>
     )
 }
+
+export default withHelmet(Feedback, "Зворотній зв'язок");

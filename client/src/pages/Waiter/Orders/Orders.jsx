@@ -11,8 +11,9 @@ import { fetchMenuDishes } from "../../../store/slices/menuDishes.slice";
 import { getOrdersByWaiter } from "../../../actions/orders.actions";
 import { AnimatePresence } from "framer-motion";
 import { SkeletonOrders } from "../../../ui/skeletons/SkeletonOrders";
+import withHelmet from "../../../utils/helpers/withHelmet";
 
-export const Orders = () => {
+const Orders = () => {
     const [openNewOrderMenu, setOpenNewOrderMenu] = useState(false);
     const [openPayOrder, setOpenPayOrder] = useState(false);
     const [currentOrder, setCurrentOrder] = useState([])
@@ -98,3 +99,5 @@ export const Orders = () => {
         </div>
     )
 }
+
+export default withHelmet(Orders, "Список замовлень ")

@@ -10,8 +10,9 @@ import { EmployeeStatModal } from './EmployeeStatModal';
 import { AnimatePresence } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { container, itemAnim } from '../../../../functions';
+import withHelmet from '../../../../utils/helpers/withHelmet';
 
-export const Sales = () => {
+const Sales = () => {
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
     const { orders } = useSelector(state => state.orders);
@@ -118,3 +119,5 @@ export const Sales = () => {
         </>
     );
 };
+
+export default withHelmet(Sales, "Статистика продажів"); 

@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom';
 import { fetchEmployees } from '../../store/slices/employees.slice';
 import { EmployeeInformation } from './EmployeeInformation';
 import { AnimatePresence } from 'framer-motion';
+import withHelmet from '../../utils/helpers/withHelmet';
 
-export const AccountantEmployees = () => {
+const AccountantEmployees = () => {
 
     const dispatch = useDispatch();
 
@@ -91,3 +92,5 @@ export const AccountantEmployees = () => {
         </>
     )
 }
+
+export default withHelmet(AccountantEmployees, "Працівники, інформація")

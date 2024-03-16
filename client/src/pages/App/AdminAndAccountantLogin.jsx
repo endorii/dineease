@@ -4,8 +4,9 @@ import { auth, loginByPass } from "../../actions/user.actions";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
+import withHelmet from "../../utils/helpers/withHelmet";
 
-export const AdminAndAccountantLogin = () => {
+const AdminAndAccountantLogin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -137,3 +138,5 @@ export const AdminAndAccountantLogin = () => {
         </div>
     )
 }
+
+export default withHelmet(AdminAndAccountantLogin, 'Увійти в свій акаунт')

@@ -11,8 +11,8 @@ import { ConfirmModal } from '../../ConfirmModal';
 import toast from 'react-hot-toast';
 import AddEmployee from './AddEmployee';
 import { AnimatePresence } from 'framer-motion';
-import { Loader } from '../../../App/Loader';
 import { SkeletonEmployees } from '../../../../ui/skeletons/SkeletonEmployees';
+import withHelmet from '../../../../utils/helpers/withHelmet';
 
 const Employees = () => {
     const [addEmployeeModalOpen, setAddEmployeeModalOpen] = useState(false);
@@ -134,4 +134,4 @@ const Employees = () => {
     )
 }
 
-export default Employees;
+export default withHelmet(Employees, "Працівники закладу");

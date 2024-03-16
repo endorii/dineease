@@ -6,8 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../actions/user.actions';
 import { Loader } from './Loader';
 import { Toaster } from 'react-hot-toast';
+import withHelmet from '../../utils/helpers/withHelmet';
 
-export const ChooseRestaurant = () => {
+const ChooseRestaurant = () => {
 
     const dispatch = useDispatch();
 
@@ -32,10 +33,10 @@ export const ChooseRestaurant = () => {
         <div className="flex flex-col w-screen h-screen justify-center items-center text-sky-900">
             <div className="text-4xl">Виберіть ваш ресторан</div>
             <div className='flex justify-center'>
-            <Toaster
-                position="top-right"
-                reverseOrder={false}
-            />
+                <Toaster
+                    position="top-right"
+                    reverseOrder={false}
+                />
                 <Suspense fallback={<Loader />}>
                     <ul className="flex justify-center items-center gap-12 px-7 py-10">
                         {restaurants.length > 0 ? restaurants.map((restaurant, i) =>
@@ -52,8 +53,9 @@ export const ChooseRestaurant = () => {
                         ) : <div>Немає доступних ресторанів</div>}
                     </ul>
                 </Suspense>
-
             </div>
         </div>
     )
 }
+
+export default withHelmet(ChooseRestaurant, 'Виберіть ваш ресторан')

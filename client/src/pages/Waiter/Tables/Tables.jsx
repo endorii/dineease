@@ -10,8 +10,9 @@ import { fetchMenuDishes } from '../../../store/slices/menuDishes.slice';
 import { AnimatePresence } from 'framer-motion';
 import { container, itemAnim, tables } from '../../../functions';
 import { motion } from 'framer-motion'
+import withHelmet from '../../../utils/helpers/withHelmet';
 
-export const Tables = () => {
+const Tables = () => {
 
     const dispatch = useDispatch();
     const { orders } = useSelector(state => state.orders);
@@ -83,9 +84,10 @@ export const Tables = () => {
                             );
                         })}
                     </motion.div>
-
                 </div>
             </div>
         </div>
     );
 };
+
+export default withHelmet(Tables, "Столи у закладі")

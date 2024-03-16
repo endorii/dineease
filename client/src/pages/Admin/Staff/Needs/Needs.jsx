@@ -8,8 +8,9 @@ import { ConfirmModal } from "../../ConfirmModal";
 import { closeNeedsMessage } from "../../../../actions/needs.actions";
 import { AnimatePresence } from "framer-motion";
 import { SkeletonNeeds } from "../../../../ui/skeletons/SkeletonNeeds";
+import withHelmet from "../../../../utils/helpers/withHelmet";
 
-export const Needs = () => {
+const Needs = () => {
 
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
@@ -121,3 +122,5 @@ export const Needs = () => {
 
     )
 }
+
+export default withHelmet(Needs, "Потреби, побажання та прохання");

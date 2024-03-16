@@ -10,8 +10,9 @@ import toast from "react-hot-toast";
 import { OrderInfoModal } from "../../../Accountant/OrderInfoModal";
 import { AnimatePresence } from "framer-motion";
 import { SkeletonChecks } from "../../../../ui/skeletons/SkeletonChecks";
+import withHelmet from "../../../../utils/helpers/withHelmet";
 
-export const Checks = () => {
+const Checks = () => {
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
     const { orders, isLoading } = useSelector(state => state.orders)
@@ -118,4 +119,4 @@ export const Checks = () => {
     )
 }
 
-
+export default withHelmet(Checks, "Замовлення та чеки")

@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { auth } from "../../actions/user.actions";
 import { fetchEmployees } from "../../store/slices/employees.slice";
+import withHelmet from "../../utils/helpers/withHelmet";
 
-export const WaiterLogin = () => {
+const WaiterLogin = () => {
 
     const dispatch = useDispatch();
     const { restaurantId } = useParams();
@@ -25,3 +26,5 @@ export const WaiterLogin = () => {
         </div>
     )
 }
+
+export default withHelmet(WaiterLogin, 'Увійти в акаунт');
