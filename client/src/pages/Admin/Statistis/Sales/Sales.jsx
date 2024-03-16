@@ -18,6 +18,7 @@ export const Sales = () => {
     const { employees } = useSelector(state => state.employees);
 
     const [statModal, setStatModal] = useState(false);
+    const [currentEmployee, setCurrentEmployee] = useState({});
 
     useEffect(() => {
         dispatch(fetchOrders(restaurantId));
@@ -78,7 +79,7 @@ export const Sales = () => {
     return (
         <>
             <AnimatePresence initial={statModal}>
-                {statModal && <EmployeeStatModal setModalOpen={setStatModal} />}
+                {statModal && <EmployeeStatModal setModalOpen={setStatModal} employee={currentEmployee}/>}
             </AnimatePresence>
 
             <div className='h-full overflow-y-scroll'>
@@ -107,7 +108,7 @@ export const Sales = () => {
                                         <motion.div className="font-medium">{employee.name}</motion.div>
                                         <motion.div className="mt-1 text-slate-700">{employee.email ? employee.email : "-"}</motion.div>
                                     </motion.div>
-                                    <motion.button className="pointer-events-auto ml-4 flex-none rounded-md px-4 py-2 font-medium text-white bg-teal-600 hover:bg-teal-700 shadow-sm border transition ease-out hover:ease-in" onClick={() => { setStatModal(true) }}>Переглянути</motion.button>
+                                    <motion.button className="pointer-events-auto ml-4 flex-none rounded-md px-4 py-2 font-medium text-white bg-teal-600 hover:bg-teal-700 shadow-sm border transition ease-out hover:ease-in" onClick={() => { setStatModal(true); setCurrentEmployee(employee) }}>Переглянути</motion.button>
                                 </motion.div>
                             ))}
                         </motion.div>

@@ -10,7 +10,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { auth } from "../../../actions/user.actions"
 import { ExitModal } from "../ExitModal"
 import { AnimatePresence } from "framer-motion"
-import { getCurrentOnlineTime, msToTime } from "../../../functions"
+import { getCurrentOnlineTime } from "../../../functions"
+import Calendar from 'react-calendar';
 
 export const CurrentEmployeeAccount = () => {
 
@@ -31,7 +32,19 @@ export const CurrentEmployeeAccount = () => {
     const startTime = user?.workingTime?.[lastIndex]?.entries?.start;
     const [exitModalOpen, setExitModalOpen] = useState(false);
 
+    const dates = user?.workingTime ? user.workingTime.map(item => {
+        const [day, month, year] = item.date.split(".");
+        return new Date(year, month - 1, day);
+    }) : [];
 
+    const [date, setDate] = useState(new Date());
+    const onChange = date => setDate(date);
+
+    const tileClassName = ({ date, view }) => {
+        if (dates.find(d => d.getTime() === date.getTime())) {
+            return 'highlight';
+        }
+    }
 
     useEffect(() => {
         dispatch(auth());
@@ -62,6 +75,24 @@ export const CurrentEmployeeAccount = () => {
                                 </button>
 
                             </div>
+                            <div className="flex gap-4 bg-white border shadow-md py-5 rounded-lg justify-center">
+                                <Calendar
+                                    onChange={onChange}
+                                    value={date}
+                                    tileClassName={tileClassName}
+                                />
+                                <style>{`
+                                .react-calendar {
+                                border: none;
+                                margin: 30px
+                                }
+                                .highlight {
+                                    background: rgb(8 47 73);;
+                                    color: white;
+                                }
+                            
+                            `}</style>
+                            </div>
                         </div>
 
                         <div className=" flex flex-col gap-6 bg-white border shadow-inner p-10 rounded-lg">
@@ -77,6 +108,7 @@ export const CurrentEmployeeAccount = () => {
                             <ul className="text-xl text-sky-800">
                                 <li>Ім'я: <span className="text-xl underline font-medium text-sky-950">{user.name}</span></li>
                                 <li>Посада: <span className="text-xl underline font-medium text-sky-950">{user.position}</span></li>
+
                             </ul>
                         </div>
 

@@ -18,6 +18,7 @@ const UserAccount = () => {
     const { user } = useSelector(state => state.user);
     const token = localStorage.getItem("accessToken");
     const navigate = useNavigate();
+    const now = new Date().toLocaleString();
 
     const [date, setDate] = useState(new Date());
     const [exitModal, setExitModal] = useState(false);
@@ -57,8 +58,8 @@ const UserAccount = () => {
             <AnimatePresence initial={exitModal}>
                 {exitModal && <AdminLogoutModal setExitModal={setExitModal} onConfirm={async () => {
                     setExitModal(false)
-                    await updateEmployeeEndWorkingTime(user._id);
-                    dispatch(logout());
+                    await updateEmployeeEndWorkingTime(user._id, user.workingTime[user.workingTime.length - 1].entries.start, now.split(', ')[1]);
+                dispatch(logout());
                 }} />}
             </AnimatePresence>
             <div className='flex flex-col h-full' >

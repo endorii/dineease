@@ -50,7 +50,7 @@ export const AdminAndAccountantLogin = () => {
     }
 
     const routeChange = () => {
-        return navigate(`/${restaurantId}/${position}/panel`);
+        return navigate(`/${restaurantId}/${position}/panel/sales`);
     }
 
     const navigate = useNavigate();

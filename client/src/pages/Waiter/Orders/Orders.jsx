@@ -49,7 +49,7 @@ export const Orders = () => {
                 </div>
             </div>
             <div className="p-10 bg-sky-50 overflow-y-scroll h-[85vh]">
-                <div className="shadow-inner border rounded-md">
+                <div className="shadow-md rounded-md">
                     {openOrders.length > 0 ?
                         <table className="w-full text-left text-sky-900">
                             <thead className="uppercase bg-teal-700/10">
@@ -80,7 +80,7 @@ export const Orders = () => {
                                             </td>
                                             <td className="px-6 py-4">
                                                 <div className="flex justify items-center">
-                                                    <div className="mr-7">Нове</div>
+                                                    <div className="mr-7">{order.isOpen ? 'Активне' : 'Закрите'}</div>
                                                     <button onClick={() => { setCurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-white transition ease-out hover:ease-in'>Оплатити замовлення</button>
                                                 </div>
                                             </td>

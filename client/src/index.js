@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from "react-router-dom"
 import './index.css';
+import 'react-calendar/dist/Calendar.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { Login } from './pages/App/Login';
@@ -21,6 +22,7 @@ import UserAccount from './pages/Admin/Account/Information/UserAccount';
 import { Sales } from './pages/Admin/Statistis/Sales/Sales';
 import AccountantPanel from './pages/Accountant/AccountantPanel'
 import { AccountantEmployees } from './pages/Accountant/AccountantEmployees';
+
 
 const router = createBrowserRouter(
     createRoutesFromElements(

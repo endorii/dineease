@@ -51,9 +51,9 @@ export const updateEmployeeStartWorkingTime = async (employeeId, currentDate, cu
     }
 }
 
-export const updateEmployeeEndWorkingTime = async (employeeId, endTime) => {
+export const updateEmployeeEndWorkingTime = async (employeeId, startTime, endTime) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateEndWorkingTime`, { endTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
+        const response = await axios.put(`http://localhost:5000/api/employees/${employeeId}/updateEndWorkingTime`, { startTime, endTime }, { headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` } });
         console.log(response.data.message);
         return response.data
     } catch (e) {

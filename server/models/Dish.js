@@ -1,4 +1,3 @@
-
 const { Schema, model } = require('mongoose');
 
 const Dish = new Schema({
@@ -12,8 +11,7 @@ const Dish = new Schema({
     weight: String,
     calories: Number,
     ingredients: [String],
-    logoPath: String,
+    logoPath: String
 })
 
-
-module.exports = model("Dish", Dish); 
+module.exports = model("Dish", Dish);

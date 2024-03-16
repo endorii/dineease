@@ -144,7 +144,7 @@ router.put('/employees/:employeeId/updateStartWorkingTime', authMiddleware, asyn
 router.put('/employees/:employeeId/updateEndWorkingTime', authMiddleware, async (req, res) => {
     try {
         const { employeeId } = req.params;
-        let { endTime } = req.body;
+        let { startTime, endTime } = req.body;
 
         if (!endTime) {
             endTime = new Date().toLocaleTimeString();
