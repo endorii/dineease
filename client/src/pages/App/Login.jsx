@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { WaiterLogin } from "./WaiterLogin";
-import { AdminAndAccountantLogin } from "./AdminAndAccountantLogin";
+import WaiterLogin from "./WaiterLogin";
+import AdminAndAccountantLogin from "./AdminAndAccountantLogin";
 
 export const Login = () => {
 

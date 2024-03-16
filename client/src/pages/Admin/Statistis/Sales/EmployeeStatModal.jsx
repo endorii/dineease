@@ -106,7 +106,6 @@ export const EmployeeStatModal = ({ setModalOpen, employee }) => {
     chartData.labels = groupedData.map(item => item.date || item.period);
     chartData.datasets[0].data = groupedData.map(item => item.servedTablesNumber);
 
-
     return (
         <Modal
             onClick={() => setModalOpen(false)}

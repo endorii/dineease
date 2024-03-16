@@ -11,7 +11,7 @@ import { updateEmployeeEndWorkingTime } from '../../../../actions/employees.acti
 import { AdminLogoutModal } from '../../AdminLogoutModal';
 import { AnimatePresence } from 'framer-motion';
 
-const UserAccount = () => {
+export const UserAccount = () => {
 
     const dispatch = useDispatch();
 
@@ -38,6 +38,10 @@ const UserAccount = () => {
         const [day, month, year] = item.date.split(".");
         return new Date(year, month - 1, day);
     }) : [];
+
+    useEffect(() => {
+        document.title = `Інформація про аканут ${user.name ? user.name : ''}`;
+    }, [user])
 
     useEffect(() => {
         if (!token) {
@@ -187,5 +191,3 @@ const UserAccount = () => {
         </>
     )
 }
-
-export default UserAccount;

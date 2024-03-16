@@ -79,7 +79,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Персонал", icon: Access, children:
                 [
                     { title: "Працівники", path: "employees" },
-                    // { title: "Посади", path: "positions" },
                     { title: "Зв'язок", path: "feedback" },
                     { title: "Потреби", path: "needs" }
                 ]
@@ -88,8 +87,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Аккаунт", icon: Settings, children:
                 [
                     { title: "Налаштування", path: "settings" },
-                    { title: "Інформація", path: "information" },
-                    // { title: "Сповіщення", path: "notifications" },
                 ]
         }
     ];
@@ -116,7 +113,9 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                     </div>
                     <div className=''>
                         <div className='text-sky-50 text-lg font-medium'>
-                            {user.name}
+                            <NavLink className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "border-b-2" : "font-light"
+                            } to={'information'}>{user.name}</NavLink>
                         </div>
                     </div>
                 </div>

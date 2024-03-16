@@ -21,6 +21,7 @@ export const LoginAs = () => {
         const fetchRestaurant = async () => {
             const restaurant = await getRestaurantById(restaurantId);
             setRestaurantName(restaurant.name);
+            document.title = `Увійти в ресторан | ${restaurant.name}`;
         };
 
         fetchRestaurant();

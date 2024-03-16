@@ -6,22 +6,22 @@ import 'react-calendar/dist/Calendar.css';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { Login } from './pages/App/Login';
-import { ChooseRestaurant } from './pages/App/ChooseRestaurant';
+import ChooseRestaurant from './pages/App/ChooseRestaurant';
 import { LoginAs } from './pages/App/LoginAs';
 import Account from './pages/Admin/Account';
-import { Orders } from './pages/Waiter/Orders/Orders';
-import { Tables } from './pages/Waiter/Tables/Tables';
+import Orders from './pages/Waiter/Orders/Orders';
+import Tables from './pages/Waiter/Tables/Tables';
 import { CurrentEmployeeAccount } from './pages/Waiter/Account/CurrentEmployeeAccount';
 import { Service } from './pages/Waiter/Service';
-import { Checks } from './pages/Admin/Finances/Checks/Checks';
+import Checks from './pages/Admin/Finances/Checks/Checks';
 import Employees from './pages/Admin/Staff/Employees/Employees';
 import Dishes from './pages/Admin/Menu/Dishes/Dishes';
-import { Needs } from './pages/Admin/Staff/Needs/Needs';
-import { Feedback } from './pages/Admin/Staff/Feedback/Feedback';
-import UserAccount from './pages/Admin/Account/Information/UserAccount';
-import { Sales } from './pages/Admin/Statistis/Sales/Sales';
+import Needs from './pages/Admin/Staff/Needs/Needs';
+import Feedback from './pages/Admin/Staff/Feedback/Feedback';
+import { UserAccount } from './pages/Admin/Account/Information/UserAccount';
+import Sales from './pages/Admin/Statistis/Sales/Sales';
 import AccountantPanel from './pages/Accountant/AccountantPanel'
-import { AccountantEmployees } from './pages/Accountant/AccountantEmployees';
+import AccountantEmployees from './pages/Accountant/AccountantEmployees';
 
 
 const router = createBrowserRouter(
@@ -43,7 +43,6 @@ const router = createBrowserRouter(
                 <Route path='positions' element={<Checks />} />
                 <Route path='feedback' element={<Feedback />} />
                 <Route path='needs' element={<Needs />} />
-                {/* <Route path='settings' element={<Checks />} /> */}
                 <Route path='information' element={<UserAccount />} />
 
             </Route>

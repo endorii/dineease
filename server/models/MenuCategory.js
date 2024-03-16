@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const MenuCategory = new Schema({
-    category: String,
+    category: {type: String, unique: true},
     restaurant: { type: Schema.Types.ObjectId, ref: 'Restaurant' },
 });
 

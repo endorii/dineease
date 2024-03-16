@@ -45,6 +45,9 @@ export const CurrentEmployeeAccount = () => {
             return 'highlight';
         }
     }
+    useEffect(() => {
+        document.title = `Інформація про аканут ${user.name ? user.name : ''}`;
+    }, [user])
 
     useEffect(() => {
         dispatch(auth());

@@ -76,7 +76,6 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             title: "Аккаунт", icon: Settings, children:
                 [
                     { title: "Налаштування", path: "settings" },
-                    { title: "Інформація", path: "information" },
                 ]
         }
     ];
@@ -98,8 +97,10 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
                         <img className='w-8' src={User} alt="" />
                     </div>
                     <div className=''>
-                        <div className='text-sky-50 text-lg font-medium'>
-                            {user.name}
+                    <div className='text-sky-50 text-lg font-medium'>
+                            <NavLink className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? "border-b-2" : "font-light"
+                            } to={'information'}>{user.name}</NavLink>
                         </div>
                     </div>
                 </div>
