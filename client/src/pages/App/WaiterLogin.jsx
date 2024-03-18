@@ -18,10 +18,11 @@ const WaiterLogin = () => {
     }, [])
 
     return (
-        <div className="flex h-screen flex-1 flex-col justify-center px-6 lg:px-8">
+        <div className="flex h-screen flex-1 flex-col justify-center items-center px-6 bg-gray-200">
             <GoBackButton />
-            <div className=" sm:mx-auto sm:w-full sm:max-w-sm">
-                <NumberPad />
+            <div className="w-[310px] 
+            sm:w-[370px]">
+                <NumberPad/>
             </div>
         </div>
     )

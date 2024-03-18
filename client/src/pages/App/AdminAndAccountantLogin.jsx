@@ -61,21 +61,21 @@ const AdminAndAccountantLogin = () => {
     }, [])
 
     return (
-        <div className="flex flex-row justify-center px-6 py-12 lg:px-8 text-sky-900">
+        <div className="flex justify-center items-center w-screen h-screen px-6 py-12 text-sky-900 bg-gray-200">
             <Toaster
                 position="top-right"
                 reverseOrder={false}
             />
             <GoBackButton />
-            <div className="w-full">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="text-center text-4xl leading-9 tracking-tight mt-[50%]">
+            <div className="bg-white p-10 rounded-xl shadow-xl">
+                <div className="mx-auto w-full">
+                    <h2 className="text-center text-4xl leading-9 tracking-tight">
                         Увійти в свій акаунт
                     </h2>
                 </div>
 
                 <div className="mt-10 flex justify-center">
-                    <form className="space-y-6 w-[25%]" action="#" method="POST">
+                    <form className="space-y-6" action="#" method="POST">
                         <div>
                             <label htmlFor="email" className="block font-medium leading-6 text-lg">
                                 Електронна адреса (Email)
