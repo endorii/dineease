@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Modal } from '../../App/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOrders } from '../../../store/slices/orders.slice';
 import { useParams } from "react-router-dom";

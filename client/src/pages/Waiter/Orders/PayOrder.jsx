@@ -25,14 +25,20 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
 
     return (
         <Modal onClick={() => setOpenPayOrder(false)}>
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropInToLeft} initial='hidden' animate='visible' exit='exit' className='absolute w-[95%] flex justify-center m-10'>
-                <div className='relative flex justify-center bg-white w-full cursor-default
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropInToLeft} initial='hidden' animate='visible' exit='exit' className='absolute w-full flex justify-center mt-5
+            sm:
+            md:
+            lg:mt-10
+            xl: 
+            2xl: 
+            '>
+                <div className='absolute flex justify-center bg-white w-[95%] cursor-default
                 '>
                     <div className="">
                         <img className="absolute top-2 right-2 z-20 w-10 cursor-pointer
                         sm:
                         md:top-5 md:right-5 
-                        lg:top-10 lg:right-10
+                        lg:top-5 lg:right-5
                         xl: 
                         2xl: 
                         " src={Close} alt="" onClick={() => {
@@ -44,7 +50,7 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                             <div className="h-full flex items-center">
                                 <PayNumberPad selectedPaymentMethod={selectedPaymentMethod} setCashInputValue={setCashInputValue} setCardInputValue={setCardInputValue} cashInputValue={cashInputValue} cardInputValue={cardInputValue} />
                             </div>
-                            <div className="flex flex-col bg-white px-10 py-10 justify-between">
+                            <div className="flex flex-col bg-white px-8 py-10 justify-between">
                                 <div>
                                     <div className='font-medium text-4xl mb-10'>
                                         <p className='font-thin text-gray-400 text-base
@@ -54,37 +60,46 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                         xl: 
                                         2xl: 
                                         '>Замовлення: {currentOrder._id}</p>
-                                        <p className=' text-xl
+                                        <p className=' text-xl mt-4
                                         sm:
                                         md:text-2xl
                                         lg:text-3xl
                                         xl: 
                                         2xl: 
-                                        '>Разом до сплати: {getTotalOrderValue(currentOrder)}₴</p>
+                                        '>Разом до сплати:
+                                            <span className='ml-2 px-3 py-2 bg-sky-800 text-white rounded-lg'>
+                                                {getTotalOrderValue(currentOrder)}₴
+                                            </span>
+                                        </p>
                                     </div>
-
                                     <div>
                                         <ul className='flex flex-col font-medium text-xl gap-1 '>Виберіть спосіб оплати:
                                             <li onClick={() => { setSelectedPaymentMethod('cash') }} className={`text-base border-2 px-4 py-2 rounded-lg hover:border-blue-500 
-                                        sm:
-                                        md:text-2xl
-                                        lg:
-                                        xl: 
-                                        2xl: 
+                                            sm:
+                                            md:text-2xl
+                                            lg:
+                                            xl: 
+                                            2xl: 
                  ${selectedPaymentMethod === 'cash' ? 'border-sky-700' : null}`}>
                                                 <div className='flex w-full justify-between items-center'>
-                                                    <p>💵 Готівкою</p>
+                                                    <p className='w-full 
+                                                    sm:
+                                                    md:text-lg
+                                                    lg:text-xl
+                                                    xl: 
+                                                    2xl: 
+                                                    '>💵 Готівкою</p>
                                                     <div className='flex'>
                                                         <input onClick={() => {
                                                             if (cashInputValue <= 0) {
                                                                 setCashInputValue('')
                                                             }
                                                         }} onChange={(e) => { setCashInputValue(e.target.value) }} value={cashInputValue} className='text-2xl w-full text-right px-1 focus:outline-none
-                                                    sm:
-                                                    md:text-3xl 
-                                                    lg:text-4xl
-                                                    xl: 
-                                                    2xl:  
+                                                        sm:
+                                                        md:text-3xl 
+                                                        lg:text-4xl
+                                                        xl: 
+                                                        2xl:  
                                                     ' type="number" />
                                                         <p className='text-xl
                                                         sm:text-2xl
@@ -95,25 +110,31 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                                 </div>
                                             </li>
                                             <li onClick={() => { setSelectedPaymentMethod('card') }} className={`text-base border-2 px-4 py-2 rounded-lg hover:border-blue-500 
-                                        sm:text-xl
-                                        md:text-2xl
-                                        lg:
-                                        xl: 
-                                        2xl: 
+                                            sm:t
+                                            md:text-2xl
+                                            lg:
+                                            xl: 
+                                            2xl: 
                  ${selectedPaymentMethod === 'card' ? 'border-sky-700' : null}`}>
                                                 <div className='flex w-full justify-between items-center'>
-                                                    <p>💳 Карткою</p>
+                                                    <p className='w-full
+                                                    sm:
+                                                    md:text-lg
+                                                    lg:text-xl
+                                                    xl: 
+                                                    2xl: 
+                                                    '>💳 Карткою</p>
                                                     <div className='flex'>
                                                         <input onClick={() => {
                                                             if (cardInputValue <= 0) {
                                                                 setCardInputValue('')
                                                             }
                                                         }} onChange={(e) => { setCardInputValue(e.target.value) }} value={cardInputValue} className='text-2xl w-full text-right px-1 focus:outline-none
-                                                    sm:
-                                                    md:text-3xl 
-                                                    lg:text-4xl
-                                                    xl: 
-                                                    2xl: 
+                                                        sm:
+                                                        md:text-3xl 
+                                                        lg:text-4xl
+                                                        xl: 
+                                                        2xl: 
                                                     ' type="number" />
                                                         <p className='text-xl
                                                         sm:text-2xl
@@ -137,20 +158,20 @@ export const PayOrder = ({ setOpenPayOrder, currentOrder }) => {
                                             </label>
                                             <span className="text-base text-black pb-1
                                             sm:
-                                            md:text-lg
-                                            lg:text-xl
+                                            md:text-base
+                                            lg:text-lg
                                             ">Друкувати чек</span>
                                         </div>
-                                        <div className='text-xl
+                                        <div className='flex items-center text-xl w-full
                                         sm:
                                         md:text-2xl
                                         lg:text-3xl
                                         '>
                                             Сума:
-                                            <p className='text-2xl inline font-medium
+                                            <p className='text-left text-2xl font-medium px-3 py-2 bg-sky-800 rounded-lg text-white ml-2
                                             sm:
-                                            md:text-3xl
-                                            lg:text-4xl
+                                            md:text-2xl
+                                            lg:text-3xl
                                             '> {Number(cardInputValue) + Number(cashInputValue)}₴</p>
                                         </div>
                                     </div>

@@ -47,7 +47,7 @@ export const PayNumberPad = ({ selectedPaymentMethod, setCashInputValue, setCard
                     {number}
                 </button>
             ))}
-            <button onClick={() => { handleClear(selectedPaymentMethod) }} className="text-center text-white bg-sky-950/50 shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-gray-100 text-center font-thin text-4xl bg-white shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-sky-950 active:text-white transition ease-out hover:ease-in
+            <button onClick={() => { handleClear(selectedPaymentMethod) }} className="text-center text-white bg-sky-950/50 shadow-md text-2xl hover:shadow-lg active:bg-gray-100 text-center font-thin text-4xl shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-sky-950 active:text-white transition ease-out hover:ease-in
             sm:text-xl sm:w-16 sm:h-16
             md:text-2xl md:w-20 md:h-20
             lg:
@@ -56,7 +56,7 @@ export const PayNumberPad = ({ selectedPaymentMethod, setCashInputValue, setCard
             ">
                 CA
             </button>
-            <button onClick={() => { handlePush(0, selectedPaymentMethod) }} className="text-center text-white bg-sky-950/50 shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-gray-100 text-center font-thin text-4xl bg-white shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-sky-950 active:text-white transition ease-out hover:ease-in
+            <button onClick={() => { handlePush(0, selectedPaymentMethod) }} className="text-center text-white bg-sky-950/50 shadow-m text-2xl hover:shadow-lg active:bg-gray-100 text-center font-thin text-4xl shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-sky-950 active:text-white transition ease-out hover:ease-in
             sm:text-xl sm:w-16 sm:h-16
             md:text-2xl md:w-20 md:h-20
             lg:
@@ -65,17 +65,17 @@ export const PayNumberPad = ({ selectedPaymentMethod, setCashInputValue, setCard
             ">
                 0
             </button>
-            <button disabled={(cashInputValue + cardInputValue) <= 0} onClick={() => { handleDelete(selectedPaymentMethod) }} className="text-center text-white bg-sky-950/50 shadow-md w-32 h-32 text-2xl hover:shadow-lg active:bg-yellow-600 transition ease-out hover:ease-in disabled:grayscale disabled:cursor-not-allowed
+            <button disabled={(cashInputValue + cardInputValue) <= 0} onClick={() => { handleDelete(selectedPaymentMethod) }} className="text-center text-white bg-sky-950/50 shadow-md text-2xl hover:shadow-lg active:bg-yellow-600 transition ease-out hover:ease-in disabled:grayscale disabled:cursor-not-allowed
             sm:text-xl sm:w-16 sm:h-16
             md:text-2xl md:w-20 md:h-20
             lg:
             xl: 
             2xl: 
             ">
-                <img className='w-6 ml-[25%]
-                sm:w-6
-                md:w-8
-                lg:w-10
+                <img className='w-8 ml-[22%]
+                sm:
+                md:w-10
+                lg:w-12
                 ' src={Delete} alt="" />
             </button>
         </div>

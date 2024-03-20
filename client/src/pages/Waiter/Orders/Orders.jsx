@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { Modal } from "../../App/Modal";
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from "react-router-dom";
 import { NewOrderModal } from "./NewOrderModal";
@@ -29,7 +28,7 @@ const Orders = () => {
     }, [])
 
     return (
-        <div className="h-[65%]">
+        <div className="h-screen">
             <Toaster
                 position="top-right"
                 reverseOrder={false}
@@ -49,7 +48,7 @@ const Orders = () => {
                     }}>Нове замовлення</button>
                 </div>
             </div>
-            <div className="p-2 bg-sky-50 overflow-y-scroll h-[85vh]
+            <div className="p-5 bg-sky-50 overflow-y-scroll h-[80%]
             sm:p-2
             md:
             lg:p-10
