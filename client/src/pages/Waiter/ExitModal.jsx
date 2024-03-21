@@ -27,10 +27,16 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
     return (
         <Modal onClick={() => setExitModalOpen(false)}>
             <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='flex justify-center cursor-default w-full'>
-                <div className='absolute bg-gray-200 shadow-xl w-[40%] h-auto z-10 rounded-md mt-12'>
-                    <div className='flex flex-col items-center mx-3 gap-4 mt-5 p-10'>
+                <div className='absolute bg-gray-200 shadow-xl w-[95%] h-auto z-10 rounded-md text-center mt-5
+                sm:
+                md:
+                lg:w-[50%]
+                xl: 
+                2xl: 
+                '>
+                    <div className='flex flex-col items-center gap-4 mt-5 p-10'>
                         <div className="font-thin text-2xl">Щоб завершити робочу зміну, введіть ваш пінкод</div>
-                        <div className="font-thin text-xl mb-4">Кінець зміни о:
+                        <div className="font-thin text-xl">Кінець зміни о:
                             <span className="font-bold text-2xl text-sky-900"> {now.split(', ')[1]}</span>
                         </div>
                         <ExitNumberPad numbers={numbers} pinInput={pinInput} setPinInput={setPinInput} />
@@ -50,8 +56,8 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
                             </div>
                         </div>
 
-                        <div className="absolute top-4 right-4 cursor-pointer" onClick={() => { setExitModalOpen(false) }}>
-                            <img className="h-10" src={Close} alt="" />
+                        <div className="absolute top-3 right-3 cursor-pointer" onClick={() => { setExitModalOpen(false) }}>
+                            <img className="h-8" src={Close} alt="" />
                         </div>
                     </div>
                 </div>

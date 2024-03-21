@@ -64,10 +64,14 @@ export const CurrentEmployeeAccount = () => {
                 {exitModalOpen && <ExitModal now={now} setExitModalOpen={setExitModalOpen} />}
             </AnimatePresence>
             <div className="bg-sky-50 overflow-y-scroll h-[93vh]">
-                <div className="p-10 flex justify-center gap-7 ">
-
-                    <div className="flex flex-col gap-5 w-[47%]">
-
+                <div className="p-10 flex flex-col justify-between gap-7 
+                sm:
+                md:
+                lg:flex-row lg:gap-3 lg:p-5
+                xl: 
+                2xl: 
+                ">
+                    <div className="flex flex-col gap-5 w-full">
                         <div className="bg-white border shadow-inner p-10 flex flex-col gap-5 rounded-lg">
                             <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
                             <div className="text-center text-sky-900 text-8xl font-bold">{currentTime}</div>
@@ -116,20 +120,26 @@ export const CurrentEmployeeAccount = () => {
                         </div>
 
                     </div>
-                    <div className="flex flex-col gap-5 w-[47%]">
+                    <div className="flex flex-col gap-5 w-full">
                         <div className="flex flex-col gap-4 bg-white border shadow-inner p-10 rounded-lg">
                             <div className="text-3xl text-sky-900 font-medium text-center">Побажання та потреби:</div>
                             <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
                                 <div className="flex flex-col w-full">
                                     <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
-                                    <div className="flex justify-around items-center text text-xl font-medium my-3 h-auto">
-                                        <div className="flex items-center gap-3 bg-sky-500 text-white px-5 py-2 rounded-md">
+                                    <div className="flex justify-around items-center text text-base font-medium my-3 h-auto
+                                    sm:
+                                    md:
+                                    lg:gap-1 lg:flex-wrap
+                                    xl: 
+                                    2xl: 
+                                    ">
+                                        <div className="flex items-center gap-3 bg-sky-500 text-white p-2 rounded-md w-full m-1">
                                             <input value="Низька" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Низька
                                         </div>
-                                        <div className="flex items-center gap-3 bg-sky-700 text-white px-5 py-2 rounded-md">
+                                        <div className="flex items-center gap-3 bg-sky-700 text-white p-2 rounded-md w-full m-1">
                                             <input value="Середня" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Середня
                                         </div>
-                                        <div className="flex items-center gap-3 bg-sky-900 text-white px-5 py-2 rounded-md">
+                                        <div className="flex items-center gap-3 bg-sky-900 text-white p-2 rounded-md w-full m-1">
                                             <input value="Висока" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Висока
                                         </div>
                                     </div>
