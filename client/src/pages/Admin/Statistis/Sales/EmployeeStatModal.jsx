@@ -107,14 +107,15 @@ export const EmployeeStatModal = ({ setModalOpen, employee }) => {
     chartData.datasets[0].data = groupedData.map(item => item.servedTablesNumber);
 
     return (
-        <Modal
-            onClick={() => setModalOpen(false)}
-        >
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className=' absolute flex justify-center cursor-default mt-16'>
-                <div className='relative bg-gray-200 shadow-xl w-full h-auto z-10 rounded-md px-24'>
-                    <div className='flex flex-col items-center mx-3 gap-4 py-10 mb-5'>
-                        <div className="flex justify-center gap-5 mt-5">
-                            {employee.position === 'Waiter' ? <div className="w-full bg-white rounded-xl shadow-lg">
+        <Modal onClick={() => setModalOpen(false)}>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className=' absolute flex justify-center cursor-default my-5 mx-10'>
+                <div className='relative bg-gray-200 shadow-xl w-full h-auto z-10 rounded-md'>
+                    <div className='flex flex-col items-center mx-3 gap-4 py-12 h-full'>
+                        <div className="flex items-center flex-col gap-3
+                        xl:flex-row xl:justify-center
+                        ">
+                            {employee.position === 'Waiter' ?
+                            <div className="w-full bg-white rounded-xl shadow-lg h-full">
                                 <div className="flex px-10 py-5 gap-5 items-center">
                                     <h3 className="text-2xl font-medium ">Статистика замовлень:</h3>
                                     <ul className="flex flex gap-1">
@@ -124,17 +125,17 @@ export const EmployeeStatModal = ({ setModalOpen, employee }) => {
                                             </li>)}
                                     </ul>
                                 </div>
-                                <div className="flex px-7">
+                                <div className="flex">
                                     <div className="w-full h-full">
                                         <Line className='p-5' data={chartData} />
                                     </div>
                                 </div>
                             </div> : null}
-                            <div className="bg-white rounded-xl shadow-lg">
+                            <div className="w-full bg-white rounded-xl shadow-lg h-full">
                                 <div>
                                     <h3 className="text-2xl font-medium px-10 py-5">Робочі години та відвідуваність:</h3>
                                 </div>
-                                <div className="flex justify-center px-7 ">
+                                <div className="flex justify-center">
                                     <div className="bg-white">
                                         <Calendar
                                             onChange={onChange}
@@ -143,7 +144,6 @@ export const EmployeeStatModal = ({ setModalOpen, employee }) => {
                                         />
                                         <style>{`
                                             .react-calendar {
-                                            
                                                 border: none;
                                                 margin: 30px
                                             }
@@ -151,15 +151,14 @@ export const EmployeeStatModal = ({ setModalOpen, employee }) => {
                                             background: rgb(8 47 73);;
                                             color: white;
                                             }
-                            
                                         `}</style>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div className="absolute top-2 right-2 cursor-pointer" onClick={() => { setModalOpen(false) }}>
-                            <img className="h-10" src={Close} alt="" />
+                        <div className="absolute top-2 right-2 cursor-pointer"
+                            onClick={() => { setModalOpen(false) }}>
+                            <img className="h-8" src={Close} alt="" />
                         </div>
                     </div>
                 </div>

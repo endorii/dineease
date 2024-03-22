@@ -37,6 +37,8 @@ export const CurrentEmployeeAccount = () => {
         return new Date(year, month - 1, day);
     }) : [];
 
+    const priorities = ['Низька', 'Середня', 'Висока']
+
     const [date, setDate] = useState(new Date());
     const onChange = date => setDate(date);
 
@@ -58,19 +60,13 @@ export const CurrentEmployeeAccount = () => {
     }, [startTime]);
 
     return (
-
         <>
             <AnimatePresence initial={exitModalOpen}>
                 {exitModalOpen && <ExitModal now={now} setExitModalOpen={setExitModalOpen} />}
             </AnimatePresence>
             <div className="bg-sky-50 overflow-y-scroll h-[93vh]">
-                <div className="p-10 flex flex-col justify-between gap-7 
-                sm:
-                md:
-                lg:flex-row lg:gap-3 lg:p-5
-                xl: 
-                2xl: 
-                ">
+                <div className="p-10 flex flex-col justify-between gap-7
+                lg:flex-row lg:gap-3 lg:p-5">
                     <div className="flex flex-col gap-5 w-full">
                         <div className="bg-white border shadow-inner p-10 flex flex-col gap-5 rounded-lg">
                             <div className="text-3xl text-sky-900 font-medium text-center">Час вашого сеансу:</div>
@@ -80,7 +76,6 @@ export const CurrentEmployeeAccount = () => {
                                     Закінчити робочу зміну
                                     <img className="w-6 inline-block ml-3 mb-1" src={Logout} alt="" />
                                 </button>
-
                             </div>
                             <div className="flex gap-4 bg-white border shadow-md py-5 rounded-lg justify-center">
                                 <Calendar
@@ -97,7 +92,6 @@ export const CurrentEmployeeAccount = () => {
                                     background: rgb(8 47 73);;
                                     color: white;
                                 }
-                            
                             `}</style>
                             </div>
                         </div>
@@ -115,7 +109,6 @@ export const CurrentEmployeeAccount = () => {
                             <ul className="text-xl text-sky-800">
                                 <li>Ім'я: <span className="text-xl underline font-medium text-sky-950">{user.name}</span></li>
                                 <li>Посада: <span className="text-xl underline font-medium text-sky-950">{user.position}</span></li>
-
                             </ul>
                         </div>
 
@@ -127,21 +120,12 @@ export const CurrentEmployeeAccount = () => {
                                 <div className="flex flex-col w-full">
                                     <textarea onChange={(e) => { setWishesAreaText(e.target.value) }} value={wishesAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium" name="" id="" rows="7"></textarea>
                                     <div className="flex justify-around items-center text text-base font-medium my-3 h-auto
-                                    sm:
-                                    md:
-                                    lg:gap-1 lg:flex-wrap
-                                    xl: 
-                                    2xl: 
-                                    ">
-                                        <div className="flex items-center gap-3 bg-sky-500 text-white p-2 rounded-md w-full m-1">
-                                            <input value="Низька" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Низька
-                                        </div>
-                                        <div className="flex items-center gap-3 bg-sky-700 text-white p-2 rounded-md w-full m-1">
-                                            <input value="Середня" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Середня
-                                        </div>
-                                        <div className="flex items-center gap-3 bg-sky-900 text-white p-2 rounded-md w-full m-1">
-                                            <input value="Висока" className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />Висока
-                                        </div>
+                                    lg:gap-1 lg:flex-wrap">
+                                        {priorities.map((item, i) => 
+                                            <div className={`flex items-center gap-3 ${item === 'Низька' ? 'bg-sky-500' : item === 'Середня' ? 'bg-sky-700' : item === 'Висока' ? 'bg-sky-900' : ''} text-white p-2 rounded-md w-full m-1`} key={i}>
+                                                <input value={item} className="w-8 h-8" type="radio" name="priority" onChange={(e) => setPriority(e.target.value)} />{item}
+                                            </div>
+                                        )}
                                     </div>
 
                                 </div>
@@ -160,7 +144,7 @@ export const CurrentEmployeeAccount = () => {
                         <div className="flex flex-col gap-4 bg-white border shadow-inner p-10 rounded-lg">
                             <div className="text-3xl text-sky-900 font-medium text-center">Зворотній зв'язок:</div>
                             <div className="flex border-2 border-sky-900 rounded-xl p-1 mt-2">
-                                <textarea onChange={(e) => { setContactAreaText(e.target.value) }} value={contactAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium " name="" id="" rows="7"></textarea>
+                                <textarea onChange={(e) => { setContactAreaText(e.target.value) }} value={contactAreaText} placeholder="Введіть повідомлення для адміністратора..." className="w-full text-lg p-5 outline-none text-sky-900 font-medium " rows="7"></textarea>
                                 <button disabled={contactAreaText === ''} onClick={() => {
                                     notify();
                                     addFeedbackToRestaurant(restaurantId, user.name, contactAreaText, now.split(', ')[1], now.split(', ')[0]);

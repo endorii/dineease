@@ -83,24 +83,37 @@ const Sales = () => {
                 {statModal && <EmployeeStatModal setModalOpen={setStatModal} employee={currentEmployee}/>}
             </AnimatePresence>
 
-            <div className='h-full overflow-y-scroll'>
+            <div className='h-full w-full overflow-y-scroll'>
                 <h2 className="text-3xl font-medium">Статистика продажів</h2>
                 <hr className='border-t-1 border-slate-300 my-4' />
-                <div className='grid grid-cols-4 gap-5 w-full h-full p-5'>
-                    <div className='flex flex-col m-15 bg-white rounded-lg shadow-md col-span-2 h-[70%]'>
+                <div className='flex flex-col justify-center w-full gap-3 p-2
+                sm:
+                md:
+                lg:p-5 lg:gap-5 xl:flex-row
+                xl: 
+                2xl: 
+                '>
+                    <div className='flex flex-col m-15 bg-white rounded-lg shadow-md col-span-2 h-[70%] w-full'>
                         <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl rounded-t-lg'>
                             За місяць:
                         </div>
                         <div className='flex-grow p-5'>
                             <Line data={chartData} />
                         </div>
-                        <div className='px-5 py-3 bg-sky-950/5 font-medium text-xl flex justify-between'>
+                        <div className='px-5 py-3 bg-sky-950/5 font-medium text-base flex justify-between
+                        sm:
+                        md:text-lg
+                        lg:text-xl
+                        xl: 
+                        2xl: 
+                        
+                        '>
                             <div className='p-3 bg-teal-700/80 rounded-md text-white'>
                                 Прибуток: {sumOfOrders}₴
                             </div>
                         </div>
                     </div>
-                    <div className='m-15 bg-white rounded-lg shadow-md col-span-2'>
+                    <div className='m-15 bg-white rounded-lg shadow-md col-span-2 w-full'>
                         <motion.div className='p-5 flex flex-col gap-3' variants={container} initial="hidden" animate="visible">
                             {employees.map((employee, i) => (
                                 <motion.div key={i} className="flex items-center p-4 bg-gray-50 rounded-md" variants={itemAnim}>

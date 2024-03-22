@@ -52,7 +52,6 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
                                         notifyInvalid();
                                     }
                                 }} className="flex items-center bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 transition ease-out hover:ease-in">Закінчити</button>
-
                             </div>
                         </div>
 

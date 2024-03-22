@@ -44,7 +44,6 @@ const router = createBrowserRouter(
                 <Route path='feedback' element={<Feedback />} />
                 <Route path='needs' element={<Needs />} />
                 <Route path='information' element={<UserAccount />} />
-
             </Route>
             <Route path=':restaurantId/Accountant/panel' element={<AccountantPanel />}>
                 <Route path='sales' element={<Sales />} />
