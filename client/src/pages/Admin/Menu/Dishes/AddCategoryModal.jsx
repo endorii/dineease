@@ -67,23 +67,26 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
 
     return (
         <Modal onClick={() => setOpenAddCategoryModal(false)}>
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative bg-gray-50 m-16 rounded-lg shadow-xl h-[450px] cursor-default'>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative bg-gray-50 m-16 rounded-lg shadow-xl h-[410px] cursor-default'>
                 <div className="">
-                    <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer " src={Close} alt="" onClick={() => {
+                    <img className="absolute right-2 top-2 z-20 w-8 cursor-pointer " src={Close} alt="" onClick={() => {
                         setOpenAddCategoryModal(false)
                     }} />
                 </div>
 
                 <div>
-                    <div className='text-3xl font-medium text-sky-950 text-center px-12 py-7'>Додати страву</div>
+                    <div className='text-3xl font-medium text-sky-950 text-center py-4
+                    lg:py-7'>Додати категорію</div>
                     <hr className='border-t-1 border-slate-300' />
                 </div>
 
 
-                <div className='flex flex-col gap-3 px-10 py-7 mt-5'>
+                <div className='flex flex-col gap-3 p-5 mt-5
+                lg:px-10 lg:py-7
+                '>
                     <div className='flex gap-2'>
                         <div className='flex flex-col gap-8'>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-5 items-center relative'>
                                 <label htmlFor="dishname" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Назва:</label>
                                 <input
                                     value={categoryName}
@@ -92,11 +95,11 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
                                     id="dishname"
                                     name="dishname"
                                     onBlur={(e) => { blurHandler(e) }}
-                                    className={categoryNameTouched && categoryNameError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                    className={`bg-gray-50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-full ${categoryNameTouched && categoryNameError ? "border-red-500" : "border-gray-300"}`} required
                                 />
                                 {(categoryNameTouched && categoryNameError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{categoryNameError}</div>}
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-5 items-center relative'>
                                 <label htmlFor="dishlogo" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Фотографія:</label>
                                 <input
                                     value={categoryLogo}
@@ -105,7 +108,7 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
                                     id="dishlogo"
                                     name="dishlogo"
                                     onBlur={(e) => { blurHandler(e) }}
-                                    className={categoryLogoTouched && categoryLogoError ? "bg-gray-50 border border-red-500 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5 " : "bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                    className={`bg-gray-50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-full ${categoryLogoTouched && categoryLogoError ? "border-red-500" : "border-gray-300"}`} required
                                 />
                                 {(categoryLogoTouched && categoryLogoError) && <div className="absolute -top-7 left-[50%] text-red-600 text-center">{categoryLogoError}</div>}
                             </div>
@@ -118,12 +121,11 @@ export const AddCategoryModal = ({ setOpenAddCategoryModal }) => {
                                 e.preventDefault();
                                 await addMenuCategory(restaurantId, categoryName, categoryLogo);
                                 dispatch(fetchMenuCategories(restaurantId));
-                                dispatch(fetchMenuCategories(restaurantId));
                                 setOpenAddCategoryModal(false);
                                 notifySuccess('Категорію додано!');
                             }}
                             disabled={categoryNameError}
-                            className="bg-teal-600 hover:bg-teal-700 rounded-lg mb-7 mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
+                            className="bg-teal-600 hover:bg-teal-700 rounded-lg mt-10 px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed">
                             Підтвердити
                         </button>
                     </div>

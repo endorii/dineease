@@ -65,7 +65,7 @@ const Checks = () => {
                         Скинути фільтр
                     </div>
                     {ordersStates.length > 0 ? ordersStates.map((state, i) =>
-                        <div className={orderState === state ? 'px-4 py-2 bg-sky-950 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer' : 'px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer'} onClick={() => { setOrderState(state) }}>
+                        <div className={`px-4 py-2 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in cursor-pointer ${orderState === state ? 'bg-sky-950' : 'bg-sky-700'}`} onClick={() => { setOrderState(state) }}>
                             {state ? "Відкрите" : "Закрите"}
                         </div>
                     ) : null}
@@ -127,14 +127,14 @@ const Checks = () => {
                                     ">
                                             {order._id.slice(0, 10)}...
                                         </th>
-                                        <td className="w-[15%] text-center text-sm text-sky-800 font-bold
+                                        <td className="w-[15%] text-center text-sm font-bold
                                         sm:
                                         md:text-base
                                         lg:p-1
                                         xl: 
                                         2xl: 
                                     ">
-                                            <div className="bg-teal-500/5 p-3 rounded-lg ">{order.date} / {order.time} </div>
+                                            <div className="p-3 rounded-lg ">{order.date} {order.time} </div>
                                         </td>
                                         <td className="p-3 text-lg w-[15%] text-center">
                                             <div className={`p-3 rounded-xl font-medium ${order.isOpen ? "bg-teal-500/50" : "bg-yellow-500/40"}`}>

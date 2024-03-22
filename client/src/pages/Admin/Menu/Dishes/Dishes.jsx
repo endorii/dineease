@@ -44,14 +44,16 @@ const Dishes = () => {
                 <div className='mb-5'>
                     <div className="flex justify-between ">
                         <h2 className="text-3xl font-medium text-sky-950">Доступні страви для замовлень</h2>
-                        <div className='flex gap-5'>
+                        <div className='flex gap-1 
+                        lg:gap-5'>
                             <AddButton customFunction={setOpenAddDishModal} buttonText={'Додати страву'} />
                             <AddButton customFunction={setOpenAddCategoryModal} buttonText={'Додати категорію'} />
                         </div>
                     </div>
                     <hr className='border-t-1 border-slate-300 my-5' />
-                    <div className="flex w-full justify-between">
-                        <div className='flex gap-3 items-center flex-wrap'>
+                    <div className="flex justify-between px-2">
+                        <div className='flex gap-2 items-center flex-wrap w-[55%] 
+                        lg:gap-3 lg:w-auto'>
                             <div className='py-2 text-gray-500'>
                                 Фільтри:
                             </div>
@@ -68,7 +70,7 @@ const Dishes = () => {
                             <img
                                 src={Search}
                                 alt="" className="w-6 mr-2" />
-                            <input className="p-3 rounded-lg border-2 border-gray-200" type="text" placeholder="Введать назву страви..." value={searchInput} onChange={(e) => {
+                            <input className="p-3 rounded-lg border-2 border-gray-200 w-[90%]" type="text" placeholder="Введать назву страви..." value={searchInput} onChange={(e) => {
                                 setSearchInput(e.target.value);
                             }} />
                         </div>
@@ -82,19 +84,19 @@ const Dishes = () => {
                         <table className="w-full text-left">
                             <thead className="text-xs text-gray-700 uppercase bg-sky-900/20 ">
                                 <tr>
-                                    <th scope="col" className="w-auto px-6 py-3">
+                                    <th scope="col" className="w-auto px-3 py-2">
                                         Назва
                                     </th>
-                                    <th scope="col" className="w-[50%] px-7 py-1 text-center">
+                                    <th scope="col" className="w-[35%] px-3 py-1 text-center">
                                         Категорія
                                     </th>
-                                    <th scope="col" className="w-[5%] px-1 py-1">
+                                    <th scope="col" className="w-[20%] p-1">
 
                                     </th>
-                                    <th scope="col" className="w-[5%] px-1 py-1">
+                                    <th scope="col" className="w-[10%] p-1">
 
                                     </th>
-                                    <th scope="col" className="w-[5%] px-1 py-1">
+                                    <th scope="col" className="w-[10%] p-1">
 
                                     </th>
                                 </tr>
