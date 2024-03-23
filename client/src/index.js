@@ -23,7 +23,6 @@ import Sales from './pages/Admin/Statistis/Sales/Sales';
 import AccountantPanel from './pages/Accountant/AccountantPanel'
 import AccountantEmployees from './pages/Accountant/AccountantEmployees';
 
-
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
@@ -64,4 +63,3 @@ root.render(
         </Provider>
     </React.StrictMode>
 );
-

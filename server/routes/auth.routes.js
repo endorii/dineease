@@ -33,7 +33,7 @@ router.post('/loginByPass/:restaurantId',
 
             await user.save();
 
-            const accessToken = jwt.sign({ _id: user._id }, config.get("secretAccessKey"), { expiresIn: "30m" });
+            const accessToken = jwt.sign({ _id: user._id }, config.get("secretAccessKey"), { expiresIn: "59m" });
             const refreshToken = jwt.sign({ _id: user._id }, config.get("secretRefreshKey"), { expiresIn: "30d" });
 
             res.cookie('refreshToken', refreshToken, {
