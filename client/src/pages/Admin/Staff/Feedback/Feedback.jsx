@@ -46,16 +46,16 @@ const Feedback = () => {
                     <table className="w-full text-left text-sky-900">
                         <thead className="text-xs text-gray-700 uppercase bg-sky-950/10">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Від
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Дата
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Контент
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
 
                                 </th>
                             </tr>
@@ -67,15 +67,14 @@ const Feedback = () => {
                                     <th scope="row" className="p-3 font-medium text-gray-900 w-[10%] text-center">
                                         {message.waiterName}
                                     </th>
-                                    <td className="p-3 w-[15%] text-center text-sky-800 font-bold">
-                                        <div className="bg-teal-500/5 p-3 rounded-lg ">{formatDateString(message.date)} / {message.time} </div>
+                                    <td className="p-3 w-[10%] text-center font-bold">
+                                        <div className="rounded-lg ">{formatDateString(message.date)} {message.time} </div>
                                     </td>
-                                    <td className="p-3 text-lg w-[60%] text-center">
+                                    <td className="p-3 text-lg w-[30%] text-center">
                                         {message.message}
                                     </td>
-                                    <td className="p-3 w-[5%] text-center">
-
-                                        <div className="cursor-pointer" onClick={() => { setCurrentMessage(message); setConfirmModal(true) }}>
+                                    <td className="p-3 w-[15%] text-center">
+                                        <div className="flex justify-end cursor-pointer" onClick={() => { setCurrentMessage(message); setConfirmModal(true) }}>
                                             <img className="h-10" src={TrashDone} alt="" />
                                         </div>
                                     </td>

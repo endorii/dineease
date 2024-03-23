@@ -6,7 +6,9 @@ import { dropIn } from '../../functions';
 export const AdminLogoutModal = ({setExitModal, onConfirm}) => {
     return (
         <Modal onClick={() => setExitModal(false)}>
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute flex justify-center mt-16 cursor-default w-[40%]'>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute flex justify-center m-5 cursor-default w-[95%]
+            md:w-[60%]
+            lg:w-[40%]'>
                 <div className='relative bg-gray-200 shadow-xl h-auto z-10 rounded-md'>
                     <div className='flex flex-col items-center mx-3 gap-4 mt-10 px-10'>
                         <div className="text-xl text-center mb-5">Ви впевнені, що хочете завершити робочу зміну? Натисніть 'Так' для видалення або 'Ні' для скасування. </div>

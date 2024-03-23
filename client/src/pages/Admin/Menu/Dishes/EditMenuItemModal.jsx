@@ -71,10 +71,10 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
         dispatch(fetchMenuDishes(restaurantId));
     }, [])
 
-
     return (
         <Modal onClick={() => setEditModal(false)}>
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative bg-gray-50 m-16 rounded-lg shadow-xl w-[66%] cursor-default'>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative h-max bg-gray-50 m-5 rounded-lg shadow-xl w-[550px] cursor-default
+            md:w-[95%]'>
                 <div>
                     <img className="absolute right-2 top-2 z-20 w-10 cursor-pointer" src={Close} alt="" onClick={() => {
                         setEditModal(false)
@@ -82,16 +82,18 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                 </div>
 
                 <div>
-                    <div className='text-3xl font-medium text-sky-950 text-center px-12 py-7'>Змінити інформацію про страву</div>
+                    <div className='text-3xl font-medium text-sky-950 text-center p-5
+                    lg:px-12 lg:py-7'>Змінити інформацію про страву</div>
                     <hr className='border-t-1 border-slate-300' />
                 </div>
 
-                <div className='flex flex-col gap-3 px-10 py-7 mt-5'>
-                    <div className='flex gap-2'>
-                        <div className='flex flex-col gap-8'>
-                            <div className='flex gap-5 items-center relative'>
+                <div className='flex flex-col gap-4 px-5 py-3 mt-5
+                lg:gap-3 lg:px-10 lg:py-7'>
+                    <div className='flex flex-col gap-7 md:flex-row'>
+                        <div className='flex flex-col gap-7'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishcategory" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Категорія:</label>
-                                <div className='flex flex-col justify-between'>
+                                <div className='flex flex-col'>
                                     <select id='dishcategory'
                                         value={dishCategory}
                                         onChange={(e) => {
@@ -102,15 +104,14 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                         }}
                                         name="dishcategory"
 
-                                        className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required >
+                                        className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"} required >
                                         {menuCategories.map((category, i) => {
                                             return <option key={i} value={category.category}>{category.category}</option>
                                         })}
                                     </select>
                                 </div>
-
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishname" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Назва:</label>
                                 <input
                                     value={dishName}
@@ -118,12 +119,10 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="text"
                                     id="dishname"
                                     name="dishname"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"} required
                                 />
-
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishprice" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Ціна:</label>
                                 <input
                                     value={dishPrice}
@@ -131,12 +130,10 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="number"
                                     name="dishprice"
                                     id="dishprice"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"}
                                     required />
-
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishtime" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Час:</label>
                                 <input
                                     value={dishTime}
@@ -144,14 +141,12 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="number"
                                     name="dishtime"
                                     id="dishtime"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"}
                                     required />
-
                             </div>
                         </div>
                         <div className='flex flex-col gap-8'>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishamount" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Кількість:</label>
                                 <input
                                     value={dishAmount}
@@ -159,12 +154,10 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="number"
                                     name="dishamount"
                                     id="dishamount"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"}
                                     required />
-
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishweight" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Вага:</label>
                                 <input
                                     value={dishWeight}
@@ -172,12 +165,10 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="text"
                                     name="dishweight"
                                     id="dishweight"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"}
                                     required />
-
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishcal" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Калорійність:</label>
                                 <input
                                     value={dishCal}
@@ -185,12 +176,11 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="number"
                                     name="dishcal"
                                     id="dishcal"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"}
+                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"}
                                     required />
 
                             </div>
-                            <div className='flex gap-5 items-center justify-between relative'>
+                            <div className='flex gap-1 items-center relative'>
                                 <label htmlFor="dishlogo" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Фотографія:</label>
                                 <input
                                     value={dishLogo}
@@ -198,15 +188,13 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     type="file"
                                     id="dishlogo"
                                     name="dishlogo"
-
-                                    className={"bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[400px] p-2.5"} required
-                                />
-
+                                    className={"bg-gray-50 border rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 w-[90%]"}
+                                    required />
                             </div>
                         </div>
                     </div>
-                    <div className='flex mt-5'>
-                        <div className='flex flex-col gap-5 w-[75%] relative'>
+                    <div className='flex mt-5 w-full'>
+                        <div className='flex flex-col gap-1 w-[60%] relative'>
                             <label htmlFor="dishingredients" className="block font-medium mb-1 text-xl bg-sky-900 text-white px-4 py-3 rounded-xl">Інгредієнти, (через кому):</label>
                             <textarea
                                 value={dishIngredients}
@@ -216,11 +204,9 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                 id="dishingredients"
                                 cols="50"
                                 rows="6">
-
                             </textarea>
-
                         </div>
-                        <div className='flex justify-center w-[25%]'>
+                        <div className='flex justify-center w-[40%]'>
                             <button
                                 disabled={!dishName || !dishPrice || !dishTime || !dishAmount || !dishWeight || !dishCal || !dishCategory}
                                 onClick={async (e) => {
@@ -231,13 +217,12 @@ export const EditMenuItemModal = ({ setEditModal, currentDish }) => {
                                     setEditModal(false);
                                     notifyEdit('Інформацію про страву успішно оновлено!')
                                 }}
-                                className="flex items-center bg-teal-600 hover:bg-teal-700 rounded-lg mt-10 mx-[30%] px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-green-900/20 disabled:hover:bg-green-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
+                                className="w-full mx-10 bg-teal-600 hover:bg-teal-700 rounded-lg px-7 py-2 text-white font-medium drop-shadow-md disabled:bg-teal-900/20 disabled:hover:bg-teal-900/20 disabled:text-gray-100 disabled:cursor-not-allowed"
                             >Підтвердити зміну
                             </button>
                         </div>
                     </div>
                 </div>
-
             </motion.div>
         </Modal>
     )

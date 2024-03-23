@@ -41,7 +41,7 @@ const Needs = () => {
             <div className="flex flex-col h-full ">
                 <h2 className="text-3xl font-medium">Потреби, побажання та прохання</h2>
                 <hr className='border-t-1 border-slate-300 my-10' />
-                <div className='flex gap-3 items-center flex-wrap mb-5'>
+                <div className='flex gap-2 items-center flex-wrap mb-5'>
                     <div className='px-4 py-2 text-gray-500'>
                         Фільтри:
                     </div>
@@ -50,7 +50,7 @@ const Needs = () => {
                     </button>
 
                     {priorityList.length > 0 ? priorityList.map((priority, i) =>
-                        <button className={priorityFilter === priority ? 'px-4 py-2 bg-sky-950 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in' : 'px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in'} onClick={() => { setPriorityFilter(priority) }}>
+                        <button key={i} className={priorityFilter === priority ? 'px-4 py-2 bg-sky-950 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in' : 'px-4 py-2 bg-sky-700 text-white rounded-2xl hover:bg-sky-900 transition ease-out hover:ease-in'} onClick={() => { setPriorityFilter(priority) }}>
                             {priority}
                         </button>
                     ) : null}
@@ -62,19 +62,19 @@ const Needs = () => {
                     <table className="w-full text-left text-sky-900">
                         <thead className="text-xs text-gray-700 uppercase bg-sky-950/10">
                             <tr>
-                                <th scope="col" className="px-6 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Від
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Дата
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Контент
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
                                     Пріорітетність
                                 </th>
-                                <th scope="col" className="px-1 py-3 text-center">
+                                <th scope="col" className="px-1 py-2 text-center">
 
                                 </th>
                             </tr>
@@ -83,28 +83,29 @@ const Needs = () => {
                             {needs.length > 0 || !isLoading ? needs.map((need, i) =>
                                 priorityFilter === 'all' || need.priority === priorityFilter ?
                                     <tr className="bg-white border-b border-gray-300 text-gray-700" key={i}>
-                                        <th scope="row" className="p-3 font-medium text-gray-900 whitespace-nowrap w-[10%] text-center">
+                                        <th scope="row" className="p-3 font-medium text-gray-900 whitespace-nowrap w-[10%] text-center text-[12px] md:text-sm lg:text-base">
                                             {need.waiterName}
                                         </th>
-                                        <td className="p-3 w-[15%] text-center text-sky-800 font-bold">
-                                            <div className="bg-teal-500/5 p-3 rounded-lg ">{formatDateString(need.date)} / {need.time}</div>
+                                        <td className="p-3 w-[10%] text-center font-bold text-[12px] md:text-sm lg:text-base">
+                                            <div className="rounded-lg ">{formatDateString(need.date)} {need.time}</div>
                                         </td>
-                                        <td className="p-3 text-lg w-[50%] text-center">
+                                        <td className="p-3 text-lg w-[30%] text-center text-[12px] md:text-sm md:w-[50%] lg:text-base">
                                             {need.message}
                                         </td>
                                         <td className={
-                                            (need.priority === 'Низька' ? "p-3 text-lg w-[10%] text-center bg-sky-600/10 font-medium rounded-xl" :
-                                                (need.priority === 'Середня' ? "p-3 text-lg w-[10%] text-center bg-sky-600/30 font-medium rounded-xl" :
-                                                    (need.priority === 'Висока' ? "p-3 text-lg w-[10%] text-center bg-sky-600/60 font-medium rounded-xl" :
-                                                        "px-3 p-3 text-lg w-[10%] text-center bg-sky-600/50"
+                                            (need.priority === 'Низька' ? "p-1 w-[10%] text-center bg-sky-600/10 font-medium rounded-xl text-[12px] md:text-sm lg:text-base" :
+                                                (need.priority === 'Середня' ? "p-1 w-[10%] text-center bg-sky-600/30 font-medium rounded-xl text-[12px] md:text-sm lg:text-base" :
+                                                    (need.priority === 'Висока' ? "p-1 w-[10%] text-center bg-sky-600/60 font-medium rounded-xl text-[12px] md:text-sm lg:text-base" :
+                                                        "p-3 w-[10%] text-center bg-sky-600/50 text-[12px] md:text-sm lg:text-base"
                                                     )
                                                 )
                                             )
                                         }>
                                             {need.priority}
                                         </td>
-                                        <td className="px-3 p-3 w-[5%] text-center">
-                                            <div className="cursor-pointer" onClick={() => {
+                                        <td className="p-1 w-full
+                                        lg:w-[10%]">
+                                            <div className="cursor-pointer flex justify-end text-[12px] md:text-sm lg:text-base" onClick={() => {
                                                 setConfirm(true);
                                                 setCurrentNeed(need);
                                             }}>

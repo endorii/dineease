@@ -256,8 +256,9 @@ const EditEmployee = ({ setOpen, currentEmployee }) => {
 
     return (
         <Modal onClick={() => setOpen(false)}>
-            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute w-[50%] flex justify-center mt-16 cursor-default'>
-                <div className='relative bg-white shadow-xl w-full h-auto z-10 rounded-md'>
+            <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute w-[95%] flex justify-center m-5 cursor-default h-max
+            lg:w-[70%]'>
+                <div className='relative bg-white shadow-xl w-full z-10 rounded-md'>
                     <div className='flex flex-col items-center mx-3 gap-3'>
                         <img className="absolute top-2 right-2 w-8 cursor-pointer" src={Close} onClick={() => setOpen(false)} alt="" />
                         <span className='text-center text-2xl mt-6 font-semibold'>Змінити дані працівника</span>

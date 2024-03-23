@@ -67,60 +67,85 @@ const Employees = () => {
                     <table className="w-full text-left text-gray-500">
                         <thead className="text-xs text-gray-700 uppercase bg-sky-900/20">
                             <tr>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-1 py-2 text-[12px]
+                                md:px-3 md:text-md
+                                lg:px-6 lg:py-3
+                                ">
                                     Ім'я
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-1 py-2 text-[12px]
+                                md:px-3 md:text-md
+                                lg:px-6 lg:py-3
+                                ">
                                     Логін
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-1 py-2 text-[12px]
+                                md:px-3 md:text-md
+                                lg:px-6 lg:py-3
+                                ">
                                     Пінкод
                                 </th>
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-1 py-2 text-[12px]
+                                md:px-3 md:text-md
+                                lg:px-6 lg:py-3
+                                ">
                                     Посада
                                 </th>
-                                <th scope="col" className="px-1 py-3">
+                                <th scope="col" className="px-1 py-2 text-[12px] text-center
+                                md:px-3 md:text-md">
                                     Востаннє здійснено вхід
                                 </th>
                                 <th scope="col" className="px-1 py-1">
-                                    <span className="sr-only">Змінити</span>
                                 </th>
                                 <th scope="col" className="px-1 py-1">
-                                    <span className="sr-only">Опції</span>
                                 </th>
                             </tr>
                         </thead>
                         {employees.length > 0 || !isLoading ? employees.map((employee, i) =>
                             <tbody key={i}>
                                 <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900">
+                                    <th scope="row" className="pl-3 p-1 py-5 text-[12px] font-medium text-gray-900
+                                    md:text-base
+                                    ">
                                         {employee.name}
                                     </th>
-                                    <td className="px-6 py-4">
+                                    <td className="p-1 text-[12px]
+                                    md:text-base
+                                    ">
                                         {employee.email ? employee.email : "-"}
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="p-1 text-[12px] text-center
+                                    md:text-base
+                                    ">
                                         {employee.pin ? employee.pin : "-"}
                                     </td>
-                                    <td className="px-6 py-4">
+                                    <td className="p-1 text-[12px]
+                                    md:text-base
+                                    ">
                                         {employee.position === 'Admin' ? 'Адмін' : employee.position === 'Accountant' ? 'Бухгалтер' : employee.position === 'Waiter' ? 'Офіціант' : null}
                                     </td>
-                                    <td className="px-1 py-4">
-                                        {employee.workingTime[employee.workingTime.length - 1]?.entries.start} | {employee.workingTime[employee.workingTime.length - 1]?.date}
+                                    <td className="p-1 text-[12px] text-center
+                                    md:text-base
+                                    ">
+                                        {employee.workingTime[employee.workingTime.length - 1]?.entries.start} {employee.workingTime[employee.workingTime.length - 1]?.date}
                                     </td>
-                                    <td className="px-2 py-1 text-right">
+                                    <td className="p-1 text-right">
                                         <button onClick={async () => {
                                             setCurrentEmployee(employee)
                                             setEditEmployeeModalOpen(true);
                                             dispatch(fetchEmployees(restaurantId));
                                         }}
-                                            className="font-medium text-sky-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in">Редагувати</button>
+                                            className="font-medium text-sky-700 text-[12px] rounded-md bg-gray-100 px-1 py-1 shadow hover:bg-sky-800/10 transition ease-out hover:ease-in
+                                            md:text-base
+                                            ">Редагувати</button>
                                     </td>
-                                    <td className="px-2 py-1 text-left">
+                                    <td className="p-1 pr-3 text-left">
                                         <button onClick={() => {
                                             setCurrentEmployee(employee);
                                             setDeleteEmployeeModalOpen(true);
-                                        }} className="font-medium text-yellow-700 rounded-md bg-gray-100 px-3 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in">Видалити</button>
+                                        }} className="font-medium text-yellow-700 text-[12px] rounded-md bg-gray-100 px-1 py-1 shadow hover:bg-yellow-800/10 transition ease-out hover:ease-in
+                                        md:text-base
+                                        ">Видалити</button>
                                     </td>
                                 </tr>
                             </tbody>

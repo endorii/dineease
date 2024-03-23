@@ -80,10 +80,11 @@ export const UserAccount = () => {
                 </div>
                 <hr className='border-t-1 border-slate-300 my-5' />
 
-                <div className='flex flex-col pb-10 gap-5 overflow-y-scroll'>
+                <div className='flex flex-col pb-5 gap-5 overflow-y-scroll p-2'>
 
-                    <div className='flex gap-5 justify-center w-full'>
-                        <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
+                    <div className='flex flex-col gap-5 items-center w-full
+                    lg:flex-row'>
+                        <div className='flex flex-col bg-white shadow-xl p-5 rounded-xl w-full h-full'>
                             <div className='flex items-center gap-5 mb-4 m-2'>
                                 <h3 className='text-2xl font-medium'>{user.name}</h3>
                                 <p className='text-lg font-medium rounded-md px-6 py-2 bg-sky-500 text-white'>{user.position}</p>
@@ -94,7 +95,7 @@ export const UserAccount = () => {
                                 <div className='text-gray-500'>Телефон:<span className='ml-6 text-lg text-black'>{user.phone}</span></div>
                             </div>
                         </div>
-                        <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
+                        <div className='flex flex-col bg-white shadow-xl p-5 rounded-xl w-full'>
                             <div className='p-3'>
                                 <p className='font-medium text-2xl text-center mb-2'>Час робочої зміни</p>
                                 <p className='text-black text-8xl mt-2 px-5 py-3 rounded-xl text-center'>{currentTime}</p>
@@ -102,12 +103,12 @@ export const UserAccount = () => {
                         </div>
                     </div>
 
-                    <div className='flex gap-5'>
-                        <div className='bg-white shadow-xl p-10 rounded-xl min-w-[60%] h-auto'>
+                    <div className='flex gap-5 flex-col xl:flex-row'>
+                        <div className='bg-white shadow-xl p-5 rounded-xl xl:w-[60%]'>
                             <div>
                                 <div className=''>
                                     <h3 className='text-2xl font-medium p-3'>Базова інформація</h3>
-                                    <div className='flex gap-5 pb-5'>
+                                    <div className='flex gap-5 pb-5 flex-wrap'>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>Ресторан</p>
                                             <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>restaurant.name</p>
@@ -125,7 +126,7 @@ export const UserAccount = () => {
                                 <hr />
                                 <div className=''>
                                     <h3 className='text-2xl font-medium p-3'>Особиста інформація</h3>
-                                    <div className='flex gap-5 pb-5'>
+                                    <div className='flex gap-5 pb-5 flex-wrap'>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800'>Дата народження</p>
                                             <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>user.birthDate</p>
@@ -143,7 +144,7 @@ export const UserAccount = () => {
                                 <hr />
                                 <div>
                                     <h3 className='text-2xl font-medium p-3'>Загальна інформація</h3>
-                                    <div className='flex gap-5 pb-5'>
+                                    <div className='flex gap-5 pb-5 flex-wrap'>
                                         <div className='p-3'>
                                             <p className='font-medium text-xl text-sky-800 '>Тип часу роботи</p>
                                             <p className='bg-sky-950 text-white mt-2 px-3 py-2 rounded-xl'>{user.typeOfWorkingTime}</p>
@@ -160,12 +161,12 @@ export const UserAccount = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className='flex flex-col bg-white shadow-xl p-10 rounded-xl w-full h-auto'>
+                        <div className='flex flex-col bg-white shadow-xl p-5 rounded-xl xl:w-[40%]'>
                             <div className="flex flex-col items-center">
                                 <div>
-                                    <h3 className="text-2xl font-medium px-10 py-5">Робочі години та відвідуваність:</h3>
+                                    <h3 className="text-2xl font-medium px-5 py-5">Робочі години та відвідуваність:</h3>
                                 </div>
-                                <div className="bg-white rounded-xl shadow-lg m-5 p-5">
+                                <div className="bg-white rounded-xl shadow-lg">
                                     <Calendar
                                         onChange={onChange}
                                         value={date}
