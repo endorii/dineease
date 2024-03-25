@@ -52,11 +52,7 @@ const Checks = () => {
                 <h2 className="text-3xl font-medium">Замовлення та чеки</h2>
                 <hr className='border-t-1 border-slate-300 my-5' />
                 <div className='flex gap-2 items-center flex-wrap pb-5
-                sm:
-                md:
                 lg:gap-3
-                xl: 
-                2xl: 
                 '>
                     <div className='py-2 text-gray-500'>
                         Фільтри:
@@ -78,39 +74,18 @@ const Checks = () => {
                         <thead className="text-xs text-gray-700 uppercase bg-sky-950/10">
                             <tr>
                                 <th scope="col" className="px-4 py-1 
-                                sm:
-                                md:
-                                lg:px-10 lg:py-3
-                                xl: 
-                                2xl: 
-                                ">
+                                lg:px-10 lg:py-3">
                                     Замовлення
                                 </th>
                                 <th scope="col" className="px-4 py-1 text-center
-                                sm:
-                                md:
-                                lg:px-1 lg:py-3
-                                xl: 
-                                2xl: 
-                                ">
+                                lg:px-1 lg:py-3">
                                     Дата
                                 </th>
                                 <th scope="col" className="px-4 py-1 text-center
-                                sm:
-                                md:
-                                lg:px-1 lg:py-3 
-                                xl: 
-                                2xl: 
-                                ">
+                                lg:px-1 lg:py-3">
                                     Стан
                                 </th>
-                                <th scope="col" className="text-center
-                                sm:
-                                md:
-                                lg:
-                                xl: 
-                                2xl: 
-                                "></th>
+                                <th scope="col" className="text-center"></th>
                             </tr>
                         </thead>
                         {orders.length > 0 || !isLoading ? orders.map((order, i) =>
@@ -118,22 +93,12 @@ const Checks = () => {
                                 <tbody
                                     key={i}>
                                     <tr className="bg-white border-b border-gray-300 text-gray-700">
-                                        <th scope="row" className="px-5 font-medium text-gray-900 w-[20%] text-sm
-                                        sm:
-                                        md:
-                                        lg:px-10
-                                        xl: 
-                                        2xl: 
-                                    ">
+                                        <th scope="row" className="px-5 font-medium text-gray-900 w-[20%] text-sm lg:px-10 ">
                                             {order._id.slice(0, 10)}...
                                         </th>
                                         <td className="w-[15%] text-center text-sm font-bold
-                                        sm:
                                         md:text-base
-                                        lg:p-1
-                                        xl: 
-                                        2xl: 
-                                    ">
+                                        lg:p-1">
                                             <div className="p-3 rounded-lg ">{order.date} {order.time} </div>
                                         </td>
                                         <td className="p-3 text-lg w-[15%] text-center">

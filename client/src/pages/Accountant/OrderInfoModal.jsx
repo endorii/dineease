@@ -31,12 +31,7 @@ export const OrderInfoModal = ({ setOpenInfo, order }) => {
     return (
         <Modal onClick={() => setOpenInfo(false)}>
             <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='relative flex m-5 bg-gray-50 w-[95%] h-[90%] px-5 py-10 rounded-md shadow-xl cursor-default overflow-y-auto
-            sm:
-            md:
-            lg:w-[70%]
-            xl: 
-            2xl: 
-            '>
+            lg:w-[70%]'>
                 <div>
                     <img className=' absolute top-2 right-2 w-8 cursor-pointer' onClick={() => { setOpenInfo(false) }} src={Close} alt="" />
                 </div>

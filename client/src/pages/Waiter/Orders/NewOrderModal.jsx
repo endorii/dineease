@@ -53,92 +53,55 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
     useEffect(() => {
         dispatch(fetchMenuCategories(restaurantId));
         dispatch(fetchMenuDishes(restaurantId));
-        // dispatch(getOrdersByWaiter(restaurantId));
     }, [])
 
     return (
         <Modal onClick={() => setOpenNewOrderMenu(false)}>
             <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='absolute w-full flex justify-center cursor-default
             m-5
-            sm:
-            md:
-            lg:mt-10
-            xl: 
-            2xl:'>
+            lg:mt-10'>
 
                 <div className='absolute bg-white shadow-xl w-[95%] z-10 rounded-md bg-gray-400'>
                     <div className=""><img className="absolute top-4 right-4 z-20 w-8 cursor-pointer
-                sm:
                 md:top-3 md:right-3 md:w-10
-                lg:top-5 lg:right-5
-                xl: 
-                2xl: 
-                " src={Close} alt="" onClick={() => {
+                lg:top-5 lg:right-5" src={Close} alt="" onClick={() => {
                             setOpenNewOrderMenu(false)
                         }} /></div>
                     <div>
                         <div className="flex rounded-xl h-[90vh]">
                             <div className="bg-gray-200 w-[35%] h-full flex flex-col justify-between overflow-x-auto
-                            sm:
                             md:w-[40%]
-                            lg:w-[30%]
-                            xl: 
-                            2xl: 
-                            ">
+                            lg:w-[30%]">
                                 <div>
                                     <table className="w-full text-left text-gray-500 ">
                                         <thead className="text-gray-700 uppercase bg-gray-300">
                                             <tr className='text-center'>
                                                 <th scope="col" className="p-1 text-[12px]
-                                                sm:
                                                 md:text-sm
-                                                lg:text-base lg:p-3
-                                                xl: 
-                                                2xl: 
-                                                ">
+                                                lg:text-base lg:p-3">
                                                     Назва
                                                 </th>
                                                 <th scope="col" className="p-1 text-[12px]
-                                                sm:
                                                 md:text-sm
-                                                lg:text-base lg:p-3
-                                                xl: 
-                                                2xl: 
-                                                ">
+                                                lg:text-base lg:p-3">
                                                     Кількість
                                                 </th>
                                                 <th scope="col" className="p-1 text-[12px]
-                                                sm:
                                                 md:text-sm
-                                                lg:text-base lg:p-3
-                                                xl: 
-                                                2xl: 
-                                                ">
+                                                lg:text-base lg:p-3">
                                                     Ціна
                                                 </th>
                                             </tr>
                                         </thead>
                                     </table>
-                                    <div className="p-3 flex flex-col gap-y-3 items-start
-                                    sm:
-                                    md:
-                                    lg:
-                                    xl: 
-                                    2xl: 
-                                    ">
+                                    <div className="p-3 flex flex-col gap-y-3 items-start">
                                         {guests.map((guest, i) => {
                                             return (
                                                 <div
                                                     key={i}
                                                     className={`bg-white w-full rounded-lg px-3 py-3 cursor-pointer ${currentGuest.id === guest.id ? 'border-4 border-sky-800' : ''}`} onClick={() => setCurrentGuest(guest)}>
                                                     <div className='flex justify-between p-2 items-center'>
-                                                        <div className="text-base font-bold
-                                                        sm:
-                                                        md:
-                                                        lg:
-                                                        xl: 
-                                                        2xl: 
-                                                        ">Гість {guest.id}</div>
+                                                        <div className="text-base font-bold">Гість {guest.id}</div>
                                                         <button
                                                             className="text-lg font-bold px-4 py-2 bg-yellow-700 hover:bg-yellow-800 text-white rounded-xl transition ease-out hover:ease-in"
                                                             onClick={() => {
@@ -153,12 +116,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                                         <hr className='w-full' />
                                                     </div>
                                                     <div className='w-full text-base
-                                                    sm:
-                                                    md:
-                                                    lg:text-lg
-                                                    xl: 
-                                                    2xl: 
-                                                    '>
+                                                    lg:text-lg'>
                                                         <tbody className='bg-gray-100 p-1 m-2 rounded-xl w-full '>
                                                             {guest.orderInfo.map((dish, i) => {
                                                                 return (
@@ -191,29 +149,15 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                             setOpenNewOrderMenu(false);
                                             dispatch(getOrdersByWaiter(restaurantId));
                                         }} className="w-full bg-teal-700 hover:bg-teal-800 p-3 rounded-lg text-white font-medium transition ease-out hover:ease-in disabled:bg-teal-900/40 disabled:cursor-not-allowed
-                                        sm:
-                                        md:
-                                        lg:
-                                        xl:text-lg
-                                        2xl:
-                                        ">
+                                        xl:text-lg">
                                             Відправити на кухню
                                         </button>
                                     </div>
                                     <div className='bg-white rounded-lg p-3 flex flex-col gap-3 text-lg
-                                    sm:
-                                    md:
                                     lg:text-xl
-                                    xl:text-2xl
-                                    2xl: 
-                                    '>
+                                    xl:text-2xl'>
                                         <div className="flex w-full justify-between items-center flex-col
-                                        sm:
-                                        md:flex-row
-                                        lg:
-                                        xl: 
-                                        2xl: 
-                                        ">
+                                        md:flex-row">
                                             <div className="font-thin">Разом до сплати</div>
                                             <div className="font-medium">{getTotalInsideOrderValue(guests)} ₴</div>
                                         </div>
@@ -233,12 +177,7 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                                 <li key={i} className="bg-gray-100 rounded-lg shadow-md cursor-pointer"
                                                     onClick={() => { if (Object.keys(currentGuest).length !== 0) { selectFoodForGuest(currentGuest, dish) } }}>
                                                     <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg
-                                                sm:
-                                                md:
-                                                lg:w-[270px] lg:h-[180px]
-                                                xl: 
-                                                2xl: 
-                                                " src={Test} alt={dish.name} />
+                                                    lg:w-[270px] lg:h-[180px]" src={Test} alt={dish.name} />
                                                     <div className="font-thin px-4 py-2 text-xl">{dish.name}</div>
                                                     <div className="flex justify-between">
                                                         <div className="flex items-center font-thin px-4 py-2 text-lg"> <img className="w-4 mr-1" src={Time} alt="" />{dish.readyTime}</div>
@@ -249,12 +188,8 @@ export const NewOrderModal = ({ setOpenNewOrderMenu, currentTable }) => {
                                             ) : (menuCategories.map((category, i) => (
                                                 <li key={i} onClick={() => { setCurrentCategoryFood(category.category); }} className="bg-gray-100 rounded-lg shadow-md cursor-pointer ">
                                                     <img className="w-[350px] h-[200px] object-cover object-[50% 100%] rounded-t-lg
-                                                    sm:
-                                                    md:
                                                     lg:w-[270px] lg:h-[180px]
-                                                    xl:w-[350px] xl:h-[200px] 
-                                                    2xl: 
-                                                    " src={Test} alt={category.alt} />
+                                                    xl:w-[350px] xl:h-[200px" src={Test} alt={category.alt} />
                                                     <div className="font-thin text-xl px-4 py-2">{category.category}</div>
                                                 </li>
                                             )))}

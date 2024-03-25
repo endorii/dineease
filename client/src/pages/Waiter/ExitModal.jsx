@@ -28,12 +28,7 @@ export const ExitModal = ({ now, setExitModalOpen }) => {
         <Modal onClick={() => setExitModalOpen(false)}>
             <motion.div onClick={(e) => e.stopPropagation()} variants={dropIn} initial='hidden' animate='visible' exit='exit' className='flex justify-center cursor-default w-full'>
                 <div className='absolute bg-gray-200 shadow-xl w-[95%] h-auto z-10 rounded-md text-center mt-5
-                sm:
-                md:
-                lg:w-[50%]
-                xl: 
-                2xl: 
-                '>
+                lg:w-[50%]'>
                     <div className='flex flex-col items-center gap-4 mt-5 p-10'>
                         <div className="font-thin text-2xl">Щоб завершити робочу зміну, введіть ваш пінкод</div>
                         <div className="font-thin text-xl">Кінець зміни о:

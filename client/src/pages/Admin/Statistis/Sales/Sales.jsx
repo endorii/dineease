@@ -87,12 +87,7 @@ const Sales = () => {
                 <h2 className="text-3xl font-medium">Статистика продажів</h2>
                 <hr className='border-t-1 border-slate-300 my-4' />
                 <div className='flex flex-col justify-center w-full gap-3 p-2
-                sm:
-                md:
-                lg:p-5 lg:gap-5 xl:flex-row
-                xl: 
-                2xl: 
-                '>
+                lg:p-5 lg:gap-5 xl:flex-row'>
                     <div className='flex flex-col m-15 bg-white rounded-lg shadow-md col-span-2 h-[70%] w-full'>
                         <div className='px-5 py-3 bg-sky-950 text-white font-medium text-xl rounded-t-lg'>
                             За місяць:
@@ -101,13 +96,8 @@ const Sales = () => {
                             <Line data={chartData} />
                         </div>
                         <div className='px-5 py-3 bg-sky-950/5 font-medium text-base flex justify-between
-                        sm:
                         md:text-lg
-                        lg:text-xl
-                        xl: 
-                        2xl: 
-                        
-                        '>
+                        lg:text-xl'>
                             <div className='p-3 bg-teal-700/80 rounded-md text-white'>
                                 Прибуток: {sumOfOrders}₴
                             </div>

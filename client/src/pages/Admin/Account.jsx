@@ -108,9 +108,10 @@ const Accordion = ({ menuOpen, setMenuOpen }) => {
             </motion.ul>
             <button onClick={() => setMenuOpen(!menuOpen)}>
                 <div className='text-black p-3 flex items-center'>
-                    <div>
-                        <img className='w-8' src={User} alt="" />
-                    </div>
+                    {menuOpen ?
+                        <div>
+                            <img className='w-8' src={User} alt="" />
+                        </div> : null}
                     <div className=''>
                         <div className='text-sky-50 text-lg font-medium'>
                             <NavLink className={({ isActive, isPending }) =>

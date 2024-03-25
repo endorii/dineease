@@ -50,56 +50,30 @@ const Orders = () => {
             </div>
             <div className="p-5 bg-sky-50 overflow-y-scroll h-[80%]
             sm:p-2
-            md:
-            lg:p-10
-            xl: 
-            2xl: 
-            ">
+            lg:p-10">
                 <div className="shadow-md rounded-md">
                     {openOrders.length > 0 ?
-                        <table className="w-full text-left text-sky-900
-                        sm:
-                        md:
-                        lg:
-                        xl: 
-                        2xl: 
-">
+                        <table className="w-full text-left text-sky-900">
                             <thead className="uppercase bg-teal-700/10">
                                 <tr>
                                     <th scope="col" className="p-2 text-sm
-                                    sm:
                                     md:text-base
-                                    lg:px-6 lg:py-3
-                                    xl: 
-                                    2xl: 
-                                    ">
+                                    lg:px-6 lg:py-3">
                                         Замовлення
                                     </th>
                                     <th scope="col" className="p-2 text-sm
-                                    sm:
                                     md:text-base
-                                    lg:px-6 lg:py-3
-                                    xl: 
-                                    2xl: 
-                                    ">
+                                    lg:px-6 lg:py-3">
                                         Дата відкриття
                                     </th>
                                     <th scope="col" className="p-2 text-sm text-center
-                                    sm:
                                     md:text-base
-                                    lg:px-6 lg:py-3
-                                    xl: 
-                                    2xl: 
-                                    ">
+                                    lg:px-6 lg:py-3">
                                         Статус
                                     </th>
                                     <th scope="col" className="p-2 text-sm text-center
-                                    sm:
                                     md:text-base
-                                    lg:px-6 lg:py-3
-                                    xl: 
-                                    2xl: 
-                                    ">
+                                    lg:px-6 lg:py-3">
                                         Сума
                                     </th>
                                 </tr>
@@ -109,42 +83,26 @@ const Orders = () => {
                                     <tbody key={i}>
                                         <tr className="bg-white border-b border-gray-300 text-lg">
                                             <th scope="row" className="font-medium p-2 text-sm
-                                            sm:
                                             md:text-base
-                                            lg:px-6 lg:py-4
-                                            xl: 
-                                            2xl: 
-                                            ">
+                                            lg:px-6 lg:py-4">
                                                 {order.tableNumber !== undefined ? `Столик ${order.tableNumber}` : "З  собою"} | Замовлення {order._id}
                                             </th>
                                             <td className="p-2 text-sm
-                                            sm:
                                             md:text-base
-                                            lg:px-6 lg:py-4
-                                            xl: 
-                                            2xl: 
-                                            ">
+                                            lg:px-6 lg:py-4">
                                                 {order.time || order.date ? `${order.time} | ${order.date}` : "-"}
                                             </td>
                                             <td className="p-2 text-sm
-                                            sm:
                                             md:text-base
-                                            lg:px-6 lg:py-4
-                                            xl: 
-                                            2xl: 
-                                            ">
+                                            lg:px-6 lg:py-4">
                                                 <div className="flex justify-center items-center gap-3">
                                                     <div className="">{order.isOpen ? 'Активне' : 'Закрите'}</div>
                                                     <button onClick={() => { setCurrentOrder(order); setOpenPayOrder(true) }} className='px-6 py-3 bg-teal-700 rounded-lg hover:bg-teal-800 text-white transition ease-out hover:ease-in'>Оплатити замовлення</button>
                                                 </div>
                                             </td>
                                             <td className="p-2 font-medium text-sm text-center
-                                            sm:
                                             md:text-base
-                                            lg:px-6 lg:py-4
-                                            xl: 
-                                            2xl: 
-                                            ">
+                                            lg:px-6 lg:py-4">
                                                 {getTotalOrderValue(order)}₴
                                             </td>
                                         </tr>
