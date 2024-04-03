@@ -1,50 +1,60 @@
-import axios from 'axios';
-import { setUser } from '../store/slices/user.slice';
-import toast from 'react-hot-toast';
+import axios from "axios";
+import { setUser } from "../store/slices/user.slice";
+import toast from "react-hot-toast";
 
 const notifyError = (message) => toast.error(message);
 const notifySuccess = (message) => toast.success(message);
 
 export const loginByPass = (restaurantId, email, password, routeChange, position) => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
-            const response = await axios.post(`http://localhost:5000/api/auth/loginByPass/${restaurantId}`, {email, password, position});
+            const response = await axios.post(
+                `http://localhost:5000/api/auth/loginByPass/${restaurantId}`,
+                { email, password, position }
+            );
             dispatch(setUser(response.data.employee));
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem("accessToken", response.data.accessToken);
             routeChange();
-            notifySuccess(response.data.message)
+            notifySuccess(response.data.message);
             console.log(response.data);
-
         } catch (e) {
-            notifyError(e.response.data.message)
+            notifyError(e.response.data.message);
             console.log(e.response.data.message);
-        }       
-    }
-}
+        }
+    };
+};
 
 export const loginByPin = (restaurantId, pin) => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
-            const response = await axios.post(`http://localhost:5000/api/auth/loginByPin/${restaurantId}`, {pin});
+            const response = await axios.post(
+                `http://localhost:5000/api/auth/loginByPin/${restaurantId}`,
+                { pin }
+            );
             dispatch(setUser(response.data.employee));
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem("accessToken", response.data.accessToken);
             console.log(response.data.message);
-
         } catch (e) {
             console.log(e.response.data.message);
-        }       
-    }
-}
+        }
+    };
+};
 
 export const auth = () => {
-    return async dispatch => {
+    return async (dispatch) => {
         try {
-            const response = await axios.get("http://localhost:5000/api/auth/auth", {headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}});
+            const response = await axios.get("http://localhost:5000/api/auth/auth", {
+                headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+            });
             dispatch(setUser(response.data.employee));
-            localStorage.setItem('accessToken', response.data.accessToken);
+            localStorage.setItem("accessToken", response.data.accessToken);
         } catch (e) {
             console.log(e.response.data.message);
-            localStorage.removeItem('accessToken');
-        }       
-    }
-}
+            console.log(e.response.status);
+            if (e.response.status === 401) {
+                window.location.href = "/";
+            }
+            localStorage.removeItem("accessToken");
+        }
+    };
+};

@@ -8,8 +8,8 @@ export const getTotalInsideOrderValue = (guests) => {
             totalValue += guests[i].orderInfo[j].price;
         }
     }
-    return totalValue
-}
+    return totalValue;
+};
 
 export const getTotalOrderValue = (order) => {
     let totalValue = 0;
@@ -23,27 +23,34 @@ export const getTotalOrderValue = (order) => {
     }
 
     return Number(totalValue);
-}
+};
 
 export const configureOrder = (restaurantId, guests, currentTable, waiterId) => {
     const now = new Date().toLocaleString();
 
     const order = {
         items: guests,
-        date: now.split(', ')[0],
-        time: now.split(', ')[1],
+        date: now.split(", ")[0],
+        time: now.split(", ")[1],
         tableNumber: currentTable,
-        waiter: waiterId
-    }
-    addOrdersToRestaurant(restaurantId, order.items, order.date, order.time, order.tableNumber, order.waiter);
-}
+        waiter: waiterId,
+    };
+    addOrdersToRestaurant(
+        restaurantId,
+        order.items,
+        order.date,
+        order.time,
+        order.tableNumber,
+        order.waiter
+    );
+};
 
 export const formatDateString = (inputDate) => {
     const today = new Date();
     const yesterday = new Date(today);
     yesterday.setDate(today.getDate() - 1);
 
-    const [day, month, year] = inputDate.split('.').map(Number);
+    const [day, month, year] = inputDate.split(".").map(Number);
     const date = new Date(year, month - 1, day);
 
     if (
@@ -59,7 +66,11 @@ export const formatDateString = (inputDate) => {
     ) {
         return "Вчора";
     } else {
-        return date.toLocaleDateString("uk-UA", { day: "numeric", month: "numeric", year: "numeric" });
+        return date.toLocaleDateString("uk-UA", {
+            day: "numeric",
+            month: "numeric",
+            year: "numeric",
+        });
     }
 };
 
@@ -76,7 +87,7 @@ export const experienceCounter = (experience) => {
     } else {
         return `${experience} років`;
     }
-}
+};
 
 export const msToTime = (duration) => {
     const seconds = Math.floor((duration / 1000) % 60),
@@ -86,11 +97,10 @@ export const msToTime = (duration) => {
     const pad = (num) => (num < 10 ? "0" + num : num);
 
     return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-}
+};
 
 export const getCurrentOnlineTime = (startTime) => {
-
-    const [startHours, startMinutes, startSeconds] = startTime.split(':').map(Number);
+    const [startHours, startMinutes, startSeconds] = startTime.split(":").map(Number);
     const now = new Date();
     const start = new Date();
     start.setHours(startHours, startMinutes, startSeconds);
@@ -142,44 +152,44 @@ export const tables = [
 export const dropIn = {
     hidden: {
         opacity: 0,
-        y: '-100vh'
+        y: "-100vh",
     },
     visible: {
-        y: '0',
+        y: "0",
         opacity: 1,
         transition: {
             duration: 0.1,
-            type: 'spring',
+            type: "spring",
             damping: 80,
-            stiffness: 600
-        }
+            stiffness: 600,
+        },
     },
     exit: {
         opacity: 0,
-        y: '-100vh'
-    }
-}
+        y: "-100vh",
+    },
+};
 
 export const dropInToLeft = {
     hidden: {
         opacity: 0,
-        x: '-100vh'
+        x: "-100vh",
     },
     visible: {
-        x: '0',
+        x: "0",
         opacity: 1,
         transition: {
             duration: 0.2,
-            type: 'spring',
+            type: "spring",
             damping: 50,
-            stiffness: 500
-        }
+            stiffness: 500,
+        },
     },
     exit: {
         opacity: 0,
-        x: '-100vh'
-    }
-}
+        x: "-100vh",
+    },
+};
 
 export const popUp = {
     hidden: {
@@ -194,13 +204,13 @@ export const popUp = {
             // type: 'spring',
             // damping: 80,
             // stiffness: 600
-        }
+        },
     },
     exit: {
         opacity: 0,
         // y: '-100vh'
-    }
-}
+    },
+};
 
 export const accordionAnim = {
     // hidden: {
@@ -210,21 +220,21 @@ export const accordionAnim = {
     // },
     visible: {
         // y: '0',
-        width: '240px',
+        width: "240px",
         // opacity: 1,
         transition: {
             duration: 0.3,
             // type: 'spring',
             // damping: 80,
             // stiffness: 600
-        }
+        },
     },
     exit: {
-        width: '100px',
+        width: "100px",
         // opacity: 0,
         // y: '-100vh'
-    }
-}
+    },
+};
 
 export const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -233,15 +243,21 @@ export const container = {
         scale: 1,
         transition: {
             delayChildren: 0.01,
-            staggerChildren: 0.04
-        }
-    }
-}
+            staggerChildren: 0.04,
+        },
+    },
+};
 
 export const itemAnim = {
     hidden: { y: 20, opacity: 0 },
     visible: {
         y: 0,
-        opacity: 1
-    }
-}
+        opacity: 1,
+    },
+};
+
+export const setClassesForInputs = (touched, error) => {
+    return `bg-gray-50 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-black  ${
+        touched && error ? "border-red-500" : "border-gray-300"
+    }`;
+};
